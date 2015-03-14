@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:singleLine="true"
-            android:text="购物车"
+            android:text="全部商品"
             android:textColor="@color/white"
             android:textSize="17sp" />
     </RelativeLayout>
@@ -192,7 +192,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:background="@drawable/shopping"
+                    android:background="@drawable/product"
                     android:duplicateParentState="true" />
 
                 <TextView
@@ -202,7 +202,7 @@
                     android:layout_below="@id/igw"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="8dp"
-                    android:text="购物车"
+                    android:text="全部商品"
                     android:textColor="@color/bgtitle"
                     android:textSize="11sp" />
             </LinearLayout>

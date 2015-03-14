@@ -533,7 +533,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:background="@drawable/shopping2"
+                            android:background="@drawable/product2"
                             android:duplicateParentState="true" />
 
                         <TextView
@@ -543,7 +543,7 @@
                             android:layout_below="@id/igw"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="8dp"
-                            android:text="购物车"
+                            android:text="全部商品"
                             android:textColor="@color/text5a5a5a"
                             android:textSize="11sp" />
                     </LinearLayout>

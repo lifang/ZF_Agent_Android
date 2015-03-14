@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/F3F2F2">
+
+	<include layout="@layout/title_back"/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:paddingTop="24dp">
+
+		<View style="@style/Divider"/>
+
+		<FrameLayout style="@style/FrameItem">
+
+			<TextView
+				style="@style/TextItem"
+				android:layout_gravity="left|center_vertical"
+				android:text="@string/after_sale_mark_company"/>
+
+			<EditText
+				android:id="@+id/after_sale_mark_company"
+				style="@style/EditTextItem"/>
+		</FrameLayout>
+
+		<View style="@style/Divider"/>
+
+		<FrameLayout style="@style/FrameItem">
+
+			<TextView
+				style="@style/TextItem"
+				android:layout_gravity="left|center_vertical"
+				android:text="@string/after_sale_mark_number"/>
+
+			<EditText
+				android:id="@+id/after_sale_mark_number"
+				style="@style/EditTextItem"/>
+		</FrameLayout>
+
+		<View style="@style/Divider"/>
+
+	</LinearLayout>
+
+	<Button
+		android:id="@+id/after_sale_mark_submit"
+		style="@style/ButtonNormal"
+		android:layout_marginTop="24dp"
+		android:text="@string/button_submit"
+		android:enabled="false"/>
+
+</LinearLayout>

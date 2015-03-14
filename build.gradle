@@ -1,0 +1,59 @@
+ buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.1.3'
+    }
+}
+ 
+apply plugin: 'android'
+
+android {
+    compileSdkVersion 15
+    buildToolsVersion '21.1.1'
+
+    sourceSets {
+        main {
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+
+            manifest.srcFile 'AndroidManifest.xml'
+        }
+    }
+
+    defaultConfig {
+        applicationId 'com.example.zf_android'
+        minSdkVersion 14
+        targetSdkVersion 14
+        versionCode 1
+        versionName '1.0'
+    }
+    buildTypes {
+        release {
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+    }
+
+    packagingOptions {
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
+}
+
+
+repositories {
+        mavenCentral()
+}
+
+dependencies {
+	compile fileTree(dir: 'libs', include: ['*.jar'])
+	compile 'cn.trinea.android.common:trinea-android-common:4.2.15'
+	compile 'com.loopj.android:android-async-http:1.4.5'
+}

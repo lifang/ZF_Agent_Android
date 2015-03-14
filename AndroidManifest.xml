@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.zf_android"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="14" />
+
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <application
+        android:name="com.example.zf_android.MyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".Welcome"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.About"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.Main"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.PosListActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.PosSelect"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.FindLogin"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.FindPass"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.FindPassword"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.MenuMine"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.OrderList"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.MineSet"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.MyMessage"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.OrderDetail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.ChanceAdress"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.AdressEdit"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- ====================================================== -->
+        <!-- Leo's Activities -->
+        <!-- ====================================================== -->
+        <activity
+            android:name=".trade.TradeFlowActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".trade.TradeClientActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".trade.TradeStatisticActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".trade.TradeDetailActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".trade.CitySelectActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".trade.CityProvinceActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".trade.AfterSaleGridActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".trade.AfterSaleListActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".trade.AfterSaleDetailActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".trade.AfterSalePayActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".trade.AfterSaleMarkActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".trade.AfterSaleMaterialActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".trade.TerminalManageActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".trade.TerminalChannelActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".trade.TerminalAddActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".trade.TerminalDetailActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".trade.ShowWebImageActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".trade.ApplyListActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".trade.ApplyDetailActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".trade.ApplyChooseActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+	    <activity
+		    android:name=".trade.ApplyOpenProgressActivity"
+		    android:screenOrientation="portrait" >
+	    </activity>
+        <!-- ====================================================== -->
+        <!-- Leo's Activities End -->
+        <!-- ====================================================== -->
+
+        <activity
+            android:name="com.example.zf_android.activity.SystemDetail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.MymsgDetail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.SystemMessage"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.ApplyDetail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.ContentUs"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.WantBuy"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.ShopCar"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.ConfirmOrder"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.PayFromCar"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.MyInfo"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.ChangeText"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.AdressList"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.ChangePassword"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.MerchantList"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.Register"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.RegistMail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.Register4phone"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.PosSelecList"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.PosSearch"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.GoodDeatail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.GoodConfirm"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.GoodComment"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.ApplyNeed"
+            android:screenOrientation="portrait" >
+        </activity>
+                <activity
+            android:name="com.example.zf_android.activity.LeaseInstruction"
+            android:screenOrientation="portrait" >
+        </activity>
+                        <activity
+            android:name="com.example.zf_android.activity.MerchantEdit"
+            android:screenOrientation="portrait" >
+        </activity>
+     </application>
+
+</manifest>

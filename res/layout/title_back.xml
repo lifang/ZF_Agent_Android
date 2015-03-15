@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-  android:layout_height="@dimen/titleback_height"
+    android:layout_height="@dimen/titleback_height"
     android:background="@color/bgtitle"
     android:orientation="horizontal" >
 
-         <LinearLayout
+    <LinearLayout
         android:id="@+id/titleback_linear_back"
         android:layout_width="60dp"
         android:layout_height="48dp"
-       
+
         android:layout_marginLeft="@dimen/margin_left"
         android:gravity="center_vertical" >
 
@@ -51,8 +51,8 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="11dp"
         android:src="@drawable/delete_sure"
-         android:visibility="gone"
-      />
+        android:visibility="gone"
+        />
 
     <TextView
         android:id="@+id/next_sure"
@@ -63,7 +63,7 @@
         android:gravity="right"
         android:singleLine="true"
         android:text="确认"
-           
+
         android:visibility="gone"
         android:layout_centerVertical="true"
         android:textColor="@color/white"

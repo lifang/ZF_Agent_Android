@@ -2,13 +2,12 @@ package com.examlpe.zf_android.util;
 
  
 
-import com.example.zf_android.R;
-
 import android.app.Activity;
- 
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.zf_android.R;
  
  
 public class TitleMenuUtil {

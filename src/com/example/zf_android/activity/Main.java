@@ -252,14 +252,15 @@ public class Main extends BaseActivity implements OnClickListener{
 			break;
  
 		case R.id.main_rl_pos:  // ��POS����
- 
-			 startActivity(new Intent(Main.this,PosListActivity.class));
-			 
+
+//            startActivity(new Intent(Main.this, PosListActivity.class));
+            startActivity(new Intent(Main.this, AllProduct.class));
+
 			break;
  
  
 		case R.id.main_rl_renzhen:  //��֤
-			 Intent i =new Intent(Main.this, ApplyListActivity.class);
+			 Intent i =new Intent(Main.this, OrderList.class);
 			 startActivity(i);
 			 
 			break;

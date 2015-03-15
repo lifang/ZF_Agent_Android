@@ -91,7 +91,7 @@ public class Main extends BaseActivity implements OnClickListener{
 					ma.add(myList.get(i).getPicture_url());
 				}
 				indicator_imgs	= new ImageView[ma.size()];
-				initIndicator();
+//				initIndicator();
 				adapter.notifyDataSetChanged();		 
 				break;
 			case 1:
@@ -240,7 +240,7 @@ public class Main extends BaseActivity implements OnClickListener{
             break;
 
 		case R.id.main_rl_pos1:  // 锟斤拷POS锟斤拷锟斤拷
-			 startActivity(new Intent(Main.this,MyMessage.class));
+			 startActivity(new Intent(Main.this, SystemMessage.class));
 			 
 			break;
  
@@ -286,7 +286,7 @@ public class Main extends BaseActivity implements OnClickListener{
 			 startActivity(new Intent(Main.this,ContentUs.class));
 			 break;
 		case R.id.main_rl_gwc:  
-			 startActivity(new Intent(Main.this,ShopCar.class));
+			 startActivity(new Intent(Main.this, AllProduct.class));
 			break;
 		default:
 			break;
@@ -311,7 +311,7 @@ public class Main extends BaseActivity implements OnClickListener{
         }
     }
     
-private void initIndicator(){
+    private void initIndicator(){
 		
 		ImageView imgView;
 		View v = findViewById(R.id.indicator);// 线性水平布局，负责动态调整导航图标

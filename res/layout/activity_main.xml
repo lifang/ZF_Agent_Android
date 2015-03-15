@@ -139,7 +139,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:background="@drawable/itme1"
+                            android:background="@drawable/wyjh_icon"
                             android:duplicateParentState="true" />
 
                         <TextView
@@ -149,7 +149,7 @@
                             android:layout_below="@id/laa"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="11dp"
-                            android:text="买POS机"
+                            android:text="我要进货"
                             android:textColor="@color/text5a5a5a"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -180,7 +180,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:background="@drawable/item2" />
+                            android:background="@drawable/ddgl_icon" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -188,7 +188,7 @@
                             android:layout_below="@id/other"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="11dp"
-                            android:text="开通认证"
+                            android:text="订单管理"
                             android:textColor="@color/text5a5a5a"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -227,7 +227,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:background="@drawable/item3"
+                            android:background="@drawable/kcgl_icon"
                             android:duplicateParentState="true" />
 
                         <TextView
@@ -237,7 +237,7 @@
                             android:layout_below="@id/l3"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="11dp"
-                            android:text="终端管理"
+                            android:text="库存管理"
                             android:textColor="@color/text5a5a5a"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -305,7 +305,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:background="@drawable/item5" />
+                            android:background="@drawable/main_item3" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -313,7 +313,7 @@
                             android:layout_below="@id/Forum"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="11dp"
-                            android:text="健康服务"
+                            android:text="终端管理"
                             android:textColor="@color/text5a5a5a"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -352,7 +352,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:background="@drawable/item6"
+                            android:background="@drawable/yhgl_icon"
                             android:duplicateParentState="true" />
 
                         <TextView
@@ -362,7 +362,7 @@
                             android:layout_below="@id/l31"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="11dp"
-                            android:text="我要理财"
+                            android:text="用户管理"
                             android:textColor="@color/text5a5a5a"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -393,7 +393,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:background="@drawable/item7" />
+                            android:background="@drawable/shjl_icon" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -401,7 +401,7 @@
                             android:layout_below="@id/l41"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="11dp"
-                            android:text="系统公告"
+                            android:text="售后记录"
                             android:textColor="@color/text5a5a5a"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -432,7 +432,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:background="@drawable/item8" />
+                            android:background="@drawable/sqkt_icon" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -440,7 +440,7 @@
                             android:layout_below="@id/Forum1"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="11dp"
-                            android:text="联系我们"
+                            android:text="申请开通"
                             android:textColor="@color/text5a5a5a"
                             android:textSize="16sp" />
                     </LinearLayout>

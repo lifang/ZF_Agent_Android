@@ -63,4 +63,13 @@
         <item name="android:minHeight">26dp</item>
         <item name="android:maxHeight">32dp</item>
         </style>
+
+    <style name="big_button" >
+        <item name="android:layout_width" >fill_parent</item>
+        <item name="android:layout_height" >50dp</item>
+        <item name="android:textColor" >#ffffff</item>
+        <item name="android:gravity" >center</item>
+        <item name="android:layout_margin" >3dp</item>
+        <item name="android:textSize" >18dp</item>
+    </style>
 </resources>

@@ -10,7 +10,6 @@ import android.widget.RelativeLayout;
 
 import com.example.zf_android.BaseActivity;
 import com.example.zf_android.R;
-import com.example.zf_android.trade.AfterSaleGridActivity;
 import com.example.zf_android.trade.ApplyOpenProgressActivity;
 
 
@@ -39,14 +38,6 @@ public class MenuMine extends BaseActivity implements OnClickListener{
 		search.setOnClickListener(this);
 		ll_dd=(LinearLayout) findViewById(R.id.ll_dd);
 		ll_dd.setOnClickListener(this);
-		ll_shjl=(LinearLayout) findViewById(R.id.ll_shjl);
-		ll_shjl.setOnClickListener(this);
-		ll_wdxx=(LinearLayout) findViewById(R.id.ll_wdxx);
-		ll_wdxx.setOnClickListener(this);
-		ll_sh=(LinearLayout) findViewById(R.id.ll_sh);
-		ll_sh.setOnClickListener(this);
-		ll_request=(LinearLayout) findViewById(R.id.ll_request);
-		ll_request.setOnClickListener(this);
 	}
 	@Override
 	public void onClick(View v) {
@@ -66,10 +57,6 @@ public class MenuMine extends BaseActivity implements OnClickListener{
 		 
 			startActivity(new Intent(MenuMine.this,OrderList.class));
 			break;
-		case R.id.ll_shjl: 
-			 
-			startActivity(new Intent(MenuMine.this,AfterSaleGridActivity.class));
-			break;
 		case R.id.ll_wdxx: 
 		 
 		startActivity(new Intent(MenuMine.this,MyInfo.class));
@@ -84,10 +71,10 @@ public class MenuMine extends BaseActivity implements OnClickListener{
 
 		case R.id.main_rl_gwc: //��ϵ����
 
-			 startActivity(new Intent(MenuMine.this,ShopCar.class));
+			 startActivity(new Intent(MenuMine.this, AllProduct.class));
 			 break;
 		case R.id.main_rl_pos1:  
-			 startActivity(new Intent(MenuMine.this,MyMessage.class));
+			 startActivity(new Intent(MenuMine.this, SystemMessage.class));
 			break;
 		default:
 			break;

@@ -2,87 +2,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-  	android:orientation="vertical"
-  	android:background="@color/F3F2F2"
-  	 >
+    android:background="@color/F3F2F2"
+    android:orientation="vertical" >
 
- <include layout="@layout/title_back" />
-
-	 <LinearLayout
-        android:id="@+id/eva_nodata"
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center"
-        android:background="@color/ffffff"
-        android:orientation="horizontal"
-        android:visibility="gone">
+        android:layout_height="@dimen/titleback_height"
+        android:background="@color/bgtitle"
+        android:orientation="horizontal" >
 
-        <include layout="@layout/include_norecord" />
+        <TextView
+            android:id="@+id/titleback_text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:singleLine="true"
+            android:text="全部商品"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:orientation="vertical" >
+
+            <Button
+                android:background="@drawable/pifa_button"
+                android:id="@+id/button1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="去批购"
+                style="@style/big_button" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:orientation="vertical" >
+
+            <Button
+                android:background="@drawable/daigou_button"
+                android:id="@+id/button2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="去代购"
+                style="@style/big_button" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 
 
 
-
-
-
-		<com.examlpe.zf_android.util.XListView
-        android:id="@+id/x_listview"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/white"
-        android:fadingEdge="none"
-        android:scrollbars="none" />
-		<RelativeLayout
-		android:id="@+id/rl_edit"
-        android:layout_width="fill_parent"
-        android:layout_height="57dp"
-    	android:visibility="gone"
-        android:orientation="horizontal" >
-
-		    	            <View android:layout_height="0.5dp"
-		    	                android:background="@color/Viewc2"
-		    	                android:layout_width="fill_parent"
-		    	                android:layout_alignParentTop="true"/>
-
-		    	                   <TextView
-                 	android:id="@+id/tv_all"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                  	android:layout_centerVertical="true"
-                    android:layout_marginLeft="7dp"
-                    android:layout_alignParentLeft="true"
-                    android:text="全部标记为已读"
-                    android:textColor="@color/text5a5a5a"
-                    android:textSize="11sp" />
-		    	    <TextView
-                 	android:id="@+id/tv_dle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                  	android:layout_centerVertical="true"
-                    android:layout_marginRight="7dp"
-                    android:layout_alignParentRight="true"
-                    android:text="删除"
-                    android:textColor="@color/text5a5a5a"
-                    android:textSize="11sp" />
-
-		    	        </RelativeLayout>
-
-		<RelativeLayout
-		    android:layout_height="57dp"
-		    android:layout_width="fill_parent"
-		    android:id="@+id/rl_editno"
-
-
-		    >
-
-
-
-		        <LinearLayout
-		            android:id="@+id/ll1"
+    <!-- line -->
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:background="#909090"
@@ -96,12 +84,12 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
+            android:background="@color/bgtitle"
             android:layout_weight="1"
-           />
+            />
 
         <View
             android:layout_width="0dp"
-               android:background="@color/bgtitle"
             android:layout_height="1dp"
             android:layout_weight="1" />
 
@@ -110,19 +98,17 @@
             android:layout_height="1dp"
             android:layout_weight="1" />
     </LinearLayout>
-
-	<LinearLayout
+    <!--end line-->
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="56dp"
         android:background="#E1E0E0"
-        android:layout_below="@id/ll1"
         android:orientation="horizontal" >
 
         <RelativeLayout
             android:id="@+id/main_rl_sy"
-
             android:layout_width="fill_parent"
-            android:layout_height="match_parent"
+            android:layout_height="fill_parent"
             android:layout_weight="1" >
 
             <LinearLayout
@@ -154,7 +140,6 @@
             </LinearLayout>
         </RelativeLayout>
 
-
         <RelativeLayout
             android:id="@+id/main_rl_gwc"
             android:layout_width="fill_parent"
@@ -174,7 +159,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:background="@drawable/product2"
+                    android:background="@drawable/product"
                     android:duplicateParentState="true" />
 
                 <TextView
@@ -185,7 +170,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="8dp"
                     android:text="全部商品"
-                    android:textColor="@color/text5a5a5a"
+                    android:textColor="@color/bgtitle"
                     android:textSize="11sp" />
             </LinearLayout>
         </RelativeLayout>
@@ -209,7 +194,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:background="@drawable/message"
+                    android:background="@drawable/message2"
                     android:duplicateParentState="true" />
 
                 <TextView
@@ -220,8 +205,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="8dp"
                     android:text="我的消息"
-                     android:textColor="@color/bgtitle"
-
+                    android:textColor="@color/text5a5a5a"
                     android:textSize="11sp" />
             </LinearLayout>
         </RelativeLayout>
@@ -261,19 +245,5 @@
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
-
-
-
-
-
-
-
-
-
-    </RelativeLayout>
-
-
-
-
 
 </LinearLayout>

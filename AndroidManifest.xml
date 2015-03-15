@@ -229,6 +229,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.example.zf_android.activity.AllProduct"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.example.zf_android.activity.ConfirmOrder"
             android:screenOrientation="portrait" >
         </activity>

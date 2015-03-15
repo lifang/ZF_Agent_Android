@@ -1,24 +1,17 @@
 package com.example.zf_android.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.Header;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.examlpe.zf_android.util.Tools;
@@ -29,13 +22,19 @@ import com.example.zf_android.Config;
 import com.example.zf_android.MyApplication;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.MessageEntity;
-import com.example.zf_android.entity.TestEntitiy;
 import com.example.zf_zandroid.adapter.MessageAdapter;
-import com.example.zf_zandroid.adapter.OrderAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /***
  * 
 *    
@@ -46,7 +45,9 @@ import com.loopj.android.http.RequestParams;
 * @version    
 *
  */
-public class SystemMessage extends BaseActivity implements  IXListViewListener{
+public class SystemMessage extends BaseActivity implements  IXListViewListener, View.OnClickListener {
+    private RelativeLayout main_rl_sy, main_rl_gwc, main_rl_my;
+
 	private XListView Xlistview;
 	private int page=1;
 	private int rows=Config.ROWS;
@@ -98,8 +99,14 @@ public class SystemMessage extends BaseActivity implements  IXListViewListener{
 
 		private void initView() {
 			// TODO Auto-generated method stub
+            main_rl_sy=(RelativeLayout) findViewById(R.id.main_rl_sy);
+            main_rl_sy.setOnClickListener(this);
+            main_rl_my=(RelativeLayout) findViewById(R.id.main_rl_my);
+            main_rl_my.setOnClickListener(this);
+            main_rl_gwc=(RelativeLayout) findViewById(R.id.main_rl_gwc);
+            main_rl_gwc.setOnClickListener(this);
  
-			new TitleMenuUtil(SystemMessage.this, "系统公告").show();
+			new TitleMenuUtil(SystemMessage.this, "我的消息").show();
 			myAdapter=new MessageAdapter(SystemMessage.this, myList);
 			eva_nodata=(LinearLayout) findViewById(R.id.eva_nodata);
 			Xlistview=(XListView) findViewById(R.id.x_listview);
@@ -119,27 +126,6 @@ public class SystemMessage extends BaseActivity implements  IXListViewListener{
 				}
 			});
 			Xlistview.setAdapter(myAdapter);
-//			next_sure.setOnClickListener(new OnClickListener() {
-//				
-//				@Override
-//				public void onClick(View v) {
-//					// TODO Auto-generated method stub
-//					if(MyApplication.getIsSelect()){
-//						//��������ɾ�����
-//						MyApplication.setIsSelect(false);
-//						myAdapter.notifyDataSetChanged();
-//						for(int i=0;i<myList.size();i++){
-//							 
-//							if(myList.get(i).getIscheck()){
-//								System.out.println("��---"+i+"����ѡ��");
-//							}
-//						}
-//					}else{
-//						MyApplication.setIsSelect(true);
-//						myAdapter.notifyDataSetChanged();
-//					}
-//				}
-//			});
 		}
 
 		@Override
@@ -184,6 +170,33 @@ public class SystemMessage extends BaseActivity implements  IXListViewListener{
 			myList.clear();
 			getData();
 		}
+
+
+    @Override
+    public void onClick(View v) {
+        // TODO Auto-generated method stub
+        switch (v.getId()) {
+
+            case R.id.main_rl_gwc:  // 全部商品
+                startActivity(new Intent(SystemMessage.this, AllProduct.class));
+
+                break;
+
+            case R.id.main_rl_my:  // 我的
+
+                startActivity(new Intent(SystemMessage.this, MenuMine.class));
+
+                break;
+
+            case R.id.main_rl_sy:  // 首页
+
+                startActivity(new Intent(SystemMessage.this, MenuMine.class));
+
+                break;
+            default:
+                break;
+        }
+    }
 	 
 		private void getData() {
 			// TODO Auto-generated method stub

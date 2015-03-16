@@ -1,31 +1,30 @@
 package com.example.zf_zandroid.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.zf_android.R;
-import com.example.zf_android.entity.Goodlist;
+import com.example.zf_android.activity.OrderDetail;
+import com.example.zf_android.entity.OrderEntity;
 
 import java.util.List;
 
 
-
-
-public class OrderDetail_PosAdapter extends BaseAdapter{
+public class StockAdapter extends BaseAdapter{
     private Context context;
-    private List<Goodlist> list;
+    private List<OrderEntity> list;
     private LayoutInflater inflater;
-    private int state;
     private ViewHolder holder = null;
-    public OrderDetail_PosAdapter(Context context, List<Goodlist> list ,int state) {
+    public StockAdapter(Context context, List<OrderEntity> list) {
         this.context = context;
         this.list = list;
-        this.state = state;
     }
     @Override
     public int getCount() {
@@ -47,27 +46,27 @@ public class OrderDetail_PosAdapter extends BaseAdapter{
         inflater = LayoutInflater.from(context);
         if(convertView == null){
             holder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.order_detail_positem, null);
-            holder.content = (TextView) convertView.findViewById(R.id.content_pp);
-            holder.btn_ishow = (Button) convertView.findViewById(R.id.btn_ishow);
-            holder.tv_price = (TextView) convertView.findViewById(R.id.tv_price);
-            holder.tv_x = (TextView) convertView.findViewById(R.id.tv_x);
+            convertView = inflater.inflate(R.layout.stock_item, null);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder)convertView.getTag();
         }
 
-        holder.content.setText(list.get(position).getGood_name());
-        holder.tv_price .setText("￥ "+list.get(position).getGood_actualprice());
-//        holder.tv_x .setText(list.get(position).getGood_actualprice());
-        holder.btn_ishow.setVisibility(state==3?View.VISIBLE:View.GONE);
+        convertView.setOnClickListener(new OnClickListener() {
 
+            @Override
+            public void onClick(View arg0) {
+                // TODO Auto-generated method stub
+                Intent i = new Intent(context, OrderDetail.class);
+                context.startActivity(i);
+            }
+        });
 
         return convertView;
     }
 
     public final class ViewHolder {
-        public TextView content,tv_price,tv_x;
-        public Button btn_ishow;
+        public TextView tv_goodnum,tv_price,content,tv_ddbh,tv_time,tv_status,tv_sum,tv_psf,tv_pay,tv_gtd,content2,content_pp;
+        private LinearLayout ll_ishow;
     }
 }

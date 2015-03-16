@@ -22,6 +22,7 @@ import com.example.zf_android.R;
 import com.example.zf_android.entity.OrderEntity;
 import com.example.zf_android.trade.widget.MyTabWidget;
 import com.example.zf_zandroid.adapter.OrderAdapter;
+import com.example.zf_zandroid.adapter.StockAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -40,7 +41,7 @@ import java.util.List;
  * �����ˣ� ljp
  * ����ʱ�䣺2015-2-4 ����3:04:31
  */
-public class OrderList extends BaseActivity implements IXListViewListener {
+public class StockList extends BaseActivity implements IXListViewListener {
     //���²��� Xlist
     private XListView Xlistview;
     private MyTabWidget mTabWidget;
@@ -48,7 +49,7 @@ public class OrderList extends BaseActivity implements IXListViewListener {
     private int rows = Config.ROWS;
     private LinearLayout eva_nodata;
     private boolean onRefresh_number = true;
-    private OrderAdapter myAdapter;
+    private StockAdapter myAdapter;
     List<OrderEntity> myList = new ArrayList<OrderEntity>();
     List<OrderEntity> moreList = new ArrayList<OrderEntity>();
     private Handler handler = new Handler() {
@@ -87,7 +88,7 @@ public class OrderList extends BaseActivity implements IXListViewListener {
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.order_list);
+        setContentView(R.layout.stock_list);
         initView();
         getData();
     }
@@ -95,18 +96,8 @@ public class OrderList extends BaseActivity implements IXListViewListener {
     private void initView() {
         // TODO Auto-generated method stub
 
-        mTabWidget = (MyTabWidget) findViewById(R.id.tab_widget);
-        // add tabs to the TabWidget
-        String[] tabs = getResources().getStringArray(R.array.order_kind_tabs);
-        for (int i = 0; i < tabs.length; i++) {
-            mTabWidget.addTab(tabs[i]);
-        }
-        mTabWidget.updateTabs(0);
-
-
-
-        new TitleMenuUtil(OrderList.this, "订单管理").show();
-        myAdapter = new OrderAdapter(OrderList.this, myList);
+        new TitleMenuUtil(StockList.this, "库存管理").show();
+        myAdapter = new StockAdapter(StockList.this, myList);
         eva_nodata = (LinearLayout) findViewById(R.id.eva_nodata);
         Xlistview = (XListView) findViewById(R.id.x_listview);
         // refund_listview.getmFooterView().getmHintView().setText("�Ѿ�û�������");
@@ -120,7 +111,7 @@ public class OrderList extends BaseActivity implements IXListViewListener {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // TODO Auto-generated method stub
-                Intent i = new Intent(OrderList.this, OrderDetail.class);
+                Intent i = new Intent(StockList.this, OrderDetail.class);
                 OrderEntity orderEntity = myList.get(position - 1);
                 i.putExtra("status", orderEntity.getOrder_status());
                 i.putExtra("id", orderEntity.getOrder_id());

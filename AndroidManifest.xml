@@ -195,10 +195,10 @@
             android:name=".trade.ApplyChooseActivity"
             android:screenOrientation="portrait" >
         </activity>
-	    <activity
-		    android:name=".trade.ApplyOpenProgressActivity"
-		    android:screenOrientation="portrait" >
-	    </activity>
+        <activity
+            android:name=".trade.ApplyOpenProgressActivity"
+            android:screenOrientation="portrait" >
+        </activity>
         <!-- ====================================================== -->
         <!-- Leo's Activities End -->
         <!-- ====================================================== -->
@@ -303,14 +303,14 @@
             android:name="com.example.zf_android.activity.ApplyNeed"
             android:screenOrientation="portrait" >
         </activity>
-                <activity
+        <activity
             android:name="com.example.zf_android.activity.LeaseInstruction"
             android:screenOrientation="portrait" >
         </activity>
-                        <activity
+        <activity
             android:name="com.example.zf_android.activity.MerchantEdit"
             android:screenOrientation="portrait" >
         </activity>
-     </application>
+    </application>
 
 </manifest>

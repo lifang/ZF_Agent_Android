@@ -110,26 +110,27 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:layout_marginLeft="26dp"
             android:layout_marginRight="12dp"
+            android:layout_gravity="center_vertical"
             android:orientation="vertical" >
 
 
             <Button
                 android:layout_width="69dp"
-                android:layout_height="wrap_content"
                 android:text="商品更名"
                 android:id="@+id/change_name"
-                android:background="@drawable/pifa_button"
-                style="@style/big_button"
+                android:background="@drawable/small_button"
+                style="@style/small_button"
                 />
 
 
             <Button
                 android:layout_width="69dp"
-                android:layout_height="wrap_content"
                 android:text="去批购"
-                android:id="@+id/go_pigou" />
+                android:id="@+id/go_pigou"
+                android:background="@drawable/small_button"
+                style="@style/small_button"
+                />
 
         </LinearLayout>
     </LinearLayout>
@@ -137,56 +138,73 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="0.5dp"
-        android:layout_marginLeft="7dp"
-        android:layout_marginRight="7dp"
         android:background="@color/Viewc2" />
 
-    <LinearLayout
+    <TableLayout
         android:layout_width="fill_parent"
-        android:layout_height="30dp"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:background="#f0f0f0"
+        android:stretchColumns="0,1,2,3,4,5,6"
+        >
+        <TableRow>
 
-        <TextView
-            android:id="@+id/tv_sum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="7dp"
-            android:text="共计:   10件"
-            android:textColor="@color/text6c6c6c6"
-            android:textSize="8sp" />
+            <TextView
+                android:text="历史进货数量\n1000件"
+                android:layout_width="wrap_content"
 
-        <TextView
-            android:id="@+id/tv_psf"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:text="配送费：￥1000"
-            android:textColor="@color/text6c6c6c6"
-            android:textSize="8sp" />
+                style="@style/center_textview"
+                />
 
-        <TextView
-            android:id="@+id/tv_pay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="7dp"
-            android:text="实付：29999"
-            android:textColor="@color/text6c6c6c6"
-            android:textSize="13sp" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                >
+                <View style="@style/VDivider" />
+            </LinearLayout>
+
+            <TextView
+                android:text="已开通数量\n500件"
+                android:layout_width="wrap_content"
+                style="@style/center_textview"
+                />
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                >
+                <View style="@style/VDivider" />
+            </LinearLayout>
+
+            <TextView
+                android:text="代理商库存\n500件"
+                android:layout_width="wrap_content"
+                style="@style/center_textview"
+                />
+
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                >
+                <View style="@style/VDivider" />
+            </LinearLayout>
+
+            <TextView
+                android:text="总库存\n500件"
+                android:layout_width="wrap_content"
+                style="@style/center_textview"
+                />
+        </TableRow>
 
 
+
+    </TableLayout>
     <View
         android:layout_width="fill_parent"
         android:layout_height="0.5dp"
-       
+        android:layout_marginBottom="6dp"
         android:background="@color/Viewc2" />
-        <View
-        android:layout_width="fill_parent"
-        android:layout_height="5dp"
-       
-        android:background="@color/F3F2F2" />
 </LinearLayout>

@@ -11,18 +11,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.zf_android.R;
-import com.example.zf_android.activity.StockAgentDetail;
+import com.example.zf_android.activity.StockDetail;
 import com.example.zf_android.entity.OrderEntity;
 
 import java.util.List;
 
 
-public class StockAgentAdapter extends BaseAdapter{
+public class StockAgentTerminalAdapter extends BaseAdapter{
     private Context context;
     private List<OrderEntity> list;
     private LayoutInflater inflater;
     private ViewHolder holder = null;
-    public StockAgentAdapter(Context context, List<OrderEntity> list) {
+    public StockAgentTerminalAdapter(Context context, List<OrderEntity> list) {
         this.context = context;
         this.list = list;
     }
@@ -46,7 +46,7 @@ public class StockAgentAdapter extends BaseAdapter{
         inflater = LayoutInflater.from(context);
         if(convertView == null){
             holder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.stock_agent_item, null);
+            convertView = inflater.inflate(R.layout.stock_terminal_item, null);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder)convertView.getTag();
@@ -57,7 +57,7 @@ public class StockAgentAdapter extends BaseAdapter{
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
-                Intent i = new Intent(context, StockAgentDetail.class);
+                Intent i = new Intent(context, StockDetail.class);
                 context.startActivity(i);
             }
         });

@@ -1,13 +1,10 @@
 package com.example.zf_android.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -21,7 +18,6 @@ import com.example.zf_android.MyApplication;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.OrderEntity;
 import com.example.zf_android.trade.widget.MyTabWidget;
-import com.example.zf_zandroid.adapter.StockAdapter;
 import com.example.zf_zandroid.adapter.StockAgentAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -41,7 +37,7 @@ import java.util.List;
  * �����ˣ� ljp
  * ����ʱ�䣺2015-2-4 ����3:04:31
  */
-public class StockDetail extends BaseActivity implements IXListViewListener {
+public class StockAgentDetail extends BaseActivity implements IXListViewListener {
     //���²��� Xlist
     private XListView Xlistview;
     private MyTabWidget mTabWidget;
@@ -88,7 +84,7 @@ public class StockDetail extends BaseActivity implements IXListViewListener {
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.stock_detail);
+        setContentView(R.layout.stock_agent_detail);
         initView();
         getData();
     }
@@ -96,8 +92,8 @@ public class StockDetail extends BaseActivity implements IXListViewListener {
     private void initView() {
         // TODO Auto-generated method stub
 
-        new TitleMenuUtil(StockDetail.this, "库存详情").show();
-        myAdapter = new StockAgentAdapter(StockDetail.this, myList);
+        new TitleMenuUtil(StockAgentDetail.this, "动感科技有限公司").show();
+        myAdapter = new StockAgentAdapter(StockAgentDetail.this, myList);
         eva_nodata = (LinearLayout) findViewById(R.id.eva_nodata);
         Xlistview = (XListView) findViewById(R.id.x_listview);
         Xlistview.setPullLoadEnable(true);

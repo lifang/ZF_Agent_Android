@@ -3,20 +3,17 @@ package com.examlpe.zf_android.util;
  
  
 
-import com.example.zf_android.R;
-
 import android.app.Dialog;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.zf_android.R;
 
 public class DialogUtil {
     private Context context;
@@ -55,8 +52,8 @@ public class DialogUtil {
         dialog.setContentView(v);
         Window window = dialog.getWindow();
         window.setGravity(Gravity.CENTER);
-        window.setLayout(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);// 加上可以点击dialog外围可以消失
-      //  window.setWindowAnimations(R.style.TanchuDialogAnim);
+        window.setLayout(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
+
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

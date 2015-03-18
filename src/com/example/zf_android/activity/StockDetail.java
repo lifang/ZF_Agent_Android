@@ -21,8 +21,8 @@ import com.example.zf_android.MyApplication;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.OrderEntity;
 import com.example.zf_android.trade.widget.MyTabWidget;
-import com.example.zf_zandroid.adapter.OrderAdapter;
 import com.example.zf_zandroid.adapter.StockAdapter;
+import com.example.zf_zandroid.adapter.StockAgentAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -41,7 +41,7 @@ import java.util.List;
  * �����ˣ� ljp
  * ����ʱ�䣺2015-2-4 ����3:04:31
  */
-public class StockList extends BaseActivity implements IXListViewListener {
+public class StockDetail extends BaseActivity implements IXListViewListener {
     //���²��� Xlist
     private XListView Xlistview;
     private MyTabWidget mTabWidget;
@@ -49,7 +49,7 @@ public class StockList extends BaseActivity implements IXListViewListener {
     private int rows = Config.ROWS;
     private LinearLayout eva_nodata;
     private boolean onRefresh_number = true;
-    private StockAdapter myAdapter;
+    private StockAgentAdapter myAdapter;
     List<OrderEntity> myList = new ArrayList<OrderEntity>();
     List<OrderEntity> moreList = new ArrayList<OrderEntity>();
     private Handler handler = new Handler() {
@@ -88,7 +88,7 @@ public class StockList extends BaseActivity implements IXListViewListener {
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.stock_list);
+        setContentView(R.layout.stock_detail);
         initView();
         getData();
     }
@@ -96,8 +96,8 @@ public class StockList extends BaseActivity implements IXListViewListener {
     private void initView() {
         // TODO Auto-generated method stub
 
-        new TitleMenuUtil(StockList.this, "库存管理").show();
-        myAdapter = new StockAdapter(StockList.this, myList);
+        new TitleMenuUtil(StockDetail.this, "库存详情").show();
+        myAdapter = new StockAgentAdapter(StockDetail.this, myList);
         eva_nodata = (LinearLayout) findViewById(R.id.eva_nodata);
         Xlistview = (XListView) findViewById(R.id.x_listview);
         // refund_listview.getmFooterView().getmHintView().setText("�Ѿ�û�������");
@@ -105,19 +105,19 @@ public class StockList extends BaseActivity implements IXListViewListener {
         Xlistview.setXListViewListener(this);
         Xlistview.setDivider(null);
 
-//        Xlistview.setOnItemClickListener(new OnItemClickListener() {
-//
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view,
-//                                    int position, long id) {
-//                // TODO Auto-generated method stub
-//                Intent i = new Intent(StockList.this, StockDetail.class);
-//                OrderEntity orderEntity = myList.get(position - 1);
-//                i.putExtra("status", orderEntity.getOrder_status());
-//                i.putExtra("id", orderEntity.getOrder_id());
-//                startActivity(i);
-//            }
-//        });
+        Xlistview.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                // TODO Auto-generated method stub
+                Intent i = new Intent(StockDetail.this, OrderDetail.class);
+                OrderEntity orderEntity = myList.get(position - 1);
+                i.putExtra("status", orderEntity.getOrder_status());
+                i.putExtra("id", orderEntity.getOrder_id());
+                startActivity(i);
+            }
+        });
         Xlistview.setAdapter(myAdapter);
     }
 

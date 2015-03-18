@@ -17,12 +17,12 @@ import com.example.zf_android.entity.OrderEntity;
 import java.util.List;
 
 
-public class StockAdapter extends BaseAdapter{
+public class StockAgentAdapter extends BaseAdapter{
     private Context context;
     private List<OrderEntity> list;
     private LayoutInflater inflater;
     private ViewHolder holder = null;
-    public StockAdapter(Context context, List<OrderEntity> list) {
+    public StockAgentAdapter(Context context, List<OrderEntity> list) {
         this.context = context;
         this.list = list;
     }
@@ -46,7 +46,7 @@ public class StockAdapter extends BaseAdapter{
         inflater = LayoutInflater.from(context);
         if(convertView == null){
             holder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.stock_item, null);
+            convertView = inflater.inflate(R.layout.stock_agent_item, null);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder)convertView.getTag();

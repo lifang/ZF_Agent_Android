@@ -91,6 +91,10 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".activity.StockDetail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".activity.MineSet"
             android:screenOrientation="portrait" >
         </activity>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:stretchColumns="0,1,2"
+        >
+        <TableRow>
+
+            <TextView
+                android:text="动感科技有限公司"
+                android:layout_width="wrap_content"
+                android:gravity="center_horizontal"
+
+                />
+
+            <TextView
+                android:text="2340"
+                android:layout_width="wrap_content"
+                android:gravity="center_horizontal"
+                />
+
+            <LinearLayout
+                android:id="@+id/eva_nodata"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:text="2340"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/post_right"
+                    />
+            </LinearLayout>
+
+
+        </TableRow>
+    </TableLayout>
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:stretchColumns="0,1"
+        >
+        <TableRow>
+
+            <TextView
+                android:text="上次配送日期：2015-12-12 10:11:00"
+                android:layout_width="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="10dp"
+                android:textColor="#cccccc"
+                />
+
+            <TextView
+                android:text="上次开通日期：2015-12-12 10:11:00"
+                android:layout_width="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="10dp"
+                android:textColor="#cccccc"
+                />
+
+
+        </TableRow>
+    </TableLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:background="@color/Viewc2" />
+
+</LinearLayout>

@@ -1,0 +1,87 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/F3F2F2"
+    >
+
+    <include layout="@layout/title_back" />
+
+    <LinearLayout
+        android:id="@+id/eva_nodata"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:background="@color/ffffff"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <include layout="@layout/include_norecord" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="10dp"
+        />
+    <LinearLayout
+        android:id="@+id/sumary"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/ffffff"
+        android:orientation="horizontal"
+        >
+        <include layout="@layout/stock_item" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/Viewc2" />
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="0,1,2"
+        >
+        <TableRow>
+
+            <TextView
+                android:text="下级代理商"
+                android:layout_width="wrap_content"
+                android:gravity="center_horizontal"
+
+                />
+
+            <TextView
+                android:text="配货总量"
+                android:layout_width="wrap_content"
+                android:gravity="center_horizontal"
+                />
+
+            <TextView
+                android:text="已开通量"
+                android:layout_width="wrap_content"
+                android:gravity="center_horizontal"
+                />
+
+        </TableRow>
+    </TableLayout>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/Viewc2" />
+
+    <com.examlpe.zf_android.util.XListView
+        android:id="@+id/x_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/white"
+
+        android:fadingEdge="none"
+        android:scrollbars="none" />
+</LinearLayout>

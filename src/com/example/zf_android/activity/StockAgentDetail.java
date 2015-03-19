@@ -19,6 +19,7 @@ import com.example.zf_android.R;
 import com.example.zf_android.entity.OrderEntity;
 import com.example.zf_android.trade.widget.MyTabWidget;
 import com.example.zf_zandroid.adapter.StockAgentAdapter;
+import com.example.zf_zandroid.adapter.StockAgentTerminalAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -45,7 +46,7 @@ public class StockAgentDetail extends BaseActivity implements IXListViewListener
     private int rows = Config.ROWS;
     private LinearLayout eva_nodata;
     private boolean onRefresh_number = true;
-    private StockAgentAdapter myAdapter;
+    private StockAgentTerminalAdapter myAdapter;
     List<OrderEntity> myList = new ArrayList<OrderEntity>();
     List<OrderEntity> moreList = new ArrayList<OrderEntity>();
     private Handler handler = new Handler() {
@@ -93,7 +94,7 @@ public class StockAgentDetail extends BaseActivity implements IXListViewListener
         // TODO Auto-generated method stub
 
         new TitleMenuUtil(StockAgentDetail.this, "动感科技有限公司").show();
-        myAdapter = new StockAgentAdapter(StockAgentDetail.this, myList);
+        myAdapter = new StockAgentTerminalAdapter(StockAgentDetail.this, myList);
         eva_nodata = (LinearLayout) findViewById(R.id.eva_nodata);
         Xlistview = (XListView) findViewById(R.id.x_listview);
         Xlistview.setPullLoadEnable(true);
@@ -155,7 +156,7 @@ public class StockAgentDetail extends BaseActivity implements IXListViewListener
         RequestParams params = new RequestParams();
         params.put("customer_id", 80);
         params.put("page", page);
-        params.put("pageSize", 2);
+        params.put("pageSize", 4);
 
         params.setUseJsonStreamer(true);
 

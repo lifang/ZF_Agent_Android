@@ -8,18 +8,6 @@
 
     <include layout="@layout/title_back" />
 
-    <LinearLayout
-        android:id="@+id/eva_nodata"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center"
-        android:background="@color/ffffff"
-        android:orientation="horizontal"
-        android:visibility="gone">
-
-        <include layout="@layout/include_norecord" />
-    </LinearLayout>
-
     <View
         android:layout_width="fill_parent"
         android:layout_height="0.5dp"
@@ -31,9 +19,37 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@color/ffffff"
-        android:orientation="horizontal"
+        android:padding="10dp"
+        android:orientation="vertical"
         >
-        <include layout="@layout/stock_item" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textSize="16dp"
+            android:text="配货总量 2340"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textSize="16dp"
+            android:text="已开通量 2340"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="12dp"
+            android:text="上次配货日期 2015-03-12 22:20:11"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="12dp"
+            android:text="上次开通日期 2015-03-12 22:20:11"
+            />
     </LinearLayout>
 
     <View
@@ -50,20 +66,20 @@
         <TableRow>
 
             <TextView
-                android:text="aaa"
+                android:text="终端号"
                 android:layout_width="wrap_content"
                 android:gravity="center_horizontal"
 
                 />
 
             <TextView
-                android:text="配货总量"
+                android:text="机型"
                 android:layout_width="wrap_content"
                 android:gravity="center_horizontal"
                 />
 
             <TextView
-                android:text="已开通量"
+                android:text="开通状态"
                 android:layout_width="wrap_content"
                 android:gravity="center_horizontal"
                 />

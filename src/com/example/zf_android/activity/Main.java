@@ -264,7 +264,7 @@ public class Main extends BaseActivity implements OnClickListener{
                 startActivity(new Intent(Main.this, TradeFlowActivity.class));
                 break;
             case R.id.main_rl_Forum: //锟斤拷要锟斤拷锟�
-                startActivity(new Intent(Main.this, ChanceAdress.class));
+                startActivity(new Intent(Main.this, Terminal.class));
                 break;
 
             case R.id.main_rl_xtgg: //ϵͳ����

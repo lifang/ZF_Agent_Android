@@ -103,6 +103,14 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".activity.Terminal"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.TerminalDetail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".activity.MineSet"
             android:screenOrientation="portrait" >
         </activity>

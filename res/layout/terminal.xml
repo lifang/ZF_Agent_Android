@@ -1,0 +1,87 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/F3F2F2"
+    >
+
+    <include layout="@layout/title_back" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="10dp"
+        />
+    <LinearLayout
+        android:id="@+id/sumary"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:background="@drawable/buttong_light"
+            android:textColor="@color/bgtitle"
+            android:text="申请售后" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:background="@drawable/buttong_light"
+            android:textColor="@color/bgtitle"
+            android:text="为用户绑定终端" />
+    </LinearLayout>
+
+    <View android:layout_height="1dp"
+        android:layout_width="fill_parent"
+        android:background="@color/Viewc2"/>
+    <LinearLayout android:layout_height="50dp"
+        android:layout_width="fill_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择终端状态"
+            android:textColor="@color/text292929"
+            android:textSize="16sp"
+            android:layout_marginLeft="14dp"
+            android:id="@+id/b" />
+        <ImageView android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/title_down"
+            android:layout_marginLeft="10dp"/>
+        <TextView android:layout_width="fill_parent"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_height="wrap_content"
+            android:hint="全部"
+            android:id="@+id/a" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/Viewc2" />
+
+
+    <com.examlpe.zf_android.util.XListView
+        android:id="@+id/x_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/white"
+
+        android:fadingEdge="none"
+        android:scrollbars="none" />
+</LinearLayout>

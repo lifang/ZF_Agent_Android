@@ -181,7 +181,7 @@
 	        android:textColor="@color/text292929"
 	       	android:textSize="20sp"
 	       	android:layout_marginLeft="14dp"
-	       	/>
+            android:id="@+id/ww" />
 	    <ImageView android:layout_height="wrap_content"
 	        android:layout_width="wrap_content"
 	        android:background="@drawable/title_down"
@@ -192,7 +192,8 @@
 		            android:layout_height="wrap_content"
 		            android:hint="请输入发票抬头"
 		            
-		            android:background="@drawable/edit_login"/>
+		            android:background="@drawable/edit_login"
+             android:id="@+id/ee" />
 	    
 	</LinearLayout>
 		        

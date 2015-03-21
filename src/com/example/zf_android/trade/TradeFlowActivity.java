@@ -1,14 +1,5 @@
 package com.example.zf_android.trade;
 
-import static com.example.zf_android.trade.Constants.TradeType.CONSUME;
-import static com.example.zf_android.trade.Constants.TradeType.LIFE_PAY;
-import static com.example.zf_android.trade.Constants.TradeType.PHONE_PAY;
-import static com.example.zf_android.trade.Constants.TradeType.REPAYMENT;
-import static com.example.zf_android.trade.Constants.TradeType.TRANSFER;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -31,7 +22,7 @@ import com.example.zf_android.R;
 import com.example.zf_android.entity.OrderEntity;
 import com.example.zf_android.trade.widget.MyTabWidget;
 import com.example.zf_android.trade.widget.MyViewPager;
-import com.example.zf_zandroid.adapter.StockAgentAdapter;
+import com.example.zf_zandroid.adapter.TradeFlowAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -40,6 +31,15 @@ import com.loopj.android.http.RequestParams;
 import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.example.zf_android.trade.Constants.TradeType.CONSUME;
+import static com.example.zf_android.trade.Constants.TradeType.LIFE_PAY;
+import static com.example.zf_android.trade.Constants.TradeType.PHONE_PAY;
+import static com.example.zf_android.trade.Constants.TradeType.REPAYMENT;
+import static com.example.zf_android.trade.Constants.TradeType.TRANSFER;
 
 /**
  * Created by Leo on 2015/2/6.
@@ -56,7 +56,7 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
     private int rows = Config.ROWS;
     private LinearLayout eva_nodata;
     private boolean onRefresh_number = true;
-    private StockAgentAdapter myAdapter;
+    private TradeFlowAdapter myAdapter;
     List<OrderEntity> myList = new ArrayList<OrderEntity>();
     List<OrderEntity> moreList = new ArrayList<OrderEntity>();
     private Handler handler = new Handler() {
@@ -131,7 +131,7 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
         mTabWidget.updateTabs(0);
         mViewPager.setCurrentItem(0);
 
-        myAdapter = new StockAgentAdapter(TradeFlowActivity.this, myList);
+        myAdapter = new TradeFlowAdapter(TradeFlowActivity.this, myList);
         eva_nodata = (LinearLayout) findViewById(R.id.eva_nodata);
         Xlistview = (XListView) findViewById(R.id.x_listview);
         Xlistview.setPullLoadEnable(true);

@@ -1,0 +1,217 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/ffffff"
+    android:orientation="vertical" >
+
+    <include layout="@layout/title_back" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="交易成功"
+            android:textColor="@color/text5a5a5a"
+            android:textSize="17sp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="交易金额：￥99999.99"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/text5a5a5a"
+            android:textSize="13sp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="手续费：￥99999.99"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/text5a5a5a"
+            android:textSize="13sp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="交易时间：2014-12-22 22:22:30"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/text5a5a5a"
+            android:textSize="13sp" />
+
+
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="#cccccc"
+        />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="账户信息"
+            android:textColor="#cccccc"
+            android:textSize="17sp" />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="#0987da"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="编号：1345"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/text5a5a5a"
+            android:textSize="13sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="代理商 ID：马大姐"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/text5a5a5a"
+            android:textSize="13sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="商户 ID：动感科技"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/text5a5a5a"
+            android:textSize="13sp" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="20dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="交易信息"
+            android:textColor="#cccccc"
+            android:textSize="17sp" />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="#0987da"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="终端号：1343244545"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/text5a5a5a"
+            android:textSize="13sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="付款帐号：1343244545"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/text5a5a5a"
+            android:textSize="13sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="收款帐号：1343244545"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/text5a5a5a"
+            android:textSize="13sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="支付通道：支付宝"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/text5a5a5a"
+            android:textSize="13sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="分润金额：￥9999.29"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/text5a5a5a"
+            android:textSize="13sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="交易金额：￥9999.29"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/text5a5a5a"
+            android:textSize="13sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="交易时间：2015-12-12 22:22:11"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/text5a5a5a"
+            android:textSize="13sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="交易状态：成功"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/text5a5a5a"
+            android:textSize="13sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="交易批次号：2233458"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/text5a5a5a"
+            android:textSize="13sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="交易流水号：2233458"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/text5a5a5a"
+            android:textSize="13sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="付款银行号：中国银行"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/text5a5a5a"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

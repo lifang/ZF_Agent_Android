@@ -99,6 +99,10 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".activity.TradeOrderDetail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".activity.MineSet"
             android:screenOrientation="portrait" >
         </activity>

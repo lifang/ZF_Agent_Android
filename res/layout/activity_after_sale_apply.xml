@@ -1,0 +1,203 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/F3F2F2"
+    >
+
+    <include layout="@layout/title_back" />
+    <ScrollView  android:layout_height="wrap_content"
+        android:layout_width="fill_parent">
+        <LinearLayout android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/Viewc" />
+            <LinearLayout
+                android:id="@+id/click_choose_terminal"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bg_item" >
+
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="@dimen/margin_left2"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="选择终端号"
+                    android:textColor="@color/text292929"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/tv4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:maxLength="8"
+                    android:singleLine="true"
+                    android:text="10098023444...."
+                    android:textColor="@color/text6c6c6c6"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:layout_marginRight="@dimen/margin_right"
+                    android:src="@drawable/post_right" />
+            </LinearLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/Viewc" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/Viewc" />
+            <LinearLayout
+                android:id="@+id/mi_r34"
+                android:layout_width="fill_parent"
+                android:layout_height="90dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bg_item" >
+
+
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="90dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_marginTop="15dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_left2"
+                            android:gravity="center_vertical"
+                            android:singleLine="true"
+                            android:text="收件人：张笑笑"
+                            android:textColor="@color/text292929"
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/tvd1d4"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="10dp"
+                            android:maxLength="80"
+                            android:singleLine="true"
+                            android:text="139898765567"
+                            android:textColor="@color/text6c6c6c6"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_left2"
+                            android:gravity="center_vertical"
+                            android:singleLine="true"
+                            android:text="收件地址：上海市黄浦区某某街道"
+                            android:textColor="@color/text292929"
+                            android:textSize="17sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:layout_marginRight="@dimen/margin_right"
+                    android:src="@drawable/post_right" />
+            </LinearLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/Viewc" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/Viewc" />
+            <LinearLayout
+                android:id="@+id/mi_r5"
+                android:layout_width="fill_parent"
+                android:layout_height="150dp"
+                android:padding="20dp"
+                android:background="@drawable/bg_item" >
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@color/white"
+                    android:gravity="top"
+                    android:padding="0dp"
+                    android:maxLength="200"
+                    android:hint="售后原因"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:background="@drawable/bg_item" >
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="right"
+                    android:text="最多填写200个汉字"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/Viewc" />
+
+
+
+            <Button
+                android:layout_width="180dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/adresslist"
+
+                android:layout_marginBottom="30dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/bg_blue_shape"
+                android:textColor="@color/ffffff"
+                android:text="保存" />
+
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

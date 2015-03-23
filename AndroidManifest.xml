@@ -87,6 +87,14 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".activity.AfterSaleApply"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.TerminalChooseForm"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".activity.StockList"
             android:screenOrientation="portrait" >
         </activity>

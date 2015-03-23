@@ -1,10 +1,12 @@
 package com.example.zf_android.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -37,8 +39,8 @@ import java.util.List;
  * �����ˣ� ljp
  * ����ʱ�䣺2015-2-4 ����3:04:31
  */
-public class Terminal extends BaseActivity implements IXListViewListener {
-    //���²��� Xlist
+public class Terminal extends BaseActivity implements IXListViewListener, View.OnClickListener {
+    private Button btn_bind_terminal, btn_after_sale_apply;
     private XListView Xlistview;
     private MyTabWidget mTabWidget;
     private int page = 1;
@@ -55,7 +57,6 @@ public class Terminal extends BaseActivity implements IXListViewListener {
                     onLoad();
 
                     if (myList.size() == 0) {
-                        //	norecord_text_to.setText("��û����ص���Ʒ");
                         Xlistview.setVisibility(View.GONE);
                         eva_nodata.setVisibility(View.VISIBLE);
                     }
@@ -90,7 +91,11 @@ public class Terminal extends BaseActivity implements IXListViewListener {
     }
 
     private void initView() {
-        // TODO Auto-generated method stub
+        // set up click
+        btn_after_sale_apply = (Button) findViewById(R.id.btn_after_sale_apply);
+        btn_after_sale_apply.setOnClickListener(this);
+        btn_bind_terminal = (Button) findViewById(R.id.btn_bind_terminal);
+        btn_bind_terminal.setOnClickListener(this);
 
         new TitleMenuUtil(Terminal.this, "终端管理").show();
         myAdapter = new TerminalAdapter(Terminal.this, myList);
@@ -213,5 +218,20 @@ public class Terminal extends BaseActivity implements IXListViewListener {
                 });
 
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_after_sale_apply:
+                Intent i = new Intent(getApplicationContext(), AfterSaleApply.class);
+                startActivity(i);
+                break;
+            case R.id.btn_bind_terminal:
+
+                break;
+            default:
+                break;
+        }
     }
 }

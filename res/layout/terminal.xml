@@ -22,22 +22,23 @@
         android:orientation="horizontal"
         >
         <Button
-            android:layout_width="wrap_content"
+            android:id="@+id/btn_after_sale_apply"
+            android:layout_width="150dp"
             android:layout_height="fill_parent"
-            android:layout_weight="1"
             android:layout_margin="5dp"
-            android:background="@drawable/buttong_light"
-            android:textColor="@color/bgtitle"
+            android:background="@drawable/bg_blue_shape"
+            android:textColor="@color/white"
             android:text="申请售后" />
 
 
         <Button
-            android:layout_width="wrap_content"
+            android:id="@+id/btn_bind_terminal"
+            android:layout_width="150dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:layout_margin="5dp"
-            android:background="@drawable/buttong_light"
-            android:textColor="@color/bgtitle"
+            android:background="@drawable/bg_blue_shape"
+            android:textColor="@color/white"
             android:text="为用户绑定终端" />
     </LinearLayout>
 

@@ -21,39 +21,8 @@
             <com.example.zf_android.trade.widget.MyTextView
                 android:id="@+id/after_sale_maintain"
                 style="@style/TextGrid"
-                android:drawableTop="@drawable/after_sale_maintain"
-                android:text="@string/after_sale_maintain"/>
-
-            <View style="@style/CutLine"/>
-
-            <com.example.zf_android.trade.widget.MyTextView
-                android:id="@+id/after_sale_return"
-                style="@style/TextGrid"
-                android:drawableTop="@drawable/after_sale_return"
-                android:text="@string/after_sale_return"/>
-
-            <View style="@style/CutLine"/>
-
-            <com.example.zf_android.trade.widget.MyTextView
-                android:id="@+id/after_sale_cancel"
-                style="@style/TextGrid"
-                android:drawableTop="@drawable/after_sale_cancel"
-                android:text="@string/after_sale_cancel"/>
-
-        </LinearLayout>
-
-        <View style="@style/Divider"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="88dp"
-            android:orientation="horizontal">
-
-            <com.example.zf_android.trade.widget.MyTextView
-                android:id="@+id/after_sale_change"
-                style="@style/TextGrid"
-                android:drawableTop="@drawable/after_sale_change"
-                android:text="@string/after_sale_change"/>
+                android:drawableTop="@drawable/after_sale_ticket"
+                android:text="@string/after_sale_ticket"/>
 
             <View style="@style/CutLine"/>
 
@@ -66,11 +35,12 @@
             <View style="@style/CutLine"/>
 
             <com.example.zf_android.trade.widget.MyTextView
-                android:id="@+id/after_sale_lease"
+                android:id="@+id/after_sale_cancel"
                 style="@style/TextGrid"
-                android:drawableTop="@drawable/after_sale_lease"
-                android:text="@string/after_sale_lease"/>
+                android:drawableTop="@drawable/after_sale_cancel"
+                android:text="@string/after_sale_cancel"/>
 
         </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>

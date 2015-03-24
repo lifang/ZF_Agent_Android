@@ -24,6 +24,7 @@ import com.example.zf_android.Config;
 import com.example.zf_android.MyApplication;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.PicEntity;
+import com.example.zf_android.trade.AfterSaleGridActivity;
 import com.example.zf_android.trade.CitySelectActivity;
 import com.example.zf_android.trade.TerminalManageActivity;
 import com.example.zf_android.trade.TradeFlowActivity;
@@ -48,8 +49,8 @@ import static com.example.zf_android.trade.Constants.CityIntent.SELECTED_PROVINC
 
 public class Main extends BaseActivity implements OnClickListener{
 
-    private RelativeLayout btn_user_list,main_rl_pos,main_rl_renzhen,
-            main_rl_zdgl,main_rl_jyls,main_rl_Forum,main_rl_wylc,
+    private RelativeLayout btn_user_list, click_after_sale, main_rl_pos,
+            main_rl_renzhen, main_rl_zdgl,main_rl_jyls,main_rl_Forum,main_rl_wylc,
             main_rl_xtgg,main_rl_lxwm,main_rl_my,main_rl_pos1,main_rl_gwc;
     private ImageView testbutton;
 
@@ -202,8 +203,7 @@ public class Main extends BaseActivity implements OnClickListener{
 
         main_rl_lxwm=(RelativeLayout) findViewById(R.id.main_rl_lxwm);
         main_rl_lxwm.setOnClickListener(this);
-        main_rl_xtgg=(RelativeLayout) findViewById(R.id.main_rl_xtgg);
-        main_rl_xtgg.setOnClickListener(this);
+
         main_rl_my=(RelativeLayout) findViewById(R.id.main_rl_my);
         main_rl_my.setOnClickListener(this);
         main_rl_pos1=(RelativeLayout) findViewById(R.id.main_rl_pos1);
@@ -212,6 +212,8 @@ public class Main extends BaseActivity implements OnClickListener{
 
         btn_user_list=(RelativeLayout) findViewById(R.id.btn_user_list);
         btn_user_list.setOnClickListener(this);
+        click_after_sale=(RelativeLayout) findViewById(R.id.click_after_sale);
+        click_after_sale.setOnClickListener(this);
 
 
         view_pager = (ViewPager) findViewById(R.id.view_pager);
@@ -279,6 +281,9 @@ public class Main extends BaseActivity implements OnClickListener{
                 break;
             case R.id.main_rl_gwc:
                 startActivity(new Intent(Main.this, AllProduct.class));
+                break;
+            case R.id.click_after_sale:
+                startActivity(new Intent(Main.this, AfterSaleGridActivity.class));
                 break;
             default:
                 break;

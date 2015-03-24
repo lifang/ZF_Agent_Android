@@ -48,8 +48,9 @@ import static com.example.zf_android.trade.Constants.CityIntent.SELECTED_PROVINC
 
 public class Main extends BaseActivity implements OnClickListener{
 
-    private RelativeLayout  main_rl_pos,main_rl_renzhen,main_rl_zdgl,main_rl_jyls,
-            main_rl_Forum,main_rl_wylc,main_rl_xtgg,main_rl_lxwm,main_rl_my,main_rl_pos1,main_rl_gwc;
+    private RelativeLayout btn_user_list,main_rl_pos,main_rl_renzhen,
+            main_rl_zdgl,main_rl_jyls,main_rl_Forum,main_rl_wylc,
+            main_rl_xtgg,main_rl_lxwm,main_rl_my,main_rl_pos1,main_rl_gwc;
     private ImageView testbutton;
 
     private View citySelect;
@@ -198,8 +199,7 @@ public class Main extends BaseActivity implements OnClickListener{
         main_rl_jyls.setOnClickListener(this);
         main_rl_Forum=(RelativeLayout) findViewById(R.id.main_rl_Forum);
         main_rl_Forum.setOnClickListener(this);
-        main_rl_wylc=(RelativeLayout) findViewById(R.id.main_rl_wylc);
-        main_rl_wylc.setOnClickListener(this);
+
         main_rl_lxwm=(RelativeLayout) findViewById(R.id.main_rl_lxwm);
         main_rl_lxwm.setOnClickListener(this);
         main_rl_xtgg=(RelativeLayout) findViewById(R.id.main_rl_xtgg);
@@ -208,6 +208,10 @@ public class Main extends BaseActivity implements OnClickListener{
         main_rl_my.setOnClickListener(this);
         main_rl_pos1=(RelativeLayout) findViewById(R.id.main_rl_pos1);
         main_rl_pos1.setOnClickListener(this);
+
+
+        btn_user_list=(RelativeLayout) findViewById(R.id.btn_user_list);
+        btn_user_list.setOnClickListener(this);
 
 
         view_pager = (ViewPager) findViewById(R.id.view_pager);
@@ -231,35 +235,34 @@ public class Main extends BaseActivity implements OnClickListener{
                 startActivityForResult(intent, REQUEST_CITY);
                 break;
 
-            case R.id.main_rl_pos1:  // 锟斤拷POS锟斤拷锟斤拷
+            case R.id.main_rl_pos1:
                 startActivity(new Intent(Main.this, SystemMessage.class));
 
                 break;
 
 
-            case R.id.main_rl_my:  // ��POS����
+            case R.id.main_rl_my:
 
                 startActivity(new Intent(Main.this,MenuMine.class));
 
                 break;
 
-            case R.id.main_rl_pos:  // ��POS����
+            case R.id.main_rl_pos:
 
-//            startActivity(new Intent(Main.this, PosListActivity.class));
                 startActivity(new Intent(Main.this, AllProduct.class));
 
                 break;
 
 
-            case R.id.main_rl_renzhen:  //��֤
+            case R.id.main_rl_renzhen:
                 Intent i =new Intent(Main.this, OrderList.class);
                 startActivity(i);
 
                 break;
-            case R.id.main_rl_kcgl: //�ն˹���
+            case R.id.main_rl_kcgl:
                 startActivity(new Intent(Main.this, StockList.class));
                 break;
-            case R.id.main_rl_jyls: //锟斤拷锟斤拷锟斤拷水
+            case R.id.main_rl_jyls:
 
                 startActivity(new Intent(Main.this, TradeFlowActivity.class));
                 break;
@@ -267,13 +270,9 @@ public class Main extends BaseActivity implements OnClickListener{
                 startActivity(new Intent(Main.this, Terminal.class));
                 break;
 
-            case R.id.main_rl_xtgg: //ϵͳ����
-
-
-                startActivity(new Intent(Main.this,SystemMessage.class));
-
+            case R.id.btn_user_list:
+                startActivity(new Intent(Main.this, UserList.class));
                 break;
-
             case R.id.main_rl_lxwm: //��ϵ����
 
                 startActivity(new Intent(Main.this,ContentUs.class));

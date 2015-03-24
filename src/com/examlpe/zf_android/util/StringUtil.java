@@ -1,5 +1,8 @@
 package com.examlpe.zf_android.util;
 
+import android.util.Base64;
+import android.util.Log;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -14,11 +17,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESedeKeySpec;
 
-import android.util.Base64;
-import android.util.Log;
-
 /***
- * ¶Ô×Ö·û´® ¼ÓÃÜ£¬½âÎö
  * 
  * @author Lijinpeng
  * 
@@ -100,7 +99,7 @@ public class StringUtil {
 	}
 
 	/**
-	 * MD5¼ÓÃÜËã·¨
+	 * MD5ï¿½ï¿½ï¿½ï¿½ï¿½ã·¨
 	 * 
 	 * @param plainText
 	 * @return
@@ -125,8 +124,8 @@ public class StringUtil {
 			}
 			md5Password = buf.toString();
 
-			System.out.println("result: " + buf.toString());// 32Î»µÄ¼ÓÃÜ
-			System.out.println("result: " + buf.toString().substring(8, 24));// 16Î»µÄ¼ÓÃÜ
+			System.out.println("result: " + buf.toString());// 32Î»ï¿½Ä¼ï¿½ï¿½ï¿½
+			System.out.println("result: " + buf.toString().substring(8, 24));// 16Î»ï¿½Ä¼ï¿½ï¿½ï¿½
 
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
@@ -134,7 +133,7 @@ public class StringUtil {
 		return md5Password.toUpperCase();
 	}
 
-	// È¥³ýËùÓÐ¿Õ¸ñ
+	// È¥ï¿½ï¿½ï¿½ï¿½ï¿½Ð¿Õ¸ï¿½
 	public static String replaceBlank(String str) {
 		String dest = "";
 		if (str != null) {
@@ -146,7 +145,7 @@ public class StringUtil {
 	}
 
 	/**
-	 * ÃÜÂë¼ÓÃÜ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param src
 	 * @param key
@@ -173,11 +172,11 @@ public class StringUtil {
 	}
 
 	/***
-	 * ²ÎÊý¼ÓÃÜ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param paramValues
 	 * @param secret
-	 * @return ¼ÓÃÜsign
+	 * @return ï¿½ï¿½ï¿½ï¿½sign
 	 */
 	public static String sign(Map<String, String> paramValues, String secret) {
 		StringBuilder sign = new StringBuilder();

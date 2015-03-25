@@ -13,14 +13,10 @@ import com.example.zf_android.R;
 /**
  * 
 *    
-* ÀàÃû³Æ£ºSystemDetail   
-* ÀàÃèÊö£º   ÏµÍ³ÏêÇé
-* ´´½¨ÈË£º ljp 
-* ´´½¨Ê±¼ä£º2015-2-6 ÏÂÎç3:32:14   
-* @version    
+* æ¶ˆæ¯è¯¦æƒ…
 *
  */
-public class SystemDetail extends BaseActivity{
+public class SystemDetail extends BaseActivity implements View.OnClickListener{
 	private TextView tv_titel,tv_time,tv_content;
 	private int id;
 	private String url;
@@ -30,7 +26,7 @@ public class SystemDetail extends BaseActivity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.system_detail);
-		new TitleMenuUtil(SystemDetail.this, "¹«¸æÏêÇé");
+        new TitleMenuUtil(SystemDetail.this, "æ¶ˆæ¯è¯¦æƒ…").show();
 		initView();
 		getData();
 	}
@@ -50,9 +46,13 @@ public class SystemDetail extends BaseActivity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				//Ö´ĞĞÉ¾³ı²Ù×÷
+				//Ö´ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½
 			}
 		});
 	}
-	
+
+    @Override
+    public void onClick(View v) {
+
+    }
 }

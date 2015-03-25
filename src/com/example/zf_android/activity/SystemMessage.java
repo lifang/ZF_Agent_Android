@@ -6,8 +6,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -110,21 +108,9 @@ public class SystemMessage extends BaseActivity implements  IXListViewListener, 
 			myAdapter=new MessageAdapter(SystemMessage.this, myList);
 			eva_nodata=(LinearLayout) findViewById(R.id.eva_nodata);
 			Xlistview=(XListView) findViewById(R.id.x_listview);
-			// refund_listview.getmFooterView().getmHintView().setText("�Ѿ�û�������");
 			Xlistview.setPullLoadEnable(true);
 			Xlistview.setXListViewListener(this);
 			Xlistview.setDivider(null);
-
-			Xlistview.setOnItemClickListener(new OnItemClickListener() {
-
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-					// TODO Auto-generated method stub
- 					Intent i = new Intent(SystemMessage.this, SystemDetail.class);
- 					startActivity(i);
-				}
-			});
 			Xlistview.setAdapter(myAdapter);
 		}
 

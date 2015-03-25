@@ -30,6 +30,7 @@ import com.example.zf_android.trade.TerminalManageActivity;
 import com.example.zf_android.trade.TradeFlowActivity;
 import com.example.zf_android.trade.entity.City;
 import com.example.zf_android.trade.entity.Province;
+import com.example.zf_android.trade.entity.TerminalOpen;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -51,7 +52,7 @@ public class Main extends BaseActivity implements OnClickListener{
 
     private RelativeLayout btn_user_list, click_after_sale, main_rl_pos,
             main_rl_renzhen, main_rl_zdgl,main_rl_jyls,main_rl_Forum,main_rl_wylc,
-            main_rl_xtgg,main_rl_lxwm,main_rl_my,main_rl_pos1,main_rl_gwc;
+            main_rl_xtgg,click_apply_open,main_rl_my,main_rl_pos1,main_rl_gwc;
     private ImageView testbutton;
 
     private View citySelect;
@@ -201,8 +202,8 @@ public class Main extends BaseActivity implements OnClickListener{
         main_rl_Forum=(RelativeLayout) findViewById(R.id.main_rl_Forum);
         main_rl_Forum.setOnClickListener(this);
 
-        main_rl_lxwm=(RelativeLayout) findViewById(R.id.main_rl_lxwm);
-        main_rl_lxwm.setOnClickListener(this);
+        click_apply_open=(RelativeLayout) findViewById(R.id.click_apply_open);
+        click_apply_open.setOnClickListener(this);
 
         main_rl_my=(RelativeLayout) findViewById(R.id.main_rl_my);
         main_rl_my.setOnClickListener(this);
@@ -275,9 +276,8 @@ public class Main extends BaseActivity implements OnClickListener{
             case R.id.btn_user_list:
                 startActivity(new Intent(Main.this, UserList.class));
                 break;
-            case R.id.main_rl_lxwm: //��ϵ����
-
-                startActivity(new Intent(Main.this,ContentUs.class));
+            case R.id.click_apply_open: //��ϵ����
+                startActivity(new Intent(Main.this, TerminalOpenApply.class));
                 break;
             case R.id.main_rl_gwc:
                 startActivity(new Intent(Main.this, AllProduct.class));

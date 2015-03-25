@@ -1,25 +1,22 @@
 package com.example.zf_zandroid.adapter;
 
-import java.util.List;
-
-import com.example.zf_android.MyApplication;
-import com.example.zf_android.R;
-import com.example.zf_android.entity.MessageEntity;
-import com.example.zf_android.entity.TestEntitiy;
-
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.zf_android.MyApplication;
+import com.example.zf_android.R;
+import com.example.zf_android.activity.SystemDetail;
+import com.example.zf_android.entity.MessageEntity;
+
+import java.util.List;
 
 public class MessageAdapter extends BaseAdapter {
 	private Context context;
@@ -80,7 +77,17 @@ public class MessageAdapter extends BaseAdapter {
 				list.get(position).setIscheck(isChecked);
 			}
 		});
-		//holder.item_cb.toggle();
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                // TODO Auto-generated method stub
+                Intent i = new Intent(context, SystemDetail.class);
+                context.startActivity(i);
+            }
+        });
+
 		return convertView;
 	}
 

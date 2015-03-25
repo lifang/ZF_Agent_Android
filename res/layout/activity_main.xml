@@ -414,7 +414,7 @@
                     android:background="@color/Viewc" />
 
                 <RelativeLayout
-                    android:id="@+id/main_rl_lxwm"
+                    android:id="@+id/click_apply_open"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1" >

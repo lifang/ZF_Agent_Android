@@ -1,5 +1,31 @@
 package com.examlpe.zf_android.util;
 
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningTaskInfo;
+import android.content.ComponentName;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuff.Mode;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
+
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
@@ -21,49 +47,12 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-import android.app.Activity;
-import android.app.ActivityManager;
-import android.app.ActivityManager.RunningTaskInfo;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuff.Mode;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.RectF;
-import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewTreeObserver.OnPreDrawListener;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.ImageView;
-import android.widget.TextView;
- 
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
 public class Tools {
 	static int index = 0;
 	static int index2 = 0;
 	static ArrayList<ImageView> imageviewList0;
 	private static Bitmap bm = null;
 
-	// ÅÐ¶ÏÓ¦ÓÃÇ°Ì¨»¹ÊÇºóÌ¨
 	public static boolean isApplicationBroughtToBackground(final Context context) {
 		ActivityManager am = (ActivityManager) context
 				.getSystemService(Context.ACTIVITY_SERVICE);
@@ -99,14 +88,14 @@ public class Tools {
 				try {
 					Log.i("linshi------------", url);
 					URL myurl = new URL(url);
-					// »ñµÃÁ¬½Ó
+					// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					HttpURLConnection conn = (HttpURLConnection) myurl
 							.openConnection();
-					conn.setConnectTimeout(6000);// ÉèÖÃ³¬Ê±
+					conn.setConnectTimeout(6000);// ï¿½ï¿½ï¿½Ã³ï¿½Ê±
 					conn.setDoInput(true);
-					conn.setUseCaches(false);// ²»»º´æ
+					conn.setUseCaches(false);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					conn.connect();
-					InputStream is = conn.getInputStream();// »ñµÃÍ¼Æ¬µÄÊý¾ÝÁ÷
+					InputStream is = conn.getInputStream();// ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					// bm =decodeSampledBitmapFromStream(is,150,150);
 
 					BitmapFactory.Options options = new BitmapFactory.Options();
@@ -135,9 +124,9 @@ public class Tools {
 						// bm.compress(Bitmap.CompressFormat.PNG, 90, out);
 						// out.flush();
 						// out.close();
-						// Log.i("linshi", "ÒÑ¾­±£´æ");
+						// Log.i("linshi", "ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½");
 						face_drawable = new BitmapDrawable(bm);
-						Message msg = new Message();// ´´½¨Message ¶ÔÏó
+						Message msg = new Message();// ï¿½ï¿½ï¿½ï¿½Message ï¿½ï¿½ï¿½ï¿½
 						msg.what = 0;
 						msg.obj = face_drawable;
 						mHandler.sendMessage(msg);
@@ -145,7 +134,7 @@ public class Tools {
 					}
 
 				} catch (Exception e) {
-					Log.i("linshi", "·¢ÉúÒì³£");
+					Log.i("linshi", "ï¿½ï¿½ï¿½ï¿½ï¿½ì³£");
 					// Log.i("linshi", url);
 				}
 
@@ -179,14 +168,14 @@ public class Tools {
 					Log.i("linshi------------", url);
 					URL myurl = new URL(url);
 					// initTrustSSL();
-					// »ñµÃÁ¬½Ó
+					// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					HttpURLConnection conn = (HttpURLConnection) myurl
 							.openConnection();
-					conn.setConnectTimeout(6000);// ÉèÖÃ³¬Ê±
+					conn.setConnectTimeout(6000);// ï¿½ï¿½ï¿½Ã³ï¿½Ê±
 					conn.setDoInput(true);
-					conn.setUseCaches(false);// ²»»º´æ
+					conn.setUseCaches(false);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					conn.connect();
-					InputStream is = conn.getInputStream();// »ñµÃÍ¼Æ¬µÄÊý¾ÝÁ÷
+					InputStream is = conn.getInputStream();// ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					// bm =decodeSampledBitmapFromStream(is,150,150);
 
 					BitmapFactory.Options options = new BitmapFactory.Options();
@@ -215,9 +204,9 @@ public class Tools {
 						// bm.compress(Bitmap.CompressFormat.PNG, 90, out);
 						// out.flush();
 						// out.close();
-						// Log.i("linshi", "ÒÑ¾­±£´æ");
+						// Log.i("linshi", "ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½");
 
-						Message msg = new Message();// ´´½¨Message ¶ÔÏó
+						Message msg = new Message();// ï¿½ï¿½ï¿½ï¿½Message ï¿½ï¿½ï¿½ï¿½
 						msg.what = 0;
 						msg.obj = bm;
 						mHandler.sendMessage(msg);
@@ -225,7 +214,7 @@ public class Tools {
 					}
 
 				} catch (Exception e) {
-					Log.i("linshi", "·¢ÉúÒì³£");
+					Log.i("linshi", "ï¿½ï¿½ï¿½ï¿½ï¿½ì³£");
 					// Log.i("linshi", url);
 				}
 
@@ -237,10 +226,10 @@ public class Tools {
 	}
 
 	/**
-	 * ×ª»»Í¼Æ¬³ÉÔ²ÐÎ
+	 * ×ªï¿½ï¿½Í¼Æ¬ï¿½ï¿½Ô²ï¿½ï¿½
 	 * 
 	 * @param bitmap
-	 *            ´«ÈëBitmap¶ÔÏó
+	 *            ï¿½ï¿½ï¿½ï¿½Bitmapï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	public static Bitmap toRoundBitmap(Bitmap bitmap) {
@@ -282,23 +271,23 @@ public class Tools {
 				(int) bottom);
 		final Rect dst = new Rect((int) dst_left, (int) dst_top,
 				(int) dst_right, (int) dst_bottom);
-		paint.setAntiAlias(true);// ÉèÖÃ»­±ÊÎÞ¾â³Ý
+		paint.setAntiAlias(true);// ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Þ¾ï¿½ï¿½
 
-		canvas.drawARGB(0, 0, 0, 0); // Ìî³äÕû¸öCanvas
+		canvas.drawARGB(0, 0, 0, 0); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Canvas
 		paint.setColor(color);
 
-		// ÒÔÏÂÓÐÁ½ÖÖ·½·¨»­Ô²,drawRounRectºÍdrawCircle
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ô²,drawRounRectï¿½ï¿½drawCircle
 		// canvas.drawRoundRect(rectF, roundPx, roundPx, paint);//
-		// »­Ô²½Ç¾ØÐÎ£¬µÚÒ»¸ö²ÎÊýÎªÍ¼ÐÎÏÔÊ¾ÇøÓò£¬µÚ¶þ¸ö²ÎÊýºÍµÚÈý¸ö²ÎÊý·Ö±ðÊÇË®Æ½Ô²½Ç°ë¾¶ºÍ´¹Ö±Ô²½Ç°ë¾¶¡£
+		// ï¿½ï¿½Ô²ï¿½Ç¾ï¿½ï¿½Î£ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªÍ¼ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ò£¬µÚ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½Ë®Æ½Ô²ï¿½Ç°ë¾¶ï¿½Í´ï¿½Ö±Ô²ï¿½Ç°ë¾¶ï¿½ï¿½
 		canvas.drawCircle(roundPx, roundPx, roundPx, paint);
 
-		paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));// ÉèÖÃÁ½ÕÅÍ¼Æ¬Ïà½»Ê±µÄÄ£Ê½,²Î¿¼http://trylovecatch.iteye.com/blog/1189452
-		canvas.drawBitmap(bitmap, src, dst, paint); // ÒÔMode.SRC_INÄ£Ê½ºÏ²¢bitmapºÍÒÑ¾­drawÁËµÄCircle
+		paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½à½»Ê±ï¿½ï¿½Ä£Ê½,ï¿½Î¿ï¿½http://trylovecatch.iteye.com/blog/1189452
+		canvas.drawBitmap(bitmap, src, dst, paint); // ï¿½ï¿½Mode.SRC_INÄ£Ê½ï¿½Ï²ï¿½bitmapï¿½ï¿½ï¿½Ñ¾ï¿½drawï¿½Ëµï¿½Circle
 
 		return output;
 	}
 
-	// ÅÐ¶Ïsd¿¨ÊÇ·ñ¿ÉÓÃ
+	// ï¿½Ð¶ï¿½sdï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 	public static boolean isHasSdcard() {
 		String status = Environment.getExternalStorageState();
 		if (status.equals(Environment.MEDIA_MOUNTED)) {
@@ -308,20 +297,20 @@ public class Tools {
 		}
 	}
 
-	// ÅÐ¶ÏÍøÂç
+	// ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½
 	public static boolean isConnect(Context context) {
 
-		// »ñÈ¡ÊÖ»úËùÓÐÁ¬½Ó¹ÜÀí¶ÔÏó£¨°üÀ¨¶Ôwi-fi,netµÈÁ¬½ÓµÄ¹ÜÀí£©
+		// ï¿½ï¿½È¡ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¹ï¿½ï¿½ï¿½ï¿½ï¿½ó£¨°ï¿½ï¿½ï¿½ï¿½ï¿½wi-fi,netï¿½ï¿½ï¿½ï¿½ï¿½ÓµÄ¹ï¿½ï¿½?
 		try {
 			ConnectivityManager connectivity = (ConnectivityManager) context
 					.getSystemService(Context.CONNECTIVITY_SERVICE);
 			if (connectivity != null) {
 
-				// »ñÈ¡ÍøÂçÁ¬½Ó¹ÜÀíµÄ¶ÔÏó
+				// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¹ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½
 				NetworkInfo info = connectivity.getActiveNetworkInfo();
 
 				if (info != null && info.isConnected()) {
-					// ÅÐ¶Ïµ±Ç°ÍøÂçÊÇ·ñÒÑ¾­Á¬½Ó
+					// ï¿½Ð¶Ïµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½
 					if (info.getState() == NetworkInfo.State.CONNECTED) {
 						return true;
 					}
@@ -334,7 +323,7 @@ public class Tools {
 	}
 
 	/**
-	 * ¸ù¾ÝÔ­Í¼Ìí¼ÓÔ²½Ç
+	 * ï¿½ï¿½ï¿½Ô­Í¼ï¿½ï¿½ï¿½Ô²ï¿½ï¿½
 	 * 
 	 * @param source
 	 * @return
@@ -384,15 +373,15 @@ public class Tools {
 		}
 	}
 
-	public static String del_tag(String str) {// È¥³ýHTML±êÇ©
+	public static String del_tag(String str) {// È¥ï¿½ï¿½HTMLï¿½ï¿½Ç©
 		Pattern p_html = Pattern.compile("<[^>]+>", Pattern.CASE_INSENSITIVE);
 		Matcher m_html = p_html.matcher(str);
-		String content = m_html.replaceAll(""); // ¹ýÂËhtml±êÇ©
+		String content = m_html.replaceAll(""); // ï¿½ï¿½ï¿½ï¿½htmlï¿½ï¿½Ç©
 		return content;
 	}
 
 	/**
-	 * ¸ù¾ÝÊÖ»úµÄ·Ö±æÂÊ´Ó dp µÄµ¥Î» ×ª³ÉÎª px(ÏñËØ)
+	 * ï¿½ï¿½ï¿½ï¿½Ö»ï¿½Ä·Ö±ï¿½ï¿½Ê´ï¿½ dp ï¿½Äµï¿½Î» ×ªï¿½ï¿½Îª px(ï¿½ï¿½ï¿½ï¿½)
 	 */
 	public static int dip2px(Context context, float dpValue, int size) {
 		final float scale = context.getResources().getDisplayMetrics().density;
@@ -400,7 +389,7 @@ public class Tools {
 	}
 
 	/**
-	 * ¸ù¾ÝÊÖ»úµÄ·Ö±æÂÊ´Ó px(ÏñËØ) µÄµ¥Î» ×ª³ÉÎª dp
+	 * ï¿½ï¿½ï¿½ï¿½Ö»ï¿½Ä·Ö±ï¿½ï¿½Ê´ï¿½ px(ï¿½ï¿½ï¿½ï¿½) ï¿½Äµï¿½Î» ×ªï¿½ï¿½Îª dp
 	 */
 	public static int px2dip(Context context, float pxValue) {
 		final float scale = context.getResources().getDisplayMetrics().density;
@@ -408,7 +397,7 @@ public class Tools {
 	}
 
 	/**
-	 * »ñµÃµ±Ç°Ê±¼ä hh£ºmm
+	 * ï¿½ï¿½Ãµï¿½Ç°Ê±ï¿½ï¿½ hhï¿½ï¿½mm
 	 * */
 	public static String getHourAndMin() {
 		SimpleDateFormat format = new SimpleDateFormat("HH:mm");
@@ -416,7 +405,7 @@ public class Tools {
 	}
 
 	/**
-	 * Òþ²ØÊäÈë·¨
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë·¨
 	 * */
 	public static void hideInputMethod(Activity act) {
 		InputMethodManager imm = (InputMethodManager) act
@@ -468,7 +457,7 @@ public class Tools {
 //			@Override
 //			public boolean onPreDraw() {
 //				loadingDw.start();
-//				return true; // ±ØÐëÒªÓÐÕâ¸ötrue·µ»Ø
+//				return true; // ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½trueï¿½ï¿½ï¿½ï¿½
 //			}
 //		});
 //		TextView tv = (TextView) view.findViewById(R.id.loading_tv);

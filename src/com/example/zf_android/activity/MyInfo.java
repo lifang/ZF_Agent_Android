@@ -1,32 +1,18 @@
 package com.example.zf_android.activity;
  
  
-import java.io.IOException;
-import java.net.URI;
-
-import org.apache.http.Header;
-import org.apache.http.HttpResponse;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
- 
 import android.widget.TextView;
- 
+
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.BaseActivity;
 import com.example.zf_android.Config;
-import com.example.zf_android.MyApplication;
 import com.example.zf_android.R;
-import com.google.gson.Gson;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-import com.loopj.android.http.ResponseHandlerInterface;
 /***
  * 
 *    
@@ -59,25 +45,6 @@ public class MyInfo extends BaseActivity implements OnClickListener{
 		// TODO Auto-generated method stub
 		btn_exit=(Button) findViewById(R.id.btn_exit);
 		btn_exit.setOnClickListener(this);
-		mi_r1=(LinearLayout) findViewById(R.id.mi_r1);
-		mi_r1.setOnClickListener(this);
-		mi_r2=(LinearLayout) findViewById(R.id.mi_r2);
-		mi_r2.setOnClickListener(this);
-		mi_r3=(LinearLayout) findViewById(R.id.mi_r3);
-		mi_r3.setOnClickListener(this);
-		mi_r4=(LinearLayout) findViewById(R.id.mi_r4);
-		mi_r4.setOnClickListener(this);
-		mi_r5=(LinearLayout) findViewById(R.id.mi_r5);
-		mi_r5.setOnClickListener(this);
-		mi_r6=(LinearLayout) findViewById(R.id.mi_r6);
-		mi_r6.setOnClickListener(this);
-		mi_r7=(LinearLayout) findViewById(R.id.mi_r7);
-		mi_r7.setOnClickListener(this);
-		tv1=(TextView) findViewById(R.id.tv1);
-		tv2=(TextView) findViewById(R.id.tv2);
-		tv3=(TextView) findViewById(R.id.tv3);
-		tv4=(TextView) findViewById(R.id.tv4);
-		tv5=(TextView) findViewById(R.id.tv5);
 		
 	}
 

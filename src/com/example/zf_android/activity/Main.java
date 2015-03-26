@@ -246,7 +246,7 @@ public class Main extends BaseActivity implements OnClickListener{
 
             case R.id.main_rl_my:
 
-                startActivity(new Intent(Main.this,MenuMine.class));
+                startActivity(new Intent(Main.this, MenuMine.class));
 
                 break;
 

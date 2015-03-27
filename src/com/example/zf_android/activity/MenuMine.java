@@ -15,7 +15,7 @@ import com.example.zf_android.trade.ApplyOpenProgressActivity;
 
 public class MenuMine extends BaseActivity implements OnClickListener{
     private ImageView search;
-    private LinearLayout  ll_dd,ll_shjl,ll_wdxx,ll_sh,ll_request;
+    private LinearLayout  ll_dd, ll_yg, ll_shjl,ll_wdxx,ll_sh,ll_request;
     private RelativeLayout  main_rl1, main_rl2, main_rl3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,8 @@ public class MenuMine extends BaseActivity implements OnClickListener{
         ll_dd.setOnClickListener(this);
         ll_wdxx=(LinearLayout) findViewById(R.id.ll_wdxx);
         ll_wdxx.setOnClickListener(this);
+        ll_yg=(LinearLayout) findViewById(R.id.ll_yg);
+        ll_yg.setOnClickListener(this);
     }
     @Override
     public void onClick(View v) {
@@ -54,17 +56,18 @@ public class MenuMine extends BaseActivity implements OnClickListener{
             case R.id.search:
                 startActivity(new Intent(MenuMine.this,MineSet.class));
                 break;
-            case R.id.ll_dd:
-
-                startActivity(new Intent(MenuMine.this,OrderList.class));
+            case R.id.ll_dd: //下级代理商
+                startActivity(new Intent(MenuMine.this, AgentManageMainActivity.class));
                 break;
             case R.id.ll_wdxx:
-
                 startActivity(new Intent(MenuMine.this, MyInfo.class));
                 break;
 
-            case R.id.main_rl_sy: //ϵͳ����
+            case R.id.ll_yg: //员工管理
 
+                break;
+
+            case R.id.main_rl_sy: //ϵ
 
                 startActivity(new Intent(MenuMine.this,Main.class));
 

@@ -1,18 +1,18 @@
 package com.examlpe.zf_android.util;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.text.Html.ImageGetter;
 import android.widget.TextView;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
 
 public class URLImageParser implements ImageGetter {
 
@@ -60,7 +60,6 @@ public class URLImageParser implements ImageGetter {
 			return fetchDrawable(source);
 		}
 
-		// 获取URL的Drawable对象
 		public Drawable fetchDrawable(String urlString) {
 			try {
 				InputStream is = fetch(urlString);

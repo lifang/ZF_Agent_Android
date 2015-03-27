@@ -127,6 +127,14 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".activity.AgentManageMainActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.AgentManageActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".activity.MineSet"
             android:screenOrientation="portrait" >
         </activity>

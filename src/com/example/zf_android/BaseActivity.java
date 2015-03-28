@@ -74,6 +74,8 @@ public class BaseActivity extends Activity implements View.OnClickListener {
         Class activity = this.matchedClass(v);
         if (activity != null) {
             startActivity(new Intent(this, activity));
+//            overridePendingTransition(R.anim.bottom_in, R.anim.bottom_out);
+
         }
     }
 }

@@ -307,6 +307,17 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.example.zf_android.activity.GoodsListActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.zf_android.activity.SearchFormActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
             android:name="com.example.zf_android.activity.ConfirmOrder"
             android:screenOrientation="portrait" >
         </activity>
@@ -356,7 +367,7 @@
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="com.example.zf_android.activity.GoodDeatail"
+            android:name=".activity.GoodsDetail"
             android:screenOrientation="portrait" >
         </activity>
         <activity

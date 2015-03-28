@@ -339,8 +339,8 @@
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:background="@drawable/buttong_light"
-                android:textColor="@color/bgtitle"
+                android:background="@drawable/bg_blue_shape"
+                android:textColor="@color/ffffff"
                 android:text="取消订单" />
 
             <Button

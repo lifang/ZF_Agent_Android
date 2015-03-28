@@ -1,12 +1,5 @@
 package com.example.zf_android.activity;
  
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.Header;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,13 +8,13 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
- 
+
 import com.examlpe.zf_android.util.Tools;
 import com.examlpe.zf_android.util.XListView;
 import com.examlpe.zf_android.util.XListView.IXListViewListener;
@@ -29,16 +22,19 @@ import com.example.zf_android.BaseActivity;
 import com.example.zf_android.Config;
 import com.example.zf_android.MyApplication;
 import com.example.zf_android.R;
- 
 import com.example.zf_android.entity.PosEntity;
-import com.example.zf_android.entity.TestEntitiy;
-import com.example.zf_zandroid.adapter.MessageAdapter;
 import com.example.zf_zandroid.adapter.PosAdapter;
- 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
  
 public class PosListActivity extends BaseActivity implements OnClickListener, IXListViewListener{
@@ -55,7 +51,7 @@ public class PosListActivity extends BaseActivity implements OnClickListener, IX
 	private Boolean isDown=true;
 	private int orderType=0;
 	private EditText et_search;
-	List<PosEntity>  myList = new ArrayList<PosEntity>();
+    List<PosEntity>  myList = new ArrayList<PosEntity>();
 	List<PosEntity>  moreList = new ArrayList<PosEntity>();
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -138,7 +134,7 @@ public class PosListActivity extends BaseActivity implements OnClickListener, IX
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				Intent i =new Intent (PosListActivity.this,GoodDeatail.class);
+				Intent i =new Intent (PosListActivity.this,GoodsDetail.class);
 				i.putExtra("id", myList.get(position-1).getId());
 				System.out.println("-Xlistview--"+id);
 				startActivity(i);

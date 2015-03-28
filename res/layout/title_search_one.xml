@@ -1,12 +1,27 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/bgtitle"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@color/bgtitle"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
 
-         <LinearLayout
+    <LinearLayout
+        android:id="@+id/titleback_linear_back"
+        android:layout_width="18dp"
+        android:layout_height="48dp"
+
+        android:layout_marginLeft="@dimen/margin_left"
+        android:gravity="center_vertical" >
+
+        <ImageView
+            android:id="@+id/titleback_image_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/back" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="@dimen/titleback_height"
@@ -14,28 +29,31 @@
         android:background="@color/bgtitle"
         android:orientation="horizontal" >
 
-         
-
         <EditText
-            android:id="@+id/serch_edit" 
+            android:id="@+id/serch_edit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="7dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:paddingBottom="2dp"
             android:layout_weight="1"
             android:hint="搜索商品"
+            android:gravity="center"
+            android:textColorHint="#aaa"
+            android:textCursorDrawable="@null"
+            android:textColor="@color/white"
+            android:background="@drawable/search_box_border"
+            android:singleLine="true"
             android:drawableLeft="@drawable/search_bg" />
 
-         
- 
     </LinearLayout>
 
-         <TextView
-            android:id="@+id/delete"
-            android:layout_width="48dp"
-            android:layout_height="fill_parent"
-            android:gravity="center"
-            android:text="取消"
-            android:textColor="@color/fffefe"
-            android:textSize="@dimen/s_17sp" />
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/pos_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="7dp"
+        android:background="@drawable/car11" />
+</LinearLayout>

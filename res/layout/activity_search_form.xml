@@ -1,0 +1,74 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/F3F2F2"
+    >
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/bgtitle"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/titleback_height"
+            android:layout_gravity="center_vertical"
+            android:background="@color/bgtitle"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/serch_edit"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:paddingBottom="2dp"
+                android:layout_weight="1"
+                android:hint="搜索商品"
+                android:gravity="center"
+                android:textColorHint="#aaa"
+                android:textCursorDrawable="@null"
+                android:textColor="@color/white"
+                android:background="@drawable/search_box_border"
+                android:singleLine="true"
+                android:drawableLeft="@drawable/search_bg" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="48dp"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/fffefe"
+            android:textSize="@dimen/s_17sp" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list_search_history"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        ></ListView>
+
+    <Button
+        android:id="@+id/btn_clear_history"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:text="清除历史记录"
+        android:textColor="@color/white"
+        android:enabled="false"
+        android:background="@drawable/normal_button_selector"/>
+
+</LinearLayout>

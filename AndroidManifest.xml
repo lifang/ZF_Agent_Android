@@ -135,6 +135,31 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".activity.AgentNewActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.AgentDetailActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.AgentCargoActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.AgentCargoCreateActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.AgentCargoExchangeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.AgentCargoExchangeCreateActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
             android:name=".activity.MineSet"
             android:screenOrientation="portrait" >
         </activity>

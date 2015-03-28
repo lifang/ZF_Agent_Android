@@ -49,8 +49,7 @@ public class MineSet extends BaseActivity implements OnClickListener{
 			switch (v.getId()) {
 			case R.id.ll_new:
 				
-				//������
-				
+
 				break;
 			case R.id.tv_clean:
 				

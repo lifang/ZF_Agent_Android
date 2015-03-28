@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.zf_android.R;
-import com.example.zf_android.activity.TerminalDetail;
+import com.example.zf_android.activity.AgentDetailActivity;
 import com.example.zf_android.entity.OrderEntity;
 
 import java.util.List;
@@ -57,7 +57,7 @@ public class AgentAdapter extends BaseAdapter{
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
-                Intent i = new Intent(context, TerminalDetail.class);
+                Intent i = new Intent(context, AgentDetailActivity.class);
                 context.startActivity(i);
             }
         });

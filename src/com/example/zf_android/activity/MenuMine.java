@@ -64,7 +64,7 @@ public class MenuMine extends BaseActivity implements OnClickListener{
                 break;
 
             case R.id.ll_yg: //员工管理
-
+                startActivity(new Intent(MenuMine.this, UserList.class));
                 break;
 
             case R.id.main_rl_sy: //ϵ

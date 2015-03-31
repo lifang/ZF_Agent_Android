@@ -14,11 +14,11 @@ import android.widget.Toast;
 
 import com.examlpe.zf_android.util.ScrollViewWithListView;
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.BaseActivity;
+import com.posagent.activities.BaseActivity;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.TestEntitiy;
 import com.example.zf_zandroid.adapter.OrderDetail_PosAdapter;
-import com.example.zf_zandroid.adapter.RecordAdapter;
+
 /***
  * 
 *    

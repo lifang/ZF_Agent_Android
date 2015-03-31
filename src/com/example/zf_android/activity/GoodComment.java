@@ -7,7 +7,6 @@ import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -27,15 +26,12 @@ import com.examlpe.zf_android.util.XListView;
 import com.examlpe.zf_android.util.XListView.IXListViewListener;
  
  
-import com.example.zf_android.BaseActivity;
+import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
-import com.example.zf_android.MyApplication;
+import com.posagent.MyApplication;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.GoodCommentEntity;
-import com.example.zf_android.entity.PosEntity;
-import com.example.zf_android.entity.TestEntitiy;
 import com.example.zf_zandroid.adapter.GoodCommentAdapter;
-import com.example.zf_zandroid.adapter.OrderAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpResponseHandler;

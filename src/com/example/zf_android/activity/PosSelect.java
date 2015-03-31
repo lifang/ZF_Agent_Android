@@ -20,11 +20,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.zf_android.BaseActivity;
+import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
-import com.example.zf_android.MyApplication;
+import com.posagent.MyApplication;
 import com.example.zf_android.R;
-import com.example.zf_android.entity.PosEntity;
 import com.example.zf_android.entity.PosItem;
 import com.example.zf_android.entity.PosSelectEntity;
 import com.google.gson.Gson;

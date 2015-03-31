@@ -13,34 +13,30 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.examlpe.zf_android.util.Tools;
 import com.examlpe.zf_android.util.XListView;
 import com.examlpe.zf_android.util.XListView.IXListViewListener;
-import com.example.zf_android.BaseActivity;
+import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
-import com.example.zf_android.MyApplication;
+import com.posagent.MyApplication;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.MyShopCar;
 import com.example.zf_android.entity.MyShopCar.Good;
 import com.example.zf_android.entity.TestEntitiy;
-import com.example.zf_android.trade.CityProvinceActivity;
-import com.example.zf_android.trade.TradeFlowActivity;
-import com.example.zf_zandroid.adapter.OrderAdapter;
 import com.example.zf_zandroid.adapter.ShopcarAdapter;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.posagent.activities.home.Main;
 
 /***
  * 
  * 
- * ÀàÃû³Æ£ºShopCar ÀàÃèÊö£º ¹ºÎï³µ ´´½¨ÈË£º ljp ´´½¨Ê±¼ä£º2015-2-9 ÉÏÎç11:30:10
+ * ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ShopCar ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï³µ ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½ ljp ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£º2015-2-9 ï¿½ï¿½ï¿½ï¿½11:30:10
  * 
  * @version
  * 
@@ -62,7 +58,7 @@ public class ShopCar extends BaseActivity implements IXListViewListener,OnClickL
 				onLoad();
 				//
 				// if (myShopList.size() == 0) {
-				// // norecord_text_to.setText("ÄúÃ»ÓÐÏà¹ØµÄÉÌÆ·");
+				// // norecord_text_to.setText("ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½Æ·");
 				// Xlistview.setVisibility(View.GONE);
 				// eva_nodata.setVisibility(View.VISIBLE);
 				// }
@@ -74,7 +70,7 @@ public class ShopCar extends BaseActivity implements IXListViewListener,OnClickL
 						Toast.LENGTH_SHORT).show();
 
 				break;
-			case 2: // ÍøÂçÓÐÎÊÌâ
+			case 2: // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				Toast.makeText(getApplicationContext(),
 						"no 3g or wifi content", Toast.LENGTH_SHORT).show();
 				break;
@@ -86,7 +82,7 @@ public class ShopCar extends BaseActivity implements IXListViewListener,OnClickL
 		}
 	};
 
-	// ¸öÌå²ÎÊý
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -123,7 +119,7 @@ public class ShopCar extends BaseActivity implements IXListViewListener,OnClickL
 		myAdapter = new ShopcarAdapter(ShopCar.this, myShopList);
 		eva_nodata = (LinearLayout) findViewById(R.id.eva_nodata);
 		Xlistview = (XListView) findViewById(R.id.x_listview);
-		// refund_listview.getmFooterView().getmHintView().setText("ÒÑ¾­Ã»ÓÐÊý¾ÝÁË");
+		// refund_listview.getmFooterView().getmHintView().setText("ï¿½Ñ¾ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		Xlistview.setPullLoadEnable(true);
 		Xlistview.setXListViewListener(this);
 		Xlistview.setDivider(null);
@@ -185,7 +181,7 @@ public class ShopCar extends BaseActivity implements IXListViewListener,OnClickL
 	}
 
 	/*
-	 * ÇëÇóÊý¾Ý
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private void getData() {
 		// TODO Auto-generated method stub

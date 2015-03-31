@@ -7,13 +7,12 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
  
 
 import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.BaseActivity;
+import com.posagent.activities.BaseActivity;
 import com.example.zf_android.R;
 /***
  * 

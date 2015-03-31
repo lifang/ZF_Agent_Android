@@ -1,11 +1,6 @@
 package com.example.zf_android.activity;
 
  
-import org.apache.http.Header;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,13 +18,9 @@ import android.widget.Toast;
  
 import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.BaseActivity;
+import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
 import com.example.zf_android.R;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
  
 public class FindPassword extends BaseActivity   implements OnClickListener{
@@ -53,11 +44,11 @@ public class FindPassword extends BaseActivity   implements OnClickListener{
             		isRun=false;
             		tv_code.setClickable(true);
             	 
-            		tv_code.setText("·¢ËÍÑéÖ¤Âë");
+            		tv_code.setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½");
             		System.out.println("destroy`"+Countmun);
             	}else{
                  	Countmun--;  
-                 	tv_code.setText(  Countmun+"ÃëºóÖØÐÂ·¢ËÍ");  
+                 	tv_code.setText(  Countmun+"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½");  
             		System.out.println("Countmun`D2`"+Countmun);
             	}
     
@@ -71,7 +62,7 @@ public class FindPassword extends BaseActivity   implements OnClickListener{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_findpass);
-		new TitleMenuUtil(FindPassword.this, "ÕÒ»ØÃÜÂë").show();
+		new TitleMenuUtil(FindPassword.this, "ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½").show();
 		initView();
 		url=Config.FINDPASS;
 	   runnable = new Runnable() {  
@@ -81,11 +72,11 @@ public class FindPassword extends BaseActivity   implements OnClickListener{
 	        	 
 	        		Countmun=120;
 	        		tv_code.setClickable(true);
-	    			tv_code.setText("·¢ËÍÑéÖ¤Âë");
+	    			tv_code.setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½");
 	        	}else{
 	        		
 	        		Countmun--;  
-	        		tv_code.setText( Countmun+"ÃëºóÖØÐÂ·¢ËÍ");  
+	        		tv_code.setText( Countmun+"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½");  
 		         
 		            handler.postDelayed(this, 1000);  
 	        	}
@@ -107,21 +98,21 @@ public class FindPassword extends BaseActivity   implements OnClickListener{
 		switch ( v.getId()) {
  
 			 
-		case R.id.tv_code:  // »ñÈ¡ÑéÖ¤Âëtv_check
+		case R.id.tv_code:  // ï¿½ï¿½È¡ï¿½ï¿½Ö¤ï¿½ï¿½tv_check
 //			tv_check.setVisibility(View.INVISIBLE);
 //			email=StringUtil.replaceBlank(login_edit_email.getText().toString());
 //			if(email.length()==0){
-//				Toast.makeText(getApplicationContext(), "Email cannot be empty£¡",
+//				Toast.makeText(getApplicationContext(), "Email cannot be emptyï¿½ï¿½",
 //						Toast.LENGTH_SHORT).show();
 //				break;
 //			}
 			
 			
 		 	tv_code.setClickable(false);
-			tv_code.setText("120ÃëºóÖØÐÂ»ñÈ¡");
+			tv_code.setText("120ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â»ï¿½È¡");
 			getCode();
 			break;
-		case R.id.tv_check:  // »ñÈ¡ÑéÖ¤Âë 
+		case R.id.tv_check:  // ï¿½ï¿½È¡ï¿½ï¿½Ö¤ï¿½ï¿½ 
 			System.out.println("vcode"+vcode);
 			 
 			if(login_edit_code.getText().toString().equals(vcode)){
@@ -133,7 +124,7 @@ public class FindPassword extends BaseActivity   implements OnClickListener{
 			}
 			
 			break;
-		case R.id.login_linear_signin:  // »ñÈ¡ÑéÖ¤Âë 
+		case R.id.login_linear_signin:  // ï¿½ï¿½È¡ï¿½ï¿½Ö¤ï¿½ï¿½ 
 		//	pass=StringUtil.replaceBlank(login_edit_pass.getText().toString());
 		 
 			//pass= StringUtil.Md5(pass);
@@ -164,18 +155,18 @@ public class FindPassword extends BaseActivity   implements OnClickListener{
 		// TODO Auto-generated method stub
 		email=StringUtil.replaceBlank(login_edit_email.getText().toString());
 		if(email.length()==0){
-			Toast.makeText(getApplicationContext(), "Email cannot be empty£¡",
+			Toast.makeText(getApplicationContext(), "Email cannot be emptyï¿½ï¿½",
 					Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		
 		if(StringUtil.replaceBlank(login_edit_code.getText().toString()).length()==0){
-			Toast.makeText(getApplicationContext(), "vcode cannot be empty£¡",
+			Toast.makeText(getApplicationContext(), "vcode cannot be emptyï¿½ï¿½",
 					Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		if(!login_edit_code.getText().toString().endsWith(vcode)){
-			Toast.makeText(getApplicationContext(), "vcode error£¡",
+			Toast.makeText(getApplicationContext(), "vcode errorï¿½ï¿½",
 					Toast.LENGTH_SHORT).show();
 			return false;
 		}
@@ -183,12 +174,12 @@ public class FindPassword extends BaseActivity   implements OnClickListener{
 		
 		pass=StringUtil.replaceBlank(login_edit_pass.getText().toString());
 		if(pass.length()==0){
-			Toast.makeText(getApplicationContext(), "Password cannot be empty£¡",
+			Toast.makeText(getApplicationContext(), "Password cannot be emptyï¿½ï¿½",
 					Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		if(!login_edit_pass2.getText().toString().equals(pass)){
-			Toast.makeText(getApplicationContext(), "Password donot match£¡",
+			Toast.makeText(getApplicationContext(), "Password donot matchï¿½ï¿½",
 					Toast.LENGTH_SHORT).show();
 			return false;
 		}
@@ -257,7 +248,7 @@ public class FindPassword extends BaseActivity   implements OnClickListener{
 	}
 
 	/**
-	 * »ñÈ¡ÑéÖ¤Âë
+	 * ï¿½ï¿½È¡ï¿½ï¿½Ö¤ï¿½ï¿½
 	 */
 	private void getCode() {
 		// TODO Auto-generated method stub

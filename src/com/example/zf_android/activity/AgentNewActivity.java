@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.BaseActivity;
+import com.posagent.activities.BaseActivity;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.widget.MyTabWidget;
 

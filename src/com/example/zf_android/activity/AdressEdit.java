@@ -2,7 +2,7 @@ package com.example.zf_android.activity;
 
 import android.os.Bundle;
 
-import com.example.zf_android.BaseActivity;
+import com.posagent.activities.BaseActivity;
 import com.example.zf_android.R;
 /**
  * 

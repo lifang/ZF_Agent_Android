@@ -14,13 +14,11 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.zf_android.BaseActivity;
-import com.example.zf_android.MyApplication;
+import com.posagent.activities.BaseActivity;
+import com.posagent.MyApplication;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.PosItem;
-import com.example.zf_android.entity.TestEntitiy;
 import com.example.zf_zandroid.adapter.PositmeAdapter;
 
 public class PosSelecList extends BaseActivity implements OnClickListener{

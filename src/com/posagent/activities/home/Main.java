@@ -1,4 +1,4 @@
-package com.example.zf_android.activity;
+package com.posagent.activities.home;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,18 +19,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.examlpe.zf_android.util.ImageCacheUtil;
-import com.example.zf_android.BaseActivity;
+import com.example.zf_android.activity.AllProduct;
+import com.example.zf_android.activity.LoginActivity;
+import com.example.zf_android.activity.MenuMine;
+import com.example.zf_android.activity.OrderList;
+import com.example.zf_android.activity.StockList;
+import com.example.zf_android.activity.SystemMessage;
+import com.example.zf_android.activity.Terminal;
+import com.example.zf_android.activity.TerminalOpenApply;
+import com.example.zf_android.activity.UserList;
+import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
-import com.example.zf_android.MyApplication;
+import com.posagent.MyApplication;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.PicEntity;
 import com.example.zf_android.trade.AfterSaleGridActivity;
 import com.example.zf_android.trade.CitySelectActivity;
-import com.example.zf_android.trade.TerminalManageActivity;
 import com.example.zf_android.trade.TradeFlowActivity;
 import com.example.zf_android.trade.entity.City;
 import com.example.zf_android.trade.entity.Province;
-import com.example.zf_android.trade.entity.TerminalOpen;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -86,7 +93,7 @@ public class Main extends BaseActivity implements OnClickListener{
                         ma.add(myList.get(i).getPicture_url());
                     }
                     indicator_imgs	= new ImageView[ma.size()];
-//				initIndicator();
+				    initIndicator();
                     adapter.notifyDataSetChanged();
                     break;
                 case 1:
@@ -440,7 +447,6 @@ public class Main extends BaseActivity implements OnClickListener{
 
         @Override
         public void onPageSelected(int position) {
-
             // 改变所有导航的背景图片为：未选中
             for (int i = 0; i < indicator_imgs.length; i++) {
 

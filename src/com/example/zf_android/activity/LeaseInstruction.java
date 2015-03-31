@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.BaseActivity;
-import com.example.zf_android.MyApplication;
+import com.posagent.activities.BaseActivity;
+import com.posagent.MyApplication;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.GoodinfoEntity;
 

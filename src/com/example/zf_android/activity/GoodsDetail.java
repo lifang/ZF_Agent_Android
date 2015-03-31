@@ -22,9 +22,9 @@ import android.widget.Toast;
 
 import com.examlpe.zf_android.util.ImageCacheUtil;
 import com.examlpe.zf_android.util.ScrollViewWithListView;
-import com.example.zf_android.BaseActivity;
+import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
-import com.example.zf_android.MyApplication;
+import com.posagent.MyApplication;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.ApplyneedEntity;
 import com.example.zf_android.entity.ChanelEntitiy;

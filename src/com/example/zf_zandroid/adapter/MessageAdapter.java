@@ -11,7 +11,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
-import com.example.zf_android.MyApplication;
+import com.posagent.MyApplication;
 import com.example.zf_android.R;
 import com.example.zf_android.activity.SystemDetail;
 import com.example.zf_android.entity.MessageEntity;

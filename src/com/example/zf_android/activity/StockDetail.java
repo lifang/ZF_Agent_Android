@@ -1,13 +1,10 @@
 package com.example.zf_android.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -15,13 +12,12 @@ import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.examlpe.zf_android.util.Tools;
 import com.examlpe.zf_android.util.XListView;
 import com.examlpe.zf_android.util.XListView.IXListViewListener;
-import com.example.zf_android.BaseActivity;
+import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
-import com.example.zf_android.MyApplication;
+import com.posagent.MyApplication;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.OrderEntity;
 import com.example.zf_android.trade.widget.MyTabWidget;
-import com.example.zf_zandroid.adapter.StockAdapter;
 import com.example.zf_zandroid.adapter.StockAgentAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

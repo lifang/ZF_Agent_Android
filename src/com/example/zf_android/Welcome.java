@@ -1,13 +1,10 @@
 package com.example.zf_android;
 
-import com.example.zf_android.activity.LoginActivity;
-import com.example.zf_android.activity.Main;
+import com.posagent.activities.home.Main;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
 public class Welcome extends Activity {
 

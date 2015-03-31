@@ -4,7 +4,6 @@ import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,22 +15,21 @@ import android.widget.Toast;
  
 import com.examlpe.zf_android.util.StringUtil;
  
-import com.example.zf_android.BaseActivity;
+import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
-import com.example.zf_android.MyApplication;
+import com.posagent.MyApplication;
 import com.example.zf_android.R;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 /***
  * 
 *    
-* ÀàÃû³Æ£ºRegistMail   
-* ÀàÃèÊö£º   ÓÊÏä×¢²á
-* ´´½¨ÈË£º ljp 
-* ´´½¨Ê±¼ä£º2015-2-11 ÏÂÎç2:56:14   
+* ï¿½ï¿½ï¿½ï¿½Æ£ï¿½RegistMail   
+* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½
+* ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½ ljp 
+* ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£º2015-2-11 ï¿½ï¿½ï¿½ï¿½2:56:14   
 * @version    
 *
  */
@@ -172,19 +170,19 @@ public class RegistMail extends BaseActivity implements OnClickListener{
 		//username,password
 		username=StringUtil.replaceBlank(login_edit_code.getText().toString());
 		if(username.length()==0){
-			Toast.makeText(getApplicationContext(), "ÓÃ»§ÃÜÂë²»ÄÜÎª¿Õ",
+			Toast.makeText(getApplicationContext(), "ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ë²»ï¿½ï¿½Îªï¿½ï¿½",
 					Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		password=StringUtil.replaceBlank(login_edit_pass.getText().toString());
 		String password2=StringUtil.replaceBlank(login_edit_pass2.getText().toString());
 		if(password.length()<4){
-			Toast.makeText(getApplicationContext(), "ÓÃ»§ÃÜÂë±ØÐë´óÓÚ4Î»",
+			Toast.makeText(getApplicationContext(), "ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½4Î»",
 					Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		if(!password.equals(password2)){
-			Toast.makeText(getApplicationContext(), "ÃÜÂë²»Ò»ÖÂ",
+			Toast.makeText(getApplicationContext(), "ï¿½ï¿½ï¿½ë²»Ò»ï¿½ï¿½",
 					Toast.LENGTH_SHORT).show();
 			return false;
 		}
@@ -220,7 +218,7 @@ public class RegistMail extends BaseActivity implements OnClickListener{
 				try {
 					jsonobject = new JSONObject(responseMsg);
 					code = jsonobject.getInt("code");
-					if(code==1){ //ÅÐ¶Ï·µ»Ø½á¹ûÊÇ·ñºÏ·¨
+					if(code==1){ //ï¿½Ð¶Ï·ï¿½ï¿½Ø½ï¿½ï¿½ï¿½Ç·ï¿½Ï·ï¿½
 						Toast.makeText(getApplicationContext(),  jsonobject.getString("result"), 1000).show();
 //						User current = gson.fromJson(jsonobject.getString("result"), new TypeToken<User>() {
 //	 					}.getType());
@@ -254,7 +252,7 @@ public class RegistMail extends BaseActivity implements OnClickListener{
 					byte[] responseBody, Throwable error) {
 				// TODO Auto-generated method stub
 				login_linear_signin.setClickable(true);
-				Toast.makeText(getApplicationContext(), "Çë¼ì²éÍøÂçÎÊÌâ",
+				Toast.makeText(getApplicationContext(), "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",
 						Toast.LENGTH_SHORT).show();
 			}
 		});

@@ -1,21 +1,19 @@
 package com.example.zf_android.activity;
  
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.RelativeLayout;
- 
+
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.BaseActivity;
+import com.posagent.activities.BaseActivity;
 import com.example.zf_android.R;
 /***
  * 
 *    
-* ÀàÃû³Æ£ºAbout   
-* ÀàÃèÊö£º   ¹ØÓÚÒ³Ãæ
-* ´´½¨ÈË£º ljp 
-* ´´½¨Ê±¼ä£º2015-1-27 ÏÂÎç7:55:20   
+* ï¿½ï¿½ï¿½ï¿½Æ£ï¿½About   
+* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½
+* ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½ ljp 
+* ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£º2015-1-27 ï¿½ï¿½ï¿½ï¿½7:55:20   
 * @version    
 *
  */
@@ -28,7 +26,7 @@ public class ChangePassword extends BaseActivity implements OnClickListener{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.changepassword);
-		new TitleMenuUtil(ChangePassword.this, "¹ØÓÚ").show();
+		new TitleMenuUtil(ChangePassword.this, "ï¿½ï¿½ï¿½ï¿½").show();
 	}
 
 	@Override

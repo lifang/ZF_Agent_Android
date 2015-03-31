@@ -27,9 +27,9 @@ android {
     }
 
     defaultConfig {
-        applicationId 'com.example.zf_android'
+        applicationId 'com.posagent'
         minSdkVersion 14
-        targetSdkVersion 14
+        targetSdkVersion 20
         versionCode 1
         versionName '1.0'
     }
@@ -54,6 +54,9 @@ repositories {
 
 dependencies {
 	compile fileTree(dir: 'libs', include: ['*.jar'])
-	compile 'cn.trinea.android.common:trinea-android-common:4.2.15'
+    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'com.squareup.okhttp:okhttp:2.3.0'
+    compile 'cn.trinea.android.common:trinea-android-common:4.2.15'
 	compile 'com.loopj.android:android-async-http:1.4.5'
+    compile 'de.greenrobot:eventbus:2.4.0'
 }

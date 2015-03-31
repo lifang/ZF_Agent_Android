@@ -14,16 +14,14 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.examlpe.zf_android.util.ScrollViewWithListView;
-import com.example.zf_android.BaseActivity;
+import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
-import com.example.zf_android.MyApplication;
+import com.posagent.MyApplication;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.AdressEntity;
-import com.example.zf_android.entity.PosEntity;
 import com.example.zf_zandroid.adapter.ChooseAdressAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

@@ -1,4 +1,4 @@
-package com.example.zf_android;
+package com.posagent.activities;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -11,11 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.BaseActivity;
+import com.posagent.activities.BaseActivity;
 import com.example.zf_android.R;
 
 public class FindPass extends BaseActivity implements OnClickListener{
-	//·¢ËÍÖØÖÃÃÜÂëÓÊ¼ş
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½
 	private EditText login_edit_name;
 	private LinearLayout login_linear_deletename,login_linear_in;
 	private TextView tv_msg;
@@ -25,7 +25,7 @@ public class FindPass extends BaseActivity implements OnClickListener{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.findpass);
-		new TitleMenuUtil(FindPass.this,"ÕÒ»ØÃÜÂë").show();
+		new TitleMenuUtil(FindPass.this,"ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½").show();
 		initView();
 	}
 	private void initView() {
@@ -47,10 +47,10 @@ public class FindPass extends BaseActivity implements OnClickListener{
 					login_linear_deletename.setVisibility(View.GONE);
 				}
 				if(s.toString().contains("@")){
-					tv_msg.setText("·¢ËÍÖØÖÃÃÜÂëÓÊ¼ş");
+					tv_msg.setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½");
 					isMail=true;
 				}else{
-					tv_msg.setText("·¢ËÍÑéÖ¤Âë");
+					tv_msg.setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½");
 					isMail=false;
 				}
 
@@ -77,12 +77,12 @@ public class FindPass extends BaseActivity implements OnClickListener{
 			break;
 		case R.id.login_linear_in:
 			if(isMail){
-				//·¢ËÍÓÊ¼şÇëÇó
+				//ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½
 				Intent i = new Intent(getApplicationContext(),
 						FindLogin.class);
 				startActivity(i);
 			}else{
-				//·¢ËÍÊÖ»úÇëÇó
+				//ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½
 				Intent i = new Intent(getApplicationContext(),
 						FindPassword.class);
 				i.putExtra("phone", login_edit_name.getText().toString());

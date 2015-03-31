@@ -1,28 +1,19 @@
 package com.example.zf_android.activity;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.http.Header;
-import org.apache.http.entity.StringEntity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,18 +24,15 @@ import android.widget.Toast;
 import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.Config;
-import com.example.zf_android.MyApplication;
 import com.example.zf_android.R;
-import com.example.zf_android.entity.User;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 
 /***
- *   µÇÂ¼Ò³Ãæ
+ *   ï¿½ï¿½Â¼Ò³ï¿½ï¿½
  * 
  * @author Lijinpeng
  * 
@@ -74,7 +62,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 				Toast.makeText(getApplicationContext(), (String) msg.obj,
 						Toast.LENGTH_SHORT).show();
 				break;
-			case 2: // ÍøÂçÓÐÎÊÌâ
+			case 2: // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				Toast.makeText(getApplicationContext(), R.string.no_internet,
 						Toast.LENGTH_SHORT).show();
 				break;
@@ -96,14 +84,14 @@ public class LoginActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.login);
 		
 		initView();
-		new TitleMenuUtil(LoginActivity.this, "µÇÂ¼").show();
+		new TitleMenuUtil(LoginActivity.this, "ï¿½ï¿½Â¼").show();
 		//new ClientUpdate(LoginActivity.this).checkSetting();
 	}
 
 	private void initView() {
 		// TODO Auto-generated method stub
 
-		// ³õÊ¼»¯
+		// ï¿½ï¿½Ê¼ï¿½ï¿½
 		mySharedPreferences = getSharedPreferences(Config.SHARED, MODE_PRIVATE);
 		editor = mySharedPreferences.edit();
  
@@ -194,7 +182,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.login_linear_login: 
-			// µÇÂ¼
+			// ï¿½ï¿½Â¼
 			if(check()){
 				login();
 			}
@@ -202,7 +190,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 			break;
 		case R.id.zhuche_ll: 
-		// µÇÂ¼
+		// ï¿½ï¿½Â¼
 		startActivity(new Intent(LoginActivity.this,Register.class));
 	 
 
@@ -220,7 +208,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 	private void login() {
 		// TODO Auto-generated method stub
-		AsyncHttpClient client = new AsyncHttpClient(); // ´´½¨Òì²½ÇëÇóµÄ¿Í»§¶Ë¶ÔÏó
+		AsyncHttpClient client = new AsyncHttpClient(); // ï¿½ï¿½ï¿½ï¿½ï¿½ì²½ï¿½ï¿½ï¿½ï¿½Ä¿Í»ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½
 		RequestParams params = new RequestParams();
 	 
 
@@ -248,7 +236,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 //					}.getType());
 //				 
 //				 if(rc.getSolution()!=null&& rc.getSolution().length()>0){
-//					 // ÅÐ¶Ï´íÎó·µ»Ø£¬¸øÌáÊ¾ÐÅÏ¢
+//					 // ï¿½Ð¶Ï´ï¿½ï¿½ó·µ»Ø£ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢
 //						msg.setVisibility(View.VISIBLE);
 //						login_info.setText(rc.getMessage().toString());
 //				 }else{
@@ -263,7 +251,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 // 					Intent i =new Intent(getApplicationContext(),Main.class);
 // 					startActivity(i);
 // 					finish();
-//					System.out.println("ÓÃ»§µÇÂ¼³É¹¦--±£³ÖµÇÂ¼ÐÅÏ¢"+mySharedPreferences.getBoolean("isRemeber", false));
+//					System.out.println("ï¿½Ã»ï¿½ï¿½ï¿½Â¼ï¿½É¹ï¿½--ï¿½ï¿½ï¿½Öµï¿½Â¼ï¿½ï¿½Ï¢"+mySharedPreferences.getBoolean("isRemeber", false));
 //				 }
  			 
  			 
@@ -283,13 +271,13 @@ public class LoginActivity extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		usename=StringUtil.replaceBlank(login_edit_name.getText().toString());
 		if(usename.length()==0){
-			Toast.makeText(getApplicationContext(), "ÇëÊäÈëÓÃ»§Ãû£¡",
+			Toast.makeText(getApplicationContext(), "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½",
 					Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		passsword=StringUtil.replaceBlank(login_edit_pass.getText().toString());
 		if(passsword.length()==0){
-			Toast.makeText(getApplicationContext(), "ÇëÊäÈëÃÜÂë£¡",
+			Toast.makeText(getApplicationContext(), "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë£¡",
 					Toast.LENGTH_SHORT).show();
 			return false;
 		}

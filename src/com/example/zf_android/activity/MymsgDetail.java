@@ -1,8 +1,6 @@
 package com.example.zf_android.activity;
 
  
-import java.util.List;
-
 import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,9 +19,8 @@ import com.examlpe.zf_android.util.DialogUtil;
 import com.examlpe.zf_android.util.DialogUtil.CallBackChange;
 import com.examlpe.zf_android.util.TitleMenuUtil;
  
-import com.example.zf_android.BaseActivity;
+import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
-import com.example.zf_android.MyApplication;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.MessageEntity;
 import com.google.gson.Gson;
@@ -34,10 +31,10 @@ import com.loopj.android.http.RequestParams;
 /**
  * 
 *    
-* ÀàÃû³Æ£ºSystemDetail   
-* ÀàÃèÊö£º   ÏûÏ¢ÏêÇé
-* ´´½¨ÈË£º ljp 
-* ´´½¨Ê±¼ä£º2015-2-6 ÏÂÎç3:32:14   
+* ï¿½ï¿½ï¿½ï¿½Æ£ï¿½SystemDetail   
+* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
+* ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½ ljp 
+* ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£º2015-2-6 ï¿½ï¿½ï¿½ï¿½3:32:14   
 * @version    
 *
  */
@@ -51,7 +48,7 @@ public class MymsgDetail extends BaseActivity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.system_detail);
-		new TitleMenuUtil(MymsgDetail.this, "ÏûÏ¢ÏêÇé");
+		new TitleMenuUtil(MymsgDetail.this, "ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½");
 		id=getIntent().getStringExtra("id");
 		System.out.println("````"+id);
 		initView();
@@ -138,7 +135,7 @@ public class MymsgDetail extends BaseActivity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				//Ö´ÐÐÉ¾³ý²Ù×÷
+				//Ö´ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½
 				Dialog ddd = new DialogUtil(MymsgDetail.this,
 						"Mark all as read").getCheck(new CallBackChange() {
 

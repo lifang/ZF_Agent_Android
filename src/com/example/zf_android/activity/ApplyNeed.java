@@ -7,11 +7,10 @@ import android.os.Bundle;
 
 import com.examlpe.zf_android.util.ScrollViewWithListView;
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.BaseActivity;
-import com.example.zf_android.MyApplication;
+import com.posagent.activities.BaseActivity;
+import com.posagent.MyApplication;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.ApplyneedEntity;
-import com.example.zf_android.entity.PosEntity;
 import com.example.zf_zandroid.adapter.AppleNeedAdapter;
 
 /***

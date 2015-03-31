@@ -4,8 +4,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import com.example.zf_android.BaseActivity;
+import com.posagent.activities.BaseActivity;
 import com.example.zf_android.R;
+import com.posagent.activities.home.Main;
 
 import java.util.HashMap;
 

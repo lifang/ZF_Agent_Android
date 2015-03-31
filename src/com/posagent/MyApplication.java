@@ -1,19 +1,18 @@
-package com.example.zf_android;
+package com.posagent;
 
  
  
-import java.util.LinkedList;
-import java.util.List;
+import android.app.Activity;
+import android.app.Application;
 
- 
 import com.example.zf_android.entity.ApplyneedEntity;
 import com.example.zf_android.entity.GoodinfoEntity;
 import com.example.zf_android.entity.PosSelectEntity;
 import com.example.zf_android.entity.User;
 import com.loopj.android.http.AsyncHttpClient;
 
-import android.app.Activity;
-import android.app.Application;
+import java.util.LinkedList;
+import java.util.List;
  
  
  
@@ -118,12 +117,10 @@ public class MyApplication extends Application{
 
 
 	private List<Activity> mList = new LinkedList<Activity>();   
- // add Activity     
-    public void addActivity(Activity activity) {    
+    public void addActivity(Activity activity) {
         mList.add(activity);    
     }    
-    //�ر�ÿһ��list�ڵ�activity   
-    public void exit() {    
+    public void exit() {
         try {    
             for (Activity activity:mList) {    
                 if (activity != null)    
@@ -139,30 +136,9 @@ public class MyApplication extends Application{
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		mInstance = this;		 
-//		initImageLoader(getApplicationContext());
-//		SDKInitializer.initialize(this);
-//		  PackageManager packageManager = getPackageManager();
-//          // getPackageName()���㵱ǰ��İ���0����ǻ�ȡ�汾��Ϣ
-//          PackageInfo packInfo;
-//		try {
-//			packInfo = packageManager.getPackageInfo(getPackageName(),0);
-//			  int version = packInfo.versionCode;
-//			 setVersionCode(version+"");
-//		} catch (NameNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		mInstance = this;
 	}
-	
-//	private void initImageLoader(Context context) {
-//		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
-//				context).memoryCache(new LruMemoryCache(2 * 1024 * 1024))
-//				.memoryCacheSize(2 * 1024 * 1024)
-//				.discCacheSize(50 * 1024 * 1024).discCacheFileCount(100)
-//				.build();
-//		ImageLoader.getInstance().init(config);
-//	}
+
 	public static MyApplication getInstance() {
 		return mInstance;
 	}

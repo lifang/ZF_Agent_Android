@@ -5,16 +5,12 @@ import java.util.List;
 import org.apache.http.Header;
 
 import com.example.zf_android.Config;
-import com.example.zf_android.MyApplication;
+import com.posagent.MyApplication;
 import com.example.zf_android.R;
-import com.example.zf_android.activity.ShopCar;
-import com.example.zf_android.entity.MyShopCar;
-import com.example.zf_android.entity.TestEntitiy;
 import com.example.zf_android.entity.MyShopCar.Good;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-import android.R.integer;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
@@ -27,10 +23,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ShopcarAdapter extends BaseAdapter {
 	private Context context;

@@ -3,7 +3,7 @@ package com.example.zf_android.activity;
 import android.os.Bundle;
 import android.widget.ListView;
 
-import com.example.zf_android.BaseActivity;
+import com.posagent.activities.BaseActivity;
 import com.example.zf_android.R;
 import com.example.zf_zandroid.adapter.RateAdapter;
 /**

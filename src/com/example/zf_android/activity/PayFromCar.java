@@ -3,16 +3,16 @@ package com.example.zf_android.activity;
 import android.os.Bundle;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.BaseActivity;
+import com.posagent.activities.BaseActivity;
 import com.example.zf_android.R;
 
 /**
  * 
 *    
-* ÀàÃû³Æ£ºPayFromCar   
-* ÀàÃèÊö£º   ¹ºÎï³µÖ§¸¶
-* ´´½¨ÈË£º ljp 
-* ´´½¨Ê±¼ä£º2015-2-9 ÏÂÎç4:41:50   
+* ï¿½ï¿½ï¿½ï¿½Æ£ï¿½PayFromCar   
+* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½ï¿½ï³µÖ§ï¿½ï¿½
+* ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½ ljp 
+* ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£º2015-2-9 ï¿½ï¿½ï¿½ï¿½4:41:50   
 * @version    
 *
  */
@@ -22,6 +22,6 @@ public class PayFromCar extends BaseActivity{
 			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.pay);
-			new TitleMenuUtil(PayFromCar.this, "Ñ¡ÔñÖ§¸¶·½Ê½").show();
+			new TitleMenuUtil(PayFromCar.this, "Ñ¡ï¿½ï¿½Ö§ï¿½ï¿½ï¿½ï¿½Ê½").show();
 		}
 }

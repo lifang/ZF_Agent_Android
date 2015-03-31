@@ -8,9 +8,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.example.zf_android.BaseActivity;
+import com.posagent.activities.BaseActivity;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.ApplyOpenProgressActivity;
+import com.posagent.activities.home.Main;
 
 
 public class MenuMine extends BaseActivity implements OnClickListener{

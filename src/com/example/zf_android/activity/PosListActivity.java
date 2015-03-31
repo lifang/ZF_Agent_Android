@@ -18,9 +18,9 @@ import android.widget.Toast;
 import com.examlpe.zf_android.util.Tools;
 import com.examlpe.zf_android.util.XListView;
 import com.examlpe.zf_android.util.XListView.IXListViewListener;
-import com.example.zf_android.BaseActivity;
+import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
-import com.example.zf_android.MyApplication;
+import com.posagent.MyApplication;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.PosEntity;
 import com.example.zf_zandroid.adapter.PosAdapter;
@@ -297,7 +297,7 @@ public class PosListActivity extends BaseActivity implements OnClickListener, IX
 			 			 
 							}else{
 								code = jsonobject.getString("message");
-								Toast.makeText(getApplicationContext(), code, 1000).show();
+								Toast.makeText(getApplicationContext(), code, Toast.LENGTH_LONG).show();
 							}
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block

@@ -7,7 +7,7 @@ import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.BaseActivity;
+import com.posagent.activities.BaseActivity;
 import com.example.zf_android.R;
 
 public class ContentUs extends BaseActivity implements OnClickListener{

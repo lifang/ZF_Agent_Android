@@ -13,9 +13,9 @@ import android.widget.Toast;
 
 import com.examlpe.zf_android.util.Tools;
 import com.examlpe.zf_android.util.XListView;
-import com.example.zf_android.BaseActivity;
+import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
-import com.example.zf_android.MyApplication;
+import com.posagent.MyApplication;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.PosEntity;
 import com.example.zf_zandroid.adapter.PosAdapter;

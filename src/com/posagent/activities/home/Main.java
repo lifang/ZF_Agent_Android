@@ -4,21 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.examlpe.zf_android.util.ImageCacheUtil;
+import com.example.zf_android.R;
 import com.example.zf_android.activity.AllProduct;
 import com.example.zf_android.activity.LoginActivity;
 import com.example.zf_android.activity.MenuMine;
@@ -28,23 +22,12 @@ import com.example.zf_android.activity.SystemMessage;
 import com.example.zf_android.activity.Terminal;
 import com.example.zf_android.activity.TerminalOpenApply;
 import com.example.zf_android.activity.UserList;
-import com.posagent.activities.BaseActivity;
-import com.example.zf_android.Config;
-import com.posagent.MyApplication;
-import com.example.zf_android.R;
-import com.example.zf_android.entity.PicEntity;
 import com.example.zf_android.trade.AfterSaleGridActivity;
 import com.example.zf_android.trade.CitySelectActivity;
 import com.example.zf_android.trade.TradeFlowActivity;
 import com.example.zf_android.trade.entity.City;
 import com.example.zf_android.trade.entity.Province;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-
-import org.apache.http.Header;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.posagent.activities.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,12 +54,6 @@ public class Main extends BaseActivity implements OnClickListener{
     private City city;
     public static final int REQUEST_CITY = 1;
     public static final int REQUEST_CITY_WHEEL = 2;
-    //vp
-    private ArrayList<String> mal = new ArrayList<String>();
-    private ArrayList<PicEntity> myList = new ArrayList<PicEntity>();
-    private ViewPager view_pager;
-    private MyAdapter adapter ;
-    private ImageView[] indicator_imgs  ;//存放引到图片数组
     private View item ;
     private LayoutInflater inflater;
     private ImageView image;
@@ -87,14 +64,6 @@ public class Main extends BaseActivity implements OnClickListener{
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    for (int i = 0; i <myList.size(); i++) {
-                        item = inflater.inflate(R.layout.item, null);
-                        list.add(item);
-                        ma.add(myList.get(i).getPicture_url());
-                    }
-                    indicator_imgs	= new ImageView[ma.size()];
-				    initIndicator();
-                    adapter.notifyDataSetChanged();
                     break;
                 case 1:
                     Toast.makeText(getApplicationContext(), (String) msg.obj,
@@ -130,65 +99,6 @@ public class Main extends BaseActivity implements OnClickListener{
             }
         });
         System.out.println("-----");
-        getdata();
-    }
-
-    private void getdata() {
-        // TODO Auto-generated method stub
-
-        // TODO Auto-generated method stub
-
-        MyApplication.getInstance().getClient().post( "http://114.215.149.242:18080/ZFMerchant/api/index/sysshufflingfigure/getList", new AsyncHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers,
-                                  byte[] responseBody) {
-                System.out.println("-onSuccess---");
-                String responseMsg = new String(responseBody).toString();
-                Log.e("LJP", responseMsg);
-
-                Gson gson = new Gson();
-
-                JSONObject jsonobject = null;
-                String code = null;
-                try {
-                    jsonobject = new JSONObject(responseMsg);
-                    code = jsonobject.getString("code");
-                    int a =jsonobject.getInt("code");
-                    if(a==Config.CODE){
-                        String res =jsonobject.getString("result");
-                        //	jsonobject = new JSONObject(res);
-
-                        myList= gson.fromJson(res, new TypeToken<List<PicEntity>>() {
-                        }.getType());
-
-                        handler.sendEmptyMessage(0);
-
-
-
-                    }else{
-                        code = jsonobject.getString("message");
-                        Toast.makeText(getApplicationContext(), code, 1000).show();
-                    }
-                } catch (JSONException e) {
-                    // TODO Auto-generated catch block
-                    ;
-                    e.printStackTrace();
-
-                }
-
-
-
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers,
-                                  byte[] responseBody, Throwable error) {
-                // TODO Auto-generated method stub
-                error.printStackTrace();
-            }
-        });
-
     }
 
     private void initView() {
@@ -223,15 +133,7 @@ public class Main extends BaseActivity implements OnClickListener{
         click_after_sale=(RelativeLayout) findViewById(R.id.click_after_sale);
         click_after_sale.setOnClickListener(this);
 
-
-        view_pager = (ViewPager) findViewById(R.id.view_pager);
-
         inflater = LayoutInflater.from(this);
-        adapter = new MyAdapter(list);
-
-        view_pager.setAdapter(adapter);
-        //绑定动作监听器：如翻页的动画
-        view_pager.setOnPageChangeListener(new MyListener());
     }
 
     @Override
@@ -313,153 +215,6 @@ public class Main extends BaseActivity implements OnClickListener{
                 cityTextView.setText(city.getName());
                 break;
         }
-    }
-
-    private void initIndicator(){
-
-        ImageView imgView;
-        View v = findViewById(R.id.indicator);// 线性水平布局，负责动态调整导航图标
-
-        for (int i = 0; i < ma.size(); i++) {
-            imgView = new ImageView(this);
-            LinearLayout.LayoutParams params_linear = new LinearLayout.LayoutParams(10,10);
-            params_linear.setMargins(7, 10, 7, 10);
-            imgView.setLayoutParams(params_linear);
-            indicator_imgs[i] = imgView;
-
-            if (i == 0) { // 初始化第一个为选中状态
-
-                indicator_imgs[i].setBackgroundResource(R.drawable.indicator_focused);
-            } else {
-                indicator_imgs[i].setBackgroundResource(R.drawable.indicator);
-            }
-            ((ViewGroup)v).addView(indicator_imgs[i]);
-        }
-
-    }
-
-
-
-
-    /**
-     * 适配器，负责装配 、销毁  数据  和  组件 。
-     */
-    private class MyAdapter extends PagerAdapter {
-
-        private List<View> mList;
-        private int index ;
-
-
-
-        public MyAdapter(List<View> list) {
-            mList = list;
-
-        }
-
-
-
-        public int getIndex() {
-            return index;
-        }
-
-
-
-        public void setIndex(int index) {
-            this.index = index;
-        }
-
-
-
-        /**
-         * Return the number of views available.
-         */
-        @Override
-        public int getCount() {
-            // TODO Auto-generated method stub
-            return mList.size();
-        }
-
-
-        /**
-         * Remove a page for the given position.
-         * 滑动过后就销毁 ，销毁当前页的前一个的前一个的页！
-         * instantiateItem(View container, int position)
-         * This method was deprecated in API level . Use instantiateItem(ViewGroup, int)
-         */
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            // TODO Auto-generated method stub
-            container.removeView(mList.get(position));
-
-        }
-
-        @Override
-        public boolean isViewFromObject(View arg0, Object arg1) {
-            // TODO Auto-generated method stub
-            return arg0==arg1;
-        }
-
-
-        /**
-         * Create the page for the given position.
-         */
-        @Override
-        public Object instantiateItem(final ViewGroup container, final int position) {
-
-
-            View view = mList.get(position);
-            image = ((ImageView) view.findViewById(R.id.image));
-
-            ImageCacheUtil.IMAGE_CACHE.get(  ma.get(position),
-                    image);
-
-
-            container.removeView(mList.get(position));
-            container.addView(mList.get(position));
-            setIndex(position); 
-            return mList.get(position);
-        }
-
-
-    }
-
-
-    /**
-     * 动作监听器，可异步加载图片
-     *
-     */
-    private class MyListener implements OnPageChangeListener{
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-            // TODO Auto-generated method stub
-            if (state == 0) {
-                //new MyAdapter(null).notifyDataSetChanged();
-            }
-        }
-
-
-        @Override
-        public void onPageScrolled(int arg0, float arg1, int arg2) {
-            // TODO Auto-generated method stub
-
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            // 改变所有导航的背景图片为：未选中
-            for (int i = 0; i < indicator_imgs.length; i++) {
-
-                indicator_imgs[i].setBackgroundResource(R.drawable.indicator);
-
-            }
-
-            // 改变当前背景图片为：选中
-            index_ima=position;
-            indicator_imgs[position].setBackgroundResource(R.drawable.indicator_focused);
-        }
-
-
     }
 
 }

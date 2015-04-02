@@ -24,16 +24,10 @@ public class MenuMine extends BaseActivity implements OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_mine);
         initView();
+        setupCommonViews();
+        focusTabAtIndex(3);
     }
     private void initView() {
-        // TODO Auto-generated method stub
-
-        main_rl1=(RelativeLayout) findViewById(R.id.main_rl_sy);
-        main_rl1.setOnClickListener(this);
-        main_rl2=(RelativeLayout) findViewById(R.id.main_rl_gwc);
-        main_rl2.setOnClickListener(this);
-        main_rl3=(RelativeLayout) findViewById(R.id.main_rl_pos1);
-        main_rl3.setOnClickListener(this);
 
         search=(ImageView) findViewById(R.id.search);
         search.setOnClickListener(this);
@@ -84,5 +78,7 @@ public class MenuMine extends BaseActivity implements OnClickListener{
             default:
                 break;
         }
+
+        super.onClick(v);
     }
 }

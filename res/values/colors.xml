@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<color name="tmc">#e08d8d8d</color>
+    <color name="tmc">#e08d8d8d</color>
     <color name="bgtitle">#006fd5</color>
     <color name="text535252">#535252</color>
-<color name="textc9c9c9">#c9c9c9</color>
+    <color name="textc9c9c9">#c9c9c9</color>
     <color name="Viewc">#e1e0e0</color>
     <color name="Viewc2">#c9c9c9</color>
     <color name="text5a5a5a">#5a5a5a</color>
     <color name="bantouming">#e0000000</color>
     <color name="touming">#00000000</color>
-     <color name="text6c6c6c6">#6c6c6c</color>
-      <color name="text292929">#292929</color>
+    <color name="text6c6c6c6">#6c6c6c</color>
+    <color name="text292929">#292929</color>
     <color name="bg_item">#006fd5</color>
     <color name="F3F2F2">#F3F2F2</color>
-    
-    
-    
- <!-- 透明白色 -->
+
+
+
+    <!-- 透明白色 -->
     <color name="toumingbai">#f6f0f0f0</color>
- <!-- 底部透明白色 -->
+    <!-- 底部透明白色 -->
     <color name="touming7f">#7f000000</color>
- <!-- 透明黑色 -->
+    <!-- 透明黑色 -->
     <color name="toumingf6">#f6ffffff</color>
- <!-- 透明白色 -->
+    <!-- 透明白色 -->
     <color name="toumingf6f4">#f6f4f4f4</color>
- <!-- 透明白色 -->
+    <!-- 透明白色 -->
     <color name="toumingf6f1">#f6f1f1f1</color>
- <!-- 透明白色 -->
+    <!-- 透明白色 -->
     <color name="fffefe">#fffefe</color>
- <!-- 头部白色的字体颜色 -->
+    <!-- 头部白色的字体颜色 -->
     <color name="t000000">#000000</color>
- <!-- 黑色 -->
+    <!-- 黑色 -->
     <color name="tmffffff">#FFFFFFFF</color>
     <color name="ffffff">#ffffff</color>
     <color name="f4f4f4">#f4f4f4</color>
@@ -80,21 +80,21 @@
     <color name="FB9401">#FB9401</color>
     <color name="c838383">#838383</color>
     <color name="white">#ffffffff</color>
- <!-- 白色 -->
+    <!-- 白色 -->
     <color name="top_bg_color">#1FB8FE</color>
- <!-- 页面上方 蓝色块 -->
+    <!-- 页面上方 蓝色块 -->
 
     <color name="text_read">#021F35</color>
     <color name="black">#000000</color>
     <color name="oederdetails_bg">#F5F5F5</color>
- <!-- 订单详情浅灰色背景 -->
+    <!-- 订单详情浅灰色背景 -->
     <color name="line_color">#E1E1E1</color>
- <!-- 1dp 线条的颜色 -->
+    <!-- 1dp 线条的颜色 -->
     <color name="button_bg_hui_color">#838383</color>
- <!-- 深灰色 -->
+    <!-- 深灰色 -->
     <color name="oederdetail_item_red">#FF3B3D</color>
     <color name="edithinit">#333333</color>
- <!-- 订单详情 item 红色 -->
+    <!-- 订单详情 item 红色 -->
 
     <!-- 按钮颜色 -->
     <color name="normal_button_enabled">#006fd5</color>
@@ -104,6 +104,6 @@
     <color name="trade_statistic_bg">#212029</color>
     <color name="background_dark">#9f000000</color>
 
-	<color name="background_pressed">#dedede</color>
+    <color name="background_pressed">#dedede</color>
 
 </resources>

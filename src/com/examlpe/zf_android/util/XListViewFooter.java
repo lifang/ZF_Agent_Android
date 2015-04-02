@@ -3,14 +3,14 @@ package com.examlpe.zf_android.util;
 
  
 
-import com.example.zf_android.R;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.zf_android.R;
  
 
 public class XListViewFooter extends LinearLayout {
@@ -71,8 +71,7 @@ public class XListViewFooter extends LinearLayout {
 	public void setState2(int state) {
 		 	this.setVisibility(View.GONE);
 		  	mHintView.setVisibility(View.GONE);
-		//	mHintView.setText("没有更多了！");
-		 
+
 	}
 	public void setBottomMargin(int height) {
 		if (height < 0) return ;

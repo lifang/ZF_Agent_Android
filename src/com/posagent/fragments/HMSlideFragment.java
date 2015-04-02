@@ -52,6 +52,7 @@ public class HMSlideFragment extends Fragment {
     private ImageView image;
     private ArrayList<String> ma = new ArrayList<String>();
     List<View> list = new ArrayList<View>();
+    private int index_ima;
 
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
@@ -117,15 +118,21 @@ public class HMSlideFragment extends Fragment {
     private void initIndicator(){
         ImageView imgView;
         View v = indicatorContainer;
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < this.myList.size(); i++) {
             imgView = new ImageView(context);
 
             LinearLayout.LayoutParams params_linear = new LinearLayout.LayoutParams(10, 10);
             params_linear.setMargins(7, 20, 7, 20);
             imgView.setLayoutParams(params_linear);
 
+            if (i == index_ima) {
+                setCurrentDot(imgView);
+            } else {
+                setDefaultDot(imgView);
+            }
 
-            imgView.setBackgroundDrawable(dotWithColor(Color.argb(0x88, 0xff, 0x44, 0x00)));
+            indicator_imgs[i] = imgView;
+
 
             ((ViewGroup)v).addView(imgView);
         }
@@ -156,8 +163,6 @@ public class HMSlideFragment extends Fragment {
 
         }
 
-
-
         public int getIndex() {
             return index;
         }
@@ -175,7 +180,6 @@ public class HMSlideFragment extends Fragment {
          */
         @Override
         public int getCount() {
-            // TODO Auto-generated method stub
             return mList.size();
         }
 
@@ -188,14 +192,12 @@ public class HMSlideFragment extends Fragment {
          */
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-            // TODO Auto-generated method stub
             container.removeView(mList.get(position));
 
         }
 
         @Override
         public boolean isViewFromObject(View arg0, Object arg1) {
-            // TODO Auto-generated method stub
             return arg0==arg1;
         }
 
@@ -232,7 +234,6 @@ public class HMSlideFragment extends Fragment {
 
         @Override
         public void onPageScrollStateChanged(int state) {
-            // TODO Auto-generated method stub
             if (state == 0) {
                 //new MyAdapter(null).notifyDataSetChanged();
             }
@@ -241,25 +242,32 @@ public class HMSlideFragment extends Fragment {
 
         @Override
         public void onPageScrolled(int arg0, float arg1, int arg2) {
-            // TODO Auto-generated method stub
 
         }
 
         @Override
         public void onPageSelected(int position) {
-            // 改变所有导航的背景图片为：未选中
+            index_ima=position;
+            ImageView _imageView;
             for (int i = 0; i < indicator_imgs.length; i++) {
-
-                indicator_imgs[i].setBackgroundResource(R.drawable.indicator);
-
+                _imageView = indicator_imgs[i];
+                if (position == i) {
+                    setCurrentDot(_imageView);
+                } else {
+                    setDefaultDot(_imageView);
+                }
             }
-
-            // 改变当前背景图片为：选中
-//            index_ima=position;
-//            indicator_imgs[position].setBackgroundResource(R.drawable.indicator_focused);
         }
 
 
+    }
+
+    private void setDefaultDot(ImageView _imageView) {
+        _imageView.setBackgroundDrawable(dotWithColor(Color.argb(55, 0xff, 0xff, 0xff)));
+    }
+
+    private void setCurrentDot(ImageView _imageView) {
+        _imageView.setBackgroundDrawable(dotWithColor(Color.argb(0xff, 0xff, 0xff, 0xff)));
     }
 
     private void getdata() {
@@ -275,14 +283,10 @@ public class HMSlideFragment extends Fragment {
             int a =jsonobject.getInt("code");
             if(a== Config.CODE){
                 String res =jsonobject.getString("result");
-                //	jsonobject = new JSONObject(res);
-
                 myList= gson.fromJson(res, new TypeToken<List<PicEntity>>() {
                 }.getType());
 
                 handler.sendEmptyMessage(0);
-
-
 
             }
         } catch (JSONException e) {

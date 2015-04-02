@@ -2,15 +2,11 @@ package com.example.zf_android.entity;
 /***
  * 
 *    
-* 类名称：MessageEntity   
-* 类描述：   个人消息实体
-* 创建人： ljp 
-* 创建时间：2015-3-3 下午2:21:53   
+*
 * @version    
 *
  */
 public class MessageEntity {
-	//"content":"我是内容详情","id":"2","title":"还是标题","create_at":"2015-02-12 19:42:52"
 	private String content;
 	private String id;
 	private String title;

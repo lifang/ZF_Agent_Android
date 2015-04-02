@@ -2,10 +2,7 @@ package com.example.zf_android.entity;
 /**
  * 
 *    
-* 类名称：User   
-* 类描述：   用户信息实体类
-* 创建人： ljp  
-* 创建时间：2014-12-4 下午2:19:47   
+*
 * @version    
 *
  */

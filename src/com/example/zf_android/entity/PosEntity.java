@@ -1,9 +1,7 @@
 package com.example.zf_android.entity;
 
 public class PosEntity {
-	//volume_number":123,"id":2,"good_brand":"品牌1","total_score":1,
-	//"retail_price":72464,"pay_channe":"通道2",
-	//"Title":"泰山Pos旗舰版2","Model_number":"型号10"}
+
 	private Boolean has_lease;
 	
 	public Boolean getHas_lease() {

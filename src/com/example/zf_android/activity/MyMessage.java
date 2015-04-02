@@ -101,12 +101,12 @@ public class MyMessage extends BaseActivity implements IXListViewListener,
 		setContentView(R.layout.my_message);
 		initView();
 		getData();
+        setupCommonViews();
 	}
 
 	private void initView() {
 		// TODO Auto-generated method stub
 		rl_edit = (RelativeLayout) findViewById(R.id.rl_edit);
-		rl_editno = (RelativeLayout) findViewById(R.id.rl_editno);
 		tv_all=(TextView) findViewById(R.id.tv_all);
 		tv_dle=(TextView) findViewById(R.id.tv_dle);
 		tv_all.setOnClickListener(this);

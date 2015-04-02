@@ -1,6 +1,5 @@
 package com.example.zf_android.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,9 +14,7 @@ import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.examlpe.zf_android.util.Tools;
 import com.examlpe.zf_android.util.XListView;
 import com.examlpe.zf_android.util.XListView.IXListViewListener;
-import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
-import com.posagent.MyApplication;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.MessageEntity;
 import com.example.zf_zandroid.adapter.MessageAdapter;
@@ -25,6 +22,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.posagent.MyApplication;
+import com.posagent.activities.BaseActivity;
 
 import org.apache.http.Header;
 import org.json.JSONException;
@@ -34,230 +33,204 @@ import java.util.ArrayList;
 import java.util.List;
 
 /***
- * 
-*    
-* ����ƣ�MyMessage   
-* ��������   ϵͳ��Ϣ
-* �����ˣ� ljp 
-* ����ʱ�䣺2015-2-5 ����2:15:03   
-* @version    
-*
+ *
+ *
+ * ����ƣ�MyMessage
+ * ��������   ϵͳ��Ϣ
+ * �����ˣ� ljp
+ * ����ʱ�䣺2015-2-5 ����2:15:03
+ * @version
+ *
  */
 public class SystemMessage extends BaseActivity implements  IXListViewListener, View.OnClickListener {
     private RelativeLayout main_rl_sy, main_rl_gwc, main_rl_my;
 
-	private XListView Xlistview;
-	private int page=1;
-	private int rows=Config.ROWS;
-	private LinearLayout eva_nodata;
-	private boolean onRefresh_number = true;
-	private MessageAdapter myAdapter;
-	private TextView next_sure;
-	private String Url = Config.getsysmes;
-	List<MessageEntity>  myList = new ArrayList<MessageEntity>();
-	List<MessageEntity>  moreList = new ArrayList<MessageEntity>();
-	private Handler handler = new Handler() {
-		public void handleMessage(Message msg) {
-			switch (msg.what) {
-			case 0:
-				onLoad( );
-				
-				if(myList.size()==0){
-				//	norecord_text_to.setText("��û����ص���Ʒ");
-					Xlistview.setVisibility(View.GONE);
-					eva_nodata.setVisibility(View.VISIBLE);
-				}
-				onRefresh_number = true; 
-			 	myAdapter.notifyDataSetChanged();
-				break;
-			case 1:
-				Toast.makeText(getApplicationContext(), (String) msg.obj,
-						Toast.LENGTH_SHORT).show();
-			 
-				break;
-			case 2: // ����������
-				Toast.makeText(getApplicationContext(), "no 3g or wifi content",
-						Toast.LENGTH_SHORT).show();
-				break;
-			case 3:
-				Toast.makeText(getApplicationContext(),  " refresh too much",
-						Toast.LENGTH_SHORT).show();
-				break;
-			}
-		}
-	};
-		@Override
-		protected void onCreate(Bundle savedInstanceState) {
-			// TODO Auto-generated method stub
-			super.onCreate(savedInstanceState);
-			setContentView(R.layout.my_message);
-			initView();
-			getData();
-		}
+    private XListView Xlistview;
+    private int page=1;
+    private int rows=Config.ROWS;
+    private LinearLayout eva_nodata;
+    private boolean onRefresh_number = true;
+    private MessageAdapter myAdapter;
+    private TextView next_sure;
+    private String Url = Config.getsysmes;
+    List<MessageEntity>  myList = new ArrayList<MessageEntity>();
+    List<MessageEntity>  moreList = new ArrayList<MessageEntity>();
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    onLoad( );
 
-		private void initView() {
-			// TODO Auto-generated method stub
-            main_rl_sy=(RelativeLayout) findViewById(R.id.main_rl_sy);
-            main_rl_sy.setOnClickListener(this);
-            main_rl_my=(RelativeLayout) findViewById(R.id.main_rl_my);
-            main_rl_my.setOnClickListener(this);
-            main_rl_gwc=(RelativeLayout) findViewById(R.id.main_rl_gwc);
-            main_rl_gwc.setOnClickListener(this);
- 
-			new TitleMenuUtil(SystemMessage.this, "我的消息").show();
-			myAdapter=new MessageAdapter(SystemMessage.this, myList);
-			eva_nodata=(LinearLayout) findViewById(R.id.eva_nodata);
-			Xlistview=(XListView) findViewById(R.id.x_listview);
-			Xlistview.setPullLoadEnable(true);
-			Xlistview.setXListViewListener(this);
-			Xlistview.setDivider(null);
-			Xlistview.setAdapter(myAdapter);
-		}
+                    if(myList.size()==0){
+                        //	norecord_text_to.setText("��û����ص���Ʒ");
+                        Xlistview.setVisibility(View.GONE);
+                        eva_nodata.setVisibility(View.VISIBLE);
+                    }
+                    onRefresh_number = true;
+                    myAdapter.notifyDataSetChanged();
+                    break;
+                case 1:
+                    Toast.makeText(getApplicationContext(), (String) msg.obj,
+                            Toast.LENGTH_SHORT).show();
 
-		@Override
-		public void onRefresh() {
-			// TODO Auto-generated method stub
-			page = 1;
-			 System.out.println("onRefresh1");
-			myList.clear();
-			 System.out.println("onRefresh2");
-			getData();
-		}
+                    break;
+                case 2: // ����������
+                    Toast.makeText(getApplicationContext(), "no 3g or wifi content",
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                case 3:
+                    Toast.makeText(getApplicationContext(),  " refresh too much",
+                            Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.my_message);
+        initView();
+        getData();
+        setupCommonViews();
+        focusTabAtIndex(2);
+    }
+
+    private void initView() {
+
+        new TitleMenuUtil(SystemMessage.this, "我的消息").show();
+        myAdapter=new MessageAdapter(SystemMessage.this, myList);
+        eva_nodata=(LinearLayout) findViewById(R.id.eva_nodata);
+        Xlistview=(XListView) findViewById(R.id.x_listview);
+        Xlistview.setPullLoadEnable(true);
+        Xlistview.setXListViewListener(this);
+        Xlistview.setDivider(null);
+        Xlistview.setAdapter(myAdapter);
+    }
+
+    @Override
+    public void onRefresh() {
+        // TODO Auto-generated method stub
+        page = 1;
+        System.out.println("onRefresh1");
+        myList.clear();
+        System.out.println("onRefresh2");
+        getData();
+    }
 
 
-		@Override
-		public void onLoadMore() {
-			// TODO Auto-generated method stub
-			if (onRefresh_number) {
-				page = page+1;
-				
-		 
-				
-				if (Tools.isConnect(getApplicationContext())) {
-					onRefresh_number = false;
-					getData();
-				} else {
-					onRefresh_number = true;
-					handler.sendEmptyMessage(2);
-				}
-			}
-			else {
-				handler.sendEmptyMessage(3);
-			}
-		}
-		private void onLoad() {
-			Xlistview.stopRefresh();
-			Xlistview.stopLoadMore();
-			Xlistview.setRefreshTime(Tools.getHourAndMin());
-		}
+    @Override
+    public void onLoadMore() {
+        // TODO Auto-generated method stub
+        if (onRefresh_number) {
+            page = page+1;
 
-		public void buttonClick() {
-			page = 1;
-			myList.clear();
-			getData();
-		}
+
+
+            if (Tools.isConnect(getApplicationContext())) {
+                onRefresh_number = false;
+                getData();
+            } else {
+                onRefresh_number = true;
+                handler.sendEmptyMessage(2);
+            }
+        }
+        else {
+            handler.sendEmptyMessage(3);
+        }
+    }
+    private void onLoad() {
+        Xlistview.stopRefresh();
+        Xlistview.stopLoadMore();
+        Xlistview.setRefreshTime(Tools.getHourAndMin());
+    }
+
+    public void buttonClick() {
+        page = 1;
+        myList.clear();
+        getData();
+    }
 
 
     @Override
     public void onClick(View v) {
-        // TODO Auto-generated method stub
-        switch (v.getId()) {
-
-            case R.id.main_rl_gwc:  // 全部商品
-                startActivity(new Intent(SystemMessage.this, AllProduct.class));
-
-                break;
-
-            case R.id.main_rl_my:  // 我的
-
-                startActivity(new Intent(SystemMessage.this, MenuMine.class));
-
-                break;
-
-            case R.id.main_rl_sy:  // 首页
-
-                startActivity(new Intent(SystemMessage.this, MenuMine.class));
-
-                break;
-            default:
-                break;
-        }
+        super.onClick(v);
     }
-	 
-		private void getData() {
-			// TODO Auto-generated method stub
 
-			// TODO Auto-generated method stub
+    private void getData() {
+        // TODO Auto-generated method stub
 
-			RequestParams params = new RequestParams();
+        // TODO Auto-generated method stub
 
-		 
-			params.put("page", page);
-			params.put("rows", rows);
-			params.setUseJsonStreamer(true);
-			MyApplication.getInstance().getClient()
-					.post(Url, params, new AsyncHttpResponseHandler() {
+        RequestParams params = new RequestParams();
 
-						@Override
-						public void onSuccess(int statusCode, Header[] headers,
-								byte[] responseBody) {
-							System.out.println("-onSuccess---");
-							String responseMsg = new String(responseBody)
-									.toString();
-							Log.e("LJP", responseMsg);
-							Gson gson = new Gson();
-							JSONObject jsonobject = null;
-							int code = 0;
-							try {
-								jsonobject = new JSONObject(responseMsg);
-								 
-								 
-								code = jsonobject.getInt("code");
-								
-								if(code==-2){
-								 
-								}else if(code==1){
-									
-									String res =jsonobject.getString("result");
-									System.out.println("`res``"+res);
-									jsonobject = new JSONObject(res);
-									moreList.clear();
-									
-					 				moreList = gson.fromJson(jsonobject.getString("content") ,
-										new TypeToken<List<MessageEntity>>() {
-										}.getType());
-					 					 	
-					 						if (moreList.size()==0) {
-					 							Toast.makeText(getApplicationContext(),
-					 									"没有更多数据了", Toast.LENGTH_SHORT).show();
-					 							Xlistview.getmFooterView().setState2(2);
-					 					 
-					 						} 
-					 						 
-					 				myList.addAll(moreList);
-					 				handler.sendEmptyMessage(0);
-			 
-									
-									
-								}else{
-									Toast.makeText(getApplicationContext(), jsonobject.getString("message"),
-											Toast.LENGTH_SHORT).show();
-								}
-							} catch (JSONException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							 
-						}
 
-						@Override
-						public void onFailure(int statusCode, Header[] headers,
-								byte[] responseBody, Throwable error) {
-							// TODO Auto-generated method stub
-							error.printStackTrace();
-						}
-					});
-			 
-		
-		}
+        params.put("page", page);
+        params.put("rows", rows);
+        params.setUseJsonStreamer(true);
+        MyApplication.getInstance().getClient()
+                .post(Url, params, new AsyncHttpResponseHandler() {
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers,
+                                          byte[] responseBody) {
+                        System.out.println("-onSuccess---");
+                        String responseMsg = new String(responseBody)
+                                .toString();
+                        Log.e("LJP", responseMsg);
+                        Gson gson = new Gson();
+                        JSONObject jsonobject = null;
+                        int code = 0;
+                        try {
+                            jsonobject = new JSONObject(responseMsg);
+
+
+                            code = jsonobject.getInt("code");
+
+                            if(code==-2){
+
+                            }else if(code==1){
+
+                                String res =jsonobject.getString("result");
+                                System.out.println("`res``"+res);
+                                jsonobject = new JSONObject(res);
+                                moreList.clear();
+
+                                moreList = gson.fromJson(jsonobject.getString("content") ,
+                                        new TypeToken<List<MessageEntity>>() {
+                                        }.getType());
+
+                                if (moreList.size()==0) {
+                                    Toast.makeText(getApplicationContext(),
+                                            "没有更多数据了", Toast.LENGTH_SHORT).show();
+                                    Xlistview.getmFooterView().setState2(2);
+
+                                }
+
+                                myList.addAll(moreList);
+                                handler.sendEmptyMessage(0);
+
+
+
+                            }else{
+                                Toast.makeText(getApplicationContext(), jsonobject.getString("message"),
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers,
+                                          byte[] responseBody, Throwable error) {
+                        // TODO Auto-generated method stub
+                        error.printStackTrace();
+                    }
+                });
+
+
+    }
 }

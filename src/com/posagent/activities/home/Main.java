@@ -84,7 +84,6 @@ public class Main extends BaseActivity implements OnClickListener{
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
@@ -93,21 +92,19 @@ public class Main extends BaseActivity implements OnClickListener{
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Intent i =new Intent(Main.this,LoginActivity.class);
+                Intent i = new Intent(Main.this, LoginActivity.class);
                 startActivity(i);
             }
         });
-        System.out.println("-----");
+        setupCommonViews();
+
+        focusTabAtIndex(0);
     }
 
     private void initView() {
-        // TODO Auto-generated method stub
         citySelect = findViewById(R.id.titleback_linear_back);
         cityTextView = (TextView) findViewById(R.id.tv_city);
         citySelect.setOnClickListener(this);
-        main_rl_gwc=(RelativeLayout) findViewById(R.id.main_rl_gwc);
-        main_rl_gwc.setOnClickListener(this);
         main_rl_pos=(RelativeLayout) findViewById(R.id.main_rl_pos);
         main_rl_pos.setOnClickListener(this);
         main_rl_renzhen=(RelativeLayout) findViewById(R.id.main_rl_renzhen);
@@ -121,11 +118,6 @@ public class Main extends BaseActivity implements OnClickListener{
 
         click_apply_open=(RelativeLayout) findViewById(R.id.click_apply_open);
         click_apply_open.setOnClickListener(this);
-
-        main_rl_my=(RelativeLayout) findViewById(R.id.main_rl_my);
-        main_rl_my.setOnClickListener(this);
-        main_rl_pos1=(RelativeLayout) findViewById(R.id.main_rl_pos1);
-        main_rl_pos1.setOnClickListener(this);
 
 
         btn_user_list=(RelativeLayout) findViewById(R.id.btn_user_list);
@@ -197,6 +189,9 @@ public class Main extends BaseActivity implements OnClickListener{
             default:
                 break;
         }
+
+        super.onClick(v);
+
     }
 
     @Override

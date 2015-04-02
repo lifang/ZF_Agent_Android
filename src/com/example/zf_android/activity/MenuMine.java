@@ -20,7 +20,6 @@ public class MenuMine extends BaseActivity implements OnClickListener{
     private RelativeLayout  main_rl1, main_rl2, main_rl3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_mine);
         initView();
@@ -40,7 +39,6 @@ public class MenuMine extends BaseActivity implements OnClickListener{
     }
     @Override
     public void onClick(View v) {
-        // TODO Auto-generated method smtub
         switch (v.getId()) {
             case R.id.ll_request:
                 startActivity(new Intent(this, ApplyOpenProgressActivity.class));

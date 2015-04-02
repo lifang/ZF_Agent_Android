@@ -8,17 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zf_android.R;
 import com.example.zf_android.activity.AllProduct;
 import com.example.zf_android.activity.LoginActivity;
-import com.example.zf_android.activity.MenuMine;
 import com.example.zf_android.activity.OrderList;
 import com.example.zf_android.activity.StockList;
-import com.example.zf_android.activity.SystemMessage;
 import com.example.zf_android.activity.Terminal;
 import com.example.zf_android.activity.TerminalOpenApply;
 import com.example.zf_android.activity.UserList;
@@ -30,6 +27,7 @@ import com.example.zf_android.trade.entity.Province;
 import com.posagent.activities.BaseActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static com.example.zf_android.trade.Constants.CityIntent.CITY_ID;
@@ -40,9 +38,6 @@ import static com.example.zf_android.trade.Constants.CityIntent.SELECTED_PROVINC
 
 public class Main extends BaseActivity implements OnClickListener{
 
-    private RelativeLayout btn_user_list, click_after_sale, main_rl_pos,
-            main_rl_renzhen, main_rl_zdgl,main_rl_jyls,main_rl_Forum,main_rl_wylc,
-            main_rl_xtgg,click_apply_open,main_rl_my,main_rl_pos1,main_rl_gwc;
     private ImageView testbutton;
 
     private View citySelect;
@@ -96,6 +91,22 @@ public class Main extends BaseActivity implements OnClickListener{
                 startActivity(i);
             }
         });
+
+        // 准备需要监听Click的数据
+        HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{
+            put("main_buy_pos", AllProduct.class);
+            put("main_order_manage", OrderList.class);
+            put("main_stock_manage", StockList.class);
+            put("main_trade_list", TradeFlowActivity.class);
+            put("main_terminal_manage", Terminal.class);
+            put("main_user_list", UserList.class);
+            put("click_apply_open", TerminalOpenApply.class);
+            put("click_after_sale", AfterSaleGridActivity.class);
+
+
+        }};
+        this.setClickableMap(clickableMap);
+
         setupCommonViews();
 
         focusTabAtIndex(0);
@@ -105,25 +116,6 @@ public class Main extends BaseActivity implements OnClickListener{
         citySelect = findViewById(R.id.titleback_linear_back);
         cityTextView = (TextView) findViewById(R.id.tv_city);
         citySelect.setOnClickListener(this);
-        main_rl_pos=(RelativeLayout) findViewById(R.id.main_rl_pos);
-        main_rl_pos.setOnClickListener(this);
-        main_rl_renzhen=(RelativeLayout) findViewById(R.id.main_rl_renzhen);
-        main_rl_renzhen.setOnClickListener(this);
-        main_rl_zdgl=(RelativeLayout) findViewById(R.id.main_rl_kcgl);
-        main_rl_zdgl.setOnClickListener(this);
-        main_rl_jyls=(RelativeLayout) findViewById(R.id.main_rl_jyls);
-        main_rl_jyls.setOnClickListener(this);
-        main_rl_Forum=(RelativeLayout) findViewById(R.id.main_rl_Forum);
-        main_rl_Forum.setOnClickListener(this);
-
-        click_apply_open=(RelativeLayout) findViewById(R.id.click_apply_open);
-        click_apply_open.setOnClickListener(this);
-
-
-        btn_user_list=(RelativeLayout) findViewById(R.id.btn_user_list);
-        btn_user_list.setOnClickListener(this);
-        click_after_sale=(RelativeLayout) findViewById(R.id.click_after_sale);
-        click_after_sale.setOnClickListener(this);
 
         inflater = LayoutInflater.from(this);
     }
@@ -137,54 +129,6 @@ public class Main extends BaseActivity implements OnClickListener{
                 Intent intent = new Intent(Main.this, CitySelectActivity.class);
                 intent.putExtra(CITY_NAME, cityName);
                 startActivityForResult(intent, REQUEST_CITY);
-                break;
-
-            case R.id.main_rl_pos1:
-                startActivity(new Intent(Main.this, SystemMessage.class));
-
-                break;
-
-
-            case R.id.main_rl_my:
-
-                startActivity(new Intent(Main.this, MenuMine.class));
-
-                break;
-
-            case R.id.main_rl_pos:
-
-                startActivity(new Intent(Main.this, AllProduct.class));
-
-                break;
-
-
-            case R.id.main_rl_renzhen:
-                Intent i =new Intent(Main.this, OrderList.class);
-                startActivity(i);
-
-                break;
-            case R.id.main_rl_kcgl:
-                startActivity(new Intent(Main.this, StockList.class));
-                break;
-            case R.id.main_rl_jyls:
-
-                startActivity(new Intent(Main.this, TradeFlowActivity.class));
-                break;
-            case R.id.main_rl_Forum: //锟斤拷要锟斤拷锟�
-                startActivity(new Intent(Main.this, Terminal.class));
-                break;
-
-            case R.id.btn_user_list:
-                startActivity(new Intent(Main.this, UserList.class));
-                break;
-            case R.id.click_apply_open: //��ϵ����
-                startActivity(new Intent(Main.this, TerminalOpenApply.class));
-                break;
-            case R.id.main_rl_gwc:
-                startActivity(new Intent(Main.this, AllProduct.class));
-                break;
-            case R.id.click_after_sale:
-                startActivity(new Intent(Main.this, AfterSaleGridActivity.class));
                 break;
             default:
                 break;

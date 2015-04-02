@@ -110,7 +110,7 @@
                 android:orientation="horizontal" >
 
                 <RelativeLayout
-                    android:id="@+id/main_rl_pos"
+                    android:id="@+id/main_buy_pos"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1" >
@@ -151,7 +151,7 @@
                     android:background="@color/Viewc" />
 
                 <RelativeLayout
-                    android:id="@+id/main_rl_renzhen"
+                    android:id="@+id/main_order_manage"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1" >
@@ -198,7 +198,7 @@
                 android:orientation="horizontal" >
 
                 <RelativeLayout
-                    android:id="@+id/main_rl_kcgl"
+                    android:id="@+id/main_stock_manage"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1" >
@@ -238,7 +238,7 @@
                     android:background="@color/Viewc" />
 
                 <RelativeLayout
-                    android:id="@+id/main_rl_jyls"
+                    android:id="@+id/main_trade_list"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1" >
@@ -276,7 +276,7 @@
                     android:background="@color/Viewc" />
 
                 <RelativeLayout
-                    android:id="@+id/main_rl_Forum"
+                    android:id="@+id/main_terminal_manage"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1" >
@@ -323,7 +323,7 @@
                 android:orientation="horizontal" >
 
                 <RelativeLayout
-                    android:id="@+id/btn_user_list"
+                    android:id="@+id/main_user_list"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1" >

@@ -2,14 +2,10 @@ package com.posagent.activities.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.zf_android.R;
 import com.example.zf_android.activity.AllProduct;
@@ -26,9 +22,7 @@ import com.example.zf_android.trade.entity.City;
 import com.example.zf_android.trade.entity.Province;
 import com.posagent.activities.BaseActivity;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import static com.example.zf_android.trade.Constants.CityIntent.CITY_ID;
 import static com.example.zf_android.trade.Constants.CityIntent.CITY_NAME;
@@ -49,34 +43,6 @@ public class Main extends BaseActivity implements OnClickListener{
     private City city;
     public static final int REQUEST_CITY = 1;
     public static final int REQUEST_CITY_WHEEL = 2;
-    private View item ;
-    private LayoutInflater inflater;
-    private ImageView image;
-    private int  index_ima=0;
-    private ArrayList<String> ma = new ArrayList<String>();
-    List<View> list = new ArrayList<View>();
-    private Handler handler = new Handler() {
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 0:
-                    break;
-                case 1:
-                    Toast.makeText(getApplicationContext(), (String) msg.obj,
-                            Toast.LENGTH_SHORT).show();
-                    break;
-                case 2: // 网络有问题
-                    Toast.makeText(getApplicationContext(), "网络未连接",
-                            Toast.LENGTH_SHORT).show();
-                    break;
-                case 3:
-
-                    break;
-                case 4:
-
-                    break;
-            }
-        }
-    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,8 +82,6 @@ public class Main extends BaseActivity implements OnClickListener{
         citySelect = findViewById(R.id.titleback_linear_back);
         cityTextView = (TextView) findViewById(R.id.tv_city);
         citySelect.setOnClickListener(this);
-
-        inflater = LayoutInflater.from(this);
     }
 
     @Override

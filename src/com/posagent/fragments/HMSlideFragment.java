@@ -21,14 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.examlpe.zf_android.util.ImageCacheUtil;
-import com.example.zf_android.Config;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.PicEntity;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +38,7 @@ public class HMSlideFragment extends Fragment {
 
     private ArrayList<String> mal = new ArrayList<String>();
     private ArrayList<PicEntity> myList = new ArrayList<PicEntity>();
-    private ViewPager view_pager;
+    private ViewPager viewPager;
     private MyAdapter adapter ;
     private ImageView[] indicator_imgs  ;//存放引到图片数组
     private View item ;
@@ -93,26 +87,29 @@ public class HMSlideFragment extends Fragment {
 
         // viewpager
         lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        view_pager = new ViewPager(context);
-        view_pager.setLayoutParams(lp);
+        viewPager = new ViewPager(context);
+        viewPager.setLayoutParams(lp);
 
 
         adapter = new MyAdapter(list);
-        view_pager.setAdapter(adapter);
+        viewPager.setAdapter(adapter);
         //绑定动作监听器：如翻页的动画
-        view_pager.setOnPageChangeListener(new MyListener());
+        viewPager.setOnPageChangeListener(new MyListener());
 
 
-        mainContainer.addView(view_pager);
+        mainContainer.addView(viewPager);
 
 
         layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 40);
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, view_pager.getId());
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, viewPager.getId());
         mainContainer.addView(indicatorContainer, layoutParams);
 
-
-        getdata();
         return mainContainer;
+    }
+
+    public void feedData(ArrayList<PicEntity> list) {
+        myList= list;
+        handler.sendEmptyMessage(0);
     }
 
     private void initIndicator(){
@@ -156,8 +153,6 @@ public class HMSlideFragment extends Fragment {
         private List<View> mList;
         private int index ;
 
-
-
         public MyAdapter(List<View> list) {
             mList = list;
 
@@ -167,13 +162,9 @@ public class HMSlideFragment extends Fragment {
             return index;
         }
 
-
-
         public void setIndex(int index) {
             this.index = index;
         }
-
-
 
         /**
          * Return the number of views available.
@@ -193,7 +184,6 @@ public class HMSlideFragment extends Fragment {
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView(mList.get(position));
-
         }
 
         @Override
@@ -207,14 +197,9 @@ public class HMSlideFragment extends Fragment {
          */
         @Override
         public Object instantiateItem(final ViewGroup container, final int position) {
-
-
             View view = mList.get(position);
             image = ((ImageView) view.findViewById(R.id.image));
-
-            ImageCacheUtil.IMAGE_CACHE.get(  ma.get(position),
-                    image);
-
+            ImageCacheUtil.IMAGE_CACHE.get(ma.get(position), image);
 
             container.removeView(mList.get(position));
             container.addView(mList.get(position));
@@ -268,33 +253,5 @@ public class HMSlideFragment extends Fragment {
 
     private void setCurrentDot(ImageView _imageView) {
         _imageView.setBackgroundDrawable(dotWithColor(Color.argb(0xff, 0xff, 0xff, 0xff)));
-    }
-
-    private void getdata() {
-        jsonData = "{'code':1,'message':'success','result':[{'id':5,'picture_url':'http://file.youboy.com/a/142/67/57/6/660666.jpg','website_url':'http://baidu.com'},{'id':4,'picture_url':'http://img1.100ye.com/img1/4/1181/892/10772392/msgpic/61260332.jpg','website_url':'http://baidu.com'},{'id':3,'picture_url':'http://image5.huangye88.com/2013/01/08/db4ed2c6a01ec5ef.jpg','website_url':'http://baidu.com'},{'id':2,'picture_url':'http://file.youboy.com/a/149/94/17/5/669625.jpg','website_url':'http://baidu.com'}]}";
-
-        Gson gson = new Gson();
-
-        JSONObject jsonobject = null;
-        String code = null;
-        try {
-            jsonobject = new JSONObject(jsonData);
-            code = jsonobject.getString("code");
-            int a =jsonobject.getInt("code");
-            if(a== Config.CODE){
-                String res =jsonobject.getString("result");
-                myList= gson.fromJson(res, new TypeToken<List<PicEntity>>() {
-                }.getType());
-
-                handler.sendEmptyMessage(0);
-
-            }
-        } catch (JSONException e) {
-            // TODO Auto-generated catch block
-            ;
-            e.printStackTrace();
-
-        }
-
     }
 }

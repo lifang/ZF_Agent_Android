@@ -10,6 +10,7 @@ import com.example.zf_android.entity.GoodinfoEntity;
 import com.example.zf_android.entity.PosSelectEntity;
 import com.example.zf_android.entity.User;
 import com.loopj.android.http.AsyncHttpClient;
+import com.posagent.network.APIManager;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -137,7 +138,9 @@ public class MyApplication extends Application{
 	public void onCreate() {
 		super.onCreate();
 		mInstance = this;
-	}
+        //setup APIManager EventBus
+        APIManager.getDefault();
+    }
 
 	public static MyApplication getInstance() {
 		return mInstance;

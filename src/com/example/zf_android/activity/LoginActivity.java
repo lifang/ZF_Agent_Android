@@ -166,7 +166,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
     @Override
     public void onClick(View v) {
-        // TODO Auto-generated method stub
         switch (v.getId()) {
             case R.id.login_linear_login:
                 if(check()){
@@ -174,9 +173,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                 }
                 break;
             case R.id.zhuche_ll:
-                startActivity(new Intent(LoginActivity.this,Register.class));
-
-
+                startActivity(new Intent(LoginActivity.this, Register.class));
                 break;
             case R.id.login_linear_deletename:
                 login_edit_name.setText("");
@@ -194,6 +191,10 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
         Toast.makeText(getApplicationContext(),
                 event.getMessage(),
                 Toast.LENGTH_SHORT).show();
+
+        if (event.getSuccess()) {
+            finish();
+        }
     }
 
     private void login() {

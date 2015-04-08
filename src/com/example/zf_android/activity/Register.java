@@ -15,7 +15,6 @@ import com.posagent.activities.BaseActivity;
 import com.example.zf_android.R;
 
 public class Register extends BaseActivity implements OnClickListener{
-	//�������������ʼ�
 	private EditText login_edit_name;
 	private LinearLayout login_linear_deletename,login_linear_in;
 	private TextView tv_msg;
@@ -25,7 +24,7 @@ public class Register extends BaseActivity implements OnClickListener{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.register);
-		new TitleMenuUtil(Register.this,"�һ�����").show();
+		new TitleMenuUtil(Register.this,"申请成为代理商").show();
 		initView();
 	}
 	private void initView() {

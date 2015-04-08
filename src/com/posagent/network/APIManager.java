@@ -65,7 +65,6 @@ public class APIManager {
             String result = response.body().string();
             Log.d(TAG, result);
 
-            result = "{\"code\":-1,\"message\":\"用户名不存在！\",\"result\":\"sadf\"}";
 
             JSONObject json = null;
             String code = null;

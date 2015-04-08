@@ -1,8 +1,5 @@
 package com.example.zf_android.activity;
 
-import org.apache.http.Header;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -19,270 +16,205 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
- 
- 
+
 import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.Config;
 import com.example.zf_android.R;
-import com.google.gson.Gson;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
+import com.posagent.activities.BaseActivity;
+import com.posagent.events.Events;
+
+import de.greenrobot.event.EventBus;
 
 
 /***
- *   ��¼ҳ��
- * 
- * @author Lijinpeng
- * 
- *         comdo
+ *
  */
-public class LoginActivity extends Activity implements OnClickListener {
-	private String name,pass,url,deviceToken;
-	private ImageView loginImage;
-	private CheckBox isremeber_cb;
-	private Boolean isRemeber = true;
-	private TextView login_text_forget, login_info;
-	private EditText login_edit_name, login_edit_pass;
-	private LinearLayout login_linear_deletename, login_linear_deletepass,zhuche_ll,
-			login_linear_login, msg;
-	private String sign, pass1, usename, passsword;
-	private SharedPreferences mySharedPreferences;
-	private Editor editor;
-	private Boolean isFirst;
-	private String sessionId;
-	private Handler handler = new Handler() {
-		public void handleMessage(Message msg) {
-			switch (msg.what) {
-			case 0:
-				// showDialog();
-				break;
-			case 1:
-				Toast.makeText(getApplicationContext(), (String) msg.obj,
-						Toast.LENGTH_SHORT).show();
-				break;
-			case 2: // ����������
-				Toast.makeText(getApplicationContext(), R.string.no_internet,
-						Toast.LENGTH_SHORT).show();
-				break;
-			case 3:
-				Toast.makeText(getApplicationContext(),
-						R.string.refresh_toomuch, Toast.LENGTH_SHORT).show();
-				break;
-			case 4:
-				 
-				break;
-			}
-		}
-	};
+public class LoginActivity extends BaseActivity implements OnClickListener {
+    private String name,pass,url,deviceToken;
+    private ImageView loginImage;
+    private CheckBox isremeber_cb;
+    private Boolean isRemeber = true;
+    private TextView login_text_forget, login_info;
+    private EditText login_edit_name, login_edit_pass;
+    private LinearLayout login_linear_deletename, login_linear_deletepass,zhuche_ll,
+            login_linear_login, msg;
+    private String sign, pass1, username, password;
+    private SharedPreferences mySharedPreferences;
+    private Editor editor;
+    private Boolean isFirst;
+    private String sessionId;
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    // showDialog();
+                    break;
+                case 1:
+                    Toast.makeText(getApplicationContext(), (String) msg.obj,
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                case 2: // ����������
+                    Toast.makeText(getApplicationContext(), R.string.no_internet,
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                case 3:
+                    Toast.makeText(getApplicationContext(),
+                            R.string.refresh_toomuch, Toast.LENGTH_SHORT).show();
+                    break;
+                case 4:
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.login);
-		
-		initView();
-		new TitleMenuUtil(LoginActivity.this, "��¼").show();
-		//new ClientUpdate(LoginActivity.this).checkSetting();
-	}
+                    break;
+            }
+        }
+    };
 
-	private void initView() {
-		// TODO Auto-generated method stub
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.login);
 
-		// ��ʼ��
-		mySharedPreferences = getSharedPreferences(Config.SHARED, MODE_PRIVATE);
-		editor = mySharedPreferences.edit();
- 
-		login_text_forget = (TextView) findViewById(R.id.login_text_forget);
-		//login_text_forget.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
-		login_text_forget.setOnClickListener(new OnClickListener() {
+        initView();
+        new TitleMenuUtil(LoginActivity.this, "登录").show();
+    }
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent i = new Intent(getApplicationContext(),
-						FindPass.class);
-				startActivity(i);
-			}
-		});
-		msg = (LinearLayout) findViewById(R.id.msg);
-		login_info = (TextView) findViewById(R.id.login_info);
-		 
-		zhuche_ll= (LinearLayout) findViewById(R.id.zhuche_ll);
-		zhuche_ll.setOnClickListener(this);
+    private void initView() {
+        mySharedPreferences = getSharedPreferences(Config.SHARED, MODE_PRIVATE);
+        editor = mySharedPreferences.edit();
 
-		login_edit_name = (EditText) findViewById(R.id.login_edit_name);
-		login_edit_pass = (EditText) findViewById(R.id.login_edit_pass);
-		
-		login_linear_deletename = (LinearLayout) findViewById(R.id.login_linear_deletename);
-		login_linear_deletepass = (LinearLayout) findViewById(R.id.login_linear_deletepass);
-		login_linear_deletepass.setOnClickListener(this);
-		login_linear_deletename.setOnClickListener(this);
-		login_edit_name.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				msg.setVisibility(View.INVISIBLE);
-				if (s.length() > 0) {
-					login_linear_deletename.setVisibility(View.VISIBLE);
-				} else {
-					login_linear_deletename.setVisibility(View.GONE);
-				}
+        login_text_forget = (TextView) findViewById(R.id.login_text_forget);
+        //login_text_forget.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+        login_text_forget.setOnClickListener(new OnClickListener() {
 
-			}
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent i = new Intent(getApplicationContext(),
+                        FindPass.class);
+                startActivity(i);
+            }
+        });
+        msg = (LinearLayout) findViewById(R.id.msg);
+        login_info = (TextView) findViewById(R.id.login_info);
 
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-			}
+        zhuche_ll= (LinearLayout) findViewById(R.id.zhuche_ll);
+        zhuche_ll.setOnClickListener(this);
 
-			@Override
-			public void afterTextChanged(Editable s) {
-			}
-		});
-		login_edit_pass.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				msg.setVisibility(View.INVISIBLE);
-				if (s.length() > 0)
-					login_linear_deletepass.setVisibility(View.VISIBLE);
-				else
-					login_linear_deletepass.setVisibility(View.GONE);
-			}
+        login_edit_name = (EditText) findViewById(R.id.login_edit_name);
+        login_edit_pass = (EditText) findViewById(R.id.login_edit_pass);
 
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-			}
+        login_linear_deletename = (LinearLayout) findViewById(R.id.login_linear_deletename);
+        login_linear_deletepass = (LinearLayout) findViewById(R.id.login_linear_deletepass);
+        login_linear_deletepass.setOnClickListener(this);
+        login_linear_deletename.setOnClickListener(this);
+        login_edit_name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                msg.setVisibility(View.INVISIBLE);
+                if (s.length() > 0) {
+                    login_linear_deletename.setVisibility(View.VISIBLE);
+                } else {
+                    login_linear_deletename.setVisibility(View.GONE);
+                }
 
-			@Override
-			public void afterTextChanged(Editable s) {
-			}
-		});
-		 
-		login_linear_login = (LinearLayout) findViewById(R.id.login_linear_login);
-		login_linear_login.setOnClickListener(this);
-		isFirst = mySharedPreferences.getBoolean("isRemeber", false);
-		if (isFirst) {
-			login_edit_pass.setText(mySharedPreferences.getString("password",
-					""));
-			login_edit_name.setText(mySharedPreferences.getString("username",
-					""));
-		}else{
-			login_edit_name.setText(mySharedPreferences.getString("username",
-					""));
-		}
-	}
+            }
 
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		switch (v.getId()) {
-		case R.id.login_linear_login: 
-			// ��¼
-			if(check()){
-				login();
-			}
-		 
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+            }
 
-			break;
-		case R.id.zhuche_ll: 
-		// ��¼
-		startActivity(new Intent(LoginActivity.this,Register.class));
-	 
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+        login_edit_pass.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                msg.setVisibility(View.INVISIBLE);
+                if (s.length() > 0)
+                    login_linear_deletepass.setVisibility(View.VISIBLE);
+                else
+                    login_linear_deletepass.setVisibility(View.GONE);
+            }
 
-		break;
-		case R.id.login_linear_deletename:
-			login_edit_name.setText("");
-			break;
-		case R.id.login_linear_deletepass:
-			login_edit_pass.setText("");
-			break;
-		default:
-			break;
-		}
-	}
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+            }
 
-	private void login() {
-		// TODO Auto-generated method stub
-		AsyncHttpClient client = new AsyncHttpClient(); // �����첽����Ŀͻ��˶���
-		RequestParams params = new RequestParams();
-	 
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
 
-		params.put("username", usename);
-		params.put("password", passsword);
-		params.setUseJsonStreamer(true);
-		
-		
-		String url=Config.LOGIN;
-		System.out.println("usename`` `" + usename);
-		System.out.println("passsword`` `" + passsword);
-		client.post(Config.LOGIN, params, new AsyncHttpResponseHandler() {
+        login_linear_login = (LinearLayout) findViewById(R.id.login_linear_login);
+        login_linear_login.setOnClickListener(this);
+        isFirst = mySharedPreferences.getBoolean("isRemeber", false);
+        if (isFirst) {
+            login_edit_pass.setText(mySharedPreferences.getString("password",
+                    ""));
+            login_edit_name.setText(mySharedPreferences.getString("username",
+                    ""));
+        }else{
+            login_edit_name.setText(mySharedPreferences.getString("username",
+                    ""));
+        }
+    }
 
-			@Override
-			public void onSuccess(int statusCode, Header[] headers,
-					byte[] responseBody) {
-				// TODO Auto-generated method stub
-				String userMsg = new String(responseBody).toString();
-				System.out.println("userMsg`` `" + userMsg);
-			 
-				Gson gson = new Gson();
+    @Override
+    public void onClick(View v) {
+        // TODO Auto-generated method stub
+        switch (v.getId()) {
+            case R.id.login_linear_login:
+                if(check()){
+                    login();
+                }
+                break;
+            case R.id.zhuche_ll:
+                startActivity(new Intent(LoginActivity.this,Register.class));
 
-// 
-//				ResultCode rc = gson.fromJson(userMsg.toString(), new TypeToken<ResultCode>() {
-//					}.getType());
-//				 
-//				 if(rc.getSolution()!=null&& rc.getSolution().length()>0){
-//					 // �жϴ��󷵻أ�����ʾ��Ϣ
-//						msg.setVisibility(View.VISIBLE);
-//						login_info.setText(rc.getMessage().toString());
-//				 }else{
-//					 
-//					 
-// 						User current = gson.fromJson(userMsg.toString(), new TypeToken<User>() {
-// 					}.getType());
-// 						MyApplication.currentUser = current;
-// 			 
-// 					
-// 					
-// 					Intent i =new Intent(getApplicationContext(),Main.class);
-// 					startActivity(i);
-// 					finish();
-//					System.out.println("�û���¼�ɹ�--���ֵ�¼��Ϣ"+mySharedPreferences.getBoolean("isRemeber", false));
-//				 }
- 			 
- 			 
- 
-			}
 
-			@Override
-			public void onFailure(int statusCode, Header[] headers,
-					byte[] responseBody, Throwable error) {
-				// TODO Auto-generated method stub
-				System.out.println("onFailure`` `"  );
-			}
-		});
+                break;
+            case R.id.login_linear_deletename:
+                login_edit_name.setText("");
+                break;
+            case R.id.login_linear_deletepass:
+                login_edit_pass.setText("");
+                break;
+            default:
+                break;
+        }
+    }
 
-	}
-	private boolean check() {
-		// TODO Auto-generated method stub
-		usename=StringUtil.replaceBlank(login_edit_name.getText().toString());
-		if(usename.length()==0){
-			Toast.makeText(getApplicationContext(), "�������û���",
-					Toast.LENGTH_SHORT).show();
-			return false;
-		}
-		passsword=StringUtil.replaceBlank(login_edit_pass.getText().toString());
-		if(passsword.length()==0){
-			Toast.makeText(getApplicationContext(), "���������룡",
-					Toast.LENGTH_SHORT).show();
-			return false;
-		}
-		passsword=StringUtil.Md5(passsword);
-		return true;
-	}
+    // 用户登录完成
+    public void onEventMainThread(Events.LoginCompleteEvent event) {
+        Toast.makeText(getApplicationContext(),
+                event.getMessage(),
+                Toast.LENGTH_SHORT).show();
+    }
+
+    private void login() {
+        EventBus.getDefault().post(new Events.DoLoginEvent(username, password));
+    }
+
+    private boolean check() {
+        username = StringUtil.replaceBlank(login_edit_name.getText().toString());
+        if(username.length()==0){
+            Toast.makeText(getApplicationContext(), "请输入手机或邮箱",
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        password = StringUtil.replaceBlank(login_edit_pass.getText().toString());
+        if(password.length()==0){
+            Toast.makeText(getApplicationContext(), "请输入密码",
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        password = StringUtil.Md5(password);
+        return true;
+    }
 
 }

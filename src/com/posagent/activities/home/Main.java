@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.zf_android.Config;
 import com.example.zf_android.R;
@@ -26,7 +25,6 @@ import com.example.zf_android.trade.entity.Province;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.posagent.activities.BaseActivity;
-import com.posagent.events.Events;
 import com.posagent.fragments.HMSlideFragment;
 
 import org.json.JSONException;
@@ -35,8 +33,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import de.greenrobot.event.EventBus;
 
 import static com.example.zf_android.trade.Constants.CityIntent.CITY_ID;
 import static com.example.zf_android.trade.Constants.CityIntent.CITY_NAME;
@@ -58,26 +54,12 @@ public class Main extends BaseActivity implements OnClickListener{
     public static final int REQUEST_CITY = 1;
     public static final int REQUEST_CITY_WHEEL = 2;
 
-    @Override
-    protected void onDestroy() {
-        EventBus.getDefault().unregister(this);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
         setContentView(R.layout.activity_main);
         initView();
-        testbutton=(ImageView) findViewById(R.id.testbutton);
-        testbutton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Main.this, LoginActivity.class);
-                startActivity(i);
-            }
-        });
 
         // 准备需要监听Click的数据
         HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{
@@ -97,6 +79,9 @@ public class Main extends BaseActivity implements OnClickListener{
         focusTabAtIndex(0);
 
         initSlider();
+
+        Intent i = new Intent(Main.this, LoginActivity.class);
+        startActivity(i);
     }
 
     private void initView() {
@@ -139,18 +124,8 @@ public class Main extends BaseActivity implements OnClickListener{
         }
     }
 
-    // TODO 用户登录完成
-    public void onEventMainThread(Events.LoginCompleteEvent event) {
-        Toast.makeText(getApplicationContext(),
-                "LoginCompleteEvent",
-                Toast.LENGTH_SHORT).show();
-    }
-
 
     private void initSlider() {
-        // TODO 用户登录
-        EventBus.getDefault().post(new Events.DoLoginEvent("531950712@qq.com", "123456"));
-
         HMSlideFragment slideFragment = (HMSlideFragment) getFragmentManager().findFragmentById(R.id.headlines_fragment);
 
         String jsonData = "{'code':1,'message':'success','result':[{'id':5,'picture_url':'http://file.youboy.com/a/142/67/57/6/660666.jpg','website_url':'http://baidu.com'},{'id':4,'picture_url':'http://img1.100ye.com/img1/4/1181/892/10772392/msgpic/61260332.jpg','website_url':'http://baidu.com'},{'id':3,'picture_url':'http://image5.huangye88.com/2013/01/08/db4ed2c6a01ec5ef.jpg','website_url':'http://baidu.com'},{'id':2,'picture_url':'http://file.youboy.com/a/149/94/17/5/669625.jpg','website_url':'http://baidu.com'}]}";

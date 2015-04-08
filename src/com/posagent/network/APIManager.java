@@ -3,11 +3,14 @@ package com.posagent.network;
 import android.util.Log;
 
 import com.posagent.events.Events;
+import com.posagent.utils.Constants;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
+
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -27,7 +30,9 @@ public class APIManager {
 
     // Host and api
     public static final String BaseUrl = "http://114.215.149.242:28080/ZFAgent/api";
+//    public static final String BaseUrl = "http://192.168.0.106:3000";
     public static final String UrlLogin = BaseUrl + "/agent/agentLogin";
+//    public static final String UrlLogin = BaseUrl + "/";
 
 
     /** Convenience singleton for apps using a process-wide EventBus instance. */
@@ -46,9 +51,10 @@ public class APIManager {
     public void onEventBackgroundThread(Events.DoLoginEvent event){
         String username = event.getUsername();
         String password = event.getPassword();
-        RequestBody body = RequestBody.create(JSON, "username=" + username + "&password=" + password);
+        RequestBody body = RequestBody.create(JSON, "{\"username\": \""+ username +"\", \"password\": \""+ password +"\"}");
+        Log.d(TAG, body.toString());
 
-        Request request = new Request.Builder()
+        Request request = this.request()
                 .url(UrlLogin)
                 .post(body)
                 .build();
@@ -56,11 +62,43 @@ public class APIManager {
         Response response = null;
         try {
             response = client.newCall(request).execute();
-            Log.d(TAG, response.body().string());
-            EventBus.getDefault().post(new Events.LoginCompleteEvent("faceted"));
+            String result = response.body().string();
+            Log.d(TAG, result);
+
+            result = "{\"code\":-1,\"message\":\"用户名不存在！\",\"result\":\"sadf\"}";
+
+            JSONObject json = null;
+            String code = null;
+            try {
+
+                json = new JSONObject(result);
+                int intCode = json.getInt("code");
+                Events.LoginCompleteEvent loginEvent = new Events.LoginCompleteEvent("faceted");
+                loginEvent.setSuccess(intCode == Constants.SuccessCode);
+                loginEvent.setMessage(json.getString("message"));
+
+                //TODO 登录成功后做一些事情
+                if(loginEvent.getSuccess()){
+                    String res =json.getString("result");
+                }
+
+                EventBus.getDefault().post(loginEvent);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+
+    // helper
+    private Request.Builder request() {
+       return new Request.Builder()
+               .addHeader("Content-Type", "application/json;text=utf-8");
     }
 
 }

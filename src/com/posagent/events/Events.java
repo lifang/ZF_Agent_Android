@@ -19,6 +19,25 @@ public class Events {
 
     public static class LoginCompleteEvent {
         private String token;
+        private String message;
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        private Boolean success;
+
+        public Boolean getSuccess() {
+            return success;
+        }
+
+        public void setSuccess(Boolean success) {
+            this.success = success;
+        }
 
         public String getToken() { return token; }
 

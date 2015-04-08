@@ -2,6 +2,7 @@ package com.posagent.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +18,8 @@ import com.posagent.activities.home.Main;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import de.greenrobot.event.EventBus;
 
 public class BaseActivity extends Activity implements View.OnClickListener {
 
@@ -69,8 +72,19 @@ public class BaseActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        try {
+            EventBus.getDefault().register(this);
+        } catch (RuntimeException ex) {
+            Log.d("UNCatchException", ex.getMessage());
+        }
+    }
+
+    @Override
 	protected void onDestroy() {
 		//getRequests().cancelAll(this);
+        EventBus.getDefault().unregister(this);
 		super.onDestroy();
 	}
 	

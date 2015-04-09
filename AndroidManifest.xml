@@ -46,6 +46,14 @@
         </activity>
 
         <!-- ====================================================== -->
+        <!-- Common Activities -->
+        <!-- ====================================================== -->
+        <activity
+            android:name="com.posagent.activities.CommonInputer"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- ====================================================== -->
         <!-- 首页 Activities -->
         <!-- ====================================================== -->
         <activity

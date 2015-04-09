@@ -73,7 +73,7 @@ public class APIManager {
                 json = new JSONObject(result);
                 int intCode = json.getInt("code");
                 Events.LoginCompleteEvent loginEvent = new Events.LoginCompleteEvent("faceted");
-                loginEvent.setSuccess(intCode == Constants.SuccessCode);
+                loginEvent.setSuccess(intCode == Constants.SUCCESS_CODE);
                 loginEvent.setMessage(json.getString("message"));
 
                 //TODO 登录成功后做一些事情

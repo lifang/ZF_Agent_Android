@@ -1,99 +1,106 @@
 package com.example.zf_android.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.posagent.activities.BaseActivity;
 import com.example.zf_android.R;
+import com.example.zf_android.trade.widget.MyTabWidget;
+import com.example.zf_android.trade.widget.MyViewPager;
+import com.posagent.fragments.RegisterFragment;
+import com.posagent.utils.Constants.UserConstant;
 
-public class Register extends BaseActivity implements OnClickListener{
-	private EditText login_edit_name;
-	private LinearLayout login_linear_deletename,login_linear_in;
-	private TextView tv_msg;
-	private Boolean isMail=false;
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.register);
-		new TitleMenuUtil(Register.this,"申请成为代理商").show();
-		initView();
-	}
-	private void initView() {
-		// TODO Auto-generated method stub
-		tv_msg=(TextView) findViewById(R.id.tv_msg);
-		login_edit_name=(EditText) findViewById(R.id.login_edit_name);
-		login_linear_deletename=(LinearLayout) findViewById(R.id.login_linear_deletename);
-		login_linear_in=(LinearLayout) findViewById(R.id.login_linear_in);
-		login_linear_deletename.setOnClickListener(this);
-		login_linear_in.setOnClickListener(this);
-		login_edit_name.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-			 
-				if (s.length() > 0) {
-					login_linear_deletename.setVisibility(View.VISIBLE);
-				} else {
-					login_linear_deletename.setVisibility(View.GONE);
-				}
-				if(s.toString().contains("@")){
-					tv_msg.setText("�������������ʼ�");
-					isMail=true;
-				}else{
-					tv_msg.setText("������֤��");
-					isMail=false;
-				}
+import java.util.ArrayList;
+import java.util.List;
 
-			}
+public class Register extends FragmentActivity
+        implements ViewPager.OnPageChangeListener,
+                    View.OnClickListener {
 
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-			}
+    private MyTabWidget mTabWidget;
+    private MyViewPager mViewPager;
 
-			@Override
-			public void afterTextChanged(Editable s) {
-			}
-		});
-		
-		
-	}
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		switch (v.getId()) {
-		case R.id.login_linear_deletename:
-			login_edit_name.setText("");
-			break;
-		case R.id.login_linear_in:
-			if(isMail){
-				//�����ʼ�����
-				Intent i = new Intent(getApplicationContext(),
-						RegistMail.class);
-				i.putExtra("email", login_edit_name.getText().toString());
-				startActivity(i);
-			}else{
-				//�����ֻ�����
-				Intent i = new Intent(getApplicationContext(),
-						Register4phone.class);
-				i.putExtra("phone", login_edit_name.getText().toString());
-				startActivity(i);
-			}
-		 
-			
-			
-			break;
-		default:
-			break;
-		}
-	}
+    private List<RegisterFragment> mFragments;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register);
+        new TitleMenuUtil(Register.this, "申请成为代理商").show();
+        initView();
+    }
+
+    private void initView() {
+        mTabWidget = (MyTabWidget) findViewById(R.id.tab_widget);
+        mViewPager = (MyViewPager) findViewById(R.id.view_pager);
+        mFragments = new ArrayList<RegisterFragment>();
+
+        // add tabs to the TabWidget
+        String[] tabs = {"公司", "个人"};
+        for (int i = 0; i < tabs.length; i++) {
+            mTabWidget.addTab(tabs[i]);
+        }
+
+
+        mFragments.add(
+                RegisterFragment.newInstance(UserConstant.USER_KIND_AGENT)
+        );
+        mFragments.add(
+                RegisterFragment.newInstance(UserConstant.USER_KIND_PESONAL)
+        );
+
+
+        //setup
+        mTabWidget.setViewPager(mViewPager);
+        mViewPager.setAdapter(new RegisterPagerAdapter(getSupportFragmentManager()));
+        mViewPager.setOnPageChangeListener(this);
+
+
+        mTabWidget.updateTabs(0);
+        mViewPager.setCurrentItem(0);
+
+
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    // implements
+    @Override
+    public void onPageScrolled(int i, float v, int i2) {
+    }
+
+    @Override
+    public void onPageSelected(int i) {
+        mTabWidget.updateTabs(i);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int i) {
+    }
+
+    public class RegisterPagerAdapter extends FragmentPagerAdapter {
+
+        public RegisterPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int i) {
+            return mFragments.get(i);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragments.size();
+        }
+    }
 }

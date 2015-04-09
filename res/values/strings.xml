@@ -316,4 +316,9 @@
 	<string name="apply_progress_no_data">无查询结果,请填写正确的手机号码!</string>
 	<string name="apply_progress_terminal">终端号</string>
 
+    <string name="tag_destination_get">tag_destination_get</string>
+    <string name="tag_destination">tag_destination</string>
+    <string name="tag_destination_name">tag_destination_name</string>
+
+
 </resources>

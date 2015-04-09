@@ -375,7 +375,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.Register"
+            android:name="com.posagent.activities.home.Register"
             android:screenOrientation="portrait" >
         </activity>
         <activity

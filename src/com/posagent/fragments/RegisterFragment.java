@@ -26,6 +26,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
     private int userKind;
     private LayoutInflater mInflater;
+    private TextView tvContent;
 
 
     public static RegisterFragment newInstance(int userKind) {
@@ -97,7 +98,12 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) return;
         switch (requestCode) {
-            case Constants.COMMONINPUTER_REQUEST:
+            case Constants.CommonInputerConstant.REQUEST_CODE:
+                Bundle bundle = data.getExtras();
+
+
+                String content = bundle.getString(Constants.CommonInputerConstant.VALUE_KEY);
+                tvContent.setText(content);
                 Log.d(TAG, data.toString());
                 break;
         }
@@ -112,14 +118,20 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
         String tag = getString(R.string.tag_destination_get);
         if (v.getTag().equals(tag)) {
+            Intent intent = new Intent(getActivity(), CommonInputer.class);
+
             tag = getString(R.string.tag_destination_name);
             TextView tv = (TextView) v.findViewWithTag(tag);
+            intent.putExtra(Constants.CommonInputerConstant.TITLE_KEY, tv.getText());
 
             tag = getString(R.string.tag_destination);
-            tv = (TextView) v.findViewWithTag(tag);
+            tvContent = tv = (TextView) v.findViewWithTag(tag);
+            intent.putExtra(Constants.CommonInputerConstant.PLACEHOLDER_KEY, tv.getText());
 
-            Intent intent = new Intent(getActivity(), CommonInputer.class);
-            startActivityForResult(intent, Constants.COMMONINPUTER_REQUEST);
+
+
+
+            startActivityForResult(intent, Constants.CommonInputerConstant.REQUEST_CODE);
         }
     }
 }

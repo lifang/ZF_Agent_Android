@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.posagent.activities.BaseActivity;
 import com.example.zf_android.R;
+import com.posagent.activities.goods.GoodsList;
 
 import java.util.HashMap;
 
@@ -33,7 +34,7 @@ public class SearchFormActivity extends BaseActivity {
 
         // 准备需要监听Click的数据
         HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{
-            put("tv_cancel", GoodsListActivity.class);
+            put("tv_cancel", GoodsList.class);
         }};
         this.setClickableMap(clickableMap);
         this.bindClickListener();

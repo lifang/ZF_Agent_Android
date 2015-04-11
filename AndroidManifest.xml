@@ -96,7 +96,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.LoginActivity"
+            android:name="com.posagent.activities.home.LoginActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -341,7 +341,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.GoodsListActivity"
+            android:name="com.posagent.activities.goods.GoodsList"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" >
         </activity>
@@ -401,7 +401,7 @@
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name=".activity.GoodsDetail"
+            android:name="com.posagent.activities.goods.GoodsDetail"
             android:screenOrientation="portrait" >
         </activity>
         <activity

@@ -74,12 +74,11 @@
     </style>
 
     <style name="small_button" >
-        <item name="android:layout_width" >fill_parent</item>
-        <item name="android:layout_height" >28dp</item>
         <item name="android:textColor" >#1072d2</item>
         <item name="android:gravity" >center</item>
-        <item name="android:layout_marginTop" >10dp</item>
-        <item name="android:textSize" >12dp</item>
+        <item name="android:textSize" >10dp</item>
+        <item name="android:padding" >5dp</item>
+        <item name="android:background" >@drawable/primary_round</item>
     </style>
 
     <style name="center_textview" >

@@ -14,15 +14,13 @@ import android.widget.Toast;
 
 import com.example.zf_android.R;
 import com.example.zf_android.trade.CitySelectActivity;
-import com.google.gson.Gson;
 import com.posagent.activities.CommonInputer;
 import com.posagent.events.Events;
 import com.posagent.utils.Constants;
+import com.posagent.utils.JsonParams;
 import com.posagent.utils.ViewHelper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
@@ -203,8 +201,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     }
 
     private String data() {
-        Map<String, Object> data = new HashMap<String, Object>();
-
+        JsonParams data = new JsonParams();
         data.put("cityId", cityId);
         data.put("cardIdPhotoPath", cardIdPhotoPath);
         data.put("types", 2);
@@ -242,10 +239,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             }
         }
 
-        Gson gson = new Gson();
-        String strJson = gson.toJson(data);
-        Log.d(TAG, strJson);
-        return strJson;
+        return data.toString();
     }
 
     private int resouceId(String name, String kind) {

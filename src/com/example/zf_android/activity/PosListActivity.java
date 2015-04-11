@@ -28,6 +28,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.posagent.activities.goods.GoodsDetail;
 
 import org.apache.http.Header;
 import org.json.JSONException;

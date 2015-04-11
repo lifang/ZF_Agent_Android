@@ -8,12 +8,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.zf_android.R;
 import com.example.zf_android.activity.AllProduct;
 import com.example.zf_android.activity.MenuMine;
 import com.example.zf_android.activity.SystemMessage;
 import com.posagent.activities.home.Main;
+import com.posagent.events.Events;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -147,5 +149,17 @@ public class BaseActivity extends Activity implements View.OnClickListener {
             this.setClickableMap(clickableMap);
             this.bindClickListener();
         }
+    }
+
+    //event listener
+    public void onEventMainThread(Events.NoConnectEvent event) {
+        Toast.makeText(getApplicationContext(),
+                "没有网络连接",
+                Toast.LENGTH_SHORT).show();
+    }
+    public void onEventMainThread(Events.RefreshToMuch event) {
+        Toast.makeText(getApplicationContext(),
+                "刷新太频繁",
+                Toast.LENGTH_SHORT).show();
     }
 }

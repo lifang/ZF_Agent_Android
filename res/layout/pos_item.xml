@@ -16,9 +16,9 @@
         android:orientation="horizontal" >
 
         <ImageView
-            android:id="@+id/evevt_img"
+            android:id="@+id/img_face"
             android:layout_width="126dp"
-            android:layout_height="126dp"
+            android:layout_height="match_parent"
             android:layout_marginLeft="12dp"
             android:background="@drawable/testphone401" />
 
@@ -39,132 +39,173 @@
                 android:maxLines="2"
                 android:text="2015最新POS机器旗舰版  1.0"
                 android:textSize="13sp" />
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:gravity="bottom"
+                        android:text="批购价："
+                        android:layout_gravity="center_vertical"
+                        android:textSize="11sp" />
+                    <TextView
+                        android:id="@+id/tv_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:gravity="bottom"
+                        android:textColor="@color/bgtitle"
+                        android:text="$999.00"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="15sp" />
+                    <ImageView
+                        android:id="@+id/img_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/test_zl" />
+                </LinearLayout>
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="vertical" >
 
-                <ImageView
-                    android:id="@+id/img_type"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/test_zl" />
-                	<LinearLayout
-			        android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-             	android:orientation="horizontal"
-               	android:layout_marginTop="7dp"
-               	android:layout_gravity="center_vertical"
-			    >
-                           <TextView
-        		android:id="@+id/tv_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-             
- 
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:gravity="bottom"
-                android:textColor="@color/bgtitle"
-                android:text="$999.00"
-                android:textSize="17sp" />
-                   <View android:layout_height="1dp"
-                       android:layout_weight="1"
-                       android:layout_width="0dp"/>
-                <TextView
-                
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-               	android:id="@+id/ys"
- 				android:textColor="@color/text292929"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:layout_gravity="center_vertical"
-            
-                android:text="已售99"
-                android:textSize="11sp" />
-                  </LinearLayout>
+                    android:orientation="horizontal"
+                    android:layout_marginTop="7dp"
+                    android:layout_gravity="center_vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:gravity="bottom"
+                        android:textColor="@color/tmc"
+                        android:text="最小起批量："
+                        android:textSize="11sp" />
+                    <TextView
+                        android:id="@+id/tv_quantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:gravity="bottom"
+                        android:textColor="@color/tmc"
+                        android:text=""
+                        android:textSize="11sp" />
+                    <View android:layout_height="1dp"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ys"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/tmc"
+                        android:text="已售99"
+                        android:textSize="11sp" />
+                </LinearLayout>
             </LinearLayout>
-			<LinearLayout
-			        android:layout_width="wrap_content"
+
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="0dp"
-             	android:orientation="vertical"
+                android:orientation="vertical"
                 android:layout_weight="1"
-			    >
-                	
-			    
-			    	<LinearLayout
-			        android:layout_width="wrap_content"
-                android:layout_height="0dp"
-             	android:orientation="horizontal"
-                android:layout_weight="1"
-                android:gravity="bottom"
-			    >
-              
-                                              <TextView
-                android:id="@+id/content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-             
- 
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:gravity="bottom"
-                android:text="品牌型号"
-                android:textColor="@color/text6c6c6c6"
-                android:textSize="11sp" />
-			                  <TextView
-                android:id="@+id/content1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-             	android:layout_marginLeft="7dp"
- 				android:textColor="@color/text292929"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:gravity="bottom"
-                android:text="contentcontentcontentcontent"
-                android:textSize="11sp" />
-                	</LinearLayout>
-			    
-			    <LinearLayout
-			        android:layout_width="wrap_content"
-                android:layout_height="0dp"
-             	android:orientation="horizontal"
-                android:layout_weight="1"
-                android:gravity="bottom"
-			    >
-                                              <TextView
-               
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-             
- 
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:gravity="bottom"
-                android:text="支付通道"
-                android:textColor="@color/text6c6c6c6"
-                android:textSize="11sp" />
-			                  <TextView
-                android:id="@+id/tv_td"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-             	android:layout_marginLeft="7dp"
- 				android:textColor="@color/text292929"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:gravity="bottom"
-                android:text="支付宝"
-                android:textSize="11sp" />
-                	</LinearLayout>
-			    
-			    
-			    
-			</LinearLayout>
-      
+                >
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    >
+
+                    <TextView
+                        android:id="@+id/content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:gravity="bottom"
+                        android:text="品牌型号"
+                        android:textColor="@color/text6c6c6c6"
+                        android:textSize="11sp" />
+                    <TextView
+                        android:id="@+id/content1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="7dp"
+                        android:textColor="@color/text292929"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:gravity="bottom"
+                        android:text="contentcontentcontentcontent"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    >
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:gravity="bottom"
+                        android:text="支付通道"
+                        android:textColor="@color/text6c6c6c6"
+                        android:textSize="11sp" />
+                    <TextView
+                        android:id="@+id/tv_td"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="7dp"
+                        android:textColor="@color/text292929"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:gravity="bottom"
+                        android:text="支付宝"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
     <View

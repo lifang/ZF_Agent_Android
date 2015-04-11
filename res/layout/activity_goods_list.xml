@@ -18,41 +18,74 @@
         <TableRow
             android:background="#eee"
             >
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="10dp"
                 android:background="@color/white"
-                android:text="默认排序"
-                />
-            <TextView
+                >
+                <TextView
+                    android:id="@+id/btn_ordertype_0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:textColor="@color/bg_item"
+                    android:text="默认排序"
+                    />
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="10dp"
                 android:layout_marginLeft="1dp"
                 android:background="@color/white"
-                android:text="销量优先"
-                />
-            <TextView
+                >
+                <TextView
+                    android:id="@+id/btn_ordertype_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="销量优先"
+                    />
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="10dp"
                 android:layout_marginLeft="1dp"
                 android:background="@color/white"
-                android:text="价格降序"
-                />
-            <TextView
+                >
+                <TextView
+                    android:id="@+id/btn_ordertype_2_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="价格降序"
+                    />
+                <ImageView
+                    android:id="@+id/icon_ordertype_2_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ti_down"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="10dp"
                 android:layout_marginLeft="1dp"
                 android:background="@color/white"
-                android:text="评分最高"
-                />
+                >
+                <TextView
+                    android:id="@+id/btn_ordertype_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="评分最高"
+                    />
+            </LinearLayout>
         </TableRow>
     </TableLayout>
     <View

@@ -13,7 +13,17 @@ public class GoodinfoEntity {
 	private String sign_order_way;
 //     "retail_price": 12415,
 	private int retail_price;
-//     "battery_info": "电池信息2",
+    private int purchase_price;
+
+    public int getPurchase_price() {
+        return purchase_price;
+    }
+
+    public void setPurchase_price(int purchase_price) {
+        this.purchase_price = purchase_price;
+    }
+
+    //     "battery_info": "电池信息2",
 	private String battery_info;
 //     "lease_price": 111,
 	private int lease_price;

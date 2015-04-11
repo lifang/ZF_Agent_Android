@@ -1,9 +1,49 @@
 package com.posagent.events;
 
+import com.example.zf_android.entity.PosEntity;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by holin on 4/3/15.
  */
 public class Events {
+    public static class CompleteEvent {
+        private String message;
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        private Boolean success;
+
+        public Boolean getSuccess() {
+            return success;
+        }
+
+        public void setSuccess(Boolean success) {
+            this.success = success;
+        }
+
+        public CompleteEvent(Boolean _success) {
+            success = _success;
+        }
+    }
+
+    public static class NoConnectEvent {
+        public NoConnectEvent() {}
+    }
+    public static class RefreshToMuch {
+        public RefreshToMuch() {}
+    }
+
     public static class DoLoginEvent {
         private String username;
         private String password;
@@ -59,30 +99,60 @@ public class Events {
         }
     }
 
+    public static class GoodsListEvent {
+        private String params;
 
-    public static class CompleteEvent {
-        private String message;
-
-        public String getMessage() {
-            return message;
+        public String getParams() {
+            return params;
         }
 
-        public void setMessage(String message) {
-            this.message = message;
+        public GoodsListEvent(String _params) {
+            params = _params;
+        }
+    }
+
+    public static class GoodsListCompleteEvent extends CompleteEvent {
+        private List<PosEntity> list = new ArrayList<PosEntity>();
+
+        public List<PosEntity> getList() {
+            return list;
         }
 
-        private Boolean success;
-
-        public Boolean getSuccess() {
-            return success;
+        public void setList(List<PosEntity> list) {
+            this.list = list;
         }
 
-        public void setSuccess(Boolean success) {
-            this.success = success;
+        public GoodsListCompleteEvent(Boolean _success) {
+            super(_success);
+        }
+    }
+
+    public static class GoodsDetailEvent {
+        private String params;
+
+        public String getParams() {
+            return params;
         }
 
-        public CompleteEvent(Boolean _success) {
-            success = _success;
+        public GoodsDetailEvent(String _params) {
+            params = _params;
+        }
+    }
+
+    public static class GoodsDetailCompleteEvent extends CompleteEvent {
+
+        private JSONObject result;
+
+        public JSONObject getResult() {
+            return result;
+        }
+
+        public void setResult(JSONObject result) {
+            this.result = result;
+        }
+
+        public GoodsDetailCompleteEvent(Boolean _success) {
+            super(_success);
         }
     }
 }

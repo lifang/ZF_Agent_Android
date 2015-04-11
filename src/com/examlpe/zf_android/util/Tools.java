@@ -53,6 +53,10 @@ public class Tools {
 	static ArrayList<ImageView> imageviewList0;
 	private static Bitmap bm = null;
 
+    public static int cityId() {
+        return 1;
+    }
+
 	public static boolean isApplicationBroughtToBackground(final Context context) {
 		ActivityManager am = (ActivityManager) context
 				.getSystemService(Context.ACTIVITY_SERVICE);
@@ -88,15 +92,13 @@ public class Tools {
 				try {
 					Log.i("linshi------------", url);
 					URL myurl = new URL(url);
-					// �������
 					HttpURLConnection conn = (HttpURLConnection) myurl
 							.openConnection();
-					conn.setConnectTimeout(6000);// ���ó�ʱ
+					conn.setConnectTimeout(6000);
 					conn.setDoInput(true);
-					conn.setUseCaches(false);// ������
+					conn.setUseCaches(false);
 					conn.connect();
-					InputStream is = conn.getInputStream();// ���ͼƬ�������
-					// bm =decodeSampledBitmapFromStream(is,150,150);
+					InputStream is = conn.getInputStream();
 
 					BitmapFactory.Options options = new BitmapFactory.Options();
 					options.inJustDecodeBounds = false;
@@ -109,24 +111,8 @@ public class Tools {
 					if (bm != null) {
 						Log.i("linshi",
 								bm.getWidth() + "---2---" + bm.getHeight());
-						// File f = new File(Urlinterface.head_pic, contactId +
-						// "");
-						//
-						// if (f.exists()) {
-						// f.delete();
-						// }
-						// if (!f.getParentFile().exists()) {
-						// f.getParentFile().mkdirs();
-						// }
-						// Log.i("linshi", "----1");
-						// FileOutputStream out = new FileOutputStream(f);
-						// Log.i("linshi", "----6");
-						// bm.compress(Bitmap.CompressFormat.PNG, 90, out);
-						// out.flush();
-						// out.close();
-						// Log.i("linshi", "�Ѿ�����");
 						face_drawable = new BitmapDrawable(bm);
-						Message msg = new Message();// ����Message ����
+						Message msg = new Message();
 						msg.what = 0;
 						msg.obj = face_drawable;
 						mHandler.sendMessage(msg);
@@ -134,7 +120,7 @@ public class Tools {
 					}
 
 				} catch (Exception e) {
-					Log.i("linshi", "�����쳣");
+					Log.i("linshi", "dd");
 					// Log.i("linshi", url);
 				}
 

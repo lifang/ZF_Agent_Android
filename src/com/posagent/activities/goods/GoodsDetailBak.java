@@ -1,5 +1,5 @@
-package com.example.zf_android.activity;
- 
+package com.posagent.activities.goods;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,10 +22,14 @@ import android.widget.Toast;
 
 import com.examlpe.zf_android.util.ImageCacheUtil;
 import com.examlpe.zf_android.util.ScrollViewWithListView;
-import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
-import com.posagent.MyApplication;
 import com.example.zf_android.R;
+import com.example.zf_android.activity.ApplyNeed;
+import com.example.zf_android.activity.GoodComment;
+import com.example.zf_android.activity.GoodConfirm;
+import com.example.zf_android.activity.LeaseInstruction;
+import com.posagent.activities.home.LoginActivity;
+import com.example.zf_android.activity.ShopCar;
 import com.example.zf_android.entity.ApplyneedEntity;
 import com.example.zf_android.entity.ChanelEntitiy;
 import com.example.zf_android.entity.FactoryEntity;
@@ -37,6 +41,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.posagent.MyApplication;
+import com.posagent.activities.BaseActivity;
 
 import org.apache.http.Header;
 import org.json.JSONException;
@@ -44,8 +50,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
- 
-public class GoodsDetail extends BaseActivity implements OnClickListener{
+
+public class GoodsDetailBak extends BaseActivity implements OnClickListener {
 	private Button setting_btn_clear1,setting_btn_clear;
 	private int id;
 	private TextView eventsFinshTime,tv_detail,name,creat_tv,location,tv_time,tv_tel2;
@@ -130,18 +136,15 @@ public class GoodsDetail extends BaseActivity implements OnClickListener{
 	};
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.good_detail);
 		paychannelId=3;
 		id=getIntent().getIntExtra("id", 0);
 		innitView();
 		getdata();
-		System.out.println("-Xlistview--"+id);
-	 
+
 	}
 	private void innitView() {
-		// TODO Auto-generated method stub
 		tv_ins=(TextView) findViewById(R.id.tv_ins);
 		tv_ins.setOnClickListener(this);
 		tv_appneed=(TextView) findViewById(R.id.tv_appneed);
@@ -191,23 +194,23 @@ public class GoodsDetail extends BaseActivity implements OnClickListener{
 		switch (v.getId()) {
 		case R.id.tv_ins
 		:   //tv_appneed
-			Intent tv_ins =new Intent(GoodsDetail.this, LeaseInstruction.class);
+			Intent tv_ins =new Intent(GoodsDetailBak.this, LeaseInstruction.class);
 		 
 			startActivity(tv_ins);
 		break;
 		case R.id.tv_appneed:   //tv_appneed
-			Intent tv_appneed =new Intent(GoodsDetail.this, ApplyNeed.class);
+			Intent tv_appneed =new Intent(GoodsDetailBak.this, ApplyNeed.class);
 			 
 			startActivity(tv_appneed);
 		break;
 		case R.id.tv_comment:   //tv_appneed
-			Intent tv_comment =new Intent(GoodsDetail.this, GoodComment.class);
+			Intent tv_comment =new Intent(GoodsDetailBak.this, GoodComment.class);
 			tv_comment.putExtra("goodId", gfe.getId());
 			tv_comment.putExtra("commentsCount",commentsCount+"");
 			startActivity(tv_comment);
 		break;
 		case R.id.setting_btn_clear:   //tv_comment
-			Intent i2 =new Intent(GoodsDetail.this, GoodConfirm.class);
+			Intent i2 =new Intent(GoodsDetailBak.this, GoodConfirm.class);
 			i2.putExtra("getTitle", gfe.getTitle());
 			i2.putExtra("price", gfe.getPrice());
 			i2.putExtra("model", gfe.getModel_number());
@@ -224,7 +227,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener{
 			finish();
 			break;
 		case R.id.search2: 
-		Intent i =new Intent(GoodsDetail.this, ShopCar.class);
+		Intent i =new Intent(GoodsDetailBak.this, ShopCar.class);
 		startActivityForResult(i, 44);
 		break;
 		case R.id.tv_sjhttp: 
@@ -301,11 +304,11 @@ public class GoodsDetail extends BaseActivity implements OnClickListener{
 							 celist3=gson.fromJson(jsonobject.getString("other_rate"), new TypeToken<List<ChanelEntitiy>>() {
 				 				}.getType());
 						System.out.println("``celist`"+celist.size());
-						lvAdapter=new HuilvAdapter(GoodsDetail.this, celist);
+						lvAdapter=new HuilvAdapter(GoodsDetailBak.this, celist);
 						pos_lv1.setAdapter(lvAdapter);
-						lvAdapter2=new HuilvAdapter1(GoodsDetail.this, celist2);
+						lvAdapter2=new HuilvAdapter1(GoodsDetailBak.this, celist2);
 						pos_lv2.setAdapter(lvAdapter2);
-						lvAdapter3=new HuilvAdapter2(GoodsDetail.this, celist3);
+						lvAdapter3=new HuilvAdapter2(GoodsDetailBak.this, celist3);
 						pos_lv3.setAdapter(lvAdapter3);
 						for(int i=0;i<piclist.size();i++){
 							ma.add(piclist.get(i));

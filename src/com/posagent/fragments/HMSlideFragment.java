@@ -73,20 +73,23 @@ public class HMSlideFragment extends Fragment {
         context = _inflater.getContext();
         inflater = LayoutInflater.from(context);
 
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.MATCH_PARENT);
 
         RelativeLayout mainContainer = new RelativeLayout(context);
         mainContainer.setLayoutParams(layoutParams);
 
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 50);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, 50);
         indicatorContainer = new LinearLayout(context);
         indicatorContainer.setGravity(Gravity.CENTER);
         indicatorContainer.setBackgroundColor(0x33000000);
         indicatorContainer.setLayoutParams(lp);
 
         // viewpager
-        lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
         viewPager = new ViewPager(context);
         viewPager.setLayoutParams(lp);
 

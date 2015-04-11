@@ -1,11 +1,9 @@
-package com.example.zf_android.activity;
+package com.posagent.activities.home;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -21,8 +19,8 @@ import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.Config;
 import com.example.zf_android.R;
+import com.example.zf_android.activity.FindPass;
 import com.posagent.activities.BaseActivity;
-import com.posagent.activities.home.Register;
 import com.posagent.events.Events;
 
 import de.greenrobot.event.EventBus;
@@ -45,30 +43,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
     private Editor editor;
     private Boolean isFirst;
     private String sessionId;
-    private Handler handler = new Handler() {
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 0:
-                    // showDialog();
-                    break;
-                case 1:
-                    Toast.makeText(getApplicationContext(), (String) msg.obj,
-                            Toast.LENGTH_SHORT).show();
-                    break;
-                case 2: // ����������
-                    Toast.makeText(getApplicationContext(), R.string.no_internet,
-                            Toast.LENGTH_SHORT).show();
-                    break;
-                case 3:
-                    Toast.makeText(getApplicationContext(),
-                            R.string.refresh_toomuch, Toast.LENGTH_SHORT).show();
-                    break;
-                case 4:
-
-                    break;
-            }
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

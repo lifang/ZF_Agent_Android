@@ -4,13 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.zf_android.Config;
 import com.example.zf_android.R;
 import com.example.zf_android.activity.AllProduct;
-import com.example.zf_android.activity.LoginActivity;
 import com.example.zf_android.activity.OrderList;
 import com.example.zf_android.activity.StockList;
 import com.example.zf_android.activity.Terminal;
@@ -41,8 +39,6 @@ import static com.example.zf_android.trade.Constants.CityIntent.SELECTED_PROVINC
 
 
 public class Main extends BaseActivity implements OnClickListener{
-
-    private ImageView testbutton;
 
     private View citySelect;
     private TextView cityTextView;
@@ -80,8 +76,8 @@ public class Main extends BaseActivity implements OnClickListener{
 
         initSlider();
 
-        Intent i = new Intent(Main.this, LoginActivity.class);
-        startActivity(i);
+//        Intent i = new Intent(Main.this, LoginActivity.class);
+//        startActivity(i);
     }
 
     private void initView() {

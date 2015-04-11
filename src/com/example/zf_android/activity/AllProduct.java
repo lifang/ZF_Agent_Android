@@ -6,6 +6,7 @@ import android.view.View.OnClickListener;
 
 import com.example.zf_android.R;
 import com.posagent.activities.BaseActivity;
+import com.posagent.activities.goods.GoodsList;
 
 import java.util.HashMap;
 
@@ -27,8 +28,8 @@ public class AllProduct extends BaseActivity implements OnClickListener {
 
         // 准备需要监听Click的数据
         HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{
-            put("btn_qpg", GoodsListActivity.class);
-            put("btn_qdg", GoodsListActivity.class);
+            put("btn_qpg", GoodsList.class);
+            put("btn_qdg", GoodsList.class);
         }};
         this.setClickableMap(clickableMap);
 

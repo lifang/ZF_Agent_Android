@@ -13,7 +13,27 @@ public class PosEntity {
 	private int volume_number;
 	private int id;
 	private String good_brand;
-	private int total_score;
+    private String url_path;
+
+    public String getUrl_path() {
+        return url_path;
+    }
+
+    public void setUrl_path(String url_path) {
+        this.url_path = url_path;
+    }
+
+    private int total_score;
+
+    public int getFloor_purchase_quantity() {
+        return floor_purchase_quantity;
+    }
+
+    public void setFloor_purchase_quantity(int floor_purchase_quantity) {
+        this.floor_purchase_quantity = floor_purchase_quantity;
+    }
+
+    private int floor_purchase_quantity;
 	private int retail_price;
 	private String pay_channe;
 	private String Title;

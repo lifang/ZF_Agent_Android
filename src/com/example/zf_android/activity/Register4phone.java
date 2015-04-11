@@ -31,7 +31,8 @@ import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
- 
+import com.posagent.activities.home.LoginActivity;
+
 public class Register4phone extends BaseActivity   implements OnClickListener{
 	private TextView tv_code,tv_msg,tv_check;
 	private EditText login_edit_email,login_edit_code,login_edit_pass,login_edit_pass2;

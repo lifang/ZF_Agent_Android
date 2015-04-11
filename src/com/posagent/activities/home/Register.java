@@ -6,17 +6,22 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.widget.MyTabWidget;
 import com.example.zf_android.trade.widget.MyViewPager;
+import com.posagent.events.Events;
 import com.posagent.fragments.RegisterFragment;
 import com.posagent.utils.Constants.UserConstant;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 public class Register extends FragmentActivity
         implements ViewPager.OnPageChangeListener,
@@ -33,6 +38,18 @@ public class Register extends FragmentActivity
         setContentView(R.layout.activity_register);
         new TitleMenuUtil(Register.this, "申请成为代理商").show();
         initView();
+
+        try {
+            EventBus.getDefault().register(this);
+        } catch (RuntimeException ex) {
+            Log.d("UNCatchException", ex.getMessage());
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 
     private void initView() {
@@ -71,6 +88,19 @@ public class Register extends FragmentActivity
     @Override
     public void onClick(View v) {
 
+    }
+
+    // evnets
+
+    // 用户注册完成
+    public void onEventMainThread(Events.CompleteEvent event) {
+        Toast.makeText(getApplicationContext(),
+                event.getMessage(),
+                Toast.LENGTH_SHORT).show();
+
+        if (event.getSuccess()) {
+            finish();
+        }
     }
 
     // implements

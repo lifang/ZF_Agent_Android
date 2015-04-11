@@ -51,7 +51,7 @@
                         android:textSize="17sp" />
 
                     <TextView
-                        android:id="@+id/tv_gsmc"
+                        android:id="@+id/tv_companyName"
                         android:tag="@string/tag_destination"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         android:singleLine="true"
-                        android:text="动感科技"
+                        android:text=""
                         android:textColor="@color/text6c6c6c6"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -96,7 +96,7 @@
                         android:textSize="17sp" />
 
                     <TextView
-                        android:id="@+id/tv_djh"
+                        android:id="@+id/tv_businessLicense"
                         android:tag="@string/tag_destination"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
                         android:layout_weight="1"
                         android:gravity="right"
                         android:singleLine="true"
-                        android:text="023345"
+                        android:text=""
                         android:textColor="@color/text6c6c6c6"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -140,15 +140,15 @@
                         android:textSize="17sp" />
 
                     <TextView
+                        android:id="@+id/tv_taxRegisteredNo"
                         android:tag="@string/tag_destination"
-                        android:id="@+id/tv_swdjh"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
                         android:layout_weight="1"
                         android:gravity="right"
                         android:singleLine="true"
-                        android:text="023345"
+                        android:text=""
                         android:textColor="@color/text6c6c6c6"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -192,15 +192,15 @@
                     android:textSize="17sp" />
 
                 <TextView
+                    android:id="@+id/tv_name"
                     android:tag="@string/tag_destination"
-                    android:id="@+id/tv_fzrxm"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:gravity="right"
                     android:singleLine="true"
-                    android:text="张小小"
+                    android:text=""
                     android:textColor="@color/text6c6c6c6"
                     android:textSize="13sp" />
             </LinearLayout>
@@ -237,15 +237,15 @@
                     android:textSize="17sp" />
 
                 <TextView
+                    android:id="@+id/tv_idCard"
                     android:tag="@string/tag_destination"
-                    android:id="@+id/tv_fzrsfz"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:gravity="right"
                     android:singleLine="true"
-                    android:text="510219909987768661"
+                    android:text=""
                     android:textColor="@color/text6c6c6c6"
                     android:textSize="13sp" />
             </LinearLayout>
@@ -282,7 +282,7 @@
                     android:textSize="17sp" />
 
                 <TextView
-                    android:id="@+id/tv2"
+                    android:id="@+id/tv_phone"
                     android:tag="@string/tag_destination"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -291,7 +291,7 @@
                     android:gravity="right"
 
                     android:singleLine="true"
-                    android:text="15050056006"
+                    android:text=""
                     android:textColor="@color/text6c6c6c6"
                     android:textSize="13sp" />
             </LinearLayout>
@@ -328,7 +328,7 @@
                     android:textSize="17sp" />
 
                 <TextView
-                    android:id="@+id/tv3"
+                    android:id="@+id/tv_email"
                     android:tag="@string/tag_destination"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -337,7 +337,7 @@
                     android:gravity="right"
 
                     android:singleLine="true"
-                    android:text="123@gmail.com"
+                    android:text=""
                     android:textColor="@color/text6c6c6c6"
                     android:textSize="13sp" />
             </LinearLayout>
@@ -347,7 +347,7 @@
                 android:layout_height="1dp"
                 android:background="@color/Viewc" />
             <LinearLayout
-                android:id="@+id/mi_r4"
+                android:id="@+id/mi_select_city"
                 android:tag="@string/tag_destination_get"
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
@@ -374,7 +374,7 @@
                     android:textSize="17sp" />
 
                 <TextView
-                    android:id="@+id/tv4"
+                    android:id="@+id/tv_city_name"
                     android:tag="@string/tag_destination"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -383,7 +383,7 @@
                     android:gravity="right"
                     android:maxLength="8"
                     android:singleLine="true"
-                    android:text="上海"
+                    android:text=""
                     android:textColor="@color/text6c6c6c6"
                     android:textSize="13sp" />
             </LinearLayout>
@@ -420,16 +420,15 @@
                     android:textSize="17sp" />
 
                 <TextView
-                    android:id="@+id/tv_xxdz"
+                    android:id="@+id/tv_address"
                     android:tag="@string/tag_destination"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:gravity="right"
-                    android:maxLength="8"
                     android:singleLine="true"
-                    android:text="上海"
+                    android:text=""
                     android:textColor="@color/text6c6c6c6"
                     android:textSize="13sp" />
             </LinearLayout>
@@ -595,6 +594,7 @@
 
 
                 <EditText
+                    android:id="@+id/et_username"
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
                     android:layout_marginLeft="15dp"
@@ -627,6 +627,7 @@
 
 
                 <EditText
+                    android:id="@+id/et_password"
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
                     android:layout_marginLeft="15dp"
@@ -635,6 +636,7 @@
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:hint="登录密码"
+                    android:password="true"
                     android:textColor="@color/text292929"
                     android:textSize="17sp" />
             </LinearLayout>
@@ -659,6 +661,7 @@
 
 
                 <EditText
+                    android:id="@+id/et_password_confirm"
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
                     android:layout_marginLeft="15dp"
@@ -667,6 +670,7 @@
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:hint="确认密码"
+                    android:password="true"
                     android:textColor="@color/text292929"
                     android:textSize="17sp" />
             </LinearLayout>
@@ -689,6 +693,9 @@
                 android:orientation="horizontal" >
 
                 <TextView
+                    android:id="@+id/btn_submit"
+
+                    android:tag="@string/tag_destination_get"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="60dp"

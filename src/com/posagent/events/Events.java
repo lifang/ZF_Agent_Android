@@ -45,4 +45,44 @@ public class Events {
             token = _token;
         }
     }
+
+
+    public static class RegisterEvent {
+        private String params;
+
+        public String getParams() {
+            return params;
+        }
+
+        public RegisterEvent(String _params) {
+            params = _params;
+        }
+    }
+
+
+    public static class CompleteEvent {
+        private String message;
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        private Boolean success;
+
+        public Boolean getSuccess() {
+            return success;
+        }
+
+        public void setSuccess(Boolean success) {
+            this.success = success;
+        }
+
+        public CompleteEvent(Boolean _success) {
+            success = _success;
+        }
+    }
 }

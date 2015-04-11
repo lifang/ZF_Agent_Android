@@ -34,6 +34,9 @@ public class APIManager {
     public static final String UrlLogin = BaseUrl + "/agent/agentLogin";
 //    public static final String UrlLogin = BaseUrl + "/";
 
+    public static final String UrlRegister = BaseUrl + "/agent/userRegistration";
+
+
 
     /** Convenience singleton for apps using a process-wide EventBus instance. */
     public static APIManager getDefault() {
@@ -82,6 +85,49 @@ public class APIManager {
                 }
 
                 EventBus.getDefault().post(loginEvent);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void onEventBackgroundThread(Events.RegisterEvent event){
+        String params = event.getParams();
+        RequestBody body = RequestBody.create(JSON, params);
+        Log.d(TAG, body.toString());
+
+        Request request = this.request()
+                .url(UrlRegister)
+                .post(body)
+                .build();
+
+        Response response = null;
+        try {
+            response = client.newCall(request).execute();
+            String result = response.body().string();
+            Log.d(TAG, result);
+
+
+            JSONObject json = null;
+            String code = null;
+            try {
+
+                json = new JSONObject(result);
+                int intCode = json.getInt("code");
+                Events.CompleteEvent completeEvent = new Events.CompleteEvent(intCode == Constants.SUCCESS_CODE);
+                completeEvent.setMessage(json.getString("message"));
+
+                //TODO 注册成功后做一些事情
+                if(completeEvent.getSuccess()){
+                    String res =json.getString("result");
+                }
+
+                EventBus.getDefault().post(completeEvent);
 
             } catch (Exception e) {
                 e.printStackTrace();

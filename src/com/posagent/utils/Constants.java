@@ -12,6 +12,7 @@ public class Constants {
 
     public static class CommonInputerConstant {
         public static final int REQUEST_CODE = 1;
+        public static final int REQUEST_CITY_CODE = 2;
         public static final String TITLE_KEY = "title";
         public static final String PLACEHOLDER_KEY = "placeholder";
         public static final String VALUE_KEY = "value";

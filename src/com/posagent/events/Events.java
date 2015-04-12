@@ -1,8 +1,12 @@
 package com.posagent.events;
 
+import com.example.zf_android.entity.OrderEntity;
 import com.example.zf_android.entity.PosEntity;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -171,7 +175,6 @@ public class Events {
     }
 
     public static class GoodsDetailEvent extends CommonRequestEvent {}
-
     public static class GoodsDetailCompleteEvent extends CommonCompleteEvent {}
 
     public static class CreateOrderEvent extends CommonRequestEvent {}
@@ -186,5 +189,28 @@ public class Events {
 
     public static class DeleteAddressEvent extends CommonRequestEvent {}
     public static class DeleteAddressCompleteEvent extends CommonCompleteEvent {}
+
+
+    //order
+    public static class OrderListEvent extends CommonRequestEvent {}
+    public static class OrderListCompleteEvent extends CommonCompleteEvent {
+        private List<OrderEntity> list = new ArrayList<OrderEntity>();
+        public List<OrderEntity> getList() {
+            if (list.size() < 1) {
+                try {
+                    String result = getResult().getString("list");
+                    list = (new Gson()).fromJson(result,
+                            new TypeToken<List<OrderEntity>>() {}.getType());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            return list;
+        }
+        public void setList(List<OrderEntity> list) {
+            this.list = list;
+        }
+    }
 
 }

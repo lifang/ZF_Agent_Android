@@ -43,6 +43,7 @@ public class APIManager {
     public static final String UrlEventList = BaseUrl + "/agents/getAddressList";
     public static final String UrlCreateAddress = BaseUrl + "/agents/insertAddress";
     public static final String UrlDeleteAddress = BaseUrl + "/agents/deleteAddress";
+    public static final String UrlOrderList = BaseUrl + "/order/orderSearch";
 
 
 
@@ -57,6 +58,62 @@ public class APIManager {
             }
         }
         return defaultInstance;
+    }
+
+    // helper
+    private void CommonRequest(Events.CommonRequestEvent event,
+                               Events.CommonCompleteEvent completeEvent,
+                               String url)
+    {
+        String params = event.getParams();
+        RequestBody body = RequestBody.create(JSON, params);
+        Log.d(TAG, params);
+
+        Request request = this.request()
+                .url(url)
+                .post(body)
+                .build();
+
+        Response response = null;
+        try {
+            response = client.newCall(request).execute();
+            String result = response.body().string();
+            Log.d(TAG, result);
+
+            JSONObject json = null;
+            String code = null;
+            try {
+
+                json = new JSONObject(result);
+                int intCode = json.getInt("code");
+
+                completeEvent.setSuccess(intCode == Constants.SUCCESS_CODE);
+                completeEvent.setMessage(json.getString("message"));
+
+                if(completeEvent.getSuccess()){
+                    if (!json.getString("result").equals("null")) {
+                        try {
+                            completeEvent.setResult(json.getJSONObject("result"));
+                        } catch (Exception e) {
+                            completeEvent.setArrResult(json.getJSONArray("result"));
+                        }
+                    }
+                }
+
+                EventBus.getDefault().post(completeEvent);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private Request.Builder request() {
+        return new Request.Builder()
+                .addHeader("Content-Type", "application/json;text=utf-8");
     }
 
     public void onEventBackgroundThread(Events.DoLoginEvent event){
@@ -221,62 +278,13 @@ public class APIManager {
         CommonRequest(event, completeEvent, UrlDeleteAddress);
     }
 
-
-
-    // helper
-    private void CommonRequest(Events.CommonRequestEvent event,
-                               Events.CommonCompleteEvent completeEvent,
-                               String url)
-    {
-        String params = event.getParams();
-        RequestBody body = RequestBody.create(JSON, params);
-        Log.d(TAG, params);
-
-        Request request = this.request()
-                .url(url)
-                .post(body)
-                .build();
-
-        Response response = null;
-        try {
-            response = client.newCall(request).execute();
-            String result = response.body().string();
-            Log.d(TAG, result);
-
-            JSONObject json = null;
-            String code = null;
-            try {
-
-                json = new JSONObject(result);
-                int intCode = json.getInt("code");
-
-                completeEvent.setSuccess(intCode == Constants.SUCCESS_CODE);
-                completeEvent.setMessage(json.getString("message"));
-
-                if(completeEvent.getSuccess()){
-                    if (!json.getString("result").equals("null")) {
-                        try {
-                            completeEvent.setResult(json.getJSONObject("result"));
-                        } catch (Exception e) {
-                            completeEvent.setArrResult(json.getJSONArray("result"));
-                        }
-                    }
-                }
-
-                EventBus.getDefault().post(completeEvent);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    public void onEventBackgroundThread(Events.OrderListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.OrderListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlOrderList);
     }
 
-    private Request.Builder request() {
-       return new Request.Builder()
-               .addHeader("Content-Type", "application/json;text=utf-8");
-    }
+
+
+
 
 }

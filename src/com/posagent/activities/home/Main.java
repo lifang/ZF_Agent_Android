@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.example.zf_android.Config;
 import com.example.zf_android.R;
 import com.example.zf_android.activity.AllProduct;
-import com.example.zf_android.activity.OrderList;
+import com.posagent.activities.order.OrderList;
 import com.example.zf_android.activity.StockList;
 import com.example.zf_android.activity.Terminal;
 import com.example.zf_android.activity.TerminalOpenApply;

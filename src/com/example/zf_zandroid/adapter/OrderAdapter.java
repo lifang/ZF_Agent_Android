@@ -7,12 +7,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.zf_android.R;
 import com.example.zf_android.activity.OrderDetail;
 import com.example.zf_android.entity.OrderEntity;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -44,6 +46,9 @@ public class OrderAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+        OrderEntity entity = list.get(position);
+
         inflater = LayoutInflater.from(context);
         if(convertView == null){
             holder = new ViewHolder();
@@ -52,6 +57,7 @@ public class OrderAdapter extends BaseAdapter{
             holder.tv_ddbh = (TextView) convertView.findViewById(R.id.tv_ddbh);
             holder.tv_time = (TextView) convertView.findViewById(R.id.tv_time);
             holder.tv_status = (TextView) convertView.findViewById(R.id.tv_status);
+            holder.iv_face = (ImageView) convertView.findViewById(R.id.iv_face);
 
             holder.ll_ishow = (LinearLayout) convertView.findViewById(R.id.ll_ishow);
 
@@ -65,24 +71,27 @@ public class OrderAdapter extends BaseAdapter{
             holder.tv_price = (TextView) convertView.findViewById(R.id.tv_price);
             holder.tv_goodnum = (TextView) convertView.findViewById(R.id.tv_goodnum);
 
-
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder)convertView.getTag();
         }
-        holder.tv_price.setText("￥"+list.get(position).getOrder_goodsList().get(0).getGood_price());
-        holder.content2.setText(list.get(position).getOrder_goodsList().get(0).getGood_brand());
-        holder.tv_gtd.setText(list.get(position).getOrder_goodsList().get(0).getGood_channel());
-        holder.content_pp.setText(list.get(position).getOrder_goodsList().get(0).getGood_name());
 
-        holder.tv_goodnum.setText("X   "+list.get(position).getOrder_goodsList().get(0).getGood_num());
+        String face_url = entity.getOrder_goodsList().get(0).getGood_logo();
+        Picasso.with(context).load(face_url).into(holder.iv_face);
 
-        holder.tv_pay.setText("实付：￥"+list.get(position).getOrder_totalPrice()/100);
-        holder.tv_psf.setText("配送费：￥"+list.get(position).getOrder_psf()	);
-        holder.tv_ddbh.setText("订单编号: "+list.get(position).getOrder_number()	);
-        holder.tv_time.setText(list.get(position).getOrder_createTime()	);
-        holder.tv_sum.setText("共计:   "+list.get(position).getOrder_totalNum()	+"件");
-        switch (list.get(position).getOrder_status()) {
+        holder.tv_price.setText("￥"+entity.getOrder_goodsList().get(0).getGood_price());
+        holder.content2.setText(entity.getOrder_goodsList().get(0).getGood_brand());
+        holder.tv_gtd.setText(entity.getOrder_goodsList().get(0).getGood_channel());
+        holder.content_pp.setText(entity.getOrder_goodsList().get(0).getGood_name());
+
+        holder.tv_goodnum.setText("X   "+entity.getOrder_goodsList().get(0).getGood_num());
+
+        holder.tv_pay.setText("实付：￥"+entity.getOrder_totalPrice()/100);
+        holder.tv_psf.setText("配送费：￥"+entity.getOrder_psf()	);
+        holder.tv_ddbh.setText("订单编号: "+entity.getOrder_number()	);
+        holder.tv_time.setText(entity.getOrder_createTime()	);
+        holder.tv_sum.setText("共计:   "+entity.getOrder_totalNum()	+"件");
+        switch (entity.getOrder_status()) {
             case 1:
                 holder.tv_status.setText("未付款");
                 holder.ll_ishow.setVisibility(View.VISIBLE);
@@ -113,9 +122,9 @@ public class OrderAdapter extends BaseAdapter{
                 break;
         }
 
-        holder.tv_ddbh.setText("订单编号: "+list.get(position).getOrder_number()	);
-        holder.tv_ddbh.setText("订单编号: "+list.get(position).getOrder_number()	);
-        holder.tv_ddbh.setText("订单编号: "+list.get(position).getOrder_number()	);
+        holder.tv_ddbh.setText("订单编号: "+entity.getOrder_number()	);
+        holder.tv_ddbh.setText("订单编号: "+entity.getOrder_number()	);
+        holder.tv_ddbh.setText("订单编号: "+entity.getOrder_number()	);
 
 
         convertView.setOnClickListener(new OnClickListener() {
@@ -134,5 +143,6 @@ public class OrderAdapter extends BaseAdapter{
     public final class ViewHolder {
         public TextView tv_goodnum,tv_price,content,tv_ddbh,tv_time,tv_status,tv_sum,tv_psf,tv_pay,tv_gtd,content2,content_pp;
         private LinearLayout ll_ishow;
+        public ImageView iv_face;
     }
 }

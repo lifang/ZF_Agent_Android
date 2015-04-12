@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="No updates"
+            android:text="没有数据"
             android:textColor="@color/t828282"
             android:textSize="16sp" />
 

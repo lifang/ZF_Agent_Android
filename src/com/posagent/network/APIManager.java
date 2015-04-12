@@ -41,6 +41,8 @@ public class APIManager {
     public static final String UrlGoodsDetail = BaseUrl + "/good/goodinfo";
     public static final String UrlCreateOrder = BaseUrl + "/order/agent";
     public static final String UrlEventList = BaseUrl + "/agents/getAddressList";
+    public static final String UrlCreateAddress = BaseUrl + "/agents/insertAddress";
+    public static final String UrlDeleteAddress = BaseUrl + "/agents/deleteAddress";
 
 
 
@@ -209,6 +211,16 @@ public class APIManager {
         CommonRequest(event, completeEvent, UrlEventList);
     }
 
+    public void onEventBackgroundThread(Events.CreateAddressEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.CreateAddressCompleteEvent();
+        CommonRequest(event, completeEvent, UrlCreateAddress);
+    }
+
+    public void onEventBackgroundThread(Events.DeleteAddressEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.DeleteAddressCompleteEvent();
+        CommonRequest(event, completeEvent, UrlDeleteAddress);
+    }
+
 
 
     // helper
@@ -242,10 +254,12 @@ public class APIManager {
                 completeEvent.setMessage(json.getString("message"));
 
                 if(completeEvent.getSuccess()){
-                    try {
-                        completeEvent.setResult(json.getJSONObject("result"));
-                    } catch (Exception e) {
-                        completeEvent.setArrResult(json.getJSONArray("result"));
+                    if (!json.getString("result").equals("null")) {
+                        try {
+                            completeEvent.setResult(json.getJSONObject("result"));
+                        } catch (Exception e) {
+                            completeEvent.setArrResult(json.getJSONArray("result"));
+                        }
                     }
                 }
 

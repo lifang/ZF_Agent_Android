@@ -62,6 +62,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
     JSONArray goodPics;
     int commentCount;
     int orderType = Constants.Goods.OrderTypePigou;
+    String goodFaceUrl;
 
     int goodsId;
 
@@ -136,6 +137,8 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
             i2.putExtra("getTitle", goodinfo.getTitle());
             i2.putExtra("price", goodinfo.getPurchase_price());
             i2.putExtra("model", goodinfo.getModel_number());
+
+            i2.putExtra("faceUrl", goodFaceUrl);
             i2.putExtra("orderType", orderType);
             //Fixme
             i2.putExtra("paychannelId", 11);
@@ -215,6 +218,9 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         for(int i=0;i < len; i++) {
             try {
                 String url = goodPics.getString(i);
+                if (goodFaceUrl == null) {
+                    goodFaceUrl = url;
+                }
                 PicEntity picEntity = new PicEntity();
                 picEntity.setPicture_url(url);
                 list.add(picEntity);

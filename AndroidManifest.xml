@@ -211,7 +211,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.AdressEdit"
+            android:name="com.posagent.activities.user.AdressEdit"
             android:screenOrientation="portrait" >
         </activity>
 
@@ -368,7 +368,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.AdressList"
+            android:name="com.posagent.activities.user.AdressList"
             android:screenOrientation="portrait" >
         </activity>
         <activity

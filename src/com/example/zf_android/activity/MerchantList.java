@@ -84,15 +84,13 @@ public class MerchantList extends BaseActivity implements  IXListViewListener{
 		protected void onCreate(Bundle savedInstanceState) {
 			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
-			setContentView(R.layout.adress_list);
+			setContentView(R.layout.activity_adress_list);
 			initView();
 			getData();
 		}
 
 		private void initView() {
-			// TODO Auto-generated method stub
 			search=(ImageView) findViewById(R.id.search);
-			mune_rl=(RelativeLayout) findViewById(R.id.mune_rl);
 			img_add=(ImageView) findViewById(R.id.img_add);
 			new TitleMenuUtil(MerchantList.this, "我的商户").show();
 			myAdapter=new MerchanAdapter(MerchantList.this, myList);

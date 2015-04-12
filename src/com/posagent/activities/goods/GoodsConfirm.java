@@ -22,15 +22,16 @@ import android.widget.Toast;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.Config;
 import com.example.zf_android.R;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.posagent.activities.user.ChangeAdress;
 import com.example.zf_android.activity.PayFromCar;
 import com.example.zf_android.entity.AdressEntity;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.posagent.activities.BaseActivity;
+import com.posagent.activities.user.ChangeAdress;
 import com.posagent.events.Events;
 import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 
@@ -43,19 +44,20 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
     List<AdressEntity>  listAddress = new ArrayList<AdressEntity>();
     private AdressEntity addressEntity;
     private String Url=Config.ChooseAdress;
-    private TextView tv_sjr,tv_tel,tv_adress;
+    private TextView tv_sjr,tv_tel,tv_adress,tv_real_amount;
     private LinearLayout ll_choose, ll_choose_users;
     private Spinner spinnerState;
     private TextView title2,retail_price,showCountText,tv_pay,tv_count;
     private Button btn_pay;
     private String comment;
-    private ImageView reduce,add;
+    private ImageView reduce, add, iv_face;
     private int pirce;
     private int goodId,paychannelId,quantity,addressId,is_need_invoice=0;
     private EditText buyCountEdit,comment_et,et_titel;
     private CheckBox item_cb;
     private int invoice_type=1;//发票类型（0公司  1个人）
     private int orderType;
+    private String faceUrl;
 
     private String[] state= {"公司","个人"};
 
@@ -65,18 +67,31 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
 
         setContentView(R.layout.activity_good_confirm);
         new TitleMenuUtil(GoodsConfirm.this, "批购订单确认").show();
-
         initView();
 
         title2.setText(getIntent().getStringExtra("getTitle"));
         pirce=getIntent().getIntExtra("price", 0);
         retail_price.setText("￥"+ pirce);
         goodId=getIntent().getIntExtra("goodId", 1);
+        faceUrl = getIntent().getStringExtra("faceUrl");
+        iv_face = (ImageView) findViewById(R.id.iv_face);
+        Picasso.with(this).load(faceUrl).into(iv_face);
 
         orderType=getIntent().getIntExtra("orderType", Constants.Goods.OrderTypePigou);
 
+        //Fixme
         paychannelId=getIntent().getIntExtra("paychannelId", 1);
         tv_pay.setText("实付：￥ "+pirce);
+        tv_real_amount.setText("实付：￥ "+pirce);
+
+        ll_choose_users = (LinearLayout) findViewById(R.id.ll_choose_users);
+        if (orderType != Constants.Goods.OrderTypePigou) {
+            ll_choose_users.setVisibility(View.VISIBLE);
+        } else {
+            ll_choose_users.setVisibility(View.GONE);
+        }
+
+
         getData();
     }
 
@@ -90,6 +105,7 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
         tv_sjr=(TextView) findViewById(R.id.tv_sjr);
         tv_count=(TextView) findViewById(R.id.tv_count);
         tv_tel=(TextView) findViewById(R.id.tv_tel);
+        tv_real_amount=(TextView) findViewById(R.id.tv_real_amount);
         tv_adress=(TextView) findViewById(R.id.tv_adress);
         ll_choose=(LinearLayout) findViewById(R.id.ll_choose);
         ll_choose.setOnClickListener(this);
@@ -101,6 +117,8 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
         et_titel=(EditText) findViewById(R.id.et_titel);
         buyCountEdit=(EditText) findViewById(R.id.buyCountEdit);
         comment_et=(EditText) findViewById(R.id.comment_et);
+
+
         item_cb=(CheckBox) findViewById(R.id.item_cb);
         item_cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -125,7 +143,7 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
                     quantity= Integer.parseInt( buyCountEdit.getText().toString() );
                 }
 
-
+                tv_real_amount.setText("实付：￥ "+pirce*quantity);
                 tv_pay.setText("实付：￥ "+pirce*quantity);
             }
 
@@ -145,13 +163,6 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
         ArrayAdapter<String> adapter_state = new ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item, state);
         spinnerState.setAdapter(adapter_state);
         spinnerState.setOnItemSelectedListener(this);
-
-        ll_choose_users = (LinearLayout) findViewById(R.id.ll_choose_users);
-        if (orderType != Constants.Goods.OrderTypePigou) {
-            ll_choose_users.setVisibility(View.VISIBLE);
-        } else {
-            ll_choose_users.setVisibility(View.GONE);
-        }
 
 
     }

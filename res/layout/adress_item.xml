@@ -7,17 +7,17 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="96dp"
+        android:layout_height="70dp"
         android:background="@drawable/bg_item" >
-		<CheckBox
-                    android:id="@+id/item_cb"
-                    style="@style/MyCheckBox"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                   	android:layout_marginLeft="7dp"
-                 
-                   	 android:layout_gravity="center_vertical"
-                    android:checked="false" />
+        <CheckBox
+            android:id="@+id/item_cb"
+            style="@style/MyCheckBox"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="7dp"
+
+            android:layout_gravity="center_vertical"
+            android:checked="false" />
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -31,7 +31,7 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:id="@+id/adress_name"
+                    android:id="@+id/tv_receiver"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="22dp"
@@ -42,6 +42,7 @@
                     android:textSize="17sp" />
 
                 <TextView
+                    android:id="@+id/tv_moblephone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -53,6 +54,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="22dp"
@@ -71,6 +73,18 @@
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
             android:src="@drawable/post_right" />
+
+        <TextView
+            android:id="@+id/tv_delete"
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:background="@color/tv_red"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            android:text="删除"
+            />
     </LinearLayout>
 
     <View

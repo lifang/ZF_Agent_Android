@@ -10,7 +10,6 @@ import com.examlpe.zf_android.util.ScrollViewWithListView;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.Config;
 import com.example.zf_android.R;
-import com.example.zf_android.activity.AdressList;
 import com.example.zf_android.entity.AdressEntity;
 import com.example.zf_zandroid.adapter.ChooseAdressAdapter;
 import com.google.gson.Gson;

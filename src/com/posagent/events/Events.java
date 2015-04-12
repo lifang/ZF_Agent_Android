@@ -178,6 +178,13 @@ public class Events {
     public static class CreateOrderCompleteEvent extends CommonCompleteEvent {}
 
     public static class AddressListEvent extends CommonRequestEvent {}
+    public static class AddressListReloadEvent extends CommonRequestEvent {}
     public static class AddressListCompleteEvent extends CommonCompleteEvent {}
+
+    public static class CreateAddressEvent extends CommonRequestEvent {}
+    public static class CreateAddressCompleteEvent extends CommonCompleteEvent {}
+
+    public static class DeleteAddressEvent extends CommonRequestEvent {}
+    public static class DeleteAddressCompleteEvent extends CommonCompleteEvent {}
 
 }

@@ -12,18 +12,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.zf_android.R;
-import com.example.zf_android.activity.TerminalDetail;
-import com.example.zf_android.entity.OrderEntity;
+import com.example.zf_android.entity.TerminalApplyEntity;
+import com.posagent.activities.terminal.TerminalDetail;
 
 import java.util.List;
 
 
 public class TerminalOpenApplyAdapter extends BaseAdapter{
     private Context context;
-    private List<OrderEntity> list;
+    private List<TerminalApplyEntity> list;
     private LayoutInflater inflater;
     private ViewHolder holder = null;
-    public TerminalOpenApplyAdapter(Context context, List<OrderEntity> list) {
+    public TerminalOpenApplyAdapter(Context context, List<TerminalApplyEntity> list) {
         this.context = context;
         this.list = list;
     }

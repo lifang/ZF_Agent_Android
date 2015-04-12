@@ -129,7 +129,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.TerminalChooseForm"
+            android:name="com.posagent.activities.terminal.TerminalChooseForm"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -149,15 +149,15 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.Terminal"
+            android:name="com.posagent.activities.terminal.Terminal"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.TerminalOpenApply"
+            android:name="com.posagent.activities.terminal.TerminalOpenApply"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.TerminalDetail"
+            android:name="com.posagent.activities.terminal.TerminalDetail"
             android:screenOrientation="portrait" >
         </activity>
         <activity

@@ -5,6 +5,7 @@ import com.example.zf_android.entity.OrderEntity;
 import com.example.zf_android.entity.PosEntity;
 import com.example.zf_android.entity.StockAgentEntity;
 import com.example.zf_android.entity.StockEntity;
+import com.example.zf_android.entity.TerminalApplyEntity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -291,4 +292,28 @@ public class Events {
             this.list = list;
         }
     }
+
+    // terminal
+    public static class TerminalApplyListEvent extends CommonRequestEvent {}
+    public static class TerminalApplyListCompleteEvent extends CommonCompleteEvent {
+        private List<TerminalApplyEntity> list = new ArrayList<TerminalApplyEntity>();
+        public List<TerminalApplyEntity> getList() {
+            if (list.size() < 1) {
+                try {
+                    String result = getResult().getString("applyList");
+                    list = (new Gson()).fromJson(result,
+                            new TypeToken<List<TerminalApplyEntity>>() {}.getType());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            return list;
+        }
+        public void setList(List<TerminalApplyEntity> list) {
+            this.list = list;
+        }
+    }
+
+
 }

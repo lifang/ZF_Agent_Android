@@ -1,4 +1,4 @@
-package com.example.zf_android.activity;
+package com.posagent.activities.terminal;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.examlpe.zf_android.util.Tools;
 import com.examlpe.zf_android.util.XListView;
 import com.examlpe.zf_android.util.XListView.IXListViewListener;
+import com.example.zf_android.activity.AfterSaleApply;
 import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
 import com.posagent.MyApplication;

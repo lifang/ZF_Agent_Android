@@ -52,6 +52,7 @@ public class APIManager {
     public static final String UrlStockRename = BaseUrl + "/stock/rename";
     public static final String UrlStockAgentList = BaseUrl + "/stock/info";
     public static final String UrlStockAgentTerminalList = BaseUrl + "/stock/terminallist";
+    public static final String UrlTerminalApplyList = BaseUrl + "/apply/getApplyList";
 
 
     /** Convenience singleton for apps using a process-wide EventBus instance. */
@@ -329,6 +330,11 @@ public class APIManager {
     public void onEventBackgroundThread(Events.StockAgentTerminalListEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.StockAgentTerminalCompleteEvent();
         CommonRequest(event, completeEvent, UrlStockAgentTerminalList);
+    }
+
+    public void onEventBackgroundThread(Events.TerminalApplyListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.TerminalApplyListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlTerminalApplyList);
     }
 
 

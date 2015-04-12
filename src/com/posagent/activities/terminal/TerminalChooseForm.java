@@ -1,4 +1,4 @@
-package com.example.zf_android.activity;
+package com.posagent.activities.terminal;
 
 import android.os.Bundle;
 

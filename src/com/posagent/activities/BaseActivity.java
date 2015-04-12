@@ -1,6 +1,7 @@
 package com.posagent.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -163,5 +164,10 @@ public class BaseActivity extends Activity implements View.OnClickListener {
         Toast.makeText(getApplicationContext(),
                 "刷新太频繁",
                 Toast.LENGTH_SHORT).show();
+    }
+
+    //helper
+    protected void toast(Context context, String msg) {
+        Toast.makeText(context, msg, Toast.LENGTH_LONG);
     }
 }

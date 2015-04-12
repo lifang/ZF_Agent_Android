@@ -23,6 +23,7 @@
         android:orientation="vertical"
         >
         <TextView
+            android:id="@+id/tv_historyCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="2dp"
@@ -30,6 +31,7 @@
             android:text="配货总量 2340"
             />
         <TextView
+            android:id="@+id/tv_openCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="2dp"
@@ -37,6 +39,7 @@
             android:text="已开通量 2340"
             />
         <TextView
+            android:id="@+id/tv_lastPrepareTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -44,6 +47,7 @@
             android:text="上次配货日期 2015-03-12 22:20:11"
             />
         <TextView
+            android:id="@+id/tv_lastOpenTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"

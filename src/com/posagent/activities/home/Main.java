@@ -10,7 +10,7 @@ import com.example.zf_android.Config;
 import com.example.zf_android.R;
 import com.example.zf_android.activity.AllProduct;
 import com.posagent.activities.order.OrderList;
-import com.example.zf_android.activity.StockList;
+import com.posagent.activities.stock.StockList;
 import com.example.zf_android.activity.Terminal;
 import com.example.zf_android.activity.TerminalOpenApply;
 import com.example.zf_android.activity.UserList;

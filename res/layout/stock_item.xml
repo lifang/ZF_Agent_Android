@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
     android:orientation="vertical" >
 
     <View
@@ -19,7 +20,7 @@
         android:orientation="horizontal" >
 
         <ImageView
-            android:id="@+id/evevt_img"
+            android:id="@+id/iv_face"
             android:layout_width="86dp"
             android:layout_height="86dp"
             android:layout_marginLeft="14dp"
@@ -34,7 +35,7 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/content_pp"
+                android:id="@+id/tv_goods_name"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -53,7 +54,6 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:id="@+id/content1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -64,7 +64,7 @@
                     android:textSize="11sp" />
 
                 <TextView
-                    android:id="@+id/content2"
+                    android:id="@+id/tv_brand"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="7dp"
@@ -94,7 +94,7 @@
                     android:textSize="11sp" />
 
                 <TextView
-                    android:id="@+id/tv_gtd"
+                    android:id="@+id/tv_paychannel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="7dp"
@@ -112,24 +112,30 @@
             android:layout_height="fill_parent"
             android:layout_marginRight="12dp"
             android:layout_gravity="center_vertical"
+            android:gravity="center"
             android:orientation="vertical" >
 
 
             <Button
+                android:id="@+id/btn_change_name"
                 android:layout_width="69dp"
+                android:layout_height="30dp"
                 android:text="商品更名"
-                android:id="@+id/change_name"
-                android:background="@drawable/small_button"
-                style="@style/small_button"
+                android:background="@drawable/bg_shape"
+                android:textSize="12dp"
+                android:textColor="@color/bgtitle"
                 />
 
 
             <Button
+                android:id="@+id/btn_go_pigou"
                 android:layout_width="69dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
                 android:text="去批购"
-                android:id="@+id/go_pigou"
-                android:background="@drawable/small_button"
-                style="@style/small_button"
+                android:background="@drawable/bg_shape"
+                android:textSize="12dp"
+                android:textColor="@color/bgtitle"
                 />
 
         </LinearLayout>
@@ -150,8 +156,10 @@
         <TableRow>
 
             <TextView
+                android:id="@+id/tv_historyCount"
                 android:text="历史进货数量\n1000件"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
                 style="@style/center_textview"
                 />
@@ -165,8 +173,10 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_openCount"
                 android:text="已开通数量\n500件"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 style="@style/center_textview"
                 />
 
@@ -179,8 +189,10 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_agentCount"
                 android:text="代理商库存\n500件"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 style="@style/center_textview"
                 />
 
@@ -193,8 +205,10 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_totalCount"
                 android:text="总库存\n500件"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 style="@style/center_textview"
                 />
         </TableRow>

@@ -133,15 +133,15 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.StockList"
+            android:name="com.posagent.activities.stock.StockList"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.StockDetail"
+            android:name="com.posagent.activities.stock.StockDetail"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.StockAgentDetail"
+            android:name="com.posagent.activities.stock.StockAgentDetail"
             android:screenOrientation="portrait" >
         </activity>
         <activity

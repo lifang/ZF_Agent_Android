@@ -1,28 +1,24 @@
 package com.example.zf_zandroid.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.zf_android.R;
-import com.example.zf_android.activity.StockAgentDetail;
-import com.example.zf_android.entity.OrderEntity;
+import com.example.zf_android.entity.StockAgentEntity;
 
 import java.util.List;
 
 
 public class StockAgentAdapter extends BaseAdapter{
     private Context context;
-    private List<OrderEntity> list;
+    private List<StockAgentEntity> list;
     private LayoutInflater inflater;
     private ViewHolder holder = null;
-    public StockAgentAdapter(Context context, List<OrderEntity> list) {
+    public StockAgentAdapter(Context context, List<StockAgentEntity> list) {
         this.context = context;
         this.list = list;
     }
@@ -43,30 +39,38 @@ public class StockAgentAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+        final StockAgentEntity entity = list.get(position);
+
         inflater = LayoutInflater.from(context);
         if(convertView == null){
             holder = new ViewHolder();
             convertView = inflater.inflate(R.layout.stock_agent_item, null);
             convertView.setTag(holder);
-        }else{
+
+            //init
+            holder.tv_company_name = (TextView) convertView.findViewById(R.id.tv_company_name);
+            holder.tv_historyCount = (TextView) convertView.findViewById(R.id.tv_historyCount);
+            holder.tv_openCount = (TextView) convertView.findViewById(R.id.tv_openCount);
+            holder.tv_lastPrepareTime = (TextView) convertView.findViewById(R.id.tv_lastPrepareTime);
+            holder.tv_lastOpenTime = (TextView) convertView.findViewById(R.id.tv_lastOpenTime);
+        } else {
             holder = (ViewHolder)convertView.getTag();
         }
 
-        convertView.setOnClickListener(new OnClickListener() {
+        // fill data
+        holder.tv_company_name.setText(entity.getCompany_name());
+        holder.tv_historyCount.setText(String.valueOf(entity.getHoitoryCount()));
+        holder.tv_openCount.setText(String.valueOf(entity.getOpenCount()));
+        holder.tv_lastPrepareTime.setText("上次配送日期：" + String.valueOf(entity.getLastPrepareTime()));
+        holder.tv_lastOpenTime.setText("上次开通日期：" + String.valueOf(entity.getLastOpenTime()));
 
-            @Override
-            public void onClick(View arg0) {
-                // TODO Auto-generated method stub
-                Intent i = new Intent(context, StockAgentDetail.class);
-                context.startActivity(i);
-            }
-        });
 
         return convertView;
     }
 
     public final class ViewHolder {
-        public TextView tv_goodnum,tv_price,content,tv_ddbh,tv_time,tv_status,tv_sum,tv_psf,tv_pay,tv_gtd,content2,content_pp;
-        private LinearLayout ll_ishow;
+        public TextView tv_company_name, tv_historyCount, tv_openCount,
+                tv_lastPrepareTime, tv_lastOpenTime;
     }
 }

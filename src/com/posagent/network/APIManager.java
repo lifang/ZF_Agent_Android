@@ -48,7 +48,10 @@ public class APIManager {
     public static final String UrlOrderDetailDaigou = BaseUrl + "/order/getProxyById";
     public static final String UrlOrderCancelPigou = BaseUrl + "/order/cancelWholesale";
     public static final String UrlOrderCancelDaigou = BaseUrl + "/order/cancelProxy";
-
+    public static final String UrlStockList = BaseUrl + "/stock/list";
+    public static final String UrlStockRename = BaseUrl + "/stock/rename";
+    public static final String UrlStockAgentList = BaseUrl + "/stock/info";
+    public static final String UrlStockAgentTerminalList = BaseUrl + "/stock/terminallist";
 
 
     /** Convenience singleton for apps using a process-wide EventBus instance. */
@@ -306,6 +309,26 @@ public class APIManager {
     public void onEventBackgroundThread(Events.CancelOrderPigouEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.CancelOrderCompleteEvent();
         CommonRequest(event, completeEvent, UrlOrderCancelPigou);
+    }
+
+    public void onEventBackgroundThread(Events.StockListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.StockListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlStockList);
+    }
+
+    public void onEventBackgroundThread(Events.StockRenameEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.StockRenameCompleteEvent();
+        CommonRequest(event, completeEvent, UrlStockRename);
+    }
+
+    public void onEventBackgroundThread(Events.StockAgentListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.StockAgentListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlStockAgentList);
+    }
+
+    public void onEventBackgroundThread(Events.StockAgentTerminalListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.StockAgentTerminalCompleteEvent();
+        CommonRequest(event, completeEvent, UrlStockAgentTerminalList);
     }
 
 

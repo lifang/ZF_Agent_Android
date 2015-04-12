@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.zf_android.R;
-import com.example.zf_android.activity.StockDetail;
+import com.posagent.activities.stock.StockDetail;
 import com.example.zf_android.entity.OrderEntity;
 
 import java.util.List;

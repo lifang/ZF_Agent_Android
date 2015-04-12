@@ -1,28 +1,25 @@
 package com.example.zf_zandroid.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.zf_android.R;
-import com.example.zf_android.activity.StockDetail;
-import com.example.zf_android.entity.OrderEntity;
+import com.example.zf_android.entity.AgentTerminalEntity;
+import com.posagent.utils.Constants;
 
 import java.util.List;
 
 
 public class StockAgentTerminalAdapter extends BaseAdapter{
     private Context context;
-    private List<OrderEntity> list;
+    private List<AgentTerminalEntity> list;
     private LayoutInflater inflater;
     private ViewHolder holder = null;
-    public StockAgentTerminalAdapter(Context context, List<OrderEntity> list) {
+    public StockAgentTerminalAdapter(Context context, List<AgentTerminalEntity> list) {
         this.context = context;
         this.list = list;
     }
@@ -43,30 +40,31 @@ public class StockAgentTerminalAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+        AgentTerminalEntity entity = list.get(position);
         inflater = LayoutInflater.from(context);
         if(convertView == null){
             holder = new ViewHolder();
             convertView = inflater.inflate(R.layout.stock_terminal_item, null);
             convertView.setTag(holder);
+
+            //init
+            holder.tv_terminal_number = (TextView) convertView.findViewById(R.id.tv_terminal_number);
+            holder.tv_model = (TextView) convertView.findViewById(R.id.tv_model);
+            holder.tv_status = (TextView) convertView.findViewById(R.id.tv_status);
         }else{
             holder = (ViewHolder)convertView.getTag();
         }
 
-        convertView.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                // TODO Auto-generated method stub
-                Intent i = new Intent(context, StockDetail.class);
-                context.startActivity(i);
-            }
-        });
+        //fill data
+        holder.tv_terminal_number.setText(entity.getSerial_num());
+        holder.tv_model.setText(entity.getModel_number());
+        holder.tv_status.setText(Constants.TerminalConstant.STATUS[entity.getStatus()]);
 
         return convertView;
     }
 
     public final class ViewHolder {
-        public TextView tv_goodnum,tv_price,content,tv_ddbh,tv_time,tv_status,tv_sum,tv_psf,tv_pay,tv_gtd,content2,content_pp;
-        private LinearLayout ll_ishow;
+        public TextView tv_terminal_number, tv_model, tv_status;
     }
 }

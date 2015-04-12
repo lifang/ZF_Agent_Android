@@ -14,6 +14,7 @@
         <TableRow>
 
             <TextView
+                android:id="@+id/tv_terminal_number"
                 android:text="12344454545245"
                 android:layout_width="wrap_content"
                 android:gravity="center_horizontal"
@@ -21,12 +22,14 @@
                 />
 
             <TextView
+                android:id="@+id/tv_model"
                 android:text="TS900"
                 android:layout_width="wrap_content"
                 android:gravity="center_horizontal"
                 />
 
             <TextView
+                android:id="@+id/tv_status"
                 android:text="开通"
                 android:layout_width="wrap_content"
                 android:gravity="center_horizontal"

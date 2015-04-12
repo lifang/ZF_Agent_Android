@@ -1,7 +1,10 @@
 package com.posagent.events;
 
+import com.example.zf_android.entity.AgentTerminalEntity;
 import com.example.zf_android.entity.OrderEntity;
 import com.example.zf_android.entity.PosEntity;
+import com.example.zf_android.entity.StockAgentEntity;
+import com.example.zf_android.entity.StockEntity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -222,4 +225,70 @@ public class Events {
     public static class CancelOrderCompleteEvent extends CommonCompleteEvent {}
 
 
+    //stock
+    public static class StockListEvent extends CommonRequestEvent {}
+    public static class StockListCompleteEvent extends CommonCompleteEvent {
+        private List<StockEntity> list = new ArrayList<StockEntity>();
+        public List<StockEntity> getList() {
+            if (list.size() < 1) {
+                try {
+                    String result = getResult().getString("list");
+                    list = (new Gson()).fromJson(result,
+                            new TypeToken<List<StockEntity>>() {}.getType());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            return list;
+        }
+        public void setList(List<StockEntity> list) {
+            this.list = list;
+        }
+    }
+
+    public static class StockRenameEvent extends CommonRequestEvent {}
+    public static class StockRenameCompleteEvent extends CommonCompleteEvent {}
+
+    public static class StockAgentListEvent extends CommonRequestEvent {}
+    public static class StockAgentListCompleteEvent extends CommonCompleteEvent {
+        private List<StockAgentEntity> list = new ArrayList<StockAgentEntity>();
+        public List<StockAgentEntity> getList() {
+            if (list.size() < 1) {
+                try {
+                    String result = getResult().getString("list");
+                    list = (new Gson()).fromJson(result,
+                            new TypeToken<List<StockAgentEntity>>() {}.getType());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            return list;
+        }
+        public void setList(List<StockAgentEntity> list) {
+            this.list = list;
+        }
+    }
+
+    public static class StockAgentTerminalListEvent extends CommonRequestEvent {}
+    public static class StockAgentTerminalCompleteEvent extends CommonCompleteEvent {
+        private List<AgentTerminalEntity> list = new ArrayList<AgentTerminalEntity>();
+        public List<AgentTerminalEntity> getList() {
+            if (list.size() < 1) {
+                try {
+                    String result = getResult().getString("list");
+                    list = (new Gson()).fromJson(result,
+                            new TypeToken<List<AgentTerminalEntity>>() {}.getType());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            return list;
+        }
+        public void setList(List<AgentTerminalEntity> list) {
+            this.list = list;
+        }
+    }
 }

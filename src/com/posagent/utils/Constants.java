@@ -32,4 +32,15 @@ public class Constants {
 
     }
 
+    public static class TerminalConstant {
+        public static final String[] STATUS = {"未知",
+                "已开通",
+                "部分开通",
+                "未开通",
+                "已注销",
+                "已停用"
+        };
+
+    }
+
 }

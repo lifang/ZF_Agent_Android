@@ -4,79 +4,98 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    <TableLayout
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:stretchColumns="0,1,2"
-        >
-        <TableRow>
-
-            <TextView
-                android:text="动感科技有限公司"
-                android:layout_width="wrap_content"
-                android:gravity="center_horizontal"
-
-                />
-
-            <TextView
-                android:text="2340"
-                android:layout_width="wrap_content"
-                android:gravity="center_horizontal"
-                />
-
-            <LinearLayout
-                android:id="@+id/eva_nodata"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:orientation="horizontal"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+            <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:stretchColumns="0,1,2"
                 >
+                <TableRow>
 
-                <TextView
-                    android:text="2340"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    />
+                    <TextView
+                        android:id="@+id/tv_company_name"
+                        android:text="动感科技有限公司"
+                        android:layout_width="wrap_content"
+                        android:gravity="center_horizontal"
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/post_right"
-                    />
-            </LinearLayout>
+                        />
 
+                    <TextView
+                        android:id="@+id/tv_historyCount"
+                        android:text="2340"
+                        android:layout_width="wrap_content"
+                        android:gravity="center_horizontal"
+                        />
 
-        </TableRow>
-    </TableLayout>
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:stretchColumns="0,1"
-        >
-        <TableRow>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:orientation="horizontal"
+                        >
 
-            <TextView
-                android:text="上次配送日期：2015-12-12 10:11:00"
-                android:layout_width="wrap_content"
-                android:gravity="center_horizontal"
-                android:textSize="10dp"
-                android:textColor="#cccccc"
-                />
-
-            <TextView
-                android:text="上次开通日期：2015-12-12 10:11:00"
-                android:layout_width="wrap_content"
-                android:gravity="center_horizontal"
-                android:textSize="10dp"
-                android:textColor="#cccccc"
-                />
+                        <TextView
+                            android:id="@+id/tv_openCount"
+                            android:text="2340"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            />
+                    </LinearLayout>
 
 
-        </TableRow>
-    </TableLayout>
+                </TableRow>
+            </TableLayout>
+            <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:stretchColumns="0,1"
+                >
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/tv_lastPrepareTime"
+                        android:text="上次配送日期：2015-12-12 10:11:00"
+                        android:layout_width="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:textSize="10dp"
+                        android:textColor="#cccccc"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_lastOpenTime"
+                        android:text="上次开通日期：2015-12-12 10:11:00"
+                        android:layout_width="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:textSize="10dp"
+                        android:textColor="#cccccc"
+                        />
+
+
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/post_right"
+            />
+    </LinearLayout>
 
     <View
         android:layout_width="fill_parent"

@@ -1,9 +1,11 @@
 package com.posagent.activities.goods;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -19,6 +21,7 @@ import com.google.gson.Gson;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.fragments.HMSlideFragment;
+import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
 import com.posagent.utils.ViewHelper;
 import com.squareup.picasso.Picasso;
@@ -46,9 +49,11 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
 
     ImageView iv_factory_logo;
 
-    LinearLayout ll_pay_channel, ll_support_areas;
+    LinearLayout ll_pay_channel, ll_support_areas, ll_orderType;
 
     TableLayout tl_standard_rates, tl_tDates, tl_other_rate;
+
+    Button btn_confirm_order;
 
     JSONObject paychannelinfo;
     JSONArray payChannelList;
@@ -56,6 +61,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
     GoodinfoEntity goodinfo;
     JSONArray goodPics;
     int commentCount;
+    int orderType = Constants.Goods.OrderTypePigou;
 
     int goodsId;
 
@@ -64,6 +70,8 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_good_detail);
         goodsId = getIntent().getIntExtra("id", 0);
+        orderType = getIntent().getIntExtra("orderType", Constants.Goods.OrderTypePigou);
+
         initView();
         // 准备需要监听Click的数据
         HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{
@@ -97,6 +105,15 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         tv_goods_desc = (TextView) findViewById(R.id.tv_goods_desc);
         tv_opening_requirement = (TextView) findViewById(R.id.tv_opening_requirement);
         tv_support_cancel = (TextView) findViewById(R.id.tv_support_cancel);
+        btn_confirm_order = (Button) findViewById(R.id.btn_confirm_order);
+
+        ll_orderType = (LinearLayout) findViewById(R.id.ll_orderType);
+        if (orderType != Constants.Goods.OrderTypePigou) {
+            ll_orderType.setVisibility(View.VISIBLE);
+            btn_confirm_order.setText("立即代购");
+        } else {
+            ll_orderType.setVisibility(View.GONE);
+        }
 
         ll_pay_channel = (LinearLayout) findViewById(R.id.ll_pay_channel);
         ll_support_areas = (LinearLayout) findViewById(R.id.ll_support_areas);
@@ -104,21 +121,44 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         tl_tDates = (TableLayout) findViewById(R.id.tl_tDates);
         tl_other_rate = (TableLayout) findViewById(R.id.tl_other_rate);
 
+
+        View btn_confirm_order = (View) findViewById(R.id.btn_confirm_order);
+        btn_confirm_order.setOnClickListener(this);
+
         getData();
     }
 
     @Override
     public void onClick(View v) {
+
+        if (v.getId() == R.id.btn_confirm_order) {
+            Intent i2 =new Intent(GoodsDetail.this, GoodsConfirm.class);
+            i2.putExtra("getTitle", goodinfo.getTitle());
+            i2.putExtra("price", goodinfo.getPurchase_price());
+            i2.putExtra("model", goodinfo.getModel_number());
+            i2.putExtra("orderType", orderType);
+            //Fixme
+            i2.putExtra("paychannelId", 11);
+            i2.putExtra("goodId", goodinfo.getId());
+            startActivity(i2);
+
+            return;
+        }
+
+
+
         super.onClick(v);
     }
 
     private void getData() {
         JsonParams params = new JsonParams();
-//        params.put("goodId", goodsId);
-        // Fixeme
-        params.put("goodId", 1);
+        params.put("goodId", goodsId);
+        // Fixme
+//        params.put("goodId", 1);
         String strParams = params.toString();
-        EventBus.getDefault().post(new Events.GoodsDetailEvent(strParams));
+        Events.GoodsDetailEvent event = new Events.GoodsDetailEvent();
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
     }
 
     // events

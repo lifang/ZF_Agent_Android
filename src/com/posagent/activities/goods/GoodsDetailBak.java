@@ -26,7 +26,6 @@ import com.example.zf_android.Config;
 import com.example.zf_android.R;
 import com.example.zf_android.activity.ApplyNeed;
 import com.example.zf_android.activity.GoodComment;
-import com.example.zf_android.activity.GoodConfirm;
 import com.example.zf_android.activity.LeaseInstruction;
 import com.posagent.activities.home.LoginActivity;
 import com.example.zf_android.activity.ShopCar;
@@ -210,7 +209,7 @@ public class GoodsDetailBak extends BaseActivity implements OnClickListener {
 			startActivity(tv_comment);
 		break;
 		case R.id.setting_btn_clear:   //tv_comment
-			Intent i2 =new Intent(GoodsDetailBak.this, GoodConfirm.class);
+			Intent i2 =new Intent(GoodsDetailBak.this, GoodsConfirm.class);
 			i2.putExtra("getTitle", gfe.getTitle());
 			i2.putExtra("price", gfe.getPrice());
 			i2.putExtra("model", gfe.getModel_number());

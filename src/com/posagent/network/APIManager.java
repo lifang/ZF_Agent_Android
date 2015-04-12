@@ -39,6 +39,8 @@ public class APIManager {
     public static final String UrlRegister = BaseUrl + "/agent/userRegistration";
     public static final String UrlGoodsList = BaseUrl + "/good/list";
     public static final String UrlGoodsDetail = BaseUrl + "/good/goodinfo";
+    public static final String UrlCreateOrder = BaseUrl + "/order/agent";
+    public static final String UrlEventList = BaseUrl + "/agents/getAddressList";
 
 
 
@@ -192,13 +194,34 @@ public class APIManager {
     }
 
 
-    public void onEventBackgroundThread(Events.GoodsDetailEvent event){
+    public void onEventBackgroundThread(Events.GoodsDetailEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.GoodsDetailCompleteEvent();
+        CommonRequest(event, completeEvent, UrlGoodsDetail);
+    }
+
+    public void onEventBackgroundThread(Events.CreateOrderEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.CreateOrderCompleteEvent();
+        CommonRequest(event, completeEvent, UrlCreateOrder);
+    }
+
+    public void onEventBackgroundThread(Events.AddressListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.AddressListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlEventList);
+    }
+
+
+
+    // helper
+    private void CommonRequest(Events.CommonRequestEvent event,
+                               Events.CommonCompleteEvent completeEvent,
+                               String url)
+    {
         String params = event.getParams();
         RequestBody body = RequestBody.create(JSON, params);
         Log.d(TAG, params);
 
         Request request = this.request()
-                .url(UrlGoodsDetail)
+                .url(url)
                 .post(body)
                 .build();
 
@@ -214,11 +237,16 @@ public class APIManager {
 
                 json = new JSONObject(result);
                 int intCode = json.getInt("code");
-                Events.GoodsDetailCompleteEvent completeEvent = new Events.GoodsDetailCompleteEvent(intCode == Constants.SUCCESS_CODE);
+
+                completeEvent.setSuccess(intCode == Constants.SUCCESS_CODE);
                 completeEvent.setMessage(json.getString("message"));
 
                 if(completeEvent.getSuccess()){
-                    completeEvent.setResult(json.getJSONObject("result"));
+                    try {
+                        completeEvent.setResult(json.getJSONObject("result"));
+                    } catch (Exception e) {
+                        completeEvent.setArrResult(json.getJSONArray("result"));
+                    }
                 }
 
                 EventBus.getDefault().post(completeEvent);
@@ -229,11 +257,9 @@ public class APIManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
-
-
-    // helper
     private Request.Builder request() {
        return new Request.Builder()
                .addHeader("Content-Type", "application/json;text=utf-8");

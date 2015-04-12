@@ -207,7 +207,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.ChanceAdress"
+            android:name="com.posagent.activities.user.ChangeAdress"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -405,7 +405,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.GoodConfirm"
+            android:name="com.posagent.activities.goods.GoodsConfirm"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>

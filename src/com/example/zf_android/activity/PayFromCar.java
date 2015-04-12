@@ -7,21 +7,14 @@ import com.posagent.activities.BaseActivity;
 import com.example.zf_android.R;
 
 /**
- * 
-*    
-* ����ƣ�PayFromCar   
-* ��������   ���ﳵ֧��
-* �����ˣ� ljp 
-* ����ʱ�䣺2015-2-9 ����4:41:50   
-* @version    
-*
+ * 订单支付
+ *
  */
 public class PayFromCar extends BaseActivity{
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
-			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.pay);
-			new TitleMenuUtil(PayFromCar.this, "ѡ��֧����ʽ").show();
+			new TitleMenuUtil(PayFromCar.this, "订单支付").show();
 		}
 }

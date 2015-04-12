@@ -198,6 +198,56 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_orderType"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="@dimen/margin_left2"
+                android:layout_marginRight="@dimen/margin_left2"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="购买方式"
+                    android:textColor="@color/text6c6c6c6"
+                    android:textSize="10dp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="7dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@color/bgtitle"
+                        android:background="@drawable/bg_shape"
+                        android:textSize="10dp"
+                        android:padding="2dp"
+                        android:text="代购" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:textColor="@color/text292929"
+                        android:background="@drawable/send_out_goods_shape"
+                        android:textSize="10dp"
+                        android:padding="2dp"
+                        android:text="租赁" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -1004,7 +1054,7 @@
             >
 
             <Button
-                android:id="@+id/setting_btn_clear"
+                android:id="@+id/btn_confirm_order"
                 android:layout_width="200dp"
                 android:layout_height="36dp"
                 android:layout_centerInParent="true"

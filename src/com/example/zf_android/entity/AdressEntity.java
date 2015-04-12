@@ -4,8 +4,17 @@ public class AdressEntity {
 //"id":16,"customerId":80,"receiver":"123","isDefault":2,"address":"123",
 	private int id;
 	private int customerId;
-	private String receiver;
-	private int isDefault;
+    private int is_default;
+
+    public int getIs_default() {
+        return is_default;
+    }
+
+    public void setIs_default(int is_default) {
+        this.is_default = is_default;
+    }
+
+    private String receiver;
 	private Boolean Ischeck;
 	private String address;
 	//,"cityId":123,"zipCode":"123","moblephone":"123","telphone":"123
@@ -36,12 +45,6 @@ public class AdressEntity {
 	}
 	public void setReceiver(String receiver) {
 		this.receiver = receiver;
-	}
-	public int getIsDefault() {
-		return isDefault;
-	}
-	public void setIsDefault(int isDefault) {
-		this.isDefault = isDefault;
 	}
 	public String getAddress() {
 		return address;

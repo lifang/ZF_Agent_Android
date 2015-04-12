@@ -394,7 +394,7 @@
                         android:gravity="center"
                         android:textColor="@color/bgtitle"
                         android:background="@drawable/bg_shape"
-                        android:text="购买" />
+                        android:text="代购" />
 
                     <TextView
                         android:layout_width="0dp"

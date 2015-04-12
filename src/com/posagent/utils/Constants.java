@@ -7,6 +7,14 @@ public class Constants {
     public static final int SUCCESS_CODE = 1;
 
     public static final String USER_KIND = "user_kind";
+    public static final int REQUEST_CODE = 99;
+
+
+    public static class Goods {
+        public static final int OrderTypeDaigou = 3;
+        public static final int OrderTypeDaizulin = 4;
+        public static final int OrderTypePigou = 5;
+    }
 
 
 

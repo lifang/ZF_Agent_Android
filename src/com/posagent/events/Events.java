@@ -2,6 +2,7 @@ package com.posagent.events;
 
 import com.example.zf_android.entity.PosEntity;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -32,8 +33,50 @@ public class Events {
             this.success = success;
         }
 
+        public CompleteEvent() {
+        }
         public CompleteEvent(Boolean _success) {
             success = _success;
+        }
+    }
+
+    public static class CommonCompleteEvent extends CompleteEvent {
+        private JSONObject result;
+        private JSONArray arrResult;
+
+        public JSONArray getArrResult() {
+            return arrResult;
+        }
+
+        public void setArrResult(JSONArray arrResult) {
+            this.arrResult = arrResult;
+        }
+
+        public JSONObject getResult() {
+            return result;
+        }
+
+        public void setResult(JSONObject result) {
+            this.result = result;
+        }
+    }
+
+    public static class CommonRequestEvent {
+        private String params;
+
+        public void setParams(String params) {
+            this.params = params;
+        }
+
+        public String getParams() {
+            return params;
+        }
+
+        public CommonRequestEvent() {
+        }
+
+        public CommonRequestEvent(String _params) {
+            params = _params;
         }
     }
 
@@ -127,32 +170,14 @@ public class Events {
         }
     }
 
-    public static class GoodsDetailEvent {
-        private String params;
+    public static class GoodsDetailEvent extends CommonRequestEvent {}
 
-        public String getParams() {
-            return params;
-        }
+    public static class GoodsDetailCompleteEvent extends CommonCompleteEvent {}
 
-        public GoodsDetailEvent(String _params) {
-            params = _params;
-        }
-    }
+    public static class CreateOrderEvent extends CommonRequestEvent {}
+    public static class CreateOrderCompleteEvent extends CommonCompleteEvent {}
 
-    public static class GoodsDetailCompleteEvent extends CompleteEvent {
+    public static class AddressListEvent extends CommonRequestEvent {}
+    public static class AddressListCompleteEvent extends CommonCompleteEvent {}
 
-        private JSONObject result;
-
-        public JSONObject getResult() {
-            return result;
-        }
-
-        public void setResult(JSONObject result) {
-            this.result = result;
-        }
-
-        public GoodsDetailCompleteEvent(Boolean _success) {
-            super(_success);
-        }
-    }
 }

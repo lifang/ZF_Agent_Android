@@ -21,6 +21,7 @@ import com.example.zf_android.entity.PosEntity;
 import com.example.zf_zandroid.adapter.PosAdapter;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
+import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
 
     private int page = 1;
     private int rows = Config.ROWS;
-    private int orderType = 0;
+    int orderType = Constants.Goods.OrderTypePigou;
 
     private LinearLayout eva_nodata;
     private PosAdapter myAdapter;
@@ -69,6 +70,8 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
         super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_goods_list);
+
+        orderType = getIntent().getIntExtra("orderType", Constants.Goods.OrderTypePigou);
 
         // 准备需要监听Click的数据
         HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{
@@ -153,6 +156,7 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
                                     int position, long id) {
                 Intent i = new Intent (GoodsList.this, GoodsDetail.class);
                 i.putExtra("id", myList.get(position - 1).getId());
+                i.putExtra("orderType", orderType);
                 startActivity(i);
             }
         });

@@ -203,7 +203,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.OrderDetail"
+            android:name="com.posagent.activities.order.OrderDetail"
             android:screenOrientation="portrait" >
         </activity>
         <activity

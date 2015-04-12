@@ -18,7 +18,6 @@ import com.examlpe.zf_android.util.XListView;
 import com.examlpe.zf_android.util.XListView.IXListViewListener;
 import com.example.zf_android.Config;
 import com.example.zf_android.R;
-import com.example.zf_android.activity.OrderDetail;
 import com.example.zf_android.entity.OrderEntity;
 import com.example.zf_android.trade.widget.MyTabWidget;
 import com.example.zf_zandroid.adapter.OrderAdapter;
@@ -115,6 +114,7 @@ public class OrderList extends BaseActivity implements IXListViewListener,
                 OrderEntity orderEntity = myList.get(position - 1);
                 i.putExtra("status", orderEntity.getOrder_status());
                 i.putExtra("id", orderEntity.getOrder_id());
+                i.putExtra("p", p);
                 startActivity(i);
             }
         });

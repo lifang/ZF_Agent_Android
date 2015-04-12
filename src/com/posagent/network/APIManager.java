@@ -34,8 +34,8 @@ public class APIManager {
 
     // Host and api
     public static final String BaseUrl = "http://114.215.149.242:28080/ZFAgent/api";
-    public static final String UrlLogin = BaseUrl + "/agent/agentLogin";
 
+    public static final String UrlLogin = BaseUrl + "/agent/agentLogin";
     public static final String UrlRegister = BaseUrl + "/agent/userRegistration";
     public static final String UrlGoodsList = BaseUrl + "/good/list";
     public static final String UrlGoodsDetail = BaseUrl + "/good/goodinfo";
@@ -44,6 +44,10 @@ public class APIManager {
     public static final String UrlCreateAddress = BaseUrl + "/agents/insertAddress";
     public static final String UrlDeleteAddress = BaseUrl + "/agents/deleteAddress";
     public static final String UrlOrderList = BaseUrl + "/order/orderSearch";
+    public static final String UrlOrderDetailPigou = BaseUrl + "/order/getWholesaleById";
+    public static final String UrlOrderDetailDaigou = BaseUrl + "/order/getProxyById";
+    public static final String UrlOrderCancelPigou = BaseUrl + "/order/cancelWholesale";
+    public static final String UrlOrderCancelDaigou = BaseUrl + "/order/cancelProxy";
 
 
 
@@ -91,7 +95,8 @@ public class APIManager {
                 completeEvent.setMessage(json.getString("message"));
 
                 if(completeEvent.getSuccess()){
-                    if (!json.getString("result").equals("null")) {
+                    if (!json.getString("result").equals("null") &&
+                            !json.getString("result").equals("") ) {
                         try {
                             completeEvent.setResult(json.getJSONObject("result"));
                         } catch (Exception e) {
@@ -283,7 +288,25 @@ public class APIManager {
         CommonRequest(event, completeEvent, UrlOrderList);
     }
 
+    public void onEventBackgroundThread(Events.OrderDetailPigouEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.OrderDetailCompleteEvent();
+        CommonRequest(event, completeEvent, UrlOrderDetailPigou);
+    }
 
+    public void onEventBackgroundThread(Events.OrderDetailDaigouEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.OrderDetailCompleteEvent();
+        CommonRequest(event, completeEvent, UrlOrderDetailDaigou);
+    }
+
+    public void onEventBackgroundThread(Events.CancelOrderDaigouEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.CancelOrderCompleteEvent();
+        CommonRequest(event, completeEvent, UrlOrderCancelDaigou);
+    }
+
+    public void onEventBackgroundThread(Events.CancelOrderPigouEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.CancelOrderCompleteEvent();
+        CommonRequest(event, completeEvent, UrlOrderCancelPigou);
+    }
 
 
 

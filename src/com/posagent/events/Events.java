@@ -213,4 +213,13 @@ public class Events {
         }
     }
 
+    public static class OrderDetailPigouEvent extends CommonRequestEvent {}
+    public static class OrderDetailDaigouEvent extends CommonRequestEvent {}
+    public static class OrderDetailCompleteEvent extends CommonCompleteEvent {}
+
+    public static class CancelOrderPigouEvent extends CommonRequestEvent {}
+    public static class CancelOrderDaigouEvent extends CommonRequestEvent {}
+    public static class CancelOrderCompleteEvent extends CommonCompleteEvent {}
+
+
 }

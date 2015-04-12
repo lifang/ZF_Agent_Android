@@ -25,6 +25,8 @@ import de.greenrobot.event.EventBus;
 
 public class BaseActivity extends Activity implements View.OnClickListener {
 
+    protected String TAG = getClass().toString();
+
     HashMap<String, Class> clickableMap = new HashMap<String, Class>();
     private static final ArrayList<String> tabImages = new ArrayList<String>() {{
         add("home");

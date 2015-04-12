@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.zf_android.R;
-import com.example.zf_android.activity.OrderDetail;
+import com.posagent.activities.order.OrderDetail;
 import com.example.zf_android.entity.OrderEntity;
 import com.squareup.picasso.Picasso;
 

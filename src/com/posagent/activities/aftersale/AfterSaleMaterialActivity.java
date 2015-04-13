@@ -1,4 +1,4 @@
-package com.example.zf_android.trade;
+package com.posagent.activities.aftersale;
 
 import static com.example.zf_android.trade.Constants.AfterSaleIntent.MATERIAL_URL;
 import static com.example.zf_android.trade.Constants.AfterSaleIntent.RECORD_TYPE;

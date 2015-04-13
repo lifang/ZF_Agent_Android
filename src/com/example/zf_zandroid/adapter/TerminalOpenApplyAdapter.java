@@ -8,12 +8,12 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.zf_android.R;
 import com.example.zf_android.entity.TerminalApplyEntity;
 import com.posagent.activities.terminal.TerminalDetail;
+import com.posagent.utils.Constants;
 
 import java.util.List;
 
@@ -44,22 +44,51 @@ public class TerminalOpenApplyAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+        TerminalApplyEntity entity = list.get(position);
+
         inflater = LayoutInflater.from(context);
         if(convertView == null){
             holder = new ViewHolder();
             convertView = inflater.inflate(R.layout.terminal_open_apply_item, null);
             convertView.setTag(holder);
+
+            //init
+            holder.tv_terminal_number = (TextView) convertView.findViewById(R.id.tv_terminal_number);
+            holder.tv_status = (TextView) convertView.findViewById(R.id.tv_status);
+            holder.btn_apply_open = (Button) convertView.findViewById(R.id.btn_apply_open);
+            holder.btn_apply_reopen = (Button) convertView.findViewById(R.id.btn_apply_reopen);
+
         }else{
             holder = (ViewHolder)convertView.getTag();
         }
 
-        Button btn = (Button) convertView.findViewById(R.id.btn_apply_open);
+        // fill data
+        holder.tv_terminal_number.setText(entity.getSerial_num());
+        holder.tv_status.setText(Constants.TerminalConstant.STATUS[entity.getStatus()]);
 
-        btn.setOnClickListener(new OnClickListener() {
+        if (entity.getStatus() == 3) {
+            holder.btn_apply_reopen.setVisibility(View.GONE);
+            holder.btn_apply_open.setVisibility(View.VISIBLE);
+        } else {
+            holder.btn_apply_open.setVisibility(View.GONE);
+            holder.btn_apply_reopen.setVisibility(View.VISIBLE);
+        }
+
+
+        holder.btn_apply_open.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                // TODO Auto-generated method stub
+                Intent i = new Intent(context, TerminalDetail.class);
+                context.startActivity(i);
+            }
+        });
+
+        holder.btn_apply_reopen.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
                 Intent i = new Intent(context, TerminalDetail.class);
                 context.startActivity(i);
             }
@@ -69,7 +98,7 @@ public class TerminalOpenApplyAdapter extends BaseAdapter{
     }
 
     public final class ViewHolder {
-        public TextView tv_goodnum,tv_price,content,tv_ddbh,tv_time,tv_status,tv_sum,tv_psf,tv_pay,tv_gtd,content2,content_pp;
-        private LinearLayout ll_ishow;
+        public TextView tv_terminal_number, tv_status;
+        public Button btn_apply_open, btn_apply_reopen;
     }
 }

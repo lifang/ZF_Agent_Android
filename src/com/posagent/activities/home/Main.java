@@ -15,7 +15,7 @@ import com.posagent.activities.terminal.Terminal;
 import com.posagent.activities.terminal.TerminalOpenApply;
 import com.example.zf_android.activity.UserList;
 import com.example.zf_android.entity.PicEntity;
-import com.example.zf_android.trade.AfterSaleGridActivity;
+import com.posagent.activities.aftersale.AfterSaleGridActivity;
 import com.example.zf_android.trade.CitySelectActivity;
 import com.example.zf_android.trade.TradeFlowActivity;
 import com.example.zf_android.trade.entity.City;

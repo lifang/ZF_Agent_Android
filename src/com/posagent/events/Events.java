@@ -6,6 +6,7 @@ import com.example.zf_android.entity.PosEntity;
 import com.example.zf_android.entity.StockAgentEntity;
 import com.example.zf_android.entity.StockEntity;
 import com.example.zf_android.entity.TerminalApplyEntity;
+import com.example.zf_android.trade.entity.AfterSaleRecord;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -314,6 +315,39 @@ public class Events {
             this.list = list;
         }
     }
+
+    //after sale
+    public static class AfterSaleMaintainListEvent extends CommonRequestEvent {}
+    public static class AfterSaleCancelListEvent extends CommonRequestEvent {}
+    public static class AfterSaleUpdateListEvent extends CommonRequestEvent {}
+    public static class AfterSaleListCompleteEvent extends CommonCompleteEvent {
+        private List<AfterSaleRecord> list = new ArrayList<AfterSaleRecord>();
+        public List<AfterSaleRecord> getList() {
+            if (list.size() < 1) {
+                try {
+                    String result = getResult().getString("list");
+                    list = (new Gson()).fromJson(result,
+                            new TypeToken<List<AfterSaleRecord>>() {}.getType());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            return list;
+        }
+        public void setList(List<AfterSaleRecord> list) {
+            this.list = list;
+        }
+    }
+
+    public static class AfterSaleMaintainCancelEvent extends CommonRequestEvent {}
+    public static class AfterSaleCancelCancelEvent extends CommonRequestEvent {}
+    public static class AfterSaleUpdateCancelEvent extends CommonRequestEvent {}
+    public static class AfterSaleCancelCompleteEvent extends CommonCompleteEvent {}
+
+    public static class AfterSaleCancelResubmitEvent extends CommonRequestEvent {}
+    public static class AfterSaleResubmitCompleteEvent extends CommonCompleteEvent {}
+
 
 
 }

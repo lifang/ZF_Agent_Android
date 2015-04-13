@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="bg">#f3f2f2</color>
     <color name="tmc">#e08d8d8d</color>
     <color name="bgtitle">#006fd5</color>
     <color name="text535252">#535252</color>

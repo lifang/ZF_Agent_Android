@@ -2,20 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
     android:orientation="vertical" >
-
-
 
     <View
         android:layout_width="fill_parent"
-        android:layout_height="1dp"
+        android:layout_height="1px"
         android:layout_marginTop="10dp"
         android:background="@color/Viewc2" />
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="6dp"
         android:background="@color/white"
         android:padding="5dp"
         android:stretchColumns="0,1,2"
@@ -33,11 +30,12 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:textSize="11dp"
-                    android:textColor="#ccc"
+                    android:textColor="@color/text5a5a5a"
 
                     />
                 <TextView
-                    android:text="12344454545245"
+                    android:id="@+id/tv_terminal_number"
+                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
@@ -56,10 +54,11 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:textSize="11dp"
-                    android:textColor="#ccc"
+                    android:textColor="@color/text5a5a5a"
 
                     />
                 <TextView
+                    android:id="@+id/tv_status"
                     android:text="开通"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -92,9 +91,7 @@
 
     <View
         android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:layout_margin="5dp"
-        android:layout_marginTop="1dp"
+        android:layout_height="1px"
         android:background="@color/Viewc2" />
     <LinearLayout
         android:layout_width="fill_parent"
@@ -106,17 +103,22 @@
         <Button
             android:id="@+id/btn_apply_open"
             android:layout_width="150dp"
-            android:layout_height="fill_parent"
+            android:layout_height="40dp"
             android:layout_margin="5dp"
             android:background="@drawable/bg_blue_shape"
             android:textColor="@color/white"
             android:text="申请开通" />
+        <Button
+            android:id="@+id/btn_apply_reopen"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/bg_blue_shape"
+            android:textColor="@color/white"
+            android:text="重新申请开通" />
     </LinearLayout>
-
     <View
         android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="1dp"
+        android:layout_height="1px"
         android:background="@color/Viewc2" />
-
 </LinearLayout>

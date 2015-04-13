@@ -1,4 +1,4 @@
-package com.example.zf_android.trade;
+package com.posagent.activities.aftersale;
 
 import android.app.Activity;
 import android.content.Intent;

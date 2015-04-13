@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -78,6 +79,13 @@ public class TerminalOpenApply extends BaseActivity implements IXListViewListene
         Xlistview.setXListViewListener(this);
         Xlistview.setDivider(null);
         Xlistview.setAdapter(myAdapter);
+
+        Xlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
     }
 
     @Override

@@ -1,19 +1,4 @@
-package com.example.zf_android.trade;
-
-import static com.example.zf_android.trade.Constants.AfterSaleIntent.RECORD_ID;
-import static com.example.zf_android.trade.Constants.AfterSaleIntent.RECORD_STATUS;
-import static com.example.zf_android.trade.Constants.AfterSaleIntent.RECORD_TYPE;
-import static com.example.zf_android.trade.Constants.AfterSaleIntent.REQUEST_MARK;
-import static com.example.zf_android.trade.Constants.AfterSaleType.CANCEL;
-import static com.example.zf_android.trade.Constants.AfterSaleType.CHANGE;
-import static com.example.zf_android.trade.Constants.AfterSaleType.LEASE;
-import static com.example.zf_android.trade.Constants.AfterSaleType.MAINTAIN;
-import static com.example.zf_android.trade.Constants.AfterSaleType.RETURN;
-import static com.example.zf_android.trade.Constants.AfterSaleType.UPDATE;
-
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+package com.posagent.activities.aftersale;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -28,6 +13,7 @@ import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
+import com.example.zf_android.trade.API;
 import com.example.zf_android.trade.common.CommonUtil;
 import com.example.zf_android.trade.common.HttpCallback;
 import com.example.zf_android.trade.entity.AfterSaleDetail;
@@ -40,6 +26,21 @@ import com.example.zf_android.trade.entity.AfterSaleDetailUpdate;
 import com.example.zf_android.trade.entity.Comment;
 import com.example.zf_android.trade.entity.ResourceInfo;
 import com.google.gson.reflect.TypeToken;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import static com.example.zf_android.trade.Constants.AfterSaleIntent.RECORD_ID;
+import static com.example.zf_android.trade.Constants.AfterSaleIntent.RECORD_STATUS;
+import static com.example.zf_android.trade.Constants.AfterSaleIntent.RECORD_TYPE;
+import static com.example.zf_android.trade.Constants.AfterSaleIntent.REQUEST_MARK;
+import static com.example.zf_android.trade.Constants.AfterSaleType.CANCEL;
+import static com.example.zf_android.trade.Constants.AfterSaleType.CHANGE;
+import static com.example.zf_android.trade.Constants.AfterSaleType.LEASE;
+import static com.example.zf_android.trade.Constants.AfterSaleType.MAINTAIN;
+import static com.example.zf_android.trade.Constants.AfterSaleType.RETURN;
+import static com.example.zf_android.trade.Constants.AfterSaleType.UPDATE;
 
 /**
  * Created by Leo on 2015/2/28.
@@ -108,25 +109,25 @@ public class AfterSaleDetailActivity extends Activity {
 			@Override
 			public void onClick(View view) {
 				API.cancelAfterSaleApply(AfterSaleDetailActivity.this, mRecordType, mRecordId, new HttpCallback(AfterSaleDetailActivity.this) {
-					@Override
-					public void onSuccess(Object data) {
-						mRecordStatus = 5;
-						String status = getResources().getStringArray(R.array.maintain_status)[5];
-						mStatus.setText(status);
-						if (mRecordType == CANCEL) {
-							mButton1.setText(getString(R.string.button_submit_cancel));
-							mButton1.setOnClickListener(mSubmitCancelListener);
-						} else {
-							mButton1.setVisibility(View.GONE);
-						}
-						CommonUtil.toastShort(AfterSaleDetailActivity.this, getString(R.string.toast_cancel_apply_success));
-					}
+                    @Override
+                    public void onSuccess(Object data) {
+                        mRecordStatus = 5;
+                        String status = getResources().getStringArray(R.array.maintain_status)[5];
+                        mStatus.setText(status);
+                        if (mRecordType == CANCEL) {
+                            mButton1.setText(getString(R.string.button_submit_cancel));
+                            mButton1.setOnClickListener(mSubmitCancelListener);
+                        } else {
+                            mButton1.setVisibility(View.GONE);
+                        }
+                        CommonUtil.toastShort(AfterSaleDetailActivity.this, getString(R.string.toast_cancel_apply_success));
+                    }
 
-					@Override
-					public TypeToken getTypeToken() {
-						return null;
-					}
-				});
+                    @Override
+                    public TypeToken getTypeToken() {
+                        return null;
+                    }
+                });
 			}
 		};
 

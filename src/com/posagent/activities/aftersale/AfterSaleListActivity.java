@@ -1,28 +1,36 @@
-package com.example.zf_android.trade;
+package com.posagent.activities.aftersale;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.examlpe.zf_android.util.Tools;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.common.CommonUtil;
-import com.example.zf_android.trade.common.HttpCallback;
-import com.example.zf_android.trade.common.Pageable;
 import com.example.zf_android.trade.entity.AfterSaleRecord;
 import com.example.zf_android.trade.widget.XListView;
-import com.google.gson.reflect.TypeToken;
+import com.posagent.activities.BaseActivity;
+import com.posagent.events.Events;
+import com.posagent.utils.JsonParams;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+
+import de.greenrobot.event.EventBus;
 
 import static com.example.zf_android.trade.Constants.AfterSaleIntent.RECORD_ID;
 import static com.example.zf_android.trade.Constants.AfterSaleIntent.RECORD_STATUS;
@@ -39,17 +47,22 @@ import static com.example.zf_android.trade.Constants.AfterSaleType.UPDATE;
 /**
  * Created by Leo on 2015/2/26.
  */
-public class AfterSaleListActivity extends Activity implements XListView.IXListViewListener {
+public class AfterSaleListActivity extends BaseActivity implements XListView.IXListViewListener,
+        AdapterView.OnItemSelectedListener
+{
 
 	private int mRecordType;
 
 	private XListView mListView;
 	private RecordListAdapter mAdapter;
 	private List<AfterSaleRecord> mEntities;
+    private Spinner spinnerstate;
 
-	private int page = 0;
+	private int page = 1;
 	private int total = 0;
 	private final int rows = 10;
+
+    private int q = 0;
 
 	private LayoutInflater mInflater;
 
@@ -62,7 +75,28 @@ public class AfterSaleListActivity extends Activity implements XListView.IXListV
 	// submit cancel button listener
 	private View.OnClickListener mSubmitCancelListener;
 
-	@Override
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+
+                    if (mEntities.size() == 0) {
+                        mListView.setVisibility(View.GONE);
+                    } else {
+                        mListView.setVisibility(View.VISIBLE);
+                    }
+                    mAdapter.notifyDataSetChanged();
+                    break;
+            }
+        }
+    };
+
+    private String[] status;
+    private String[] spinnerStatus;
+    private Map<String, Integer> mapStatus;
+
+
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mRecordType = getIntent().getIntExtra(RECORD_TYPE, 0);
@@ -70,6 +104,31 @@ public class AfterSaleListActivity extends Activity implements XListView.IXListV
 		setContentView(R.layout.activity_after_sale_list);
 		String[] titles = getResources().getStringArray(R.array.title_after_sale_list);
 		new TitleMenuUtil(this, titles[mRecordType]).show();
+
+        status = getResources().getStringArray(
+                mRecordType == MAINTAIN ? R.array.maintain_status
+                        : mRecordType == RETURN ? R.array.return_status
+                        : mRecordType == CANCEL ? R.array.cancel_status
+                        : mRecordType == CHANGE ? R.array.change_status
+                        : mRecordType == UPDATE ? R.array.update_status
+                        : R.array.lease_status
+        );
+
+        mapStatus = new LinkedHashMap<String, Integer>();
+        mapStatus.put("请选择状态", 0);
+
+        for (int i = 0; i < status.length; i++) {
+            String state = status[i];
+            if (!state.equals("")) {
+                mapStatus.put(state, i);
+            }
+        }
+        spinnerStatus = mapStatus.keySet().toArray(new String[mapStatus.keySet().size()]);
+
+        spinnerstate = (Spinner) findViewById(R.id.spinnerstate);
+        ArrayAdapter<String> adapter_state = new ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item, spinnerStatus);
+        spinnerstate.setAdapter(adapter_state);
+        spinnerstate.setOnItemSelectedListener(this);
 
 
 		mInflater = LayoutInflater.from(this);
@@ -87,54 +146,111 @@ public class AfterSaleListActivity extends Activity implements XListView.IXListV
 		loadData();
 	}
 
-	private void loadData() {
-		API.getAfterSaleRecordList(this, mRecordType, Constants.TEST_CUSTOMER, page + 1, rows, new HttpCallback<Pageable<AfterSaleRecord>>(this) {
-			@Override
-			public void onSuccess(Pageable<AfterSaleRecord> data) {
-				if (null != data.getContent()) {
-					mEntities.addAll(data.getContent());
-				}
-				page++;
-				total = data.getTotal();
-				mAdapter.notifyDataSetChanged();
-			}
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String key = spinnerStatus[position];
+        q = mapStatus.get(key);
+        onRefresh();
+    }
 
-			@Override
-			public void preLoad() {
-			}
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
-			@Override
-			public void postLoad() {
-				loadFinished();
-			}
+    }
 
-			@Override
-			public TypeToken<Pageable<AfterSaleRecord>> getTypeToken() {
-				return new TypeToken<Pageable<AfterSaleRecord>>() {
-				};
-			}
-		});
+    @Override
+    public void onRefresh() {
+        page = 1;
+        mEntities.clear();
+        loadData();
+    }
 
-	}
+    private void loadData() {
+        JsonParams params = new JsonParams();
+        //Fixme
+        params.put("customerId", 1);
+        if (q > 0) {
+            params.put("q", q);
+        }
+        params.put("page", page);
+        params.put("rows", rows);
+        String strParams = params.toString();
+        Events.CommonRequestEvent event = new Events.AfterSaleMaintainListEvent();
+        switch (mRecordType) {
+            case CANCEL:
+                event = new Events.AfterSaleCancelListEvent();
+
+                break;
+            case UPDATE:
+                event = new Events.AfterSaleUpdateListEvent();
+
+                break;
+        }
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
+
+    }
+
+    private void doCancel(AfterSaleRecord record) {
+        JsonParams params = new JsonParams();
+        params.put("id", record.getId());
+        String strParams = params.toString();
+        Events.CommonRequestEvent event = new Events.AfterSaleMaintainCancelEvent();
+        switch (mRecordType) {
+            case CANCEL:
+                event = new Events.AfterSaleCancelCancelEvent();
+
+                break;
+            case UPDATE:
+                event = new Events.AfterSaleUpdateCancelEvent();
+
+                break;
+        }
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
+
+    }
+
+    private void doResubmit(AfterSaleRecord record) {
+        JsonParams params = new JsonParams();
+        params.put("id", record.getId());
+        String strParams = params.toString();
+        Events.CommonRequestEvent event = new Events.AfterSaleCancelResubmitEvent();
+
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
+
+    }
+
+
+
+    // events
+    public void onEventMainThread(Events.AfterSaleListCompleteEvent event) {
+        mEntities.addAll(event.getList());
+        mListView.setPullLoadEnable(event.getList().size() >= rows);
+
+        mListView.stopRefresh();
+        mListView.stopLoadMore();
+        mListView.setRefreshTime(Tools.getHourAndMin());
+
+        handler.sendEmptyMessage(0);
+    }
+
+    public void onEventMainThread(Events.AfterSaleCancelCompleteEvent event) {
+        mAdapter.notifyDataSetChanged();
+    }
+
+    public void onEventMainThread(Events.AfterSaleResubmitCompleteEvent event) {
+        mAdapter.notifyDataSetChanged();
+    }
 
 	private void initButtonListeners() {
 		mCancelApplyListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				final AfterSaleRecord record = (AfterSaleRecord) v.getTag();
-				API.cancelAfterSaleApply(AfterSaleListActivity.this, mRecordType, record.getId(), new HttpCallback(AfterSaleListActivity.this) {
-					@Override
-					public void onSuccess(Object data) {
-						record.setStatus(5);
-						mAdapter.notifyDataSetChanged();
-						CommonUtil.toastShort(AfterSaleListActivity.this, getString(R.string.toast_cancel_apply_success));
-					}
-
-					@Override
-					public TypeToken getTypeToken() {
-						return null;
-					}
-				});
+                record.setStatus(5);
+                doCancel(record);
 			}
 		};
 
@@ -160,28 +276,10 @@ public class AfterSaleListActivity extends Activity implements XListView.IXListV
 			@Override
 			public void onClick(View v) {
 				final AfterSaleRecord record = (AfterSaleRecord) v.getTag();
-				API.resubmitCancel(AfterSaleListActivity.this, record.getId(), new HttpCallback(AfterSaleListActivity.this) {
-					@Override
-					public void onSuccess(Object obj) {
-						record.setStatus(1);
-						mAdapter.notifyDataSetChanged();
-						CommonUtil.toastShort(AfterSaleListActivity.this, getString(R.string.toast_resubmit_cancel_success));
-					}
-
-					@Override
-					public TypeToken getTypeToken() {
-						return null;
-					}
-				});
+                record.setStatus(1);
+                doResubmit(record);
 			}
 		};
-	}
-
-	@Override
-	public void onRefresh() {
-		page = 0;
-		mEntities.clear();
-		loadData();
 	}
 
 	@Override
@@ -246,14 +344,6 @@ public class AfterSaleListActivity extends Activity implements XListView.IXListV
 			holder.tvNumber.setText(data.getApplyNum());
 			holder.tvTime.setText(data.getCreateTime());
 			holder.tvTerminal.setText(data.getTerminalNum());
-			String[] status = getResources().getStringArray(
-					mRecordType == MAINTAIN ? R.array.maintain_status
-							: mRecordType == RETURN ? R.array.return_status
-							: mRecordType == CANCEL ? R.array.cancel_status
-							: mRecordType == CHANGE ? R.array.change_status
-							: mRecordType == UPDATE ? R.array.update_status
-							: R.array.lease_status
-			);
 			holder.tvStatus.setText(status[data.getStatus()]);
 
 			switch (mRecordType) {

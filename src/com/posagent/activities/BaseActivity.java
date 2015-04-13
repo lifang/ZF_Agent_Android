@@ -168,6 +168,6 @@ public class BaseActivity extends Activity implements View.OnClickListener {
 
     //helper
     protected void toast(Context context, String msg) {
-        Toast.makeText(context, msg, Toast.LENGTH_LONG);
+        Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
     }
 }

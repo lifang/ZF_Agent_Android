@@ -40,7 +40,7 @@ public class APIManager {
     public static final String UrlGoodsList = BaseUrl + "/good/list";
     public static final String UrlGoodsDetail = BaseUrl + "/good/goodinfo";
     public static final String UrlCreateOrder = BaseUrl + "/order/agent";
-    public static final String UrlEventList = BaseUrl + "/agents/getAddressList";
+    public static final String UrlAddressList = BaseUrl + "/agents/getAddressList";
     public static final String UrlCreateAddress = BaseUrl + "/agents/insertAddress";
     public static final String UrlDeleteAddress = BaseUrl + "/agents/deleteAddress";
     public static final String UrlOrderList = BaseUrl + "/order/orderSearch";
@@ -53,6 +53,13 @@ public class APIManager {
     public static final String UrlStockAgentList = BaseUrl + "/stock/info";
     public static final String UrlStockAgentTerminalList = BaseUrl + "/stock/terminallist";
     public static final String UrlTerminalApplyList = BaseUrl + "/apply/getApplyList";
+    public static final String UrlAfterSaleMaintainList = BaseUrl + "/cs/agents/search";
+    public static final String UrlAfterSaleCancelList = BaseUrl + "/cs/cancels/search";
+    public static final String UrlAfterSaleUpdateList = BaseUrl + "/update/info/search";
+    public static final String UrlAfterSaleMaintainCancel = BaseUrl + "/cs/agents/cancelApply";
+    public static final String UrlAfterSaleCancelCancel = BaseUrl + "/cs/cancels/cancelApply";
+    public static final String UrlAfterSaleUpdateCancel = BaseUrl + "/update/info/cancelApply";
+    public static final String UrlAfterSaleCancelResubmit = BaseUrl + "/cs/cancels/resubmitCancel";
 
 
     /** Convenience singleton for apps using a process-wide EventBus instance. */
@@ -274,7 +281,7 @@ public class APIManager {
 
     public void onEventBackgroundThread(Events.AddressListEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.AddressListCompleteEvent();
-        CommonRequest(event, completeEvent, UrlEventList);
+        CommonRequest(event, completeEvent, UrlAddressList);
     }
 
     public void onEventBackgroundThread(Events.CreateAddressEvent event) {
@@ -335,6 +342,41 @@ public class APIManager {
     public void onEventBackgroundThread(Events.TerminalApplyListEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.TerminalApplyListCompleteEvent();
         CommonRequest(event, completeEvent, UrlTerminalApplyList);
+    }
+
+    public void onEventBackgroundThread(Events.AfterSaleMaintainListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.AfterSaleListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlAfterSaleMaintainList);
+    }
+
+    public void onEventBackgroundThread(Events.AfterSaleCancelListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.AfterSaleListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlAfterSaleCancelList);
+    }
+
+    public void onEventBackgroundThread(Events.AfterSaleUpdateListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.AfterSaleListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlAfterSaleUpdateList);
+    }
+
+    public void onEventBackgroundThread(Events.AfterSaleMaintainCancelEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.AfterSaleCancelCompleteEvent();
+        CommonRequest(event, completeEvent, UrlAfterSaleUpdateCancel);
+    }
+
+    public void onEventBackgroundThread(Events.AfterSaleUpdateCancelEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.AfterSaleCancelCompleteEvent();
+        CommonRequest(event, completeEvent, UrlAfterSaleMaintainCancel);
+    }
+
+    public void onEventBackgroundThread(Events.AfterSaleCancelCancelEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.AfterSaleCancelCompleteEvent();
+        CommonRequest(event, completeEvent, UrlAfterSaleCancelCancel);
+    }
+
+    public void onEventBackgroundThread(Events.AfterSaleCancelResubmitEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.AfterSaleResubmitCompleteEvent();
+        CommonRequest(event, completeEvent, UrlAfterSaleCancelResubmit);
     }
 
 

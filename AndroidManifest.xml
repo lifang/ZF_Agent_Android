@@ -243,27 +243,27 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".trade.AfterSaleGridActivity"
+            android:name="com.posagent.activities.aftersale.AfterSaleGridActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".trade.AfterSaleListActivity"
+            android:name="com.posagent.activities.aftersale.AfterSaleListActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".trade.AfterSaleDetailActivity"
+            android:name="com.posagent.activities.aftersale.AfterSaleDetailActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".trade.AfterSalePayActivity"
+            android:name="com.posagent.activities.aftersale.AfterSalePayActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".trade.AfterSaleMarkActivity"
+            android:name="com.posagent.activities.aftersale.AfterSaleMarkActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".trade.AfterSaleMaterialActivity"
+            android:name="com.posagent.activities.aftersale.AfterSaleMaterialActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity

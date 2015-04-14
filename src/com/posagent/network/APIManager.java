@@ -3,8 +3,6 @@ package com.posagent.network;
 import android.util.Log;
 
 import com.example.zf_android.entity.PosEntity;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.posagent.events.Events;
 import com.posagent.utils.Constants;
 import com.squareup.okhttp.MediaType;
@@ -12,7 +10,6 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
-
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -160,7 +157,7 @@ public class APIManager {
                 loginEvent.setSuccess(intCode == Constants.SUCCESS_CODE);
                 loginEvent.setMessage(json.getString("message"));
 
-                //TODO 登录成功后做一些事情
+                //TODO 鐧诲綍鎴愬姛鍚庡仛涓�簺浜嬫儏
                 if(loginEvent.getSuccess()){
                     String res =json.getString("result");
                 }
@@ -203,7 +200,7 @@ public class APIManager {
                 Events.CompleteEvent completeEvent = new Events.CompleteEvent(intCode == Constants.SUCCESS_CODE);
                 completeEvent.setMessage(json.getString("message"));
 
-                //TODO 注册成功后做一些事情
+                //TODO 娉ㄥ唽鎴愬姛鍚庡仛涓�簺浜嬫儏
                 if(completeEvent.getSuccess()){
                     String res =json.getString("result");
                 }

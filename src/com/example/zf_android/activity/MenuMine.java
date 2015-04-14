@@ -12,6 +12,7 @@ import com.posagent.activities.BaseActivity;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.ApplyOpenProgressActivity;
 import com.posagent.activities.home.Main;
+import com.posagent.activities.user.UserList;
 
 
 public class MenuMine extends BaseActivity implements OnClickListener{

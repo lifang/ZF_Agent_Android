@@ -60,6 +60,9 @@ public class APIManager {
     public static final String UrlAfterSaleCancelCancel = BaseUrl + "/cs/cancels/cancelApply";
     public static final String UrlAfterSaleUpdateCancel = BaseUrl + "/update/info/cancelApply";
     public static final String UrlAfterSaleCancelResubmit = BaseUrl + "/cs/cancels/resubmitCancel";
+    public static final String UrlUserList = BaseUrl + "/user/getUser";
+    public static final String UrlUserDelete = BaseUrl + "/user/delectAgentUser";
+    public static final String UrlUserTerminal = BaseUrl + "/user/getTerminals";
 
 
     /** Convenience singleton for apps using a process-wide EventBus instance. */
@@ -377,6 +380,20 @@ public class APIManager {
     public void onEventBackgroundThread(Events.AfterSaleCancelResubmitEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.AfterSaleResubmitCompleteEvent();
         CommonRequest(event, completeEvent, UrlAfterSaleCancelResubmit);
+    }
+
+    public void onEventBackgroundThread(Events.UserListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.UserListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlUserList);
+    }
+
+    public void onEventBackgroundThread(Events.UserDeleteEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.UserDeleteCompleteEvent();
+        CommonRequest(event, completeEvent, UrlUserDelete);
+    }
+    public void onEventBackgroundThread(Events.UserTerminalEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.UserTerminalCompleteEvent();
+        CommonRequest(event, completeEvent, UrlUserTerminal);
     }
 
 

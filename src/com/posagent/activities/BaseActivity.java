@@ -1,7 +1,6 @@
 package com.posagent.activities;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -167,7 +166,7 @@ public class BaseActivity extends Activity implements View.OnClickListener {
     }
 
     //helper
-    protected void toast(Context context, String msg) {
-        Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+    protected void toast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 }

@@ -100,7 +100,6 @@ public class AdressList extends BaseActivity  {
             public void onClick(DialogInterface dialog, int which) {
                 JsonParams params = new JsonParams();
 
-                //Fixme
                 params.put("id", entity.getId());
 
                 String strParams = params.toString();

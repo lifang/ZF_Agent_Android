@@ -164,7 +164,7 @@ public class StockList extends BaseActivity implements IXListViewListener {
 
     public void onEventMainThread(Events.StockRenameCompleteEvent event) {
         if (event.getSuccess()) {
-            toast(this, event.getMessage());
+            toast(event.getMessage());
         }
     }
 

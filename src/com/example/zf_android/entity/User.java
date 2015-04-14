@@ -6,42 +6,37 @@ package com.example.zf_android.entity;
 * @version    
 *
  */
-public class User {
-	//"result":{"studentEmail":"475813996@qq.com","studentId":6,"studentStatus":2,"studentMobilePhone":"18862243513"}
-//    "id": 17,
-//    "username": "xianfeihu",
-//    "password": "123123",
-//    "accountType": null,
-//    "name": null,
-//    "cityId": null,
-//    "types": 0,
-//    "lastLoginedAt": null,
-//    "integral": null,
-//    "status": 1,
-//    "deviceCode": null,
-//    "createdAt": null,
-//    "updatedAt": null,
-//    "phone": null,
-//    "email": null,
-//    "code": null,
-//    "dentcode": null
+public class User extends BaseEntity {
+
 	private int id;
-	private String username;
 	private int types;
 	private int status;
-	private String phone;
+    private int customersId;
+
+    public int getCustomersId() {
+        return customersId;
+    }
+
+    public void setCustomersId(int customersId) {
+        this.customersId = customersId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private String name;
+    private String phone;
 	private String email;
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
 	}
 	public int getTypes() {
 		return types;

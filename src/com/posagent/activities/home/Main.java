@@ -13,7 +13,7 @@ import com.posagent.activities.order.OrderList;
 import com.posagent.activities.stock.StockList;
 import com.posagent.activities.terminal.Terminal;
 import com.posagent.activities.terminal.TerminalOpenApply;
-import com.example.zf_android.activity.UserList;
+import com.posagent.activities.user.UserList;
 import com.example.zf_android.entity.PicEntity;
 import com.posagent.activities.aftersale.AfterSaleGridActivity;
 import com.example.zf_android.trade.CitySelectActivity;

@@ -6,6 +6,8 @@ import com.example.zf_android.entity.PosEntity;
 import com.example.zf_android.entity.StockAgentEntity;
 import com.example.zf_android.entity.StockEntity;
 import com.example.zf_android.entity.TerminalApplyEntity;
+import com.example.zf_android.entity.User;
+import com.example.zf_android.entity.UserTerminal;
 import com.example.zf_android.trade.entity.AfterSaleRecord;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -36,6 +38,9 @@ public class Events {
 
         public Boolean getSuccess() {
             return success;
+        }
+        public Boolean success() {
+            return getSuccess();
         }
 
         public void setSuccess(Boolean success) {
@@ -347,6 +352,43 @@ public class Events {
 
     public static class AfterSaleCancelResubmitEvent extends CommonRequestEvent {}
     public static class AfterSaleResubmitCompleteEvent extends CommonCompleteEvent {}
+
+    //users
+    public static class UserListEvent extends CommonRequestEvent {}
+    public static class UserListCompleteEvent extends CommonCompleteEvent {
+        private List<User> list = new ArrayList<User>();
+        public List<User> getList() {
+            if (list.size() < 1) {
+                String result = getArrResult().toString();
+                list = (new Gson()).fromJson(result,
+                        new TypeToken<List<User>>() {}.getType());
+
+            }
+            return list;
+        }
+        public void setList(List<User> list) {
+            this.list = list;
+        }
+    }
+
+    public static class UserDeleteEvent extends CommonRequestEvent {}
+    public static class UserDeleteCompleteEvent extends CommonCompleteEvent {}
+    public static class UserTerminalEvent extends CommonRequestEvent {}
+    public static class UserTerminalCompleteEvent extends CommonCompleteEvent {
+        private List<UserTerminal> list = new ArrayList<UserTerminal>();
+        public List<UserTerminal> getList() {
+            if (list.size() < 1) {
+                String result = getArrResult().toString();
+                list = (new Gson()).fromJson(result,
+                        new TypeToken<List<UserTerminal>>() {}.getType());
+
+            }
+            return list;
+        }
+        public void setList(List<UserTerminal> list) {
+            this.list = list;
+        }
+    }
 
 
 

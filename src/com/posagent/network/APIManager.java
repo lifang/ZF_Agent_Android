@@ -3,6 +3,8 @@ package com.posagent.network;
 import android.util.Log;
 
 import com.example.zf_android.entity.PosEntity;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.posagent.events.Events;
 import com.posagent.utils.Constants;
 import com.squareup.okhttp.MediaType;
@@ -10,6 +12,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
+
 import org.json.JSONObject;
 
 import java.io.IOException;

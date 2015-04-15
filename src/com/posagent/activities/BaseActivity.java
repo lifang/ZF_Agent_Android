@@ -13,8 +13,8 @@ import android.widget.Toast;
 import com.example.zf_android.R;
 import com.example.zf_android.activity.AllProduct;
 import com.example.zf_android.activity.MenuMine;
-import com.example.zf_android.activity.SystemMessage;
 import com.posagent.activities.home.Main;
+import com.posagent.activities.user.MessageList;
 import com.posagent.events.Events;
 
 import java.util.ArrayList;
@@ -143,7 +143,7 @@ public class BaseActivity extends Activity implements View.OnClickListener {
         int bottomTabContainerId = resouceId("bottom_tab_container", "id");
         if (bottomTabContainerId > 0) {
             HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{
-                put("tab_index2", SystemMessage.class);
+                put("tab_index2", MessageList.class);
                 put("tab_index3", MenuMine.class);
                 put("tab_index0", Main.class);
                 put("tab_index1", AllProduct.class);

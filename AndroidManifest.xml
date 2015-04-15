@@ -117,6 +117,14 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.posagent.activities.user.MessageList"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.posagent.activities.user.MessageDetail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.posagent.activities.user.UserList"
             android:screenOrientation="portrait" >
         </activity>

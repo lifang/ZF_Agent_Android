@@ -1,6 +1,7 @@
 package com.posagent.events;
 
 import com.example.zf_android.entity.AgentTerminalEntity;
+import com.example.zf_android.entity.MessageEntity;
 import com.example.zf_android.entity.OrderEntity;
 import com.example.zf_android.entity.PosEntity;
 import com.example.zf_android.entity.StockAgentEntity;
@@ -389,6 +390,37 @@ public class Events {
             this.list = list;
         }
     }
+
+
+
+    public static class MessageListEvent extends CommonRequestEvent {}
+    public static class MessageListCompleteEvent extends CommonCompleteEvent {
+        private List<MessageEntity> list = new ArrayList<MessageEntity>();
+        public List<MessageEntity> getList() {
+            if (list.size() < 1) {
+                String result = null;
+                try {
+                    result = getResult().getString("list");
+                    list = (new Gson()).fromJson(result,
+                        new TypeToken<List<MessageEntity>>() {}.getType());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            return list;
+        }
+        public void setList(List<MessageEntity> list) {
+            this.list = list;
+        }
+    }
+
+    public static class MessageDeleteEvent extends CommonRequestEvent {}
+    public static class MessageDeleteCompleteEvent extends CommonCompleteEvent {}
+
+    public static class MessageMarkReadEvent extends CommonRequestEvent {}
+    public static class MessageMarkReadCompleteEvent extends CommonCompleteEvent {}
+
 
 
 

@@ -63,6 +63,9 @@ public class APIManager {
     public static final String UrlUserList = BaseUrl + "/user/getUser";
     public static final String UrlUserDelete = BaseUrl + "/user/delectAgentUser";
     public static final String UrlUserTerminal = BaseUrl + "/user/getTerminals";
+    public static final String UrlMessageList = BaseUrl + "/message/receiver/getAll";
+    public static final String UrlMessageMarkRead = BaseUrl + "/message/receiver/batchRead";
+    public static final String UrlMessageDelete = BaseUrl + "/message/receiver/batchDelete";
 
 
     /** Convenience singleton for apps using a process-wide EventBus instance. */
@@ -391,9 +394,25 @@ public class APIManager {
         Events.CommonCompleteEvent completeEvent = new Events.UserDeleteCompleteEvent();
         CommonRequest(event, completeEvent, UrlUserDelete);
     }
+
     public void onEventBackgroundThread(Events.UserTerminalEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.UserTerminalCompleteEvent();
         CommonRequest(event, completeEvent, UrlUserTerminal);
+    }
+
+    public void onEventBackgroundThread(Events.MessageListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.MessageListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlMessageList);
+    }
+
+    public void onEventBackgroundThread(Events.MessageDeleteEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.MessageDeleteCompleteEvent();
+        CommonRequest(event, completeEvent, UrlMessageDelete);
+    }
+
+    public void onEventBackgroundThread(Events.MessageMarkReadEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.MessageMarkReadCompleteEvent();
+        CommonRequest(event, completeEvent, UrlMessageMarkRead);
     }
 
 

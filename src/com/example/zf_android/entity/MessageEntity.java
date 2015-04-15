@@ -6,7 +6,7 @@ package com.example.zf_android.entity;
 * @version    
 *
  */
-public class MessageEntity {
+public class MessageEntity extends BaseEntity {
 	private String content;
 	private String id;
 	private String title;

@@ -1,4 +1,4 @@
-package com.example.zf_android.trade;
+package com.posagent.activities.trade;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zf_android.R;
+import com.example.zf_android.trade.API;
 import com.example.zf_android.trade.common.HttpCallback;
 import com.example.zf_android.trade.common.Page;
 import com.example.zf_android.trade.entity.TradeRecord;
@@ -34,8 +35,10 @@ import java.util.Date;
 import java.util.List;
 
 import static com.example.zf_android.trade.Constants.TradeIntent.CLIENT_NUMBER;
+import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_NAME;
 import static com.example.zf_android.trade.Constants.TradeIntent.END_DATE;
 import static com.example.zf_android.trade.Constants.TradeIntent.REQUEST_TRADE_CLIENT;
+import static com.example.zf_android.trade.Constants.TradeIntent.REQUEST_TRADE_AGENT;
 import static com.example.zf_android.trade.Constants.TradeIntent.START_DATE;
 import static com.example.zf_android.trade.Constants.TradeIntent.TRADE_RECORD_ID;
 import static com.example.zf_android.trade.Constants.TradeIntent.TRADE_TYPE;
@@ -51,6 +54,11 @@ import static com.example.zf_android.trade.Constants.TradeType.TRANSFER;
 public class TradeFlowFragment extends Fragment implements View.OnClickListener {
 
     private int mTradeType;
+
+    private View vTradeAgent;
+    private TextView tvTradeAgentName;
+    private String tradeAgentName;
+
 
     private View mTradeClient;
     private TextView mTradeClientName;
@@ -131,8 +139,12 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
     private void initViews(View view) {
         mInflater = LayoutInflater.from(getActivity());
         View header = mInflater.inflate(R.layout.fragment_trade_flow, null);
+
         mTradeClient = header.findViewById(R.id.trade_client);
         mTradeClientName = (TextView) header.findViewById(R.id.trade_client_name);
+
+        vTradeAgent = header.findViewById(R.id.trade_agent);
+        tvTradeAgentName = (TextView) header.findViewById(R.id.trade_agent_name);
 
         mTradeStart = header.findViewById(R.id.trade_start);
         mTradeStartDate = (TextView) header.findViewById(R.id.trade_start_date);
@@ -143,6 +155,7 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
         mTradeStatistic = (Button) header.findViewById(R.id.trade_statistic);
         mTradeSearchContent = (LinearLayout) header.findViewById(R.id.trade_search_content);
 
+        vTradeAgent.setOnClickListener(this);
         mTradeClient.setOnClickListener(this);
         mTradeStart.setOnClickListener(this);
         mTradeEnd.setOnClickListener(this);
@@ -191,6 +204,12 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
                 tradeClientName = clientName;
                 toggleButtons();
                 break;
+            case REQUEST_TRADE_AGENT:
+                String agentName = data.getStringExtra(AGENT_NAME);
+                tvTradeAgentName.setText(agentName);
+                tradeAgentName = agentName;
+                toggleButtons();
+                break;
         }
     }
 
@@ -201,6 +220,11 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
                 Intent i = new Intent(getActivity(), TradeClientActivity.class);
                 i.putExtra(CLIENT_NUMBER, tradeClientName);
                 startActivityForResult(i, REQUEST_TRADE_CLIENT);
+                break;
+            case R.id.trade_agent:
+                Intent iAgent = new Intent(getActivity(), TradeAgentActivity.class);
+                iAgent.putExtra(AGENT_NAME, tradeAgentName);
+                startActivityForResult(iAgent, REQUEST_TRADE_AGENT);
                 break;
             case R.id.trade_start:
                 showDatePicker(tradeStartDate, true);

@@ -40,11 +40,13 @@ public class Constants {
 	 * The intent data among trade activities
 	 */
 	public static class TradeIntent {
-		public static final int REQUEST_TRADE_CLIENT = 0;
+        public static final int REQUEST_TRADE_CLIENT = 0;
+        public static final int REQUEST_TRADE_AGENT = 1;
 
 		public static final String TRADE_TYPE = "trade_type";
 		public static final String TRADE_RECORD_ID = "trade_record_id";
-		public static final String CLIENT_NUMBER = "client_number";
+        public static final String CLIENT_NUMBER = "client_number";
+        public static final String AGENT_NAME = "agent_name";
 		public static final String START_DATE = "start_date";
 		public static final String END_DATE = "end_date";
 	}

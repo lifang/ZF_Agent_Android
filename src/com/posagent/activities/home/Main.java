@@ -17,7 +17,7 @@ import com.posagent.activities.user.UserList;
 import com.example.zf_android.entity.PicEntity;
 import com.posagent.activities.aftersale.AfterSaleGridActivity;
 import com.example.zf_android.trade.CitySelectActivity;
-import com.example.zf_android.trade.TradeFlowActivity;
+import com.posagent.activities.trade.TradeFlowActivity;
 import com.example.zf_android.trade.entity.City;
 import com.example.zf_android.trade.entity.Province;
 import com.google.gson.Gson;

@@ -66,6 +66,8 @@ public class APIManager {
     public static final String UrlMessageList = BaseUrl + "/message/receiver/getAll";
     public static final String UrlMessageMarkRead = BaseUrl + "/message/receiver/batchRead";
     public static final String UrlMessageDelete = BaseUrl + "/message/receiver/batchDelete";
+    public static final String UrlTradeClient = BaseUrl + "/trade/record/getTerminals";
+    public static final String UrlTradeAgent = BaseUrl + "/trade/record/getAgents";
 
 
     /** Convenience singleton for apps using a process-wide EventBus instance. */
@@ -413,6 +415,16 @@ public class APIManager {
     public void onEventBackgroundThread(Events.MessageMarkReadEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.MessageMarkReadCompleteEvent();
         CommonRequest(event, completeEvent, UrlMessageMarkRead);
+    }
+
+    public void onEventBackgroundThread(Events.TradeClientEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.TradeClientCompleteEvent();
+        CommonRequest(event, completeEvent, UrlTradeClient);
+    }
+
+    public void onEventBackgroundThread(Events.TradeAgentEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.TradeAgentCompleteEvent();
+        CommonRequest(event, completeEvent, UrlTradeAgent);
     }
 
 

@@ -1,4 +1,4 @@
-package com.example.zf_android.trade;
+package com.posagent.activities.trade;
 
 import static com.example.zf_android.trade.Constants.TradeIntent.TRADE_RECORD_ID;
 import static com.example.zf_android.trade.Constants.TradeIntent.TRADE_TYPE;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
+import com.example.zf_android.trade.API;
 import com.example.zf_android.trade.common.HttpCallback;
 import com.example.zf_android.trade.entity.TradeDetail;
 import com.google.gson.reflect.TypeToken;

@@ -1,4 +1,4 @@
-package com.example.zf_android.trade;
+package com.posagent.activities.trade;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -66,25 +66,11 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
                     onLoad();
 
                     if (myList.size() == 0) {
-                        //	norecord_text_to.setText("��û����ص���Ʒ");
                         Xlistview.setVisibility(View.GONE);
                         eva_nodata.setVisibility(View.VISIBLE);
                     }
                     onRefresh_number = true;
                     myAdapter.notifyDataSetChanged();
-                    break;
-                case 1:
-                    Toast.makeText(getApplicationContext(), (String) msg.obj,
-                            Toast.LENGTH_SHORT).show();
-
-                    break;
-                case 2: // ����������
-                    Toast.makeText(getApplicationContext(), "no 3g or wifi content",
-                            Toast.LENGTH_SHORT).show();
-                    break;
-                case 3:
-                    Toast.makeText(getApplicationContext(), " refresh too much",
-                            Toast.LENGTH_SHORT).show();
                     break;
             }
         }

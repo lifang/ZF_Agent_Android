@@ -10,6 +10,8 @@ import com.example.zf_android.entity.TerminalApplyEntity;
 import com.example.zf_android.entity.User;
 import com.example.zf_android.entity.UserTerminal;
 import com.example.zf_android.trade.entity.AfterSaleRecord;
+import com.example.zf_android.trade.entity.TradeAgent;
+import com.example.zf_android.trade.entity.TradeClient;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -422,6 +424,41 @@ public class Events {
     public static class MessageMarkReadCompleteEvent extends CommonCompleteEvent {}
 
 
+    //trade
+    public static class TradeClientEvent extends CommonRequestEvent {}
+    public static class TradeClientCompleteEvent extends CommonCompleteEvent {
+        private List<TradeClient> list = new ArrayList<TradeClient>();
+        public List<TradeClient> getList() {
+            if (list.size() < 1) {
+                String result = getArrResult().toString();
+                list = (new Gson()).fromJson(result,
+                        new TypeToken<List<TradeClient>>() {}.getType());
+
+            }
+            return list;
+        }
+        public void setList(List<TradeClient> list) {
+            this.list = list;
+        }
+    }
+
+
+    public static class TradeAgentEvent extends CommonRequestEvent {}
+    public static class TradeAgentCompleteEvent extends CommonCompleteEvent {
+        private List<TradeAgent> list = new ArrayList<TradeAgent>();
+        public List<TradeAgent> getList() {
+            if (list.size() < 1) {
+                String result = getArrResult().toString();
+                list = (new Gson()).fromJson(result,
+                        new TypeToken<List<TradeAgent>>() {}.getType());
+
+            }
+            return list;
+        }
+        public void setList(List<TradeAgent> list) {
+            this.list = list;
+        }
+    }
 
 
 }

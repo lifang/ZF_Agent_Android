@@ -100,7 +100,7 @@
                 <TextView
                     android:id="@+id/trade_agent_name"
                     style="@style/TextItem.Relative"
-                    android:text="王宝强"
+                    android:text=""
                     android:layout_toLeftOf="@+id/trade_start_arrow_agent"/>
 
                 <ImageView

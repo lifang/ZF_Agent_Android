@@ -231,19 +231,23 @@
         <!-- Leo's Activities -->
         <!-- ====================================================== -->
         <activity
-            android:name=".trade.TradeFlowActivity"
+            android:name="com.posagent.activities.trade.TradeFlowActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".trade.TradeClientActivity"
+            android:name="com.posagent.activities.trade.TradeClientActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".trade.TradeStatisticActivity"
+            android:name="com.posagent.activities.trade.TradeAgentActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".trade.TradeDetailActivity"
+            android:name="com.posagent.activities.trade.TradeStatisticActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.posagent.activities.trade.TradeDetailActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity

@@ -13,7 +13,7 @@
         >
         <TableRow>
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="160dp"
                 android:orientation="vertical"
                 android:gravity="center_vertical"
                 android:layout_marginLeft="5dp"
@@ -24,11 +24,12 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:textSize="11dp"
-                    android:textColor="#ccc"
+                    android:textColor="#999"
 
                     />
                 <TextView
-                    android:text="12344454545245"
+                    android:id="@+id/tv_terminal_number"
+                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
@@ -47,11 +48,12 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:textSize="11dp"
-                    android:textColor="#ccc"
+                    android:textColor="#999"
 
                     />
                 <TextView
-                    android:text="开通"
+                    android:id="@+id/tv_status"
+                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"

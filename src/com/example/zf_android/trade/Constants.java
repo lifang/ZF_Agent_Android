@@ -47,6 +47,7 @@ public class Constants {
 		public static final String TRADE_RECORD_ID = "trade_record_id";
         public static final String CLIENT_NUMBER = "client_number";
         public static final String AGENT_NAME = "agent_name";
+        public static final String AGENT_ID = "agent_id";
 		public static final String START_DATE = "start_date";
 		public static final String END_DATE = "end_date";
 	}

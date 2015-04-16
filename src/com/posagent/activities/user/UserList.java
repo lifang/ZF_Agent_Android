@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -47,6 +48,7 @@ public class UserList extends BaseActivity implements IXListViewListener {
 
     private boolean onRefresh_number = true;
     private boolean isDeleting = false;
+    private boolean forSelect = false;
     private UserAdapter myAdapter;
     List<User> myList = new ArrayList<User>();
 
@@ -73,6 +75,9 @@ public class UserList extends BaseActivity implements IXListViewListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
+
+        forSelect = getIntent().getBooleanExtra("forSelect", false);
+
         initView();
         getData();
     }
@@ -83,21 +88,36 @@ public class UserList extends BaseActivity implements IXListViewListener {
         if (!isDeleting) {
             rl_button_toolbar.setVisibility(View.GONE);
         }
-        // delete icon show
-        ImageView deleteIcon = (ImageView) findViewById(R.id.search);
-        deleteIcon.setVisibility(View.VISIBLE);
-        deleteIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isDeleting = !isDeleting;
-                updateListView();
-                if (isDeleting) {
-                    rl_button_toolbar.setVisibility(View.VISIBLE);
-                } else {
-                    rl_button_toolbar.setVisibility(View.GONE);
+
+        if (forSelect) {
+            //选择用户用
+            // add icon show
+            ImageView addIcon = (ImageView) findViewById(R.id.iv_addIcon);
+            addIcon.setVisibility(View.VISIBLE);
+            addIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG, "go add user");
                 }
-            }
-        });
+            });
+        } else {
+            // delete icon show
+            ImageView deleteIcon = (ImageView) findViewById(R.id.search);
+            deleteIcon.setVisibility(View.VISIBLE);
+            deleteIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    isDeleting = !isDeleting;
+                    updateListView();
+                    if (isDeleting) {
+                        rl_button_toolbar.setVisibility(View.VISIBLE);
+                    } else {
+                        rl_button_toolbar.setVisibility(View.GONE);
+                    }
+                }
+            });
+        }
+
 
         tv_deleteAll = (TextView) findViewById(R.id.tv_deleteAll);
         tv_deleteAll.setOnClickListener(new View.OnClickListener() {

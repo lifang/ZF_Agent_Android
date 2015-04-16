@@ -252,38 +252,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/trade_search_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <TextView
-                style="@style/TextTrace"
-                android:layout_marginBottom="@dimen/d_7dp"
-                android:layout_marginLeft="24dp"
-                android:textSize="12sp"
-                android:text="@string/trade_flow_title"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/Viewc2"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/trade_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"/>
-
     </LinearLayout>
 
 </ScrollView>

@@ -11,29 +11,24 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.examlpe.zf_android.util.Tools;
 import com.examlpe.zf_android.util.XListView;
 import com.example.zf_android.Config;
-import com.posagent.MyApplication;
 import com.example.zf_android.R;
-import com.example.zf_android.entity.OrderEntity;
+import com.example.zf_android.trade.entity.TradeRecord;
 import com.example.zf_android.trade.widget.MyTabWidget;
 import com.example.zf_android.trade.widget.MyViewPager;
 import com.example.zf_zandroid.adapter.TradeFlowAdapter;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-
-import org.apache.http.Header;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.posagent.events.Events;
+import com.posagent.utils.JsonParams;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import de.greenrobot.event.EventBus;
 
 import static com.example.zf_android.trade.Constants.TradeType.CONSUME;
 import static com.example.zf_android.trade.Constants.TradeType.LIFE_PAY;
@@ -57,8 +52,11 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
     private LinearLayout eva_nodata;
     private boolean onRefresh_number = true;
     private TradeFlowAdapter myAdapter;
-    List<OrderEntity> myList = new ArrayList<OrderEntity>();
-    List<OrderEntity> moreList = new ArrayList<OrderEntity>();
+    List<TradeRecord> myList = new ArrayList<TradeRecord>();
+    List<TradeRecord> moreList = new ArrayList<TradeRecord>();
+
+    Map<String, Object> searchMap;
+
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -80,9 +78,20 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        try {
+            EventBus.getDefault().register(this);
+        } catch (RuntimeException ex) {
+            Log.d("UNCatchException", ex.getMessage());
+        }
+
         setContentView(R.layout.activity_trade_flow);
         initViews();
-        getData();
+    }
+
+    @Override
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 
     private void initViews() {
@@ -128,34 +137,27 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
     }
 
 
-
     @Override
     public void onRefresh() {
-        // TODO Auto-generated method stub
         page = 1;
-        System.out.println("onRefresh1");
         myList.clear();
-        System.out.println("onRefresh2");
-        getData();
+        getData(searchMap);
     }
 
 
     @Override
     public void onLoadMore() {
-        // TODO Auto-generated method stub
         if (onRefresh_number) {
             page = page + 1;
-
-
             if (Tools.isConnect(getApplicationContext())) {
                 onRefresh_number = false;
-                getData();
+                getData(searchMap);
             } else {
                 onRefresh_number = true;
-                handler.sendEmptyMessage(2);
+                EventBus.getDefault().post(new Events.NoConnectEvent());
             }
         } else {
-            handler.sendEmptyMessage(3);
+            EventBus.getDefault().post(new Events.RefreshToMuch());
         }
     }
 
@@ -165,81 +167,33 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
         Xlistview.setRefreshTime(Tools.getHourAndMin());
     }
 
-    public void buttonClick() {
-        page = 1;
-        myList.clear();
-        getData();
+    public void getData(Map<String, Object> map) {
+
+        searchMap = map;
+
+        JsonParams params = new JsonParams();
+
+        //Fixme
+        params.put("agentId", 1);
+        params.put("tradeTypeId", map.get("tradeTypeId"));
+        params.put("terminalNumber", map.get("terminalNumber"));
+        params.put("sonagentId", map.get("sonagentId"));
+        params.put("startTime", map.get("startTime"));
+        params.put("endTime", map.get("endTime"));
+        params.put("page", page);
+        params.put("rows", rows);
+        String strParams = params.toString();
+        Events.TradeListEvent event = new Events.TradeListEvent();
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
     }
 
-    /*
-     * �������
-     */
-    private void getData() {
-        // TODO Auto-generated method stub
 
-        // TODO Auto-generated method stub
-        String url = "http://114.215.149.242:18080/ZFMerchant/api/order/getMyOrderAll";
-        RequestParams params = new RequestParams();
-        params.put("customer_id", 80);
-        params.put("page", page);
-        params.put("pageSize", 2);
-
-        params.setUseJsonStreamer(true);
-
-        MyApplication.getInstance().getClient()
-                .post(url, params, new AsyncHttpResponseHandler() {
-
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers,
-                                          byte[] responseBody) {
-                        String responseMsg = new String(responseBody)
-                                .toString();
-                        Log.e("print", responseMsg);
-
-
-                        Gson gson = new Gson();
-
-                        JSONObject jsonobject = null;
-                        String code = null;
-                        try {
-                            jsonobject = new JSONObject(responseMsg);
-                            code = jsonobject.getString("code");
-                            int a = jsonobject.getInt("code");
-                            if (a == Config.CODE) {
-                                String res = jsonobject.getString("result");
-                                jsonobject = new JSONObject(res);
-                                moreList.clear();
-                                System.out.println("-jsonobject String()--" + jsonobject.getString("content").toString());
-                                moreList = gson.fromJson(jsonobject.getString("content").toString(), new TypeToken<List<OrderEntity>>() {
-                                }.getType());
-                                System.out.println("-sendEmptyMessage String()--");
-                                myList.addAll(moreList);
-                                handler.sendEmptyMessage(0);
-
-
-                            } else {
-                                code = jsonobject.getString("message");
-                                Toast.makeText(getApplicationContext(), code, 1000).show();
-                            }
-                        } catch (JSONException e) {
-                            // TODO Auto-generated catch block
-                            ;
-                            e.printStackTrace();
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers,
-                                          byte[] responseBody, Throwable error) {
-                        // TODO Auto-generated method stub
-                        System.out.println("-onFailure---");
-                        Log.e("print", "-onFailure---" + error);
-                    }
-                });
-
-
+    // events
+    public void onEventMainThread(Events.TradeListCompleteEvent event) {
+        myList.addAll(event.getList());
+        Xlistview.setPullLoadEnable(event.getList().size() >= rows);
+        handler.sendEmptyMessage(0);
     }
 
     @Override

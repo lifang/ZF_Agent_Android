@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
@@ -15,16 +14,19 @@ import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
+import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_ID;
 import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_NAME;
 
 public class TradeAgentActivity extends BaseListActivity {
 
 
     private String selectAgentName;
+    private List<TradeAgent> myList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +43,12 @@ public class TradeAgentActivity extends BaseListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        TextView tv = (TextView) v.findViewById(R.id.item_name);
+
+        TradeAgent agent = myList.get(position);
+
         Intent intent = getIntent();
-        intent.putExtra(AGENT_NAME, tv.getText().toString());
+        intent.putExtra(AGENT_NAME, agent.getAgentName());
+        intent.putExtra(AGENT_ID, agent.getAgentId());
         setResult(RESULT_OK, intent);
         finish();
     }
@@ -63,8 +68,8 @@ public class TradeAgentActivity extends BaseListActivity {
 
     // events
     public void onEventMainThread(Events.TradeAgentCompleteEvent event) {
-
-        for (TradeAgent client : event.getList()) {
+        myList = event.getList();
+        for (TradeAgent client : myList) {
             Map<String, Object> item = new HashMap<String, Object>();
             String agentName = client.getAgentName();
             item.put("name", agentName);

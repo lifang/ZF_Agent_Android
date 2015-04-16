@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,25 +21,27 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.zf_android.Config;
 import com.example.zf_android.R;
-import com.example.zf_android.trade.API;
-import com.example.zf_android.trade.common.HttpCallback;
-import com.example.zf_android.trade.common.Page;
 import com.example.zf_android.trade.entity.TradeRecord;
-import com.google.gson.reflect.TypeToken;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import static com.example.zf_android.trade.Constants.TradeIntent.CLIENT_NUMBER;
+import de.greenrobot.event.EventBus;
+
+import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_ID;
 import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_NAME;
+import static com.example.zf_android.trade.Constants.TradeIntent.CLIENT_NUMBER;
 import static com.example.zf_android.trade.Constants.TradeIntent.END_DATE;
-import static com.example.zf_android.trade.Constants.TradeIntent.REQUEST_TRADE_CLIENT;
 import static com.example.zf_android.trade.Constants.TradeIntent.REQUEST_TRADE_AGENT;
+import static com.example.zf_android.trade.Constants.TradeIntent.REQUEST_TRADE_CLIENT;
 import static com.example.zf_android.trade.Constants.TradeIntent.START_DATE;
 import static com.example.zf_android.trade.Constants.TradeIntent.TRADE_RECORD_ID;
 import static com.example.zf_android.trade.Constants.TradeIntent.TRADE_TYPE;
@@ -55,9 +58,13 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
 
     private int mTradeType;
 
+    private int page = 1;
+    private int rows = Config.ROWS;
+
     private View vTradeAgent;
     private TextView tvTradeAgentName;
     private String tradeAgentName;
+    private int tradeAgentId;
 
 
     private View mTradeClient;
@@ -105,6 +112,18 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
         if (getArguments() != null) {
             mTradeType = getArguments().getInt(TRADE_TYPE);
         }
+
+        try {
+            EventBus.getDefault().register(this);
+        } catch (RuntimeException ex) {
+            Log.d("UNCatchException", ex.getMessage());
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 
     @Override
@@ -153,7 +172,7 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
 
         mTradeSearch = (Button) header.findViewById(R.id.trade_search);
         mTradeStatistic = (Button) header.findViewById(R.id.trade_statistic);
-        mTradeSearchContent = (LinearLayout) header.findViewById(R.id.trade_search_content);
+//        mTradeSearchContent = (LinearLayout) header.findViewById(R.id.trade_search_content);
 
         vTradeAgent.setOnClickListener(this);
         mTradeClient.setOnClickListener(this);
@@ -166,6 +185,7 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
             mRecords = new ArrayList<TradeRecord>();
         }
 
+        // Despared
         mRecordList = (ListView) view.findViewById(R.id.trade_record_list);
         mAdapter = new TradeRecordListAdapter();
         mRecordList.addHeaderView(header);
@@ -206,8 +226,10 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
                 break;
             case REQUEST_TRADE_AGENT:
                 String agentName = data.getStringExtra(AGENT_NAME);
+                int agentId = data.getIntExtra(AGENT_ID, 0);
                 tvTradeAgentName.setText(agentName);
                 tradeAgentName = agentName;
+                tradeAgentId = agentId;
                 toggleButtons();
                 break;
         }
@@ -234,24 +256,7 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
                 break;
             case R.id.trade_search:
                 hasSearched = true;
-                mTradeSearchContent.setVisibility(View.VISIBLE);
-                API.getTradeRecordList(getActivity(),
-                        mTradeType, tradeClientName, tradeStartDate, tradeEndDate, 1, 100,
-                        new HttpCallback<Page<TradeRecord>>(getActivity()) {
-
-                            @Override
-                            public void onSuccess(Page<TradeRecord> data) {
-                                mRecords.clear();
-                                mRecords.addAll(data.getList());
-                                mAdapter.notifyDataSetChanged();
-                            }
-
-                            @Override
-                            public TypeToken<Page<TradeRecord>> getTypeToken() {
-                                return new TypeToken<Page<TradeRecord>>() {
-                                };
-                            }
-                        });
+                getData();
                 break;
             case R.id.trade_statistic:
                 Intent intent = new Intent(getActivity(), TradeStatisticActivity.class);
@@ -262,6 +267,20 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
                 startActivity(intent);
                 break;
         }
+    }
+
+    public void getData() {
+
+        Map<String, Object> params = new HashMap<String, Object>();
+
+        params.put("tradeTypeId", mTradeType);
+        params.put("terminalNumber", tradeClientName);
+        params.put("sonagentId", tradeAgentId);
+        params.put("startTime", tradeStartDate);
+        params.put("endTime", tradeEndDate);
+
+        TradeFlowActivity activity = (TradeFlowActivity) getActivity();
+        activity.getData(params);
     }
 
     /**

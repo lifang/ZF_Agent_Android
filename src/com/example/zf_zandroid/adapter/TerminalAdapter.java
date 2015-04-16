@@ -7,22 +7,22 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.zf_android.R;
+import com.example.zf_android.trade.entity.TerminalItem;
+import com.google.gson.Gson;
 import com.posagent.activities.terminal.TerminalDetail;
-import com.example.zf_android.entity.OrderEntity;
 
 import java.util.List;
 
 
 public class TerminalAdapter extends BaseAdapter{
     private Context context;
-    private List<OrderEntity> list;
+    private List<TerminalItem> list;
     private LayoutInflater inflater;
     private ViewHolder holder = null;
-    public TerminalAdapter(Context context, List<OrderEntity> list) {
+    public TerminalAdapter(Context context, List<TerminalItem> list) {
         this.context = context;
         this.list = list;
     }
@@ -43,21 +43,35 @@ public class TerminalAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        final TerminalItem entity = list.get(position);
         inflater = LayoutInflater.from(context);
         if(convertView == null){
             holder = new ViewHolder();
             convertView = inflater.inflate(R.layout.terminal_item, null);
+
+            //init
+            holder.tv_status = (TextView) convertView.findViewById(R.id.tv_status);
+            holder.tv_terminal_number = (TextView) convertView.findViewById(R.id.tv_terminal_number);
+
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder)convertView.getTag();
         }
 
+        //fill data
+        holder.tv_terminal_number.setText(entity.getTerminalNumber());
+        holder.tv_status.setText(statusName(entity.getStatus()));
+
         convertView.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                // TODO Auto-generated method stub
                 Intent i = new Intent(context, TerminalDetail.class);
+
+                Gson gson = new Gson();
+                String json = gson.toJson(entity);
+                i.putExtra("json", json);
+
                 context.startActivity(i);
             }
         });
@@ -66,7 +80,10 @@ public class TerminalAdapter extends BaseAdapter{
     }
 
     public final class ViewHolder {
-        public TextView tv_goodnum,tv_price,content,tv_ddbh,tv_time,tv_status,tv_sum,tv_psf,tv_pay,tv_gtd,content2,content_pp;
-        private LinearLayout ll_ishow;
+        public TextView tv_terminal_number, tv_status;
+    }
+
+    private String statusName(int status) {
+        return com.posagent.utils.Constants.TerminalConstant.STATUS[status];
     }
 }

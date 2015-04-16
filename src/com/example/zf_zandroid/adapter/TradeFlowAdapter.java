@@ -12,17 +12,17 @@ import android.widget.TextView;
 
 import com.example.zf_android.R;
 import com.example.zf_android.activity.TradeOrderDetail;
-import com.example.zf_android.entity.OrderEntity;
+import com.example.zf_android.trade.entity.TradeRecord;
 
 import java.util.List;
 
 
 public class TradeFlowAdapter extends BaseAdapter{
     private Context context;
-    private List<OrderEntity> list;
+    private List<TradeRecord> list;
     private LayoutInflater inflater;
     private ViewHolder holder = null;
-    public TradeFlowAdapter(Context context, List<OrderEntity> list) {
+    public TradeFlowAdapter(Context context, List<TradeRecord> list) {
         this.context = context;
         this.list = list;
     }

@@ -10,8 +10,10 @@ import com.example.zf_android.entity.TerminalApplyEntity;
 import com.example.zf_android.entity.User;
 import com.example.zf_android.entity.UserTerminal;
 import com.example.zf_android.trade.entity.AfterSaleRecord;
+import com.example.zf_android.trade.entity.TerminalItem;
 import com.example.zf_android.trade.entity.TradeAgent;
 import com.example.zf_android.trade.entity.TradeClient;
+import com.example.zf_android.trade.entity.TradeRecord;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -459,6 +461,55 @@ public class Events {
             this.list = list;
         }
     }
+
+    public static class TradeListEvent extends CommonRequestEvent {}
+    public static class TradeListCompleteEvent extends CommonCompleteEvent {
+        private List<TradeRecord> list = new ArrayList<TradeRecord>();
+        public List<TradeRecord> getList() {
+            if (list.size() < 1) {
+                String result = null;
+                try {
+                    result = getResult().getString("list");
+                    list = (new Gson()).fromJson(result,
+                            new TypeToken<List<TradeRecord>>() {}.getType());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            return list;
+        }
+        public void setList(List<TradeRecord> list) {
+            this.list = list;
+        }
+    }
+
+    // Terminal
+    public static class TerminalListEvent extends CommonRequestEvent {}
+    public static class TerminalListCompleteEvent extends CommonCompleteEvent {
+        private List<TerminalItem> list = new ArrayList<TerminalItem>();
+        public List<TerminalItem> getList() {
+            if (list.size() < 1) {
+                String result = null;
+                try {
+                    result = getResult().getString("applyList");
+                    list = (new Gson()).fromJson(result,
+                            new TypeToken<List<TerminalItem>>() {}.getType());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            return list;
+        }
+        public void setList(List<TerminalItem> list) {
+            this.list = list;
+        }
+    }
+
+
+    public static class TerminalBindEvent extends CommonRequestEvent {}
+    public static class TerminalBindCompleteEvent extends CommonCompleteEvent{}
 
 
 }

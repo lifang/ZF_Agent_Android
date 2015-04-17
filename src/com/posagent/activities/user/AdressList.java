@@ -17,13 +17,9 @@ import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.AdressEntity;
 import com.example.zf_zandroid.adapter.AdressAdapter;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
-
-import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,13 +134,8 @@ public class AdressList extends BaseActivity  {
     // events
     public void onEventMainThread(Events.AddressListCompleteEvent event) {
         if (event.getSuccess()) {
-            JSONArray items = event.getArrResult();
-            String text = items.toString();
-            Gson gson = new Gson();
-            moreList = gson.fromJson(text, new TypeToken<List<AdressEntity>>(){}.getType());
-
+            moreList = event.getList();
             myList.addAll(moreList);
-
             myAdapter.notifyDataSetChanged();
         }
     }

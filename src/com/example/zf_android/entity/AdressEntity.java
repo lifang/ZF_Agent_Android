@@ -3,14 +3,14 @@ package com.example.zf_android.entity;
 public class AdressEntity {
 //"id":16,"customerId":80,"receiver":"123","isDefault":2,"address":"123",
 	private int id;
-	private int customerId;
-    private int is_default;
+	private String customerId;
+    private String is_default;
 
-    public int getIs_default() {
+    public String getIs_default() {
         return is_default;
     }
 
-    public void setIs_default(int is_default) {
+    public void setIs_default(String is_default) {
         this.is_default = is_default;
     }
 
@@ -19,7 +19,7 @@ public class AdressEntity {
 	private String address;
 	//,"cityId":123,"zipCode":"123","moblephone":"123","telphone":"123
 	private int cityId;
-	private int zipCode;
+	private String zipCode;
 	private String moblephone;
 	private String telphone;
 	public Boolean getIscheck() {
@@ -34,13 +34,16 @@ public class AdressEntity {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getCustomerId() {
-		return customerId;
-	}
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
-	}
-	public String getReceiver() {
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
+
+    public String getReceiver() {
 		return receiver;
 	}
 	public void setReceiver(String receiver) {
@@ -58,13 +61,16 @@ public class AdressEntity {
 	public void setCityId(int cityId) {
 		this.cityId = cityId;
 	}
-	public int getZipCode() {
-		return zipCode;
-	}
-	public void setZipCode(int zipCode) {
-		this.zipCode = zipCode;
-	}
-	public String getMoblephone() {
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getMoblephone() {
 		return moblephone;
 	}
 	public void setMoblephone(String moblephone) {

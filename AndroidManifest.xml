@@ -141,7 +141,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.AfterSaleApply"
+            android:name="com.posagent.activities.terminal.AfterSaleApply"
             android:screenOrientation="portrait" >
         </activity>
         <activity

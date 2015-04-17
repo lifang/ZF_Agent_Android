@@ -24,16 +24,12 @@ import com.example.zf_android.Config;
 import com.example.zf_android.R;
 import com.example.zf_android.activity.PayFromCar;
 import com.example.zf_android.entity.AdressEntity;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.posagent.activities.BaseActivity;
 import com.posagent.activities.user.ChangeAdress;
 import com.posagent.events.Events;
 import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -193,17 +189,14 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
     // events
     public void onEventMainThread(Events.AddressListCompleteEvent event) {
         if (event.getSuccess()) {
-            JSONArray items = event.getArrResult();
-            String text = items.toString();
-            Gson gson = new Gson();
-            listAddress = gson.fromJson(text, new TypeToken<List<AdressEntity>>(){}.getType());
+            listAddress = event.getList();
 
             for (AdressEntity entity: listAddress) {
                 if (addressEntity == null) {
                     addressEntity = entity;
                 }
 
-                if (entity.getIs_default() == 1) {
+                if (entity.getIs_default() == "1") {
                     addressEntity = entity;
                     break;
                 }

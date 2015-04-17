@@ -1,5 +1,6 @@
 package com.posagent.events;
 
+import com.example.zf_android.entity.AdressEntity;
 import com.example.zf_android.entity.AgentTerminalEntity;
 import com.example.zf_android.entity.MessageEntity;
 import com.example.zf_android.entity.OrderEntity;
@@ -197,7 +198,21 @@ public class Events {
 
     public static class AddressListEvent extends CommonRequestEvent {}
     public static class AddressListReloadEvent extends CommonRequestEvent {}
-    public static class AddressListCompleteEvent extends CommonCompleteEvent {}
+    public static class AddressListCompleteEvent extends CommonCompleteEvent {
+        private List<AdressEntity> list = new ArrayList<AdressEntity>();
+        public List<AdressEntity> getList() {
+            if (list.size() < 1) {
+                String result = getArrResult().toString();
+                list = (new Gson()).fromJson(result,
+                        new TypeToken<List<AdressEntity>>() {}.getType());
+
+            }
+            return list;
+        }
+        public void setList(List<AdressEntity> list) {
+            this.list = list;
+        }
+    }
 
     public static class CreateAddressEvent extends CommonRequestEvent {}
     public static class CreateAddressCompleteEvent extends CommonCompleteEvent {}

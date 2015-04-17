@@ -17,7 +17,6 @@ import com.examlpe.zf_android.util.XListView;
 import com.examlpe.zf_android.util.XListView.IXListViewListener;
 import com.example.zf_android.Config;
 import com.example.zf_android.R;
-import com.example.zf_android.activity.AfterSaleApply;
 import com.example.zf_android.trade.entity.TerminalItem;
 import com.example.zf_android.trade.widget.MyTabWidget;
 import com.example.zf_zandroid.adapter.TerminalAdapter;

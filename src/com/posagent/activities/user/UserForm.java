@@ -11,10 +11,14 @@ import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
+import com.example.zf_android.trade.CitySelectActivity;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import de.greenrobot.event.EventBus;
 
@@ -24,35 +28,43 @@ import de.greenrobot.event.EventBus;
 public class UserForm extends BaseActivity implements View.OnClickListener
 {
 
-    private TextView tv_username;
-    private EditText et_terminals;
-    private LinearLayout ll_choose_users;
-    private Button btn_bind_terminal;
+    private TextView tv_city_name;
+    private EditText et_username, et_mobile, et_verify_code,
+            et_password, et_password_confirm;
+    private LinearLayout ll_choose_city;
+    private Button btn_get_verify_code, btn_create_user;
 
-    private int userId;
+    private int cityId;
+    private String cityName;
+
+    private boolean sendingVerifyCode = false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_terminal_user_bind);
-        new TitleMenuUtil(UserForm.this, "为用户绑定").show();
+        setContentView(R.layout.activity_user_form);
+        new TitleMenuUtil(UserForm.this, "创建用户").show();
 
         initView();
     }
 
     private void initView() {
-        tv_username = (TextView) findViewById(R.id.tv_username);
-        tv_username.setOnClickListener(this);
-        et_terminals = (EditText) findViewById(R.id.et_terminals);
-        et_terminals.setOnClickListener(this);
-        ll_choose_users = (LinearLayout) findViewById(R.id.ll_choose_users);
-        ll_choose_users.setOnClickListener(this);
-        btn_bind_terminal = (Button) findViewById(R.id.btn_bind_terminal);
-        btn_bind_terminal.setOnClickListener(this);
+        tv_city_name = (TextView) findViewById(R.id.tv_city_name);
+        et_username = (EditText) findViewById(R.id.et_username);
+        et_mobile = (EditText) findViewById(R.id.et_mobile);
+        et_verify_code = (EditText) findViewById(R.id.et_verify_code);
+        et_password = (EditText) findViewById(R.id.et_password);
+        et_password_confirm = (EditText) findViewById(R.id.et_password_confirm);
+        et_username = (EditText) findViewById(R.id.et_username);
 
+        ll_choose_city = (LinearLayout) findViewById(R.id.ll_choose_city);
+        ll_choose_city.setOnClickListener(this);
 
-
+        btn_get_verify_code = (Button) findViewById(R.id.btn_get_verify_code);
+        btn_get_verify_code.setOnClickListener(this);
+        btn_create_user = (Button) findViewById(R.id.btn_create_user);
+        btn_create_user.setOnClickListener(this);
 
     }
 
@@ -61,13 +73,20 @@ public class UserForm extends BaseActivity implements View.OnClickListener
     public void onClick(View v) {
         // 特殊 onclick 处理，如有特殊处理，
         switch (v.getId()) {
-            case R.id.ll_choose_users:
-                Intent i = new Intent(UserForm.this, UserList.class);
-                i.putExtra("forSelect", true);
-                startActivity(i);
+            case R.id.ll_choose_city:
+                Intent intent = new Intent(UserForm.this, CitySelectActivity.class);
+
+                if (cityName != null) {
+                    intent.putExtra(com.example.zf_android.trade.Constants.CityIntent.CITY_NAME, cityName);
+                }
+                startActivityForResult(intent, Constants.CommonInputerConstant.REQUEST_CITY_CODE);
+
                 break;
-            case R.id.btn_bind_terminal:
-                doBind();
+            case R.id.btn_get_verify_code:
+                getVerifyCode();
+                break;
+            case R.id.btn_create_user:
+                createUser();
                 break;
             default:
                 break;
@@ -78,19 +97,69 @@ public class UserForm extends BaseActivity implements View.OnClickListener
         super.onClick(v);
     }
 
-    private void doBind() {
-        JsonParams params = new JsonParams();
+    private void getVerifyCode() {
+        if (sendingVerifyCode) {
+            return;
+        }
+        sendingVerifyCode = true;
+        btn_get_verify_code.setText("正在发送...");
+        Timer timer = new Timer();
+        VerifyCodeReableTimerTask myTimerTask = new VerifyCodeReableTimerTask();
+        timer.schedule(myTimerTask, 60 * 1000);
 
-        params.put("userId", userId);
-        params.put("terminalsNum", et_terminals.getText().toString());
+        //do get verify code
+        JsonParams params = new JsonParams();
+        params.put("codeNumber", et_mobile.getText().toString());
         String strParams = params.toString();
-        Events.TerminalBindEvent event = new Events.TerminalBindEvent();
+        Events.VerifyCodeEvent event = new Events.VerifyCodeEvent();
         event.setParams(strParams);
         EventBus.getDefault().post(event);
+
+    }
+
+
+    private boolean check() {
+        if (!et_password.getText().toString().equals(et_password_confirm.getText().toString())) {
+            toast("两次密码不匹配");
+            return false;
+        }
+        return true;
+    }
+
+    private void createUser() {
+        if(check()) {
+            JsonParams params = new JsonParams();
+
+            //Fixme
+            params.put("agentId", 1);
+            params.put("codeNumber", et_mobile.getText().toString());
+            params.put("name", et_username.getText().toString());
+            params.put("password", et_password.getText().toString());
+            params.put("cityId", cityId);
+
+            String strParams = params.toString();
+            Events.CreateUserEvent event = new Events.CreateUserEvent();
+            event.setParams(strParams);
+            EventBus.getDefault().post(event);
+        }
     }
 
     // events
     public void onEventMainThread(Events.TerminalBindCompleteEvent event) {
+        toast(event.getMessage());
+    }
+
+    public void onEventMainThread(Events.VerifyCodeCompleteEvent event) {
+        if (event.success()) {
+            toast("发送完成，请查收短信");
+        }
+    }
+
+    public void onEventMainThread(Events.CreateUserCompleteEvent event) {
+        if (event.success()) {
+            EventBus.getDefault().post(new Events.UserListReloadEvent());
+            finish();
+        }
         toast(event.getMessage());
     }
 
@@ -101,12 +170,30 @@ public class UserForm extends BaseActivity implements View.OnClickListener
         Bundle bundle = data.getExtras();
 
         switch (requestCode) {
-            case Constants.REQUEST_CODE:
-                String username = bundle.getString("username");
-                tv_username.setText(username);
-                userId = bundle.getInt("userId", 0);
+            case Constants.CommonInputerConstant.REQUEST_CITY_CODE:
+                cityName = bundle.getString(com.example.zf_android.trade.Constants.CityIntent.CITY_NAME);
+                cityId = bundle.getInt(com.example.zf_android.trade.Constants.CityIntent.CITY_ID);
+                tv_city_name.setText(cityName);
                 break;
         }
+    }
+
+
+
+    class VerifyCodeReableTimerTask extends TimerTask {
+
+        @Override
+        public void run() {
+            runOnUiThread(new Runnable(){
+
+                @Override
+                public void run() {
+                    sendingVerifyCode = false;
+                    btn_get_verify_code.setText("获取验证码");
+                }
+            });
+        }
+
     }
 
 }

@@ -71,6 +71,8 @@ public class APIManager {
     public static final String UrlTradeList = BaseUrl + "/trade/record/getTradeRecords";
     public static final String UrlTerminalList = BaseUrl + "/apply/searchApplyList";
     public static final String UrlTerminalBind = BaseUrl + "/terminal/bindingTerminals";
+    public static final String UrlVerifyCode = BaseUrl + "/terminal/sendPhoneVerificationCodeReg";
+    public static final String UrlCreateUser = BaseUrl + "/terminal/addCustomer";
 
 
     /** Convenience singleton for apps using a process-wide EventBus instance. */
@@ -122,7 +124,12 @@ public class APIManager {
                         try {
                             completeEvent.setResult(json.getJSONObject("result"));
                         } catch (Exception e) {
-                            completeEvent.setArrResult(json.getJSONArray("result"));
+                            Log.d("UnCatchException", e.getMessage());
+                            try {
+                                completeEvent.setArrResult(json.getJSONArray("result"));
+                            } catch (Exception ex) {
+                                Log.d("UnCatchException", ex.getMessage());
+                            }
                         }
                     }
                 }
@@ -443,6 +450,17 @@ public class APIManager {
     public void onEventBackgroundThread(Events.TerminalBindEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.TerminalBindCompleteEvent();
         CommonRequest(event, completeEvent, UrlTerminalBind);
+    }
+
+    public void onEventBackgroundThread(Events.VerifyCodeEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.VerifyCodeCompleteEvent();
+        CommonRequest(event, completeEvent, UrlVerifyCode);
+    }
+
+
+    public void onEventBackgroundThread(Events.CreateUserEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.CreateUserCompleteEvent();
+        CommonRequest(event, completeEvent, UrlCreateUser);
     }
 
 

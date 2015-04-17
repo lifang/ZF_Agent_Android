@@ -129,6 +129,10 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.posagent.activities.user.UserForm"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.posagent.activities.user.UserDetail"
             android:screenOrientation="portrait" >
         </activity>

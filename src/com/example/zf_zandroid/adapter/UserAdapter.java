@@ -1,7 +1,6 @@
 package com.example.zf_zandroid.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,8 +11,6 @@ import android.widget.TextView;
 
 import com.example.zf_android.R;
 import com.example.zf_android.entity.User;
-import com.google.gson.Gson;
-import com.posagent.activities.user.UserDetail;
 import com.posagent.activities.user.UserList;
 import com.posagent.utils.OnSwipeTouchListener;
 
@@ -87,11 +84,7 @@ public class UserAdapter extends BaseAdapter{
 
         convertView.setOnTouchListener(new OnSwipeTouchListener(context) {
             public void singleTapUp() {
-                Intent i = new Intent(context, UserDetail.class);
-                Gson gson = new Gson();
-                String json = gson.toJson(entity);
-                i.putExtra("json", json);
-                context.startActivity(i);
+                clickAtUser(entity);
             }
 
             public void onSwipeTop() {
@@ -129,5 +122,9 @@ public class UserAdapter extends BaseAdapter{
     public final class ViewHolder {
         private TextView text_user_name, tv_delete, cb_edit;
         private View line_for_first_item;
+    }
+
+    private void clickAtUser(User entity) {
+        ((UserList)context).clickAtUser(entity);
     }
 }

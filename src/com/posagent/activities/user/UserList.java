@@ -2,10 +2,10 @@ package com.posagent.activities.user;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,6 +22,7 @@ import com.example.zf_android.R;
 import com.example.zf_android.entity.User;
 import com.example.zf_android.trade.widget.MyTabWidget;
 import com.example.zf_zandroid.adapter.UserAdapter;
+import com.google.gson.Gson;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
@@ -97,7 +98,10 @@ public class UserList extends BaseActivity implements IXListViewListener {
             addIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d(TAG, "go add user");
+
+                    Intent i = new Intent(UserList.this, UserForm.class);
+                    startActivity(i);
+
                 }
             });
         } else {
@@ -225,6 +229,10 @@ public class UserList extends BaseActivity implements IXListViewListener {
         }
     }
 
+    public void onEventMainThread(Events.UserListReloadEvent event) {
+        myAdapter.notifyDataSetChanged();
+    }
+
     // helper
     private void cancelBatchDelete() {
         isDeleting = false;
@@ -283,6 +291,22 @@ public class UserList extends BaseActivity implements IXListViewListener {
         });
 
         builder.create().show();
+    }
+
+    public void clickAtUser(User entity) {
+        if (forSelect) {
+            Intent i = getIntent();
+            i.putExtra("username", entity.getName());
+            i.putExtra("userId", entity.getCustomersId());
+            setResult(RESULT_OK, i);
+            finish();
+        } else {
+            Intent i = new Intent(UserList.this, UserDetail.class);
+            Gson gson = new Gson();
+            String json = gson.toJson(entity);
+            i.putExtra("json", json);
+            startActivity(i);
+        }
     }
 
 }

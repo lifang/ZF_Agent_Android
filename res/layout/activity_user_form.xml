@@ -86,7 +86,7 @@
             <Button
                 android:id="@+id/btn_get_verify_code"
                 android:layout_width="100dp"
-                android:layout_height="35dp"
+                android:layout_height="30dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/bg_blue_shapepre"
                 android:textColor="@color/white"
@@ -170,6 +170,7 @@
                 android:textColor="@color/text292929"
                 android:background="@color/white"
                 android:gravity="center_vertical"
+                android:password="true"
                 android:layout_gravity="center_vertical"
                 android:textSize="17sp" />
 
@@ -181,7 +182,8 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="0.5dp"
-        android:background="@color/Viewc2" /><LinearLayout
+        android:background="@color/Viewc2" />
+    <LinearLayout
 
     android:layout_width="fill_parent"
     android:layout_height="50dp"
@@ -206,6 +208,7 @@
             android:textColor="@color/text292929"
             android:background="@color/white"
             android:gravity="center_vertical"
+            android:password="true"
             android:layout_gravity="center_vertical"
             android:textSize="17sp" />
 
@@ -227,7 +230,7 @@
         android:background="@drawable/bg_item" >
 
         <LinearLayout
-            android:id="@+id/ll_choose_users"
+            android:id="@+id/ll_choose_city"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
             android:orientation="horizontal"
@@ -290,7 +293,7 @@
         android:orientation="horizontal"
         >
         <Button
-            android:id="@+id/btn_bind_terminal"
+            android:id="@+id/btn_create_user"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"

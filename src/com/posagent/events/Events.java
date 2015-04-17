@@ -511,5 +511,12 @@ public class Events {
     public static class TerminalBindEvent extends CommonRequestEvent {}
     public static class TerminalBindCompleteEvent extends CommonCompleteEvent{}
 
+    public static class VerifyCodeEvent extends CommonRequestEvent {}
+    public static class VerifyCodeCompleteEvent extends CommonCompleteEvent{}
+
+    public static class CreateUserEvent extends CommonRequestEvent {}
+    public static class CreateUserCompleteEvent extends CommonCompleteEvent{}
+    public static class UserListReloadEvent extends CommonCompleteEvent{}
+
 
 }

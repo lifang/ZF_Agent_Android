@@ -65,7 +65,7 @@ public class TerminalUserBind extends BaseActivity implements View.OnClickListen
             case R.id.ll_choose_users:
                 Intent i = new Intent(TerminalUserBind.this, UserList.class);
                 i.putExtra("forSelect", true);
-                startActivity(i);
+                startActivityForResult(i, Constants.REQUEST_CODE);
                 break;
             case R.id.btn_bind_terminal:
                 doBind();

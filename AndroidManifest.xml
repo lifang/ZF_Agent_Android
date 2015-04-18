@@ -149,6 +149,27 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.posagent.activities.terminal.TerminalChooseAdd"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.posagent.activities.terminal.TerminalChooseList"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.posagent.activities.terminal.TerminalChoosePos"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.posagent.activities.terminal.TerminalChoosePosList"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.posagent.activities.terminal.TerminalChooseChannelList"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
             android:name="com.posagent.activities.stock.StockList"
             android:screenOrientation="portrait" >
         </activity>

@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.zf_android.R;
 import com.example.zf_android.activity.AllProduct;
 import com.example.zf_android.activity.MenuMine;
+import com.google.gson.Gson;
 import com.posagent.activities.home.Main;
 import com.posagent.activities.user.MessageList;
 import com.posagent.events.Events;
@@ -26,6 +27,8 @@ import de.greenrobot.event.EventBus;
 public class BaseActivity extends Activity implements View.OnClickListener {
 
     protected String TAG = getClass().toString();
+
+    protected Gson gson = new Gson();
 
     HashMap<String, Class> clickableMap = new HashMap<String, Class>();
     private static final ArrayList<String> tabImages = new ArrayList<String>() {{

@@ -1,38 +1,35 @@
-package com.posagent.activities.trade;
+package com.posagent.activities.terminal;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
-import com.example.zf_android.trade.entity.TradeClient;
+import com.example.zf_android.entity.ChanelEntitiy;
 import com.posagent.activities.BaseListActivity;
 import com.posagent.events.Events;
+import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
-import static com.example.zf_android.trade.Constants.TradeIntent.CLIENT_NUMBER;
-
-public class TradeClientActivity extends BaseListActivity {
+public class TerminalChooseChannelList extends BaseListActivity {
 
 
-    private String selectedNumber;
+    private List<ChanelEntitiy> myList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simple_list);
-        new TitleMenuUtil(this, getString(R.string.title_trade_client)).show();
-
-        selectedNumber = getIntent().getStringExtra(CLIENT_NUMBER);
+        new TitleMenuUtil(this, "选择支付通道").show();
 
         getData();
 
@@ -41,9 +38,12 @@ public class TradeClientActivity extends BaseListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
 //        super.onListItemClick(l, v, position, id);
-        TextView tv = (TextView) v.findViewById(R.id.item_name);
-        Intent intent = new Intent();
-        intent.putExtra(CLIENT_NUMBER, tv.getText().toString());
+
+        ChanelEntitiy item = myList.get(position);
+
+        Intent intent = getIntent();
+        intent.putExtra(Constants.DefaultSelectedNameKey, item.getName());
+        intent.putExtra(Constants.DefaultSelectedIdKey, item.getId());
         setResult(RESULT_OK, intent);
         finish();
     }
@@ -51,25 +51,25 @@ public class TradeClientActivity extends BaseListActivity {
     private void getData() {
         JsonParams params = new JsonParams();
         //Fixme
-        params.put("agentId", 1);
-        params.put("page", page);
-        params.put("rows", rows);
+        params.put("customerId", 80);
+//        params.put("page", page);
+//        params.put("rows", rows);
         String strParams = params.toString();
-        Events.TradeClientEvent event = new Events.TradeClientEvent();
+        Events.TerminalChooseChannelListEvent event = new Events.TerminalChooseChannelListEvent();
         event.setParams(strParams);
         EventBus.getDefault().post(event);
     }
 
 
     // events
-    public void onEventMainThread(Events.TradeClientCompleteEvent event) {
-
-        for (TradeClient client : event.getList()) {
+    public void onEventMainThread(Events.TerminalChooseChannelListCompleteEvent event) {
+        myList = event.getList();
+        for (ChanelEntitiy client : myList) {
             Map<String, Object> item = new HashMap<String, Object>();
-            String clientNumber = client.getSerialNum();
-            item.put("name", clientNumber);
-            item.put("selected", TextUtils.isEmpty(clientNumber)
-                    || !clientNumber.equals(selectedNumber) ? null : R.drawable.checkbox);
+            String _selectedName = client.getName();
+            item.put("name", _selectedName);
+            item.put("selected", TextUtils.isEmpty(_selectedName)
+                    || !_selectedName.equals(selectedName) ? null : R.drawable.checkbox);
             items.add(item);
         }
         adapter.notifyDataSetChanged();

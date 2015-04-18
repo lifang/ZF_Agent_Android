@@ -207,4 +207,20 @@ public class StringUtil {
 		Log.e("sign", sign.toString());
 		return sign.toString();
 	}
+
+    public static String join(List<String> list, String separator) {
+        StringBuilder sb = new StringBuilder();
+        int len = list.size();
+        int i = 0;
+        for (String s : list)
+        {
+            sb.append(s);
+            i++;
+            if (i < len) {
+                sb.append(separator);
+            }
+        }
+
+        return sb.toString();
+    }
 }

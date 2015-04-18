@@ -7,7 +7,13 @@ public class Constants {
     public static final int SUCCESS_CODE = 1;
 
     public static final String USER_KIND = "user_kind";
+    public static final String DefaultSelectedNameKey = "selectedName";
+    public static final String DefaultSelectedIdKey = "selectedId";
     public static final int REQUEST_CODE = 99;
+    public static final int REQUEST_CODE2 = 100;
+    public static final int REQUEST_CODE3 = 101;
+    public static final int REQUEST_CODE4 = 102;
+    public static final int REQUEST_CODE5 = 103;
 
 
     public static class Goods {

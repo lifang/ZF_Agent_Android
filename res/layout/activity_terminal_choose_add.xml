@@ -1,0 +1,78 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/F3F2F2"
+    >
+
+    <include layout="@layout/title_back" />
+    <ScrollView  android:layout_height="wrap_content"
+        android:layout_width="fill_parent">
+        <LinearLayout android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/Viewc" />
+
+            <LinearLayout
+                android:id="@+id/mi_r5"
+                android:layout_width="fill_parent"
+                android:layout_height="250dp"
+                android:padding="20dp"
+                android:background="@drawable/bg_item" >
+                <EditText
+                    android:id="@+id/et_terminals"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@color/white"
+                    android:gravity="top"
+                    android:padding="0dp"
+                    android:maxLength="50000"
+                    android:hint="请输入终端号，分行显示例：\n1234dd436356\n213412342134\n234331242134"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:background="@drawable/bg_item" >
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="right"
+                    android:text="粘贴内容不超过5M"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/Viewc" />
+
+
+
+            <Button
+                android:layout_width="180dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/btn_submit"
+
+                android:layout_marginBottom="30dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/bg_blue_shape"
+                android:textColor="@color/ffffff"
+                android:text="确认" />
+
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

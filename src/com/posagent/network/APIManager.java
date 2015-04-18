@@ -33,7 +33,8 @@ public class APIManager {
 
 
     // Host and api
-    public static final String BaseUrl = "http://114.215.149.242:28080/ZFAgent/api";
+//    public static final String BaseUrl = "http://114.215.149.242:28080/ZFAgent/api";
+    public static final String BaseUrl = "http://121.40.84.2:28080/ZFAgent/api";
 
     public static final String UrlLogin = BaseUrl + "/agent/agentLogin";
     public static final String UrlRegister = BaseUrl + "/agent/userRegistration";
@@ -69,10 +70,15 @@ public class APIManager {
     public static final String UrlTradeClient = BaseUrl + "/trade/record/getTerminals";
     public static final String UrlTradeAgent = BaseUrl + "/trade/record/getAgents";
     public static final String UrlTradeList = BaseUrl + "/trade/record/getTradeRecords";
-    public static final String UrlTerminalList = BaseUrl + "/apply/searchApplyList";
+    public static final String UrlTerminalList = BaseUrl + "/terminal/getTerminalList";
     public static final String UrlTerminalBind = BaseUrl + "/terminal/bindingTerminals";
     public static final String UrlVerifyCode = BaseUrl + "/terminal/sendPhoneVerificationCodeReg";
     public static final String UrlCreateUser = BaseUrl + "/terminal/addCustomer";
+    public static final String UrlBatchTerminalNumber = BaseUrl + "/terminal/batchTerminalNum";
+    public static final String UrlBatchTerminalNumberPos = BaseUrl + "/terminal/screeningTerminalNum";
+    public static final String UrlTerminalChoosePosList = BaseUrl + "/terminal/screeningPosName";
+    public static final String UrlTerminalChooseChannelList = BaseUrl + "/terminal/getChannels";
+    public static final String UrlCreateAfterSale = BaseUrl + "/terminal/submitAgent";
 
 
     /** Convenience singleton for apps using a process-wide EventBus instance. */
@@ -124,11 +130,11 @@ public class APIManager {
                         try {
                             completeEvent.setResult(json.getJSONObject("result"));
                         } catch (Exception e) {
-                            Log.d("UnCatchException", e.getMessage());
+                            Log.d("UnCatchException1", e.getMessage());
                             try {
                                 completeEvent.setArrResult(json.getJSONArray("result"));
                             } catch (Exception ex) {
-                                Log.d("UnCatchException", ex.getMessage());
+                                Log.d("UnCatchException2", ex.getMessage());
                             }
                         }
                     }
@@ -461,6 +467,32 @@ public class APIManager {
     public void onEventBackgroundThread(Events.CreateUserEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.CreateUserCompleteEvent();
         CommonRequest(event, completeEvent, UrlCreateUser);
+    }
+
+    public void onEventBackgroundThread(Events.BatchTerminalNumberEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.BatchTerminalNumberCompleteEvent();
+        CommonRequest(event, completeEvent, UrlBatchTerminalNumber);
+    }
+
+
+    public void onEventBackgroundThread(Events.TerminalChoosePosListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.TerminalChoosePosListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlTerminalChoosePosList);
+    }
+
+    public void onEventBackgroundThread(Events.TerminalChooseChannelListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.TerminalChooseChannelListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlTerminalChooseChannelList);
+    }
+
+    public void onEventBackgroundThread(Events.BatchTerminalNumberPosEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.BatchTerminalNumberPosCompleteEvent();
+        CommonRequest(event, completeEvent, UrlBatchTerminalNumberPos);
+    }
+
+    public void onEventBackgroundThread(Events.CreateAfterSaleEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.CreateAfterSaleCompleteEvent();
+        CommonRequest(event, completeEvent, UrlCreateAfterSale);
     }
 
 

@@ -48,10 +48,8 @@ public class Terminal extends BaseActivity implements IXListViewListener,
     List<TerminalItem> moreList = new ArrayList<TerminalItem>();
 
     private Spinner spinnerState;
-
-
-    private String[] state= {"选择终端状态","已开通","未开通","部分开通","已停止","已注销"};
-
+    private String[] state= {"选择终端状态","已开通","部分开通","未开通","已注销","已停止"};
+    private int status;
 
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
@@ -61,7 +59,8 @@ public class Terminal extends BaseActivity implements IXListViewListener,
 
                     if (myList.size() == 0) {
                         Xlistview.setVisibility(View.GONE);
-                        eva_nodata.setVisibility(View.VISIBLE);
+                    } else {
+                        Xlistview.setVisibility(View.VISIBLE);
                     }
                     onRefresh_number = true;
                     myAdapter.notifyDataSetChanged();
@@ -104,6 +103,7 @@ public class Terminal extends BaseActivity implements IXListViewListener,
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        status = position;
         onRefresh();
     }
 
@@ -152,6 +152,9 @@ public class Terminal extends BaseActivity implements IXListViewListener,
         JsonParams params = new JsonParams();
         //Fixme
         params.put("agentId", 1);
+        if (status != 0) {
+            params.put("status", status);
+        }
         params.put("page", page);
         params.put("rows", rows);
         String strParams = params.toString();

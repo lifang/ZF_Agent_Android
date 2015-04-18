@@ -2,12 +2,14 @@ package com.posagent.events;
 
 import com.example.zf_android.entity.AdressEntity;
 import com.example.zf_android.entity.AgentTerminalEntity;
+import com.example.zf_android.entity.ChanelEntitiy;
 import com.example.zf_android.entity.MessageEntity;
 import com.example.zf_android.entity.OrderEntity;
 import com.example.zf_android.entity.PosEntity;
 import com.example.zf_android.entity.StockAgentEntity;
 import com.example.zf_android.entity.StockEntity;
 import com.example.zf_android.entity.TerminalApplyEntity;
+import com.example.zf_android.entity.TerminalChoosePosItem;
 import com.example.zf_android.entity.User;
 import com.example.zf_android.entity.UserTerminal;
 import com.example.zf_android.trade.entity.AfterSaleRecord;
@@ -533,5 +535,92 @@ public class Events {
     public static class CreateUserCompleteEvent extends CommonCompleteEvent{}
     public static class UserListReloadEvent extends CommonCompleteEvent{}
 
+
+    public static class BatchTerminalNumberEvent extends CommonRequestEvent {}
+    public static class BatchTerminalNumberCompleteEvent extends CommonCompleteEvent {
+        private List<TerminalItem> list = new ArrayList<TerminalItem>();
+        public List<TerminalItem> getList() {
+            if (list.size() < 1) {
+                String result = null;
+                result = getArrResult().toString();
+                list = (new Gson()).fromJson(result,
+                        new TypeToken<List<TerminalItem>>() {}.getType());
+
+            }
+            return list;
+        }
+        public void setList(List<TerminalItem> list) {
+            this.list = list;
+        }
+    }
+
+    public static class TerminalChooseFinishEvent {
+        private List<String> list;
+
+        public List<String> getList() {
+            return list;
+        }
+
+        public TerminalChooseFinishEvent(List<String> _list) {
+            list = _list;
+        }
+    }
+
+    public static class TerminalChoosePosListEvent extends CommonRequestEvent {}
+    public static class TerminalChoosePosListCompleteEvent extends CommonCompleteEvent {
+        private List<TerminalChoosePosItem> list = new ArrayList<TerminalChoosePosItem>();
+        public List<TerminalChoosePosItem> getList() {
+            if (list.size() < 1) {
+                String result = null;
+                result = getArrResult().toString();
+                list = (new Gson()).fromJson(result,
+                        new TypeToken<List<TerminalChoosePosItem>>() {}.getType());
+
+            }
+            return list;
+        }
+        public void setList(List<TerminalChoosePosItem> list) {
+            this.list = list;
+        }
+    }
+
+    public static class TerminalChooseChannelListEvent extends CommonRequestEvent {}
+    public static class TerminalChooseChannelListCompleteEvent extends CommonCompleteEvent {
+        private List<ChanelEntitiy> list = new ArrayList<ChanelEntitiy>();
+        public List<ChanelEntitiy> getList() {
+            if (list.size() < 1) {
+                String result = null;
+                result = getArrResult().toString();
+                list = (new Gson()).fromJson(result,
+                        new TypeToken<List<ChanelEntitiy>>() {}.getType());
+
+            }
+            return list;
+        }
+        public void setList(List<ChanelEntitiy> list) {
+            this.list = list;
+        }
+    }
+
+    public static class BatchTerminalNumberPosEvent extends CommonRequestEvent {}
+    public static class BatchTerminalNumberPosCompleteEvent extends CommonCompleteEvent {
+        private List<TerminalItem> list = new ArrayList<TerminalItem>();
+        public List<TerminalItem> getList() {
+            if (list.size() < 1) {
+                String result = null;
+                result = getArrResult().toString();
+                list = (new Gson()).fromJson(result,
+                        new TypeToken<List<TerminalItem>>() {}.getType());
+
+            }
+            return list;
+        }
+        public void setList(List<TerminalItem> list) {
+            this.list = list;
+        }
+    }
+
+    public static class CreateAfterSaleEvent extends CommonRequestEvent {}
+    public static class CreateAfterSaleCompleteEvent extends CommonCompleteEvent{}
 
 }

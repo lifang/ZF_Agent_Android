@@ -3,6 +3,7 @@ package com.example.zf_android.entity;
 public class PosItem {
 	 
 		public Boolean isCheck;
+
 		
 		public Boolean getIsCheck() {
 			return isCheck;

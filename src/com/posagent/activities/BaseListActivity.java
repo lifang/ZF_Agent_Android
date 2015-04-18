@@ -1,12 +1,16 @@
 package com.posagent.activities;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.example.zf_android.Config;
 import com.example.zf_android.R;
+import com.posagent.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +25,9 @@ public class BaseListActivity extends ListActivity {
 
     protected List<Map<String, Object>> items;
     protected SimpleAdapter adapter;
+
+    protected String selectedName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +37,8 @@ public class BaseListActivity extends ListActivity {
         } catch (RuntimeException ex) {
             Log.d("UNCatchException", ex.getMessage());
         }
+        
+        selectedName = getIntent().getStringExtra(Constants.DefaultSelectedNameKey);
 
         items = new ArrayList<Map<String, Object>>();
         adapter = new SimpleAdapter(
@@ -46,6 +55,18 @@ public class BaseListActivity extends ListActivity {
         //getRequests().cancelAll(this);
         EventBus.getDefault().unregister(this);
         super.onDestroy();
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        Map<String, Object> item = items.get(position);
+
+        Intent intent = getIntent();
+        intent.putExtra(Constants.DefaultSelectedNameKey, (String) item.get("name"));
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
 

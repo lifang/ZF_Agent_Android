@@ -1,18 +1,28 @@
 package com.example.zf_android.trade.entity;
 
+import com.example.zf_android.entity.BaseEntity;
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Leo on 2015/3/4.
  */
-public class TerminalItem {
+public class TerminalItem extends BaseEntity {
 
 	private int id;
 	@SerializedName("serial_num")
 	private String terminalNumber;
 	private int status;
+    private int retail_price;
 
-	public int getId() {
+    public int getRetail_price() {
+        return retail_price;
+    }
+
+    public void setRetail_price(int retail_price) {
+        this.retail_price = retail_price;
+    }
+
+    public int getId() {
 		return id;
 	}
 

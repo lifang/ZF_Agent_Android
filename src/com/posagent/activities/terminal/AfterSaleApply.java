@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.AdressEntity;
@@ -32,9 +33,10 @@ import de.greenrobot.event.EventBus;
 public class AfterSaleApply extends BaseActivity {
 
     private List<AdressEntity>  listAddress = new ArrayList<AdressEntity>();
+    private  List<String> selectedList;
 
     private LinearLayout click_choose_terminal, ll_choose_address;
-    private TextView tv_receiver, tv_mobile, tv_address;
+    private TextView tv_receiver, tv_mobile, tv_address, tv_selected_terminals;
     private EditText et_aftersale_reson;
     private Button btn_after_sale_apply;
 
@@ -56,6 +58,7 @@ public class AfterSaleApply extends BaseActivity {
         ll_choose_address = (LinearLayout) findViewById(R.id.ll_choose_address);
         ll_choose_address.setOnClickListener(this);
 
+        tv_selected_terminals = (TextView) findViewById(R.id.tv_selected_terminals);
         tv_receiver = (TextView) findViewById(R.id.tv_receiver);
         tv_mobile = (TextView) findViewById(R.id.tv_mobile);
         tv_address = (TextView) findViewById(R.id.tv_address);
@@ -102,6 +105,19 @@ public class AfterSaleApply extends BaseActivity {
         }
     }
 
+    public void onEventMainThread(Events.TerminalChooseFinishEvent event) {
+        selectedList = event.getList();
+        tv_selected_terminals.setText(StringUtil.join(selectedList, ","));
+    }
+
+    public void onEventMainThread(Events.CreateAfterSaleCompleteEvent event) {
+        if (event.success()) {
+            toast("提交完成");
+        } else {
+            toast(event.getMessage());
+        }
+    }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == Constants.REQUEST_CODE) {
@@ -132,6 +148,9 @@ public class AfterSaleApply extends BaseActivity {
                 Intent i2 =new Intent(AfterSaleApply.this, ChangeAdress.class);
                 startActivityForResult(i2, Constants.REQUEST_CODE);
                 break;
+            case R.id.btn_after_sale_apply:
+                doSubmit();
+                break;
             default:
                 break;
         }
@@ -144,4 +163,25 @@ public class AfterSaleApply extends BaseActivity {
             tv_mobile.setText("" + addressEntity.getMoblephone());
         }
     }
+
+    private void doSubmit() {
+
+        JsonParams params = new JsonParams();
+        //Fixme
+        params.put("customerId", 1);
+        params.put("terminalsQuantity", selectedList.size());
+        params.put("address", tv_address.getText().toString());
+        params.put("reciver", tv_receiver.getText().toString());
+        params.put("phone", tv_mobile.getText().toString());
+        params.put("reason", et_aftersale_reson.getText().toString());
+        params.put("terminalsList", StringUtil.join(selectedList, ","));
+
+
+        String strParams = params.toString();
+        Events.CreateAfterSaleEvent event = new Events.CreateAfterSaleEvent();
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
+    }
+
+
 }

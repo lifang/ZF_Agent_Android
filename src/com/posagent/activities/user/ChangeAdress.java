@@ -66,7 +66,7 @@ public class ChangeAdress extends BaseActivity {
         findViewById(R.id.adresslist).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Intent i = new Intent(ChangeAdress.this, AdressList.class);
+                Intent i = new Intent(ChangeAdress.this, AddressList.class);
                 startActivity(i);
             }
         });

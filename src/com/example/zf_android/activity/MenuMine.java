@@ -3,22 +3,23 @@ package com.example.zf_android.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.posagent.activities.BaseActivity;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.ApplyOpenProgressActivity;
+import com.posagent.activities.BaseActivity;
 import com.posagent.activities.home.Main;
 import com.posagent.activities.user.UserList;
 
 
-public class MenuMine extends BaseActivity implements OnClickListener{
+public class MenuMine extends BaseActivity {
     private ImageView search;
     private LinearLayout  ll_dd, ll_yg, ll_shjl,ll_wdxx,ll_sh,ll_request;
     private RelativeLayout  main_rl1, main_rl2, main_rl3;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +39,8 @@ public class MenuMine extends BaseActivity implements OnClickListener{
         ll_yg=(LinearLayout) findViewById(R.id.ll_yg);
         ll_yg.setOnClickListener(this);
     }
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -56,7 +59,6 @@ public class MenuMine extends BaseActivity implements OnClickListener{
             case R.id.ll_wdxx:
                 startActivity(new Intent(MenuMine.this, MyInfo.class));
                 break;
-
             case R.id.ll_yg: //员工管理
                 startActivity(new Intent(MenuMine.this, UserList.class));
                 break;
@@ -67,7 +69,7 @@ public class MenuMine extends BaseActivity implements OnClickListener{
 
                 break;
 
-            case R.id.main_rl_gwc: //��ϵ����
+            case R.id.main_rl_gwc: //全部商品
 
                 startActivity(new Intent(MenuMine.this, AllProduct.class));
                 break;

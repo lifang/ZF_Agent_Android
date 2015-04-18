@@ -80,6 +80,11 @@ public class APIManager {
     public static final String UrlTerminalChooseChannelList = BaseUrl + "/terminal/getChannels";
     public static final String UrlCreateAfterSale = BaseUrl + "/terminal/submitAgent";
     public static final String UrlTerminalDetail = BaseUrl + "/terminal/getApplyDetails";
+    public static final String UrlUserInfo = BaseUrl + "/agents/getOne";
+    public static final String UrlUserVerifyCode = BaseUrl + "/agents/getUpdatePhoneDentcode";
+    public static final String UrlUserChangePhone = BaseUrl + "/agents/updatePhone";
+    public static final String UrlUserChangeEmail = BaseUrl + "/agents/updateEmail";
+    public static final String UrlUserChangePassword = BaseUrl + "/agents/updatePassword";
 
 
     /** Convenience singleton for apps using a process-wide EventBus instance. */
@@ -499,6 +504,31 @@ public class APIManager {
     public void onEventBackgroundThread(Events.TerminalDetailEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.TerminalDetailCompleteEvent();
         CommonRequest(event, completeEvent, UrlTerminalDetail);
+    }
+
+    public void onEventBackgroundThread(Events.UserInfoEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.UserInfoCompleteEvent();
+        CommonRequest(event, completeEvent, UrlUserInfo);
+    }
+
+    public void onEventBackgroundThread(Events.UserVerifyCodeEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.UserVerifyCodeCompleteEvent();
+        CommonRequest(event, completeEvent, UrlUserVerifyCode);
+    }
+
+    public void onEventBackgroundThread(Events.ChangePhoneEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.ChangePhoneCompleteEvent();
+        CommonRequest(event, completeEvent, UrlUserChangePhone);
+    }
+
+    public void onEventBackgroundThread(Events.ChangeEmailEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.ChangeEmailCompleteEvent();
+        CommonRequest(event, completeEvent, UrlUserChangeEmail);
+    }
+
+    public void onEventBackgroundThread(Events.ChangePasswordEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.ChangePasswordCompleteEvent();
+        CommonRequest(event, completeEvent, UrlUserChangePassword);
     }
 
 

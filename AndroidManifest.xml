@@ -410,11 +410,20 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.posagent.activities.user.ChangePhone"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.posagent.activities.user.ChangeEmail"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
             android:name=".activity.ChangeText"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.posagent.activities.user.AdressList"
+            android:name="com.posagent.activities.user.AddressList"
             android:screenOrientation="portrait" >
         </activity>
         <activity

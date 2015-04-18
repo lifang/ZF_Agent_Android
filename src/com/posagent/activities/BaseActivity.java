@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -124,6 +125,21 @@ public class BaseActivity extends Activity implements View.OnClickListener {
     protected void setText(String id, String value) {
         TextView tv = (TextView)findViewById(resouceId(id, "id"));
         tv.setText(value);
+    }
+
+    protected void enterText(String id, String value) {
+        EditText tv = (EditText)findViewById(resouceId(id, "id"));
+        tv.setText(value);
+    }
+
+    protected void hide(String id) {
+        View tv = findViewById(resouceId(id, "id"));
+        tv.setVisibility(View.GONE);
+    }
+
+    protected void show(String id) {
+        View tv = findViewById(resouceId(id, "id"));
+        tv.setVisibility(View.VISIBLE);
     }
 
     protected void focusTabAtIndex(int index) {

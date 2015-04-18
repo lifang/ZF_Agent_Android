@@ -16,7 +16,7 @@ import com.examlpe.zf_android.util.ScrollViewWithListView;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.AdressEntity;
-import com.example.zf_zandroid.adapter.AdressAdapter;
+import com.example.zf_zandroid.adapter.AddressAdapter;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
@@ -26,9 +26,9 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-public class AdressList extends BaseActivity  {
+public class AddressList extends BaseActivity  {
 
-    private AdressAdapter myAdapter;
+    private AddressAdapter myAdapter;
     private ListView lv;
     private ImageView img_add, iv_delete;
     List<AdressEntity>  myList = new ArrayList<AdressEntity>();
@@ -58,16 +58,16 @@ public class AdressList extends BaseActivity  {
         img_add.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Intent i =new Intent(AdressList.this, AdressEdit.class);
+                Intent i =new Intent(AddressList.this, AdressEdit.class);
                 startActivity(i);
 
             }
         });
 
-        new TitleMenuUtil(AdressList.this, "地址管理").show();
+        new TitleMenuUtil(AddressList.this, "地址管理").show();
 
         lv = (ScrollViewWithListView) findViewById(R.id.lv);
-        myAdapter = new AdressAdapter(AdressList.this, myList);
+        myAdapter = new AddressAdapter(AddressList.this, myList);
         lv.setAdapter(myAdapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -88,7 +88,7 @@ public class AdressList extends BaseActivity  {
     public void doDelete(final AdressEntity entity) {
         Log.d("TAG", entity.toString());
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(AdressList.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(AddressList.this);
         builder.setMessage("确定删除地址[ " + entity.getAddress() + " ]吗？");
         builder.setTitle("请确认");
 
@@ -103,7 +103,7 @@ public class AdressList extends BaseActivity  {
                 event.setParams(strParams);
                 EventBus.getDefault().post(event);
 
-                Toast.makeText(AdressList.this, "正在删除...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddressList.this, "正在删除...", Toast.LENGTH_SHORT).show();
             }
         });
 

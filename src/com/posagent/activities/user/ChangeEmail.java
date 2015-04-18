@@ -1,11 +1,11 @@
-package com.example.zf_android.activity;
- 
+package com.posagent.activities.user;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
-import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.posagent.activities.BaseActivity;
@@ -14,33 +14,35 @@ import com.posagent.utils.JsonParams;
 
 import de.greenrobot.event.EventBus;
 
-/***
- * 
-*    
-* 修改密码
-*
+/**
+ * 修改邮箱
  */
-public class ChangePassword extends BaseActivity {
+public class ChangeEmail extends BaseActivity
+{
 
-    private EditText et_password, et_new_password, et_new_password_confirm;
+    private EditText et_new_email;
+    private TextView tv_email;
     private Button btn_submit;
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_change_password);
-		new TitleMenuUtil(ChangePassword.this, "修改密码").show();
+
+    private String oldEmail;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_change_email);
+        new TitleMenuUtil(ChangeEmail.this, "修改邮箱").show();
+
+        oldEmail = getIntent().getStringExtra("email");
 
         initView();
-	}
-
-
+    }
 
     private void initView() {
+        tv_email = (TextView) findViewById(R.id.tv_email);
+        tv_email.setText(oldEmail);
 
-        et_password = (EditText) findViewById(R.id.et_password);
-        et_new_password = (EditText) findViewById(R.id.et_new_password);
-        et_new_password_confirm = (EditText) findViewById(R.id.et_new_password_confirm);
+        et_new_email = (EditText) findViewById(R.id.et_new_email);
 
         btn_submit = (Button) findViewById(R.id.btn_submit);
         btn_submit.setOnClickListener(this);
@@ -67,10 +69,6 @@ public class ChangePassword extends BaseActivity {
 
 
     private boolean check() {
-        if (!et_password.getText().toString().equals(et_new_password.getText().toString())) {
-            toast("两次密码不一致");
-            return false;
-        }
         return true;
     }
 
@@ -80,23 +78,23 @@ public class ChangePassword extends BaseActivity {
 
             //Fixme
             params.put("customerId", 40);
-            params.put("passwordOld", StringUtil.Md5(et_password.getText().toString()));
-            params.put("password", StringUtil.Md5(et_new_password.getText().toString()));
+            params.put("email", et_new_email.getText().toString());
 
             String strParams = params.toString();
-            Events.ChangePasswordEvent event = new Events.ChangePasswordEvent();
+            Events.ChangeEmailEvent event = new Events.ChangeEmailEvent();
             event.setParams(strParams);
             EventBus.getDefault().post(event);
         }
     }
 
     // events
-    public void onEventMainThread(Events.ChangePasswordCompleteEvent event) {
+    public void onEventMainThread(Events.ChangeEmailCompleteEvent event) {
         if (event.success()) {
             EventBus.getDefault().post(new Events.UserInfoReloadEvent());
             finish();
         }
         toast(event.getMessage());
     }
-	 
+
+
 }

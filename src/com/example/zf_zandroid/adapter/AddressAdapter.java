@@ -14,18 +14,18 @@ import android.widget.Toast;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.AdressEntity;
 import com.posagent.MyApplication;
-import com.posagent.activities.user.AdressList;
+import com.posagent.activities.user.AddressList;
 import com.posagent.utils.OnSwipeTouchListener;
 
 import java.util.List;
 
-public class AdressAdapter extends BaseAdapter {
+public class AddressAdapter extends BaseAdapter {
     private Context context;
     private List<AdressEntity> list;
     private LayoutInflater inflater;
     private ViewHolder holder = null;
 
-    public AdressAdapter(Context context, List<AdressEntity> list) {
+    public AddressAdapter(Context context, List<AdressEntity> list) {
         this.context = context;
         this.list = list;
     }
@@ -63,9 +63,9 @@ public class AdressAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.tv_title.setText(entity.getReceiver());
+        holder.tv_title.setText("收件人：" + entity.getReceiver());
         holder.tv_moblephone.setText(entity.getMoblephone());
-        holder.tv_address.setText(entity.getAddress());
+        holder.tv_address.setText("收件地址：" + entity.getAddress());
         if(MyApplication.getIsSelect()){
             holder.item_cb.setVisibility(View.VISIBLE);
         }else{
@@ -125,24 +125,24 @@ public class AdressAdapter extends BaseAdapter {
     //helper
     private boolean isDeleting() {
 
-        AdressList adressList = adressList();
-        if (adressList != null) {
-            return adressList.isDeleting();
+        AddressList addressList = adressList();
+        if (addressList != null) {
+            return addressList.isDeleting();
         }
         return false;
     }
 
     private void doDelete(AdressEntity entity) {
-        AdressList adressList = adressList();
-        if (adressList != null) {
-            adressList.doDelete(entity);
+        AddressList addressList = adressList();
+        if (addressList != null) {
+            addressList.doDelete(entity);
         }
     }
 
-    private AdressList adressList() {
-        if (context instanceof AdressList) {
-            AdressList adressList = (AdressList) context;
-            return adressList;
+    private AddressList adressList() {
+        if (context instanceof AddressList) {
+            AddressList addressList = (AddressList) context;
+            return addressList;
         }
         return null;
     }

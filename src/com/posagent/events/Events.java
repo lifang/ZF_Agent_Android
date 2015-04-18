@@ -18,6 +18,7 @@ import com.example.zf_android.trade.entity.TerminalItem;
 import com.example.zf_android.trade.entity.TradeAgent;
 import com.example.zf_android.trade.entity.TradeClient;
 import com.example.zf_android.trade.entity.TradeRecord;
+import com.example.zf_android.trade.entity.UserInfo;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -640,6 +641,39 @@ public class Events {
         }
 
     }
+
+    //我的
+    public static class UserInfoEvent extends CommonRequestEvent {}
+    public static class UserInfoCompleteEvent extends CommonCompleteEvent {
+        private UserInfo entity;
+
+        public UserInfo getEntity() {
+            String result = null;
+            result = getResult().toString();
+            entity = (new Gson()).fromJson(result, UserInfo.class);
+            return entity;
+        }
+
+        public void setEntity(UserInfo entity) {
+            this.entity = entity;
+        }
+
+    }
+
+    public static class UserVerifyCodeEvent extends CommonRequestEvent {}
+    public static class UserVerifyCodeCompleteEvent extends CommonCompleteEvent{}
+
+    public static class ChangePhoneEvent extends CommonRequestEvent {}
+    public static class ChangePhoneCompleteEvent extends CommonCompleteEvent{}
+
+    public static class ChangeEmailEvent extends CommonRequestEvent {}
+    public static class ChangeEmailCompleteEvent extends CommonCompleteEvent{}
+
+    public static class ChangePasswordEvent extends CommonRequestEvent {}
+    public static class ChangePasswordCompleteEvent extends CommonCompleteEvent{}
+
+    public static class UserInfoReloadEvent extends CommonRequestEvent{}
+
 
 
 }

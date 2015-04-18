@@ -13,6 +13,7 @@ import com.example.zf_android.entity.TerminalChoosePosItem;
 import com.example.zf_android.entity.User;
 import com.example.zf_android.entity.UserTerminal;
 import com.example.zf_android.trade.entity.AfterSaleRecord;
+import com.example.zf_android.trade.entity.TerminalDetail;
 import com.example.zf_android.trade.entity.TerminalItem;
 import com.example.zf_android.trade.entity.TradeAgent;
 import com.example.zf_android.trade.entity.TradeClient;
@@ -622,5 +623,23 @@ public class Events {
 
     public static class CreateAfterSaleEvent extends CommonRequestEvent {}
     public static class CreateAfterSaleCompleteEvent extends CommonCompleteEvent{}
+
+    public static class TerminalDetailEvent extends CommonRequestEvent {}
+    public static class TerminalDetailCompleteEvent extends CommonCompleteEvent {
+        private TerminalDetail entity;
+
+        public TerminalDetail getEntity() {
+            String result = null;
+            result = getResult().toString();
+            entity = (new Gson()).fromJson(result, TerminalDetail.class);
+            return entity;
+        }
+
+        public void setEntity(TerminalDetail entity) {
+            this.entity = entity;
+        }
+
+    }
+
 
 }

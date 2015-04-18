@@ -199,7 +199,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.posagent.activities.terminal.TerminalDetail"
+            android:name="com.posagent.activities.terminal.TerminalDetailActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity

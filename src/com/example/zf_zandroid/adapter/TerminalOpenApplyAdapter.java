@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.zf_android.R;
 import com.example.zf_android.entity.TerminalApplyEntity;
-import com.posagent.activities.terminal.TerminalDetail;
+import com.posagent.activities.terminal.TerminalDetailActivity;
 import com.posagent.utils.Constants;
 
 import java.util.List;
@@ -80,7 +80,7 @@ public class TerminalOpenApplyAdapter extends BaseAdapter{
 
             @Override
             public void onClick(View arg0) {
-                Intent i = new Intent(context, TerminalDetail.class);
+                Intent i = new Intent(context, TerminalDetailActivity.class);
                 context.startActivity(i);
             }
         });
@@ -89,7 +89,7 @@ public class TerminalOpenApplyAdapter extends BaseAdapter{
 
             @Override
             public void onClick(View arg0) {
-                Intent i = new Intent(context, TerminalDetail.class);
+                Intent i = new Intent(context, TerminalDetailActivity.class);
                 context.startActivity(i);
             }
         });

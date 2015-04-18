@@ -121,6 +121,11 @@ public class BaseActivity extends Activity implements View.OnClickListener {
         return this.getResources().getIdentifier(name, kind, this.getPackageName());
     }
 
+    protected void setText(String id, String value) {
+        TextView tv = (TextView)findViewById(resouceId(id, "id"));
+        tv.setText(value);
+    }
+
     protected void focusTabAtIndex(int index) {
         int bottomTabContainerId = resouceId("bottom_tab_container", "id");
         if (bottomTabContainerId > 0) {

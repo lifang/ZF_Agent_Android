@@ -11,7 +11,7 @@ public class TerminalComment {
 
 	private String name;
 
-	@SerializedName("create_at")
+	@SerializedName("createdAt")
 	private String createAt;
 
 	public String getContent() {

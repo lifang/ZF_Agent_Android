@@ -79,6 +79,7 @@ public class APIManager {
     public static final String UrlTerminalChoosePosList = BaseUrl + "/terminal/screeningPosName";
     public static final String UrlTerminalChooseChannelList = BaseUrl + "/terminal/getChannels";
     public static final String UrlCreateAfterSale = BaseUrl + "/terminal/submitAgent";
+    public static final String UrlTerminalDetail = BaseUrl + "/terminal/getApplyDetails";
 
 
     /** Convenience singleton for apps using a process-wide EventBus instance. */
@@ -493,6 +494,11 @@ public class APIManager {
     public void onEventBackgroundThread(Events.CreateAfterSaleEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.CreateAfterSaleCompleteEvent();
         CommonRequest(event, completeEvent, UrlCreateAfterSale);
+    }
+
+    public void onEventBackgroundThread(Events.TerminalDetailEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.TerminalDetailCompleteEvent();
+        CommonRequest(event, completeEvent, UrlTerminalDetail);
     }
 
 

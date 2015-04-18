@@ -17,7 +17,17 @@ public class TerminalDetail {
 
 	private List<TerminalRate> rates;
 
-	public TerminalApply getApplyDetails() {
+    private TerminalOpenInfo openingInfos;
+
+    public TerminalOpenInfo getOpeningInfos() {
+        return openingInfos;
+    }
+
+    public void setOpeningInfos(TerminalOpenInfo openingInfos) {
+        this.openingInfos = openingInfos;
+    }
+
+    public TerminalApply getApplyDetails() {
 		return applyDetails;
 	}
 

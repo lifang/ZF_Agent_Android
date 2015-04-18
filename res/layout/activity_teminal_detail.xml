@@ -10,9 +10,10 @@
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical" >
 
             <LinearLayout
@@ -40,7 +41,8 @@
                         android:layout_marginTop="15dp"
                         android:text="未开通"
                         android:textColor="@color/text5a5a5a"
-                        android:textSize="18dp" />
+                        android:textSize="18dp"
+                        android:id="@+id/tv_status" />
 
                 </LinearLayout>
 
@@ -57,7 +59,8 @@
                         android:textSize="15dp"
                         android:background="@drawable/buttong_light"
                         android:textColor="@color/bgtitle"
-                        android:text="开通申请" />
+                        android:text="开通申请"
+                        android:id="@+id/btn_apply_open" />
 
 
                     <Button
@@ -67,7 +70,8 @@
                         android:textSize="15dp"
                         android:background="@drawable/buttong_light"
                         android:textColor="@color/bgtitle"
-                        android:text="同步" />
+                        android:text="同步"
+                        android:id="@+id/btn_sync" />
 
                 </LinearLayout>
 
@@ -190,7 +194,8 @@
                             android:text="12431284687"
                             android:layout_marginTop="5dp"
                             android:textColor="@color/text5a5a5a"
-                            android:textSize="13sp" />
+                            android:textSize="13sp"
+                            android:id="@+id/tv_terminal_number" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -198,7 +203,8 @@
                             android:text="泰山"
                             android:layout_marginTop="5dp"
                             android:textColor="@color/text5a5a5a"
-                            android:textSize="13sp" />
+                            android:textSize="13sp"
+                            android:id="@+id/tv_brand" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -206,7 +212,8 @@
                             android:text="TS900"
                             android:layout_marginTop="5dp"
                             android:textColor="@color/text5a5a5a"
-                            android:textSize="13sp" />
+                            android:textSize="13sp"
+                            android:id="@+id/tv_model" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -214,7 +221,8 @@
                             android:text="支付宝"
                             android:layout_marginTop="5dp"
                             android:textColor="@color/text5a5a5a"
-                            android:textSize="13sp" />
+                            android:textSize="13sp"
+                            android:id="@+id/tv_channel" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -222,7 +230,8 @@
                             android:text="某某某"
                             android:layout_marginTop="5dp"
                             android:textColor="@color/text5a5a5a"
-                            android:textSize="13sp" />
+                            android:textSize="13sp"
+                            android:id="@+id/tv_agent" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -230,7 +239,8 @@
                             android:text="123765"
                             android:layout_marginTop="5dp"
                             android:textColor="@color/text5a5a5a"
-                            android:textSize="13sp" />
+                            android:textSize="13sp"
+                            android:id="@+id/tv_agent_tel" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -238,7 +248,8 @@
                             android:text="98034850923845"
                             android:layout_marginTop="5dp"
                             android:textColor="@color/text5a5a5a"
-                            android:textSize="13sp" />
+                            android:textSize="13sp"
+                            android:id="@+id/tv_order_number" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -246,13 +257,15 @@
                             android:text="2015-02-03 12:11:00"
                             android:layout_marginTop="5dp"
                             android:textColor="@color/text5a5a5a"
-                            android:textSize="13sp" />
+                            android:textSize="13sp"
+                            android:id="@+id/tv_create_time" />
                     </LinearLayout>
 
 
                 </LinearLayout>
 
                 <TableLayout
+                    android:id="@+id/tl_rate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -277,7 +290,7 @@
                             android:gravity="center"
                             android:background="#fff"
                             android:layout_marginRight="1dp"
-                            android:text="费率类型"
+                            android:text="费率"
                             />
                         <TextView
                             android:layout_width="match_parent"
@@ -461,6 +474,7 @@
                         >
 
                         <TextView
+                            android:id="@+id/tv_types"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -469,6 +483,7 @@
                             android:textColor="@color/text5a5a5a"
                             android:textSize="13sp" />
                         <TextView
+                            android:id="@+id/tv_agent2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -477,6 +492,7 @@
                             android:textColor="@color/text5a5a5a"
                             android:textSize="13sp" />
                         <TextView
+                            android:id="@+id/tv_name2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -485,6 +501,7 @@
                             android:textColor="@color/text5a5a5a"
                             android:textSize="13sp" />
                         <TextView
+                            android:id="@+id/tv_agent_tel2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -591,6 +608,7 @@
                     android:textSize="10dp"
                     />
                 <LinearLayout
+                    android:id="@+id/ll_comments"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"

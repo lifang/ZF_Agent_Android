@@ -50,7 +50,7 @@
                         android:textColor="@color/text292929"
                         android:textSize="17sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_companyName"
                         android:tag="@string/tag_destination"
                         android:layout_width="0dp"
@@ -61,6 +61,7 @@
                         android:singleLine="true"
                         android:text=""
                         android:textColor="@color/text6c6c6c6"
+                        android:background="@color/white"
                         android:textSize="13sp" />
                 </LinearLayout>
 
@@ -95,7 +96,7 @@
                         android:textColor="@color/text292929"
                         android:textSize="17sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_businessLicense"
                         android:tag="@string/tag_destination"
                         android:layout_width="0dp"
@@ -106,6 +107,7 @@
                         android:singleLine="true"
                         android:text=""
                         android:textColor="@color/text6c6c6c6"
+                        android:background="@color/white"
                         android:textSize="13sp" />
                 </LinearLayout>
                 <View
@@ -139,7 +141,7 @@
                         android:textColor="@color/text292929"
                         android:textSize="17sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_taxRegisteredNo"
                         android:tag="@string/tag_destination"
                         android:layout_width="0dp"
@@ -150,6 +152,7 @@
                         android:singleLine="true"
                         android:text=""
                         android:textColor="@color/text6c6c6c6"
+                        android:background="@color/white"
                         android:textSize="13sp" />
                 </LinearLayout>
                 <View
@@ -191,7 +194,7 @@
                     android:textColor="@color/text292929"
                     android:textSize="17sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/tv_name"
                     android:tag="@string/tag_destination"
                     android:layout_width="0dp"
@@ -202,6 +205,7 @@
                     android:singleLine="true"
                     android:text=""
                     android:textColor="@color/text6c6c6c6"
+                    android:background="@color/white"
                     android:textSize="13sp" />
             </LinearLayout>
             <View
@@ -236,7 +240,7 @@
                     android:textColor="@color/text292929"
                     android:textSize="17sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/tv_idCard"
                     android:tag="@string/tag_destination"
                     android:layout_width="0dp"
@@ -247,6 +251,7 @@
                     android:singleLine="true"
                     android:text=""
                     android:textColor="@color/text6c6c6c6"
+                    android:background="@color/white"
                     android:textSize="13sp" />
             </LinearLayout>
             <View
@@ -281,7 +286,7 @@
                     android:textColor="@color/text292929"
                     android:textSize="17sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/tv_phone"
                     android:tag="@string/tag_destination"
                     android:layout_width="0dp"
@@ -293,6 +298,7 @@
                     android:singleLine="true"
                     android:text=""
                     android:textColor="@color/text6c6c6c6"
+                    android:background="@color/white"
                     android:textSize="13sp" />
             </LinearLayout>
 
@@ -327,7 +333,7 @@
                     android:textColor="@color/text292929"
                     android:textSize="17sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/tv_email"
                     android:tag="@string/tag_destination"
                     android:layout_width="0dp"
@@ -339,6 +345,7 @@
                     android:singleLine="true"
                     android:text=""
                     android:textColor="@color/text6c6c6c6"
+                    android:background="@color/white"
                     android:textSize="13sp" />
             </LinearLayout>
 
@@ -386,6 +393,14 @@
                     android:text=""
                     android:textColor="@color/text6c6c6c6"
                     android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/post_right"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    />
             </LinearLayout>
 
             <View
@@ -419,7 +434,7 @@
                     android:textColor="@color/text292929"
                     android:textSize="17sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/tv_address"
                     android:tag="@string/tag_destination"
                     android:layout_width="0dp"
@@ -430,6 +445,7 @@
                     android:singleLine="true"
                     android:text=""
                     android:textColor="@color/text6c6c6c6"
+                    android:background="@color/white"
                     android:textSize="13sp" />
             </LinearLayout>
             <View

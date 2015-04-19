@@ -18,9 +18,6 @@ import com.posagent.activities.CommonInputer;
 import com.posagent.events.Events;
 import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
-import com.posagent.utils.ViewHelper;
-
-import java.util.ArrayList;
 
 import de.greenrobot.event.EventBus;
 
@@ -92,11 +89,13 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             company2.setVisibility(View.GONE);
         }
 
-        String tag = getString(R.string.tag_destination_get);
-        ArrayList<View> views = (ArrayList<View>) ViewHelper.getViewsByTag((ViewGroup) view, tag);
-        for (View _view: views) {
-            _view.setOnClickListener(this);
-        }
+        view.findViewById(R.id.mi_select_city).setOnClickListener(this);
+
+//        String tag = getString(R.string.tag_destination_get);
+//        ArrayList<View> views = (ArrayList<View>) ViewHelper.getViewsByTag((ViewGroup) view, tag);
+//        for (View _view: views) {
+//            _view.setOnClickListener(this);
+//        }
 
         tvCityName = (TextView) view.findViewById(R.id.tv_city_name);
 //        View v = view.findViewById(R.id.btn_submit);

@@ -1,31 +1,18 @@
 package com.example.zf_android.trade;
 
-import static com.example.zf_android.trade.Constants.CityIntent.CITY_ID;
-import static com.example.zf_android.trade.Constants.CityIntent.CITY_NAME;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -35,6 +22,14 @@ import com.example.zf_android.trade.common.CommonUtil;
 import com.example.zf_android.trade.entity.City;
 import com.example.zf_android.trade.entity.Province;
 import com.example.zf_android.trade.widget.LetterListView;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import static com.example.zf_android.trade.Constants.CityIntent.CITY_ID;
+import static com.example.zf_android.trade.Constants.CityIntent.CITY_NAME;
 
 public class CitySelectActivity extends Activity {
 
@@ -163,19 +158,20 @@ public class CitySelectActivity extends Activity {
     }
 
     private void initOverlay() {
-        LayoutInflater inflater = LayoutInflater.from(this);
-        overlay = (TextView) inflater.inflate(R.layout.letter_overlay, null);
-        overlay.setVisibility(View.INVISIBLE);
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.TYPE_APPLICATION,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                        | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                PixelFormat.TRANSLUCENT);
-        WindowManager windowManager = (WindowManager) this
-                .getSystemService(Context.WINDOW_SERVICE);
-        windowManager.addView(overlay, lp);
+        return;
+//        LayoutInflater inflater = LayoutInflater.from(this);
+//        overlay = (TextView) inflater.inflate(R.layout.letter_overlay, null);
+//        overlay.setVisibility(View.INVISIBLE);
+//        WindowManager.LayoutParams lp = new WindowManager.LayoutParams(
+//                LinearLayout.LayoutParams.WRAP_CONTENT,
+//                LinearLayout.LayoutParams.WRAP_CONTENT,
+//                WindowManager.LayoutParams.TYPE_APPLICATION,
+//                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+//                        | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+//                PixelFormat.TRANSLUCENT);
+//        WindowManager windowManager = (WindowManager) this
+//                .getSystemService(Context.WINDOW_SERVICE);
+//        windowManager.addView(overlay, lp);
     }
 
     public int dip2px(float dpValue) {

@@ -2,6 +2,7 @@ package com.example.zf_zandroid.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,8 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.zf_android.R;
-import com.posagent.activities.order.OrderDetail;
 import com.example.zf_android.entity.OrderEntity;
+import com.posagent.activities.order.OrderDetail;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -77,8 +78,10 @@ public class OrderAdapter extends BaseAdapter{
         }
 
         String face_url = entity.getOrder_goodsList().get(0).getGood_logo();
-        if (null != face_url) {
+        try {
             Picasso.with(context).load(face_url).into(holder.iv_face);
+        } catch (Exception ex) {
+            Log.d("OrderAdapter", ex.getMessage());
         }
 
 

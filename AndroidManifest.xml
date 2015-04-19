@@ -214,6 +214,10 @@
             android:name="com.posagent.activities.agent.AgentCargoDetail"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="com.posagent.activities.agent.AgentCargoExchangeDetail"
+            android:screenOrientation="portrait" >
+        </activity>
 
         <activity
             android:name="com.posagent.activities.agent.AgentManageActivity"

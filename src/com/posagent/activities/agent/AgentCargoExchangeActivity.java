@@ -1,38 +1,42 @@
 package com.posagent.activities.agent;
 
 
+import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.examlpe.zf_android.util.Tools;
 import com.examlpe.zf_android.util.XListView;
-import com.example.zf_android.entity.SonAgent;
-import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
-import com.posagent.MyApplication;
 import com.example.zf_android.R;
-import com.example.zf_android.entity.OrderEntity;
-import com.example.zf_zandroid.adapter.AgentAdapter;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
+import com.example.zf_android.entity.ExchangeEntity;
+import com.example.zf_zandroid.adapter.ExchangeAdapter;
+import com.posagent.activities.BaseActivity;
+import com.posagent.activities.trade.TradeAgentActivity;
+import com.posagent.events.Events;
+import com.posagent.utils.JsonParams;
 
-import org.apache.http.Header;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
+import de.greenrobot.event.EventBus;
+
+import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_ID;
+import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_NAME;
 
 /***
 *
@@ -42,14 +46,29 @@ import java.util.List;
 public class AgentCargoExchangeActivity extends BaseActivity implements XListView.IXListViewListener {
     private XListView Xlistview;
 
+    private LinearLayout ll_choose_agent;
 
     private int page = 1;
     private int rows = Config.ROWS;
-    private LinearLayout eva_nodata;
     private boolean onRefresh_number = true;
-    private AgentAdapter myAdapter;
-    List<SonAgent> myList = new ArrayList<SonAgent>();
-    List<SonAgent> moreList = new ArrayList<SonAgent>();
+    private ExchangeAdapter myAdapter;
+    List<ExchangeEntity> myList = new ArrayList<ExchangeEntity>();
+    List<ExchangeEntity> moreList = new ArrayList<ExchangeEntity>();
+
+    private int sonAgentId;
+
+    final static int REQUEST_TRADE_AGENT = 101;
+    private String tradeAgentName;
+
+
+    private View mTradeStart;
+    private TextView mTradeStartDate;
+    private View mTradeEnd;
+    private TextView mTradeEndDate;
+
+    private String tradeStartDate;
+    private String tradeEndDate;
+
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -58,63 +77,60 @@ public class AgentCargoExchangeActivity extends BaseActivity implements XListVie
 
                     if (myList.size() == 0) {
                         Xlistview.setVisibility(View.GONE);
-                        eva_nodata.setVisibility(View.VISIBLE);
+                    } else {
+                        Xlistview.setVisibility(View.VISIBLE);
                     }
                     onRefresh_number = true;
                     myAdapter.notifyDataSetChanged();
-                    break;
-                case 1:
-                    Toast.makeText(getApplicationContext(), (String) msg.obj,
-                            Toast.LENGTH_SHORT).show();
-
-                    break;
-                case 2:
-                    Toast.makeText(getApplicationContext(), "no 3g or wifi content",
-                            Toast.LENGTH_SHORT).show();
-                    break;
-                case 3:
-                    Toast.makeText(getApplicationContext(), " refresh too much",
-                            Toast.LENGTH_SHORT).show();
                     break;
             }
         }
     };
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.activity_agent_cargo_exchange);
-		new TitleMenuUtil(AgentCargoExchangeActivity.this, "调货管理").show();
+        setContentView(R.layout.activity_agent_cargo_exchange);
+        new TitleMenuUtil(AgentCargoExchangeActivity.this, "调货管理").show();
 
-        // 准备需要监听Click的数据
-        HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{
-//            put("ll_create_agent", AgentNewActivity.class);
-//            put("ll_glph", AdressList.class);
-//            put("ll_gltp", UserList.class);
-        }};
-        this.setClickableMap(clickableMap);
-        this.bindClickListener();
 
         initXListView();
 
-        //配置 调货 按钮
+        initView();
+
+    }
+
+    private void initView() {
+        //配置 配货 按钮
         TextView viewSetRate = (TextView)findViewById(R.id.next_sure);
         viewSetRate.setText("调货");
         viewSetRate.setVisibility(View.VISIBLE);
         viewSetRate.setOnClickListener(this);
 
-	}
+        ll_choose_agent = (LinearLayout) findViewById(R.id.ll_choose_agent);
+        ll_choose_agent.setOnClickListener(this);
+
+        mTradeStart = findViewById(R.id.trade_start);
+        mTradeStartDate = (TextView) findViewById(R.id.trade_start_date);
+        mTradeEnd = findViewById(R.id.trade_end);
+        mTradeEndDate = (TextView) findViewById(R.id.trade_end_date);
+
+        findViewById(R.id.trade_search).setOnClickListener(this);
+
+        mTradeStart.setOnClickListener(this);
+        mTradeEnd.setOnClickListener(this);
+
+//        getData();
+    }
 
     private void initXListView() {
-        myAdapter = new AgentAdapter(AgentCargoExchangeActivity.this, myList);
-        eva_nodata = (LinearLayout) findViewById(R.id.eva_nodata);
+        myAdapter = new ExchangeAdapter(AgentCargoExchangeActivity.this, myList);
         Xlistview = (XListView) findViewById(R.id.x_listview);
         Xlistview.setPullLoadEnable(true);
         Xlistview.setXListViewListener(this);
         Xlistview.setDivider(null);
         Xlistview.setAdapter(myAdapter);
-        getData();
     }
 
 
@@ -135,10 +151,10 @@ public class AgentCargoExchangeActivity extends BaseActivity implements XListVie
                 getData();
             } else {
                 onRefresh_number = true;
-                handler.sendEmptyMessage(2);
+                EventBus.getDefault().post(new Events.NoConnectEvent());
             }
         } else {
-            handler.sendEmptyMessage(3);
+            EventBus.getDefault().post(new Events.RefreshToMuch());
         }
     }
 
@@ -148,79 +164,31 @@ public class AgentCargoExchangeActivity extends BaseActivity implements XListVie
         Xlistview.setRefreshTime(Tools.getHourAndMin());
     }
 
-    public void buttonClick() {
-        page = 1;
-        myList.clear();
-        getData();
-    }
-
     private void getData() {
-        String url = "http://114.215.149.242:18080/ZFMerchant/api/order/getMyOrderAll";
-        RequestParams params = new RequestParams();
-        params.put("customer_id", 80);
+        JsonParams params = new JsonParams();
+        //Fixme
+        params.put("agentId", 1);
+        params.put("sonAgentId", sonAgentId);
+        params.put("startTime", tradeStartDate);
+        params.put("endTime", tradeEndDate);
         params.put("page", page);
-        params.put("pageSize", 4);
+        params.put("rows", rows);
 
-        params.setUseJsonStreamer(true);
-
-        MyApplication.getInstance().getClient()
-                .post(url, params, new AsyncHttpResponseHandler() {
-
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers,
-                                          byte[] responseBody) {
-                        String responseMsg = new String(responseBody)
-                                .toString();
-                        Log.e("print", responseMsg);
-
-
-                        Gson gson = new Gson();
-
-                        JSONObject jsonobject = null;
-                        String code = null;
-                        try {
-                            jsonobject = new JSONObject(responseMsg);
-                            code = jsonobject.getString("code");
-                            int a = jsonobject.getInt("code");
-                            if (a == Config.CODE) {
-                                String res = jsonobject.getString("result");
-                                jsonobject = new JSONObject(res);
-                                moreList.clear();
-                                System.out.println("-jsonobject String()--" + jsonobject.getString("content").toString());
-                                moreList = gson.fromJson(jsonobject.getString("content").toString(), new TypeToken<List<OrderEntity>>() {
-                                }.getType());
-                                System.out.println("-sendEmptyMessage String()--");
-                                myList.addAll(moreList);
-                                handler.sendEmptyMessage(0);
-
-
-                            } else {
-                                code = jsonobject.getString("message");
-                                Toast.makeText(getApplicationContext(), code, Toast.LENGTH_LONG).show();
-                            }
-                        } catch (JSONException e) {
-                            // TODO Auto-generated catch block
-                            ;
-                            e.printStackTrace();
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers,
-                                          byte[] responseBody, Throwable error) {
-                        // TODO Auto-generated method stub
-                        System.out.println("-onFailure---");
-                        Log.e("print", "-onFailure---" + error);
-                    }
-                });
-
-
+        String strParams = params.toString();
+        Events.CommonRequestEvent event = new Events.ExchangeListEvent();
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
     }
 
-	@Override
-	public void onClick(View v) {
+    // events
+    public void onEventMainThread(Events.ExchangeListCompleteEvent event) {
+        myList.addAll(event.getList());
+        Xlistview.setPullLoadEnable(event.getList().size() >= rows);
+        handler.sendEmptyMessage(0);
+    }
+
+    @Override
+    public void onClick(View v) {
         // 特殊 onclick 处理，如有特殊处理，
         // 则直接 return，不再调用 super 处理
         if (v.getId() == R.id.next_sure) {
@@ -228,8 +196,99 @@ public class AgentCargoExchangeActivity extends BaseActivity implements XListVie
             return;
         }
 
-        super.onClick(v);
-	}
+        if (v.getId() == R.id.trade_start) {
+            showDatePicker(tradeStartDate, true);
+            return;
+        }
 
-	 
+        if (v.getId() == R.id.trade_end) {
+            showDatePicker(tradeEndDate, false);
+            return;
+        }
+
+        if (v.getId() == R.id.trade_search) {
+            onRefresh();
+            return;
+        }
+
+        if (v.getId() == R.id.ll_choose_agent) {
+            Intent iAgent = new Intent(AgentCargoExchangeActivity.this, TradeAgentActivity.class);
+            iAgent.putExtra(AGENT_NAME, tradeAgentName);
+            startActivityForResult(iAgent, REQUEST_TRADE_AGENT);
+            return;
+        }
+
+        super.onClick(v);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != Activity.RESULT_OK) return;
+        switch (requestCode) {
+            case REQUEST_TRADE_AGENT:
+                String agentName = data.getStringExtra(AGENT_NAME);
+                int agentId = data.getIntExtra(AGENT_ID, 0);
+                tradeAgentName = agentName;
+                setText("trade_agent_name", agentName);
+                sonAgentId = agentId;
+                break;
+        }
+    }
+
+
+    /**
+     * show the date picker
+     *
+     * @param date        the chosen date
+     * @param isStartDate if true to choose the start date, else the end date
+     * @return
+     */
+    private void showDatePicker(final String date, final boolean isStartDate) {
+
+        final Calendar c = Calendar.getInstance();
+        if (TextUtils.isEmpty(date)) {
+            c.setTime(new Date());
+        } else {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                c.setTime(sdf.parse(date));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        DatePickerDialog.OnDateSetListener datePicker = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                c.set(Calendar.YEAR, year);
+                c.set(Calendar.MONTH, monthOfYear);
+                c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                String myFormat = "yyyy-MM-dd"; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.CHINA);
+                String dateStr = sdf.format(c.getTime());
+                if (isStartDate) {
+                    mTradeStartDate.setText(dateStr);
+                    tradeStartDate = dateStr;
+                } else {
+                    mTradeEndDate.setText(dateStr);
+                    tradeEndDate = dateStr;
+                }
+            }
+
+        };
+
+        new DatePickerDialog(AgentCargoExchangeActivity.this,
+                datePicker,
+                c.get(Calendar.YEAR),
+                c.get(Calendar.MONTH),
+                c.get(Calendar.DAY_OF_MONTH)).show();
+    }
+
+
+
 }

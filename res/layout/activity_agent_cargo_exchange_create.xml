@@ -25,14 +25,14 @@
 
 
             <RelativeLayout
-                android:id="@+id/ll_source"
+                android:id="@+id/ll_choose_from"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_centerVertical="true"
                 android:background="@color/white">
 
                 <ImageView
-                    android:id="@+id/icon_source"
+                    android:id="@+id/icon_destination1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -40,17 +40,18 @@
 
                 <TextView
                     style="@style/TextItem.Relative"
-                    android:layout_toRightOf="@+id/icon_source"
+                    android:layout_toRightOf="@+id/icon_destination1"
                     android:layout_marginLeft="@dimen/d_7dp"
-                    android:text="选择到"/>
+                    android:text="选择从"/>
 
                 <TextView
+                    android:id="@+id/tv_fromname"
                     style="@style/TextItem.Relative"
-                    android:text="川西数码"
-                    android:layout_toLeftOf="@+id/arrow_source"/>
+                    android:text=""
+                    android:layout_toLeftOf="@+id/arrow_destination2"/>
 
                 <ImageView
-                    android:id="@+id/arrow_source"
+                    android:id="@+id/arrow_destination2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -62,12 +63,6 @@
             </RelativeLayout>
 
         </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/Viewc2"/>
-
-
 
         <View
             android:layout_width="match_parent"
@@ -83,7 +78,7 @@
 
 
             <RelativeLayout
-                android:id="@+id/ll_destination"
+                android:id="@+id/ll_choose_to"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_centerVertical="true"
@@ -103,8 +98,9 @@
                     android:text="选择到"/>
 
                 <TextView
+                    android:id="@+id/tv_toname"
                     style="@style/TextItem.Relative"
-                    android:text="川西数码"
+                    android:text=""
                     android:layout_toLeftOf="@+id/arrow_destination"/>
 
                 <ImageView
@@ -120,6 +116,7 @@
             </RelativeLayout>
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
@@ -131,6 +128,7 @@
             android:layout_height="1px"
             android:layout_marginTop="5dp"
             android:background="@color/Viewc2"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -140,7 +138,7 @@
 
 
             <RelativeLayout
-                android:id="@+id/trade_agent"
+                android:id="@+id/ll_choose_terminal"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_centerVertical="true"
@@ -160,9 +158,10 @@
                     android:text="选择终端号"/>
 
                 <TextView
-                    android:id="@+id/trade_agent_name"
+                    android:id="@+id/tv_terminals"
                     style="@style/TextItem.Relative"
-                    android:text="11231224234..."
+                    android:text=""
+                    android:maxLength="10"
                     android:layout_toLeftOf="@+id/trade_start_arrow_agent"/>
 
                 <ImageView
@@ -183,7 +182,6 @@
             android:layout_height="1px"
             android:background="@color/Viewc2"/>
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -194,13 +192,12 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/trade_search"
+                android:id="@+id/btn_submit"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:text="提交"
                 android:textColor="@color/white"
-                android:enabled="false"
                 android:background="@drawable/normal_button_selector"/>
 
         </LinearLayout>

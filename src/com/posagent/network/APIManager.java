@@ -106,6 +106,11 @@ public class APIManager {
     public static final String UrlPrepareInfo = BaseUrl + "/preparegood/info";
     public static final String UrlPrepareAdd = BaseUrl + "/preparegood/add";
 
+    //exchange
+    public static final String UrlExchangeList = BaseUrl + "/exchangegood/list";
+    public static final String UrlExchangeInfo = BaseUrl + "/exchangegood/info";
+    public static final String UrlExchangeAdd = BaseUrl + "/exchangegood/add";
+
 
     /** Convenience singleton for apps using a process-wide EventBus instance. */
     public static APIManager getDefault() {
@@ -633,6 +638,22 @@ public class APIManager {
     public void onEventBackgroundThread(Events.PrepareAddEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.PrepareAddCompleteEvent();
         CommonRequest(event, completeEvent, UrlPrepareAdd);
+    }
+
+    //调货
+    public void onEventBackgroundThread(Events.ExchangeListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.ExchangeListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlExchangeList);
+    }
+
+    public void onEventBackgroundThread(Events.ExchangeInfoEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.ExchangeInfoCompleteEvent();
+        CommonRequest(event, completeEvent, UrlExchangeInfo);
+    }
+
+    public void onEventBackgroundThread(Events.ExchangeAddEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.ExchangeAddCompleteEvent();
+        CommonRequest(event, completeEvent, UrlExchangeAdd);
     }
 
 

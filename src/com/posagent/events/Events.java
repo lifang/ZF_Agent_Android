@@ -3,6 +3,7 @@ package com.posagent.events;
 import com.example.zf_android.entity.AdressEntity;
 import com.example.zf_android.entity.AgentTerminalEntity;
 import com.example.zf_android.entity.ChanelEntitiy;
+import com.example.zf_android.entity.ExchangeEntity;
 import com.example.zf_android.entity.MessageEntity;
 import com.example.zf_android.entity.OrderEntity;
 import com.example.zf_android.entity.PosEntity;
@@ -827,6 +828,50 @@ public class Events {
         }
 
         public void setEntity(PrepareEntity entity) {
+            this.entity = entity;
+        }
+    }
+
+
+    //调货
+    public static class ExchangeListEvent extends CommonRequestEvent {}
+    public static class ExchangeListCompleteEvent extends CommonCompleteEvent {
+
+        private List<ExchangeEntity> list = new ArrayList<ExchangeEntity>();
+        public List<ExchangeEntity> getList() {
+            if (list.size() < 1) {
+                String result = null;
+                try {
+                    result = getResult().getString("list");
+                    list = (new Gson()).fromJson(result,
+                            new TypeToken<List<ExchangeEntity>>() {}.getType());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            return list;
+        }
+        public void setList(List<ExchangeEntity> list) {
+            this.list = list;
+        }
+    }
+
+    public static class ExchangeAddEvent extends CommonRequestEvent {}
+    public static class ExchangeAddCompleteEvent extends CommonCompleteEvent {}
+
+    public static class ExchangeInfoEvent extends CommonRequestEvent {}
+    public static class ExchangeInfoCompleteEvent extends CommonCompleteEvent {
+        private ExchangeEntity entity;
+
+        public ExchangeEntity getEntity() {
+            String result = null;
+            result = getResult().toString();
+            entity = (new Gson()).fromJson(result, ExchangeEntity.class);
+            return entity;
+        }
+
+        public void setEntity(ExchangeEntity entity) {
             this.entity = entity;
         }
     }

@@ -1,15 +1,26 @@
 package com.posagent.activities.agent;
 
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
+import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.posagent.activities.BaseActivity;
 import com.example.zf_android.R;
+import com.posagent.activities.BaseActivity;
+import com.posagent.activities.terminal.TerminalChooseForm;
+import com.posagent.activities.trade.TradeAgentActivity;
+import com.posagent.events.Events;
+import com.posagent.utils.JsonParams;
 
-import java.util.HashMap;
+import java.util.List;
+
+import de.greenrobot.event.EventBus;
+
+import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_ID;
+import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_NAME;
 
 /***
 *
@@ -18,38 +29,113 @@ import java.util.HashMap;
 */
 public class AgentCargoExchangeCreateActivity extends BaseActivity {
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+    private int fromSonAgentId;
+    private int toSonAgentId;
+
+    final static int REQUEST_TRADE_AGENT_0 = 101;
+    final static int REQUEST_TRADE_AGENT_1 = 102;
+
+    private String toname;
+    private String fromname;
+
+    private List<String> selectedList;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.activity_agent_cargo_exchange_create);
-		new TitleMenuUtil(AgentCargoExchangeCreateActivity.this, "调货").show();
+        setContentView(R.layout.activity_agent_cargo_exchange_create);
+        new TitleMenuUtil(AgentCargoExchangeCreateActivity.this, "调货").show();
 
-        // 准备需要监听Click的数据
-        HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{
-//            put("ll_create_agent", AgentNewActivity.class);
-//            put("ll_glph", AdressList.class);
-//            put("ll_gltp", UserList.class);
-        }};
-        this.setClickableMap(clickableMap);
-        this.bindClickListener();
+        initView();
+    }
 
+    private void initView() {
+        findViewById(R.id.ll_choose_from).setOnClickListener(this);
+        findViewById(R.id.ll_choose_to).setOnClickListener(this);
+        findViewById(R.id.ll_choose_terminal).setOnClickListener(this);
+        findViewById(R.id.btn_submit).setOnClickListener(this);
 
-        //配置 提交 按钮
-        TextView viewSetRate = (TextView)findViewById(R.id.next_sure);
-        viewSetRate.setText("提交");
-        viewSetRate.setVisibility(View.VISIBLE);
-        viewSetRate.setOnClickListener(this);
+    }
 
-	}
-
-	@Override
-	public void onClick(View v) {
+    @Override
+    public void onClick(View v) {
         // 特殊 onclick 处理，如有特殊处理，
         // 则直接 return，不再调用 super 处理
 
-        super.onClick(v);
-	}
+        if (v.getId() == R.id.ll_choose_from) {
+            Intent iAgent = new Intent(AgentCargoExchangeCreateActivity.this, TradeAgentActivity.class);
+            iAgent.putExtra(AGENT_NAME, fromname);
+            startActivityForResult(iAgent, REQUEST_TRADE_AGENT_0);
+            return;
+        }
+        if (v.getId() == R.id.ll_choose_to) {
+            Intent iAgent = new Intent(AgentCargoExchangeCreateActivity.this, TradeAgentActivity.class);
+            iAgent.putExtra(AGENT_NAME, toname);
+            startActivityForResult(iAgent, REQUEST_TRADE_AGENT_1);
+            return;
+        }
+        if (v.getId() == R.id.ll_choose_terminal) {
+            Intent i = new Intent(AgentCargoExchangeCreateActivity.this, TerminalChooseForm.class);
+            startActivity(i);
+            return;
+        }
+        if (v.getId() == R.id.btn_submit) {
+            doSubmit();
+            return;
+        }
 
-	 
+        super.onClick(v);
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != Activity.RESULT_OK) return;
+        switch (requestCode) {
+            case REQUEST_TRADE_AGENT_0:
+                String agentName = data.getStringExtra(AGENT_NAME);
+                int agentId = data.getIntExtra(AGENT_ID, 0);
+                fromname = agentName;
+                setText("tv_fromname", agentName);
+                fromSonAgentId = agentId;
+                break;
+            case REQUEST_TRADE_AGENT_1:
+                String agentName2 = data.getStringExtra(AGENT_NAME);
+                int agentId2 = data.getIntExtra(AGENT_ID, 0);
+                toname = agentName2;
+                setText("tv_toname", agentName2);
+                toSonAgentId = agentId2;
+                break;
+        }
+    }
+
+    private void doSubmit() {
+        JsonParams params = new JsonParams();
+        //Fixme
+        params.put("customerId", 80);
+
+        params.put("toAgentId", toSonAgentId);
+        params.put("fromAgentId", fromSonAgentId);
+        params.put("serialNums", selectedList);
+
+        String strParams = params.toString();
+        Events.CommonRequestEvent event = new Events.ExchangeAddEvent();
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
+    }
+
+    //Events
+    public void onEventMainThread(Events.ExchangeAddCompleteEvent event) {
+        toast(event.getMessage());
+    }
+
+    public void onEventMainThread(Events.TerminalChooseFinishEvent event) {
+        selectedList = event.getList();
+        setText("tv_terminals", StringUtil.join(selectedList, ","));
+    }
+
+
+
 }

@@ -1,113 +1,87 @@
 package com.posagent.activities.trade;
 
-import static com.example.zf_android.trade.Constants.TradeIntent.TRADE_RECORD_ID;
-import static com.example.zf_android.trade.Constants.TradeIntent.TRADE_TYPE;
-
-import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
-import com.example.zf_android.trade.API;
-import com.example.zf_android.trade.common.HttpCallback;
 import com.example.zf_android.trade.entity.TradeDetail;
-import com.google.gson.reflect.TypeToken;
+import com.posagent.activities.BaseActivity;
+import com.posagent.events.Events;
+import com.posagent.utils.JsonParams;
 
-public class TradeDetailActivity extends Activity {
+import de.greenrobot.event.EventBus;
 
-    private LinearLayout mCommercialKeyContainer;
-    private LinearLayout mCommercialValueContainer;
+public class TradeDetailActivity extends BaseActivity {
 
-    private LinearLayout mBankKeyContainer;
-    private LinearLayout mBankValueContainer;
+    private int id;
 
-    private TextView mTradeStatus;
-    private TextView mTradeAmount;
-    private TextView mTradePoundage;
-    private TextView mTradeTime;
+    private TradeDetail entity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_trade_item);
+        setContentView(R.layout.activity_trade_detail);
         new TitleMenuUtil(this, getString(R.string.title_trade_detail)).show();
-        initialViews();
 
-        int typeId = getIntent().getIntExtra(TRADE_TYPE, 0);
-        int recordId = getIntent().getIntExtra(TRADE_RECORD_ID, 0);
-        API.getTradeRecordDetail(this, typeId, recordId, new HttpCallback<TradeDetail>(this) {
-            @Override
-            public void onSuccess(TradeDetail data) {
+        id = getIntent().getIntExtra("id", 0);
 
-                Resources resources = getResources();
-                String[] tradeStatuses = resources.getStringArray(R.array.trade_status);
-                mTradeStatus.setText(tradeStatuses[data.getTradedStatus()]);
-                mTradeAmount.setText(getString(R.string.notation_yuan) + data.getAmount());
-                mTradePoundage.setText(getString(R.string.notation_yuan) + data.getPoundage());
-                mTradeTime.setText(data.getTradedTimeStr());
-
-                String[] commercialKeys = resources.getStringArray(R.array.trade_item_commercial);
-                String[] bankKeys = resources.getStringArray(R.array.trade_item_bank);
-
-                for (int i = 0; i < commercialKeys.length; i++) {
-                    TextView value = new TextView(TradeDetailActivity.this);
-                    value.setGravity(Gravity.LEFT);
-                    value.setPadding(0, 5, 0, 5);
-                    value.setTextColor(getResources().getColor(R.color.text6c6c6c6));
-                    value.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
-                    value.setText(i == 0 ? data.getMerchantNumber()
-                            : i == 1 ? data.getAgentId() + ""
-                            : i == 2 ? data.getMerchantName()
-                            : "");
-                    mCommercialValueContainer.addView(value);
-                }
-
-                for (int i = 0; i < bankKeys.length; i++) {
-                    TextView value = new TextView(TradeDetailActivity.this);
-                    value.setGravity(Gravity.LEFT);
-                    value.setPadding(0, 5, 0, 5);
-                    value.setTextColor(resources.getColor(R.color.text6c6c6c6));
-                    value.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
-                    value.setText(i == 0 ? data.getTerminalNumber()
-                            : i == 1 ? data.getPayFromAccount()
-                            : i == 2 ? data.getPayIntoAccount()
-                            : i == 3 ? data.getPayChannelName()
-                            : i == 4 ? data.getProfitPrice() + ""
-                            : i == 5 ? data.getAmount() + ""
-                            : i == 6 ? data.getTradedTimeStr()
-                            : i == 7 ? tradeStatuses[data.getTradedStatus()]
-                            : i == 8 ? data.getBatchNumber()
-                            : i == 9 ? data.getTradeNumber()
-                            : "");
-                    mBankValueContainer.addView(value);
-                }
-            }
-
-            @Override
-            public TypeToken<TradeDetail> getTypeToken() {
-                return new TypeToken<TradeDetail>() {
-                };
-            }
-        });
+        initView();
     }
 
-    private void initialViews() {
-        mTradeStatus = (TextView) findViewById(R.id.trade_detail_status);
-        mTradeAmount = (TextView) findViewById(R.id.trade_detail_amount);
-        mTradePoundage = (TextView) findViewById(R.id.trade_detail_poundage);
-        mTradeTime = (TextView) findViewById(R.id.trade_detail_time);
+    private void initView() {
+        getData();
+    }
 
-        mCommercialKeyContainer = (LinearLayout) findViewById(R.id.trade_commercial_key_container);
-        mCommercialValueContainer = (LinearLayout) findViewById(R.id.trade_commercial_value_container);
-        mBankKeyContainer = (LinearLayout) findViewById(R.id.trade_bank_key_container);
-        mBankValueContainer = (LinearLayout) findViewById(R.id.trade_bank_value_container);
+    private void getData() {
+        JsonParams params = new JsonParams();
+        //Fixme
+        params.put("agentId", 1);
+        params.put("id", id);
+        params.put("isHaveProfit", 1);
+
+        String strParams = params.toString();
+        Events.CommonRequestEvent event = new Events.TradeDetailEvent();
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
+    }
+
+    // events
+    public void onEventMainThread(Events.TradeDetailCompleteEvent event) {
+        if (event.success()) {
+            entity = event.getEntity();
+            updateView();
+        } else {
+            toast(event.getMessage());
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        super.onClick(v);
+    }
+
+    private void updateView() {
 
         Resources resources = getResources();
+        String[] tradeStatuses = resources.getStringArray(R.array.trade_status);
+
+        setText("trade_detail_status", tradeStatuses[entity.getTradedStatus()]);
+        setText("trade_detail_amount", "" + entity.getAmount());
+        setText("trade_detail_poundage", "" + entity.getPoundage());
+        setText("trade_detail_time", "" + entity.getTradedTimeStr());
+
+        LinearLayout mCommercialValueContainer = (LinearLayout) findViewById(R.id.trade_commercial_value_container);
+        LinearLayout mBankValueContainer = (LinearLayout) findViewById(R.id.trade_bank_value_container);
+        LinearLayout mBankKeyContainer = (LinearLayout) findViewById(R.id.trade_bank_key_container);
+        LinearLayout mCommercialKeyContainer = (LinearLayout) findViewById(R.id.trade_commercial_key_container);
+
         String[] commercialKeys = resources.getStringArray(R.array.trade_item_commercial);
         String[] bankKeys = resources.getStringArray(R.array.trade_item_bank);
 
@@ -130,5 +104,39 @@ public class TradeDetailActivity extends Activity {
             key.setText(bankKeys[i]);
             mBankKeyContainer.addView(key);
         }
+
+        for (int i = 0; i < commercialKeys.length; i++) {
+            TextView value = new TextView(TradeDetailActivity.this);
+            value.setGravity(Gravity.LEFT);
+            value.setPadding(0, 5, 0, 5);
+            value.setTextColor(getResources().getColor(R.color.text6c6c6c6));
+            value.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
+            value.setText(i == 0 ? entity.getMerchantNumber()
+                    : i == 1 ? entity.getAgentId() + ""
+                    : i == 2 ? entity.getMerchantName()
+                    : "");
+            mCommercialValueContainer.addView(value);
+        }
+
+        for (int i = 0; i < bankKeys.length; i++) {
+            TextView value = new TextView(TradeDetailActivity.this);
+            value.setGravity(Gravity.LEFT);
+            value.setPadding(0, 5, 0, 5);
+            value.setTextColor(resources.getColor(R.color.text6c6c6c6));
+            value.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
+            value.setText(i == 0 ? entity.getTerminalNumber()
+                    : i == 1 ? entity.getPayFromAccount()
+                    : i == 2 ? entity.getPayIntoAccount()
+                    : i == 3 ? entity.getPayChannelName()
+                    : i == 4 ? entity.getProfitPrice() + ""
+                    : i == 5 ? entity.getAmount() + ""
+                    : i == 6 ? entity.getTradedTimeStr()
+                    : i == 7 ? tradeStatuses[entity.getTradedStatus()]
+                    : i == 8 ? entity.getBatchNumber()
+                    : i == 9 ? entity.getTradeNumber()
+                    : "");
+            mBankValueContainer.addView(value);
+        }
     }
+
 }

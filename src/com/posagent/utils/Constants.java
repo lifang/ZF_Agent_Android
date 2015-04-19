@@ -49,4 +49,16 @@ public class Constants {
 
     }
 
+    public static class Trade {
+        public static final String[] STATUS = {
+                "未知",
+                "转账",
+                "消费",
+                "还款",
+                "生活充值",
+                "话费充值"
+        };
+
+    }
+
 }

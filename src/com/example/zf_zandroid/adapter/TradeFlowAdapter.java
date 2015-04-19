@@ -7,12 +7,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.zf_android.R;
-import com.example.zf_android.activity.TradeOrderDetail;
 import com.example.zf_android.trade.entity.TradeRecord;
+import com.posagent.activities.trade.TradeDetailActivity;
+import com.posagent.utils.Constants;
 
 import java.util.List;
 
@@ -43,21 +43,40 @@ public class TradeFlowAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        final TradeRecord entity = list.get(position);
         inflater = LayoutInflater.from(context);
         if(convertView == null){
             holder = new ViewHolder();
             convertView = inflater.inflate(R.layout.trade_flow_item, null);
             convertView.setTag(holder);
+
+            holder.trade_time = (TextView) convertView.findViewById(R.id.trade_time);
+            holder.trade_account = (TextView) convertView.findViewById(R.id.trade_account);
+            holder.trade_receive_account = (TextView) convertView.findViewById(R.id.trade_receive_account);
+            holder.trade_client_number = (TextView) convertView.findViewById(R.id.trade_client_number);
+            holder.trade_status = (TextView) convertView.findViewById(R.id.trade_status);
+            holder.trade_amount = (TextView) convertView.findViewById(R.id.trade_amount);
+
         }else{
             holder = (ViewHolder)convertView.getTag();
         }
+
+        // fill data
+        holder.trade_time.setText(entity.getTradedTimeStr());
+        holder.trade_account.setText(entity.getPayFromAccount());
+        holder.trade_receive_account.setText(entity.getPayIntoAccount());
+        holder.trade_client_number.setText(entity.getTerminalNumber());
+
+        String statusName = Constants.Trade.STATUS[entity.getTradedStatus()];
+        holder.trade_status.setText(statusName);
+        holder.trade_amount.setText("￥" + entity.getAmount());
 
         convertView.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                // TODO Auto-generated method stub
-                Intent i = new Intent(context, TradeOrderDetail.class);
+                Intent i = new Intent(context, TradeDetailActivity.class);
+                i.putExtra("id", entity.getId());
                 context.startActivity(i);
             }
         });
@@ -66,7 +85,7 @@ public class TradeFlowAdapter extends BaseAdapter{
     }
 
     public final class ViewHolder {
-        public TextView tv_goodnum,tv_price,content,tv_ddbh,tv_time,tv_status,tv_sum,tv_psf,tv_pay,tv_gtd,content2,content_pp;
-        private LinearLayout ll_ishow;
+        public TextView trade_time, trade_account, trade_receive_account, trade_client_number,
+                trade_status, trade_amount;
     }
 }

@@ -1,24 +1,29 @@
 package com.posagent.activities.trade;
 
-import static com.example.zf_android.trade.Constants.TradeIntent.CLIENT_NUMBER;
-import static com.example.zf_android.trade.Constants.TradeIntent.END_DATE;
-import static com.example.zf_android.trade.Constants.TradeIntent.START_DATE;
-import static com.example.zf_android.trade.Constants.TradeIntent.TRADE_TYPE;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
-import com.example.zf_android.trade.API;
-import com.example.zf_android.trade.common.HttpCallback;
 import com.example.zf_android.trade.entity.TradeStatistic;
-import com.google.gson.reflect.TypeToken;
+import com.posagent.activities.BaseActivity;
+import com.posagent.events.Events;
+import com.posagent.utils.JsonParams;
 
-public class TradeStatisticActivity extends Activity {
+import de.greenrobot.event.EventBus;
 
+import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_ID;
+import static com.example.zf_android.trade.Constants.TradeIntent.CLIENT_NUMBER;
+import static com.example.zf_android.trade.Constants.TradeIntent.END_DATE;
+import static com.example.zf_android.trade.Constants.TradeIntent.SON_AGENT_ID;
+import static com.example.zf_android.trade.Constants.TradeIntent.START_DATE;
+import static com.example.zf_android.trade.Constants.TradeIntent.TRADE_TYPE;
+
+public class TradeStatisticActivity extends BaseActivity {
+
+    private int mAgentId;
+    private int mSonAgentId;
     private int mTradeType;
     private String mStartDate;
     private String mEndDate;
@@ -30,10 +35,14 @@ public class TradeStatisticActivity extends Activity {
     private TextView statisticClient;
     private TextView statisticChannel;
 
+    private TradeStatistic entity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
+        mAgentId = intent.getIntExtra(AGENT_ID, 1);
+        mSonAgentId = intent.getIntExtra(SON_AGENT_ID, 1);
         mTradeType = intent.getIntExtra(TRADE_TYPE, 1);
         mStartDate = intent.getStringExtra(START_DATE);
         mEndDate = intent.getStringExtra(END_DATE);
@@ -42,23 +51,6 @@ public class TradeStatisticActivity extends Activity {
         setContentView(R.layout.activity_trade_statistic);
         initViews();
 
-        API.getTradeRecordStatistic(this, mTradeType, mClientNumber, mStartDate, mEndDate,
-                new HttpCallback<TradeStatistic>(this) {
-                    @Override
-                    public void onSuccess(TradeStatistic data) {
-                        statisticAmount.setText("" + data.getAmountTotal());
-                        statisticCount.setText("" + data.getTradeTotal());
-                        statisticTime.setText(mStartDate.replaceAll("-", "/") + " - " + mEndDate.replaceAll("-", "/"));
-                        statisticClient.setText(data.getTerminalNumber());
-                        statisticChannel.setText(data.getPayChannelName());
-                    }
-
-                    @Override
-                    public TypeToken<TradeStatistic> getTypeToken() {
-                        return new TypeToken<TradeStatistic>() {
-                        };
-                    }
-                });
     }
 
     private void initViews() {
@@ -69,5 +61,50 @@ public class TradeStatisticActivity extends Activity {
         statisticTime = (TextView) findViewById(R.id.trade_statistic_time);
         statisticClient = (TextView) findViewById(R.id.trade_statistic_client);
         statisticChannel = (TextView) findViewById(R.id.trade_statistic_channel);
+
+        getData();
+    }
+
+    private void getData() {
+        JsonParams params = new JsonParams();
+        //Fixme
+        params.put("agentId", mAgentId);
+        params.put("sonagentId", mSonAgentId);
+
+        params.put("tradeTypeId", mTradeType);
+        params.put("terminalNumber", mClientNumber);
+        params.put("startTime", mStartDate);
+        params.put("endTime", mEndDate);
+
+
+        String strParams = params.toString();
+        Events.CommonRequestEvent event = new Events.TradeStatisticEvent();
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
+    }
+
+    // events
+    public void onEventMainThread(Events.TradeStatisticCompleteEvent event) {
+        if (event.success()) {
+            entity = event.getEntity();
+            updateView();
+        } else {
+            toast(event.getMessage());
+        }
+    }
+
+    private void updateView() {
+        statisticAmount = (TextView) findViewById(R.id.trade_statistic_amount);
+        statisticCount = (TextView) findViewById(R.id.trade_statistic_count);
+        statisticTime = (TextView) findViewById(R.id.trade_statistic_time);
+        statisticClient = (TextView) findViewById(R.id.trade_statistic_client);
+        statisticChannel = (TextView) findViewById(R.id.trade_statistic_channel);
+
+        statisticAmount.setText(entity.getAmountTotal());
+        statisticCount.setText(entity.getTradeTotal());
+        statisticTime.setText( mStartDate + " - " + mEndDate);
+        statisticClient.setText(entity.getTerminalNumber());
+        statisticChannel.setText(entity.getPayChannelName());
+
     }
 }

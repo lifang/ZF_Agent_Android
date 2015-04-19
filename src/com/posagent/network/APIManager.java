@@ -70,6 +70,8 @@ public class APIManager {
     public static final String UrlTradeClient = BaseUrl + "/trade/record/getTerminals";
     public static final String UrlTradeAgent = BaseUrl + "/trade/record/getAgents";
     public static final String UrlTradeList = BaseUrl + "/trade/record/getTradeRecords";
+    public static final String UrlTradeDetail = BaseUrl + "/trade/getTradeRecord";
+    public static final String UrlTradeStatistic = BaseUrl + "/trade/getTradeStatistics";
     public static final String UrlTerminalList = BaseUrl + "/terminal/getTerminalList";
     public static final String UrlTerminalBind = BaseUrl + "/terminal/bindingTerminals";
     public static final String UrlVerifyCode = BaseUrl + "/terminal/sendPhoneVerificationCodeReg";
@@ -477,6 +479,16 @@ public class APIManager {
     public void onEventBackgroundThread(Events.TradeListEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.TradeListCompleteEvent();
         CommonRequest(event, completeEvent, UrlTradeList);
+    }
+
+    public void onEventBackgroundThread(Events.TradeDetailEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.TradeDetailCompleteEvent();
+        CommonRequest(event, completeEvent, UrlTradeDetail);
+    }
+
+    public void onEventBackgroundThread(Events.TradeStatisticEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.TradeStatisticCompleteEvent();
+        CommonRequest(event, completeEvent, UrlTradeStatistic);
     }
 
     public void onEventBackgroundThread(Events.TerminalListEvent event) {

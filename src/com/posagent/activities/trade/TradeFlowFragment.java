@@ -37,6 +37,7 @@ import java.util.Map;
 import de.greenrobot.event.EventBus;
 
 import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_ID;
+import static com.example.zf_android.trade.Constants.TradeIntent.SON_AGENT_ID;
 import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_NAME;
 import static com.example.zf_android.trade.Constants.TradeIntent.CLIENT_NUMBER;
 import static com.example.zf_android.trade.Constants.TradeIntent.END_DATE;
@@ -260,6 +261,10 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
                 break;
             case R.id.trade_statistic:
                 Intent intent = new Intent(getActivity(), TradeStatisticActivity.class);
+                //Fixme
+                intent.putExtra(AGENT_ID, 1);
+                intent.putExtra(SON_AGENT_ID, 1);
+                intent.putExtra(TRADE_TYPE, mTradeType);
                 intent.putExtra(TRADE_TYPE, mTradeType);
                 intent.putExtra(CLIENT_NUMBER, tradeClientName);
                 intent.putExtra(START_DATE, tradeStartDate);

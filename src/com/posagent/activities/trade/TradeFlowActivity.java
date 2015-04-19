@@ -171,13 +171,27 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
 
         searchMap = map;
 
+//        {
+//            "startTime": "2015-03-01",
+//                "page": 1,
+//                "agentId": 80,
+//                "endTime": "2015-04-16",
+//                "terminalNumber": "501000012002",
+//                "sonagentId": 81,
+//                "tradeTypeId": 5,
+//                "rows": 10
+//        }
+
         JsonParams params = new JsonParams();
 
         //Fixme
-        params.put("agentId", 1);
+        params.put("agentId", 80);
         params.put("tradeTypeId", map.get("tradeTypeId"));
-        params.put("terminalNumber", map.get("terminalNumber"));
-        params.put("sonagentId", map.get("sonagentId"));
+//        params.put("terminalNumber", map.get("terminalNumber"));
+        //Fixme
+        params.put("terminalNumber", "501000012002");
+//        params.put("sonagentId", map.get("sonagentId"));
+        params.put("sonagentId", 81);
         params.put("startTime", map.get("startTime"));
         params.put("endTime", map.get("endTime"));
         params.put("page", page);

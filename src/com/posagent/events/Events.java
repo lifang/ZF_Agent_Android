@@ -22,7 +22,9 @@ import com.example.zf_android.trade.entity.TerminalDetail;
 import com.example.zf_android.trade.entity.TerminalItem;
 import com.example.zf_android.trade.entity.TradeAgent;
 import com.example.zf_android.trade.entity.TradeClient;
+import com.example.zf_android.trade.entity.TradeDetail;
 import com.example.zf_android.trade.entity.TradeRecord;
+import com.example.zf_android.trade.entity.TradeStatistic;
 import com.example.zf_android.trade.entity.UserInfo;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -486,6 +488,7 @@ public class Events {
         }
     }
 
+    // trade
     public static class TradeListEvent extends CommonRequestEvent {}
     public static class TradeListCompleteEvent extends CommonCompleteEvent {
         private List<TradeRecord> list = new ArrayList<TradeRecord>();
@@ -507,6 +510,41 @@ public class Events {
             this.list = list;
         }
     }
+
+    public static class TradeDetailEvent extends CommonRequestEvent {}
+    public static class TradeDetailCompleteEvent extends CommonCompleteEvent {
+        private TradeDetail entity;
+
+        public TradeDetail getEntity() {
+            String result = null;
+            result = getResult().toString();
+            entity = (new Gson()).fromJson(result, TradeDetail.class);
+            return entity;
+        }
+
+        public void setEntity(TradeDetail entity) {
+            this.entity = entity;
+        }
+    }
+
+
+    public static class TradeStatisticEvent extends CommonRequestEvent {}
+    public static class TradeStatisticCompleteEvent extends CommonCompleteEvent {
+        private TradeStatistic entity;
+
+        public TradeStatistic getEntity() {
+            String result = null;
+            result = getResult().toString();
+            entity = (new Gson()).fromJson(result, TradeStatistic.class);
+            return entity;
+        }
+
+        public void setEntity(TradeStatistic entity) {
+            this.entity = entity;
+        }
+    }
+
+
 
     // Terminal
     public static class TerminalListEvent extends CommonRequestEvent {}

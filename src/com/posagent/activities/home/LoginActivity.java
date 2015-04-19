@@ -63,7 +63,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 Intent i = new Intent(getApplicationContext(),
                         FindPass.class);
                 startActivity(i);

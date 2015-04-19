@@ -4,26 +4,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.posagent.activities.BaseActivity;
 import com.example.zf_android.R;
+import com.posagent.activities.BaseActivity;
 import com.posagent.activities.home.LoginActivity;
 
-public class FindLogin extends BaseActivity {
+public class FindPasswordDone extends BaseActivity {
 
-        private String email;
 
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
-			setContentView(R.layout.findlogin);
-
-            email = getIntent().getStringExtra("email");
-            setText("tv_email", email);
+			setContentView(R.layout.activity_find_password_done);
 
             findViewById(R.id.tv_submit).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(FindLogin.this, LoginActivity.class);
+                    Intent i = new Intent(FindPasswordDone.this, LoginActivity.class);
                     startActivity(i);
                 }
             });

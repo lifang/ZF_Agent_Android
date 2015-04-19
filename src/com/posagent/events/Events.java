@@ -204,6 +204,15 @@ public class Events {
     public static class GoodsDetailEvent extends CommonRequestEvent {}
     public static class GoodsDetailCompleteEvent extends CommonCompleteEvent {}
 
+    // find password
+    public static class SendEmailVerificationCodeEvent extends CommonRequestEvent {}
+    public static class SendEmailVerificationCodeCompleteEvent extends CommonCompleteEvent {}
+    public static class SendPhoneVerificationCodeEvent extends CommonRequestEvent {}
+    public static class SendPhoneVerificationCodeCompleteEvent extends CommonCompleteEvent {}
+    public static class UpdatePasswordEvent extends CommonRequestEvent {}
+    public static class UpdatePasswordCompleteEvent extends CommonCompleteEvent {}
+
+
     public static class CreateOrderEvent extends CommonRequestEvent {}
     public static class CreateOrderCompleteEvent extends CommonCompleteEvent {}
 

@@ -8,20 +8,22 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.examlpe.zf_android.util.Tools;
 import com.examlpe.zf_android.util.XListView;
 import com.examlpe.zf_android.util.XListView.IXListViewListener;
 import com.example.zf_android.Config;
 import com.example.zf_android.R;
-import com.example.zf_android.entity.MessageEntity;
+import com.example.zf_android.entity.StaffEntity;
 import com.example.zf_android.trade.widget.MyTabWidget;
-import com.example.zf_zandroid.adapter.NewMessageAdapter;
+import com.example.zf_zandroid.adapter.StaffAdapter;
 import com.google.gson.Gson;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
@@ -34,9 +36,9 @@ import java.util.List;
 import de.greenrobot.event.EventBus;
 
 /**
- * 消息列表
+ * 员工列表
  */
-public class MessageList extends BaseActivity implements IXListViewListener {
+public class StaffList extends BaseActivity implements IXListViewListener {
 
     private XListView Xlistview;
     private MyTabWidget mTabWidget;
@@ -45,13 +47,13 @@ public class MessageList extends BaseActivity implements IXListViewListener {
     private LinearLayout eva_nodata;
 
     private RelativeLayout rl_button_toolbar;
-    private TextView tv_makeReadAll, tv_batchDelete;
+    private TextView tv_batchDelete, tv_cancel;
 
 
     private boolean onRefresh_number = true;
     private boolean isDeleting = false;
-    private NewMessageAdapter myAdapter;
-    List<MessageEntity> myList = new ArrayList<MessageEntity>();
+    private StaffAdapter myAdapter;
+    List<StaffEntity> myList = new ArrayList<StaffEntity>();
 
     List<String> deleteIds;
 
@@ -78,51 +80,64 @@ public class MessageList extends BaseActivity implements IXListViewListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_message_list);
+        setContentView(R.layout.activity_staff_list);
         initView();
         getData();
     }
 
     private void initView() {
-        new TitleMenuUtil(MessageList.this, "我的消息").show();
+        new TitleMenuUtil(StaffList.this, "员工帐号").show();
         rl_button_toolbar = (RelativeLayout) findViewById(R.id.rl_button_toolbar);
         if (!isDeleting) {
             rl_button_toolbar.setVisibility(View.GONE);
         }
         // delete icon show
-        final TextView editIcon = (TextView) findViewById(R.id.tv_title_back_edit);
-        editIcon.setVisibility(View.VISIBLE);
-        editIcon.setOnClickListener(new View.OnClickListener() {
+        final ImageView iv_delete = (ImageView) findViewById(R.id.search);
+        iv_delete.setVisibility(View.VISIBLE);
+        iv_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isDeleting = !isDeleting;
                 updateListView();
                 if (isDeleting) {
-                    editIcon.setText("取消");
                     rl_button_toolbar.setVisibility(View.VISIBLE);
                 } else {
-                    editIcon.setText("编辑");
                     rl_button_toolbar.setVisibility(View.GONE);
                 }
             }
         });
 
-        tv_makeReadAll = (TextView) findViewById(R.id.tv_makeReadAll);
-        tv_makeReadAll.setOnClickListener(new View.OnClickListener() {
+        // add icon show
+        final ImageView iv_addIcon = (ImageView) findViewById(R.id.iv_addIcon);
+
+
+        iv_addIcon.setVisibility(View.VISIBLE);
+        iv_addIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                makeReadAll();
+                Intent i = new Intent(StaffList.this, StaffForm.class);
+                startActivityForResult(i, Constants.REQUEST_CODE);
             }
         });
+
         tv_batchDelete = (TextView) findViewById(R.id.tv_batchDelete);
+        tv_cancel = (TextView) findViewById(R.id.tv_cancel);
         tv_batchDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 deleteAll();
             }
         });
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isDeleting = false;
+                rl_button_toolbar.setVisibility(View.GONE);
+                cancelBatchDelete();
+            }
+        });
 
-        myAdapter = new NewMessageAdapter(MessageList.this, myList);
+        myAdapter = new StaffAdapter(StaffList.this, myList);
         eva_nodata = (LinearLayout) findViewById(R.id.eva_nodata);
         Xlistview = (XListView) findViewById(R.id.x_listview);
         Xlistview.setPullLoadEnable(true);
@@ -164,11 +179,11 @@ public class MessageList extends BaseActivity implements IXListViewListener {
     private void getData() {
         JsonParams params = new JsonParams();
         //Fixme
-        params.put("customerId", 80);
+        params.put("agentsId", 1);
         params.put("page", page);
         params.put("rows", rows);
         String strParams = params.toString();
-        Events.MessageListEvent event = new Events.MessageListEvent();
+        Events.StaffListEvent event = new Events.StaffListEvent();
         event.setParams(strParams);
         EventBus.getDefault().post(event);
     }
@@ -176,35 +191,20 @@ public class MessageList extends BaseActivity implements IXListViewListener {
     private void sendDelete() {
         JsonParams params = new JsonParams();
         //Fixme
-        params.put("customerId", 80);
-        params.put("ids", deleteIds);
-        params.put("page", 1);
-        params.put("rows", 10);
+        params.put("agentsId", 1);
+        params.put("loginId", 1);
+        params.put("customerIds", StringUtil.join(deleteIds, ","));
+
         String strParams = params.toString();
-        Events.MessageDeleteEvent event = new Events.MessageDeleteEvent();
+        Events.StaffDeleteEvent event = new Events.StaffDeleteEvent();
         event.setParams(strParams);
         EventBus.getDefault().post(event);
     }
 
-    public void doDelete(MessageEntity entity) {
+    public void doDelete(StaffEntity entity) {
         entity.setSelected(true);
         deleteAll();
     }
-
-
-    private void sendMakeReadAll() {
-        JsonParams params = new JsonParams();
-        //Fixme
-        params.put("customerId", 1);
-        params.put("ids", deleteIds);
-        params.put("page", 1);
-        params.put("rows", 10);
-        String strParams = params.toString();
-        Events.MessageMarkReadEvent event = new Events.MessageMarkReadEvent();
-        event.setParams(strParams);
-        EventBus.getDefault().post(event);
-    }
-
 
 
     @Override
@@ -215,31 +215,27 @@ public class MessageList extends BaseActivity implements IXListViewListener {
     }
 
     // events
-    public void onEventMainThread(Events.MessageListCompleteEvent event) {
+    public void onEventMainThread(Events.StaffListCompleteEvent event) {
         myList.addAll(event.getList());
         Xlistview.setPullLoadEnable(event.getList().size() >= rows);
         handler.sendEmptyMessage(0);
     }
 
-    public void onEventMainThread(Events.MessageDeleteCompleteEvent event) {
+    public void onEventMainThread(Events.StaffDeleteCompleteEvent event) {
         if (event.success()) {
             myAdapter.notifyDataSetChanged();
         }
         toast(event.getMessage());
     }
 
-    public void onEventMainThread(Events.MessageMarkReadCompleteEvent event) {
-        if (event.success()) {
-            myAdapter.notifyDataSetChanged();
-        }
-        toast(event.getMessage());
+    public void onEventMainThread(Events.StaffListReloadEvent event) {
+        onRefresh();
     }
-
 
 
     // callback
-    public void showMessageDetail(MessageEntity entity) {
-        Intent i = new Intent(MessageList.this, MessageDetail.class);
+    public void showDetail(StaffEntity entity) {
+        Intent i = new Intent(StaffList.this, StaffForm.class);
         Gson gson = new Gson();
         String json = gson.toJson(entity);
         i.putExtra("json", json);
@@ -255,10 +251,10 @@ public class MessageList extends BaseActivity implements IXListViewListener {
         switch (requestCode) {
             case Constants.REQUEST_CODE:
                 Gson gson = new Gson();
-                MessageEntity entity = gson.fromJson(bundle.getString("json"), MessageEntity.class);
+                StaffEntity entity = gson.fromJson(bundle.getString("json"), StaffEntity.class);
                 for (int i = 0; i < myList.size(); i++) {
-                    MessageEntity item = myList.get(i);
-                    if (item.getId().equals(entity.getId())) {
+                    StaffEntity item = myList.get(i);
+                    if (item.getId() == entity.getId()) {
                         myList.remove(item);
                         return;
                     }
@@ -279,11 +275,11 @@ public class MessageList extends BaseActivity implements IXListViewListener {
     private void updateListView() {
         if (isDeleting) {
             // update list
-            for (MessageEntity entity : myList) {
+            for (StaffEntity entity : myList) {
                 entity.setBatchEditing(true);
             }
         } else {
-            for (MessageEntity entity : myList) {
+            for (StaffEntity entity : myList) {
                 entity.setBatchEditing(false);
             }
         }
@@ -291,8 +287,8 @@ public class MessageList extends BaseActivity implements IXListViewListener {
     }
 
     private void deleteAll() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MessageList.this);
-        builder.setMessage("确定删除这些消息吗？");
+        AlertDialog.Builder builder = new AlertDialog.Builder(StaffList.this);
+        builder.setMessage("确定删除这些员工吗？");
         builder.setTitle("请确认");
 
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -300,11 +296,11 @@ public class MessageList extends BaseActivity implements IXListViewListener {
                 deleteIds = new ArrayList<String>();
 
                 for (int i = myList.size() - 1; i >= 0; i--) {
-                    MessageEntity entity = myList.get(i);
+                    StaffEntity entity = myList.get(i);
                     if (entity.isSelected()) {
                         entity.setDeleted(true);
                         myList.remove(entity);
-                        deleteIds.add(entity.getId());
+                        deleteIds.add("" + entity.getId());
                     } else {
                         entity.setDeleted(false);
                     }
@@ -313,7 +309,7 @@ public class MessageList extends BaseActivity implements IXListViewListener {
                 if (deleteIds.size() > 0) {
                     sendDelete();
 
-                    Toast.makeText(MessageList.this, "正在删除...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StaffList.this, "正在删除...", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -329,39 +325,5 @@ public class MessageList extends BaseActivity implements IXListViewListener {
         builder.create().show();
     }
 
-    private void makeReadAll() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MessageList.this);
-        builder.setMessage("确定标记这些消息吗？");
-        builder.setTitle("请确认");
-
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                deleteIds = new ArrayList<String>();
-
-                for (int i = myList.size() - 1; i >= 0; i--) {
-                    MessageEntity entity = myList.get(i);
-                    if (entity.isSelected()) {
-                        deleteIds.add(entity.getId());
-                    }
-
-                }
-                if (deleteIds.size() > 0) {
-                    sendMakeReadAll();
-
-                    Toast.makeText(MessageList.this, "正在标记...", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
-
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-
-                dialog.cancel();
-            }
-        });
-
-        builder.create().show();
-    }
 
 }

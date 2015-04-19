@@ -6,6 +6,7 @@ import com.example.zf_android.entity.ChanelEntitiy;
 import com.example.zf_android.entity.MessageEntity;
 import com.example.zf_android.entity.OrderEntity;
 import com.example.zf_android.entity.PosEntity;
+import com.example.zf_android.entity.StaffEntity;
 import com.example.zf_android.entity.StockAgentEntity;
 import com.example.zf_android.entity.StockEntity;
 import com.example.zf_android.entity.TerminalApplyEntity;
@@ -673,6 +674,55 @@ public class Events {
     public static class ChangePasswordCompleteEvent extends CommonCompleteEvent{}
 
     public static class UserInfoReloadEvent extends CommonRequestEvent{}
+
+    public static class StaffListEvent extends CommonRequestEvent {}
+    public static class StaffListCompleteEvent extends CommonCompleteEvent {
+        private List<StaffEntity> list = new ArrayList<StaffEntity>();
+        public List<StaffEntity> getList() {
+            if (list.size() < 1) {
+                String result = null;
+                try {
+                    result = getResult().getString("list");
+                    list = (new Gson()).fromJson(result,
+                            new TypeToken<List<StaffEntity>>() {}.getType());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            return list;
+        }
+        public void setList(List<StaffEntity> list) {
+            this.list = list;
+        }
+    }
+
+    public static class StaffDeleteEvent extends CommonRequestEvent {}
+    public static class StaffDeleteCompleteEvent extends CommonCompleteEvent {}
+
+    public static class StaffCreateEvent extends CommonRequestEvent {}
+    public static class StaffCreateCompleteEvent extends CommonCompleteEvent {}
+
+    public static class StaffEditEvent extends CommonRequestEvent {}
+    public static class StaffEditCompleteEvent extends CommonCompleteEvent {}
+
+    public static class StaffInfoEvent extends CommonRequestEvent {}
+    public static class StaffInfoCompleteEvent extends CommonCompleteEvent {
+        private StaffEntity entity;
+
+        public StaffEntity getEntity() {
+            String result = null;
+            result = getResult().toString();
+            entity = (new Gson()).fromJson(result, StaffEntity.class);
+            return entity;
+        }
+
+        public void setEntity(StaffEntity entity) {
+            this.entity = entity;
+        }
+    }
+
+    public static class StaffListReloadEvent extends CommonRequestEvent{}
 
 
 

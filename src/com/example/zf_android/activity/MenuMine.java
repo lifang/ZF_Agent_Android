@@ -11,7 +11,7 @@ import com.example.zf_android.R;
 import com.example.zf_android.trade.ApplyOpenProgressActivity;
 import com.posagent.activities.BaseActivity;
 import com.posagent.activities.home.Main;
-import com.posagent.activities.user.UserList;
+import com.posagent.activities.user.StaffList;
 
 
 public class MenuMine extends BaseActivity {
@@ -60,7 +60,7 @@ public class MenuMine extends BaseActivity {
                 startActivity(new Intent(MenuMine.this, MyInfo.class));
                 break;
             case R.id.ll_yg: //员工管理
-                startActivity(new Intent(MenuMine.this, UserList.class));
+                startActivity(new Intent(MenuMine.this, StaffList.class));
                 break;
 
             case R.id.main_rl_sy: //ϵ

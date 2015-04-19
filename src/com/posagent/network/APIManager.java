@@ -85,6 +85,11 @@ public class APIManager {
     public static final String UrlUserChangePhone = BaseUrl + "/agents/updatePhone";
     public static final String UrlUserChangeEmail = BaseUrl + "/agents/updateEmail";
     public static final String UrlUserChangePassword = BaseUrl + "/agents/updatePassword";
+    public static final String UrlStaffList = BaseUrl + "/customerManage/getList";
+    public static final String UrlStaffDelete = BaseUrl + "/customerManage/deleteAll";
+    public static final String UrlStaffCreate = BaseUrl + "/customerManage/insert";
+    public static final String UrlStaffEdit = BaseUrl + "/customerManage/edit";
+    public static final String UrlStaffInfo = BaseUrl + "/customerManage/getInfo";
 
 
     /** Convenience singleton for apps using a process-wide EventBus instance. */
@@ -529,6 +534,32 @@ public class APIManager {
     public void onEventBackgroundThread(Events.ChangePasswordEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.ChangePasswordCompleteEvent();
         CommonRequest(event, completeEvent, UrlUserChangePassword);
+    }
+
+    public void onEventBackgroundThread(Events.StaffListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.StaffListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlStaffList);
+    }
+
+    public void onEventBackgroundThread(Events.StaffDeleteEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.StaffDeleteCompleteEvent();
+        CommonRequest(event, completeEvent, UrlStaffDelete);
+    }
+
+    //staff
+    public void onEventBackgroundThread(Events.StaffCreateEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.StaffCreateCompleteEvent();
+        CommonRequest(event, completeEvent, UrlStaffCreate);
+    }
+
+    public void onEventBackgroundThread(Events.StaffEditEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.StaffEditCompleteEvent();
+        CommonRequest(event, completeEvent, UrlStaffEdit);
+    }
+
+    public void onEventBackgroundThread(Events.StaffInfoEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.StaffInfoCompleteEvent();
+        CommonRequest(event, completeEvent, UrlStaffInfo);
     }
 
 

@@ -417,6 +417,14 @@
             android:name="com.posagent.activities.user.ChangeEmail"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="com.posagent.activities.user.StaffList"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.posagent.activities.user.StaffForm"
+            android:screenOrientation="portrait" >
+        </activity>
 
         <activity
             android:name=".activity.ChangeText"

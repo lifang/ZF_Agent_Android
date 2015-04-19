@@ -25,7 +25,7 @@
 
 
             <RelativeLayout
-                android:id="@+id/trade_agent"
+                android:id="@+id/ll_choose_terminal"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_centerVertical="true"
@@ -45,9 +45,10 @@
                     android:text="选择终端号"/>
 
                 <TextView
-                    android:id="@+id/trade_agent_name"
+                    android:id="@+id/tv_terminals"
                     style="@style/TextItem.Relative"
-                    android:text="11231224234..."
+                    android:text=""
+                    android:maxLength="10"
                     android:layout_toLeftOf="@+id/trade_start_arrow_agent"/>
 
                 <ImageView
@@ -82,7 +83,7 @@
 
 
             <RelativeLayout
-                android:id="@+id/ll_destination"
+                android:id="@+id/ll_choose_agent"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_centerVertical="true"
@@ -102,8 +103,9 @@
                     android:text="配送至"/>
 
                 <TextView
+                    android:id="@+id/trade_agent_name"
                     style="@style/TextItem.Relative"
-                    android:text="川西数码"
+                    android:text=""
                     android:layout_toLeftOf="@+id/arrow_destination"/>
 
                 <ImageView
@@ -134,13 +136,12 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/trade_search"
+                android:id="@+id/btn_submit"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:text="提交"
                 android:textColor="@color/white"
-                android:enabled="false"
                 android:background="@drawable/normal_button_selector"/>
 
         </LinearLayout>

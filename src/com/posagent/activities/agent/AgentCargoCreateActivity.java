@@ -1,15 +1,26 @@
 package com.posagent.activities.agent;
 
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
+import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.posagent.activities.BaseActivity;
 import com.example.zf_android.R;
+import com.posagent.activities.BaseActivity;
+import com.posagent.activities.terminal.TerminalChooseForm;
+import com.posagent.activities.trade.TradeAgentActivity;
+import com.posagent.events.Events;
+import com.posagent.utils.JsonParams;
 
-import java.util.HashMap;
+import java.util.List;
+
+import de.greenrobot.event.EventBus;
+
+import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_ID;
+import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_NAME;
 
 /***
 *
@@ -18,6 +29,13 @@ import java.util.HashMap;
 */
 public class AgentCargoCreateActivity extends BaseActivity {
 
+    private int sonAgentId;
+
+    final static int REQUEST_TRADE_AGENT = 101;
+    private String tradeAgentName;
+
+    private List<String> selectedList;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,31 +43,82 @@ public class AgentCargoCreateActivity extends BaseActivity {
 		setContentView(R.layout.activity_agent_cargo_create);
 		new TitleMenuUtil(AgentCargoCreateActivity.this, "配货").show();
 
-        // 准备需要监听Click的数据
-        HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{
-//            put("ll_create_agent", AgentNewActivity.class);
-//            put("ll_glph", AdressList.class);
-//            put("ll_gltp", UserList.class);
-        }};
-        this.setClickableMap(clickableMap);
-        this.bindClickListener();
-
-
-        //配置 提交 按钮
-        TextView viewSetRate = (TextView)findViewById(R.id.next_sure);
-        viewSetRate.setText("提交");
-        viewSetRate.setVisibility(View.VISIBLE);
-        viewSetRate.setOnClickListener(this);
-
+        initView();
 	}
+
+    private void initView() {
+        findViewById(R.id.ll_choose_agent).setOnClickListener(this);
+        findViewById(R.id.ll_choose_terminal).setOnClickListener(this);
+        findViewById(R.id.btn_submit).setOnClickListener(this);
+
+    }
 
 	@Override
 	public void onClick(View v) {
         // 特殊 onclick 处理，如有特殊处理，
         // 则直接 return，不再调用 super 处理
 
+        if (v.getId() == R.id.ll_choose_agent) {
+            Intent iAgent = new Intent(AgentCargoCreateActivity.this, TradeAgentActivity.class);
+            iAgent.putExtra(AGENT_NAME, tradeAgentName);
+            startActivityForResult(iAgent, REQUEST_TRADE_AGENT);
+            return;
+        }
+        if (v.getId() == R.id.ll_choose_terminal) {
+            Intent i = new Intent(AgentCargoCreateActivity.this, TerminalChooseForm.class);
+            startActivity(i);
+            return;
+        }
+        if (v.getId() == R.id.btn_submit) {
+            doSubmit();
+            return;
+        }
+
         super.onClick(v);
 	}
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != Activity.RESULT_OK) return;
+        switch (requestCode) {
+            case REQUEST_TRADE_AGENT:
+                String agentName = data.getStringExtra(AGENT_NAME);
+                int agentId = data.getIntExtra(AGENT_ID, 0);
+                tradeAgentName = agentName;
+                setText("trade_agent_name", agentName);
+                sonAgentId = agentId;
+                break;
+        }
+    }
+
+    private void doSubmit() {
+        JsonParams params = new JsonParams();
+        //Fixme
+        params.put("agentId", 1);
+        params.put("customerId", 80);
+
+        params.put("sonAgentId", sonAgentId);
+        params.put("paychannelId", 0);
+        params.put("goodId", 0);
+        params.put("serialNums", selectedList);
+
+        String strParams = params.toString();
+        Events.CommonRequestEvent event = new Events.PrepareAddEvent();
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
+    }
+
+    //Events
+    public void onEventMainThread(Events.PrepareAddCompleteEvent event) {
+        toast(event.getMessage());
+    }
+
+    public void onEventMainThread(Events.TerminalChooseFinishEvent event) {
+        selectedList = event.getList();
+        setText("tv_terminals", StringUtil.join(selectedList, ","));
+    }
 
 	 
 }

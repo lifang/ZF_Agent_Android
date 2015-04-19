@@ -6,6 +6,7 @@ import com.example.zf_android.entity.ChanelEntitiy;
 import com.example.zf_android.entity.MessageEntity;
 import com.example.zf_android.entity.OrderEntity;
 import com.example.zf_android.entity.PosEntity;
+import com.example.zf_android.entity.PrepareEntity;
 import com.example.zf_android.entity.SonAgent;
 import com.example.zf_android.entity.SonAgentInfo;
 import com.example.zf_android.entity.StaffEntity;
@@ -787,4 +788,46 @@ public class Events {
     public static class ChannelListEvent extends CommonRequestEvent {}
     public static class ChannelListCompleteEvent extends CommonCompleteEvent {}
 
+    //配货
+    public static class PrepareListEvent extends CommonRequestEvent {}
+    public static class PrepareListCompleteEvent extends CommonCompleteEvent {
+
+        private List<PrepareEntity> list = new ArrayList<PrepareEntity>();
+        public List<PrepareEntity> getList() {
+            if (list.size() < 1) {
+                String result = null;
+                try {
+                    result = getResult().getString("list");
+                    list = (new Gson()).fromJson(result,
+                            new TypeToken<List<PrepareEntity>>() {}.getType());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            return list;
+        }
+        public void setList(List<PrepareEntity> list) {
+            this.list = list;
+        }
+    }
+
+    public static class PrepareAddEvent extends CommonRequestEvent {}
+    public static class PrepareAddCompleteEvent extends CommonCompleteEvent {}
+
+    public static class PrepareInfoEvent extends CommonRequestEvent {}
+    public static class PrepareInfoCompleteEvent extends CommonCompleteEvent {
+        private PrepareEntity entity;
+
+        public PrepareEntity getEntity() {
+            String result = null;
+            result = getResult().toString();
+            entity = (new Gson()).fromJson(result, PrepareEntity.class);
+            return entity;
+        }
+
+        public void setEntity(PrepareEntity entity) {
+            this.entity = entity;
+        }
+    }
 }

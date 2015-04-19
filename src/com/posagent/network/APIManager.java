@@ -101,6 +101,11 @@ public class APIManager {
     public static final String UrlDeleteProfit = BaseUrl + "/lowerAgent/delChannel";
     public static final String UrlChannelList = BaseUrl + "/lowerAgent/getChannellist";
 
+    //prepare
+    public static final String UrlPrepareList = BaseUrl + "/preparegood/list";
+    public static final String UrlPrepareInfo = BaseUrl + "/preparegood/info";
+    public static final String UrlPrepareAdd = BaseUrl + "/preparegood/add";
+
 
     /** Convenience singleton for apps using a process-wide EventBus instance. */
     public static APIManager getDefault() {
@@ -612,6 +617,22 @@ public class APIManager {
     public void onEventBackgroundThread(Events.ChannelListEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.ChannelListCompleteEvent();
         CommonRequest(event, completeEvent, UrlChannelList);
+    }
+
+    //配货
+    public void onEventBackgroundThread(Events.PrepareListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.PrepareListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlPrepareList);
+    }
+
+    public void onEventBackgroundThread(Events.PrepareInfoEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.PrepareInfoCompleteEvent();
+        CommonRequest(event, completeEvent, UrlPrepareInfo);
+    }
+
+    public void onEventBackgroundThread(Events.PrepareAddEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.PrepareAddCompleteEvent();
+        CommonRequest(event, completeEvent, UrlPrepareAdd);
     }
 
 

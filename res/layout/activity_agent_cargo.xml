@@ -1,16 +1,15 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="none">
+    android:orientation="vertical"
+    android:background="@color/F3F2F2">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/F3F2F2">
+    <include layout="@layout/title_back" />
 
-        <include layout="@layout/title_back" />
-
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,7 +28,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@color/white"
-            android:paddingLeft="24dp">
+            android:paddingLeft="24dp"
+            android:id="@+id/ll_choose_agent">
 
 
             <RelativeLayout
@@ -55,7 +55,7 @@
                 <TextView
                     android:id="@+id/trade_agent_name"
                     style="@style/TextItem.Relative"
-                    android:text="王宝强"
+                    android:text=""
                     android:layout_toLeftOf="@+id/trade_start_arrow_agent"/>
 
                 <ImageView
@@ -190,7 +190,6 @@
                 android:layout_weight="1"
                 android:text="@string/trade_search"
                 android:textColor="@color/white"
-                android:enabled="false"
                 android:background="@drawable/normal_button_selector"/>
 
         </LinearLayout>
@@ -208,16 +207,23 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/Viewc2"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1"
+        >
         <!-- XListView -->
         <com.examlpe.zf_android.util.XListView
             android:id="@+id/x_listview"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="@color/white"
-
             android:fadingEdge="none"
             android:scrollbars="none" />
 
+
     </LinearLayout>
 
-</ScrollView>
+</LinearLayout>

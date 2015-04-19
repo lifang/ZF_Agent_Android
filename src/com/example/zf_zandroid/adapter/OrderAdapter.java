@@ -77,7 +77,10 @@ public class OrderAdapter extends BaseAdapter{
         }
 
         String face_url = entity.getOrder_goodsList().get(0).getGood_logo();
-        Picasso.with(context).load(face_url).into(holder.iv_face);
+        if (null != face_url) {
+            Picasso.with(context).load(face_url).into(holder.iv_face);
+        }
+
 
         holder.tv_price.setText("￥"+entity.getOrder_goodsList().get(0).getGood_price());
         holder.content2.setText(entity.getOrder_goodsList().get(0).getGood_brand());

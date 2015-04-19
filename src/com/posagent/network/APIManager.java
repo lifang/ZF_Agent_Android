@@ -91,6 +91,16 @@ public class APIManager {
     public static final String UrlStaffEdit = BaseUrl + "/customerManage/edit";
     public static final String UrlStaffInfo = BaseUrl + "/customerManage/getInfo";
 
+    //sonagent
+    public static final String UrlSonAgentList = BaseUrl + "/lowerAgent/list";
+    public static final String UrlSonAgentInfo = BaseUrl + "/lowerAgent/info";
+    public static final String UrlSonAgentCreate = BaseUrl + "/lowerAgent/createNew";
+    public static final String UrlChangeProfit = BaseUrl + "/lowerAgent/changeProfit";
+    public static final String UrlProfitList = BaseUrl + "/lowerAgent/getProfitlist";
+    public static final String UrlSetProfit = BaseUrl + "/lowerAgent/saveOrEdit";
+    public static final String UrlDeleteProfit = BaseUrl + "/lowerAgent/delChannel";
+    public static final String UrlChannelList = BaseUrl + "/lowerAgent/getChannellist";
+
 
     /** Convenience singleton for apps using a process-wide EventBus instance. */
     public static APIManager getDefault() {
@@ -560,6 +570,48 @@ public class APIManager {
     public void onEventBackgroundThread(Events.StaffInfoEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.StaffInfoCompleteEvent();
         CommonRequest(event, completeEvent, UrlStaffInfo);
+    }
+
+    //Son Agent
+    public void onEventBackgroundThread(Events.SonAgentListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.SonAgentListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlSonAgentList);
+    }
+
+
+    public void onEventBackgroundThread(Events.SonAgentInfoEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.SonAgentInfoCompleteEvent();
+        CommonRequest(event, completeEvent, UrlSonAgentInfo);
+    }
+
+    public void onEventBackgroundThread(Events.SonAgentCreateEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.SonAgentCreateCompleteEvent();
+        CommonRequest(event, completeEvent, UrlSonAgentCreate);
+    }
+
+    public void onEventBackgroundThread(Events.ChangeProfitEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.ChangeProfitCompleteEvent();
+        CommonRequest(event, completeEvent, UrlChangeProfit);
+    }
+
+    public void onEventBackgroundThread(Events.ProfitListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.ProfitListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlProfitList);
+    }
+
+    public void onEventBackgroundThread(Events.SetProfitEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.SetProfitCompleteEvent();
+        CommonRequest(event, completeEvent, UrlSetProfit);
+    }
+
+    public void onEventBackgroundThread(Events.DeleteProfitEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.DeleteProfitCompleteEvent();
+        CommonRequest(event, completeEvent, UrlDeleteProfit);
+    }
+
+    public void onEventBackgroundThread(Events.ChannelListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.ChannelListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlChannelList);
     }
 
 

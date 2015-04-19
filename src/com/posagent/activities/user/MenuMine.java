@@ -1,4 +1,4 @@
-package com.example.zf_android.activity;
+package com.posagent.activities.user;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,10 +8,15 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.zf_android.R;
+import com.example.zf_android.activity.AllProduct;
+import com.example.zf_android.activity.MerchantList;
+import com.example.zf_android.activity.MineSet;
+import com.example.zf_android.activity.MyInfo;
+import com.example.zf_android.activity.SystemMessage;
 import com.example.zf_android.trade.ApplyOpenProgressActivity;
 import com.posagent.activities.BaseActivity;
+import com.posagent.activities.agent.AgentManageMainActivity;
 import com.posagent.activities.home.Main;
-import com.posagent.activities.user.StaffList;
 
 
 public class MenuMine extends BaseActivity {

@@ -1,4 +1,4 @@
-package com.example.zf_android.activity;
+package com.posagent.activities.agent;
 
 
 import android.content.Intent;
@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.examlpe.zf_android.util.Tools;
 import com.examlpe.zf_android.util.XListView;
+import com.example.zf_android.entity.SonAgent;
 import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
 import com.posagent.MyApplication;
@@ -47,8 +48,8 @@ public class AgentCargoExchangeActivity extends BaseActivity implements XListVie
     private LinearLayout eva_nodata;
     private boolean onRefresh_number = true;
     private AgentAdapter myAdapter;
-    List<OrderEntity> myList = new ArrayList<OrderEntity>();
-    List<OrderEntity> moreList = new ArrayList<OrderEntity>();
+    List<SonAgent> myList = new ArrayList<SonAgent>();
+    List<SonAgent> moreList = new ArrayList<SonAgent>();
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {

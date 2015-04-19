@@ -32,6 +32,7 @@ import com.example.zf_zandroid.adapter.ShopcarAdapter;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.posagent.activities.home.Main;
+import com.posagent.activities.user.MenuMine;
 
 /***
  * 

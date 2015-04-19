@@ -29,6 +29,7 @@ import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.posagent.activities.home.Main;
+import com.posagent.activities.user.MenuMine;
 
 import org.apache.http.Header;
 import org.json.JSONArray;

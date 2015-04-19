@@ -112,7 +112,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.MenuMine"
+            android:name="com.posagent.activities.user.MenuMine"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" >
         </activity>
@@ -203,35 +203,39 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.AgentManageMainActivity"
+            android:name="com.posagent.activities.agent.AgentManageMainActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.AgentManageActivity"
+            android:name="com.posagent.activities.agent.AgentProfit"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.AgentNewActivity"
+            android:name="com.posagent.activities.agent.AgentManageActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.AgentDetailActivity"
+            android:name="com.posagent.activities.agent.AgentNewActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.AgentCargoActivity"
+            android:name="com.posagent.activities.agent.AgentDetailActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.AgentCargoCreateActivity"
+            android:name="com.posagent.activities.agent.AgentCargoActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.AgentCargoExchangeActivity"
+            android:name="com.posagent.activities.agent.AgentCargoCreateActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.AgentCargoExchangeCreateActivity"
+            android:name="com.posagent.activities.agent.AgentCargoExchangeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.posagent.activities.agent.AgentCargoExchangeCreateActivity"
             android:screenOrientation="portrait" >
         </activity>
 

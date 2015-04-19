@@ -1,9 +1,9 @@
-package com.example.zf_android.activity;
+package com.posagent.activities.agent;
 
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
+import android.view.View.OnClickListener;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.posagent.activities.BaseActivity;
@@ -13,33 +13,26 @@ import java.util.HashMap;
 
 /***
 *
-* 代理商配货管理
+* 代理商管理首页
 *
 */
-public class AgentCargoCreateActivity extends BaseActivity {
+public class AgentManageMainActivity extends BaseActivity implements OnClickListener{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.activity_agent_cargo_create);
-		new TitleMenuUtil(AgentCargoCreateActivity.this, "配货").show();
+		setContentView(R.layout.activity_agent_manage_main);
+		new TitleMenuUtil(AgentManageMainActivity.this, "下级代理商管理").show();
 
         // 准备需要监听Click的数据
         HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{
-//            put("ll_create_agent", AgentNewActivity.class);
-//            put("ll_glph", AdressList.class);
-//            put("ll_gltp", UserList.class);
+            put("ll_glxjdls", AgentManageActivity.class);
+            put("ll_glph", AgentCargoActivity.class);
+            put("ll_gltp", AgentCargoExchangeActivity.class);
         }};
         this.setClickableMap(clickableMap);
         this.bindClickListener();
-
-
-        //配置 提交 按钮
-        TextView viewSetRate = (TextView)findViewById(R.id.next_sure);
-        viewSetRate.setText("提交");
-        viewSetRate.setVisibility(View.VISIBLE);
-        viewSetRate.setOnClickListener(this);
 
 	}
 
@@ -49,6 +42,7 @@ public class AgentCargoCreateActivity extends BaseActivity {
         // 则直接 return，不再调用 super 处理
 
         super.onClick(v);
+
 	}
 
 	 

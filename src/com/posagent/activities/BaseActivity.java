@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,11 +14,12 @@ import android.widget.Toast;
 
 import com.example.zf_android.R;
 import com.example.zf_android.activity.AllProduct;
-import com.example.zf_android.activity.MenuMine;
+import com.posagent.activities.user.MenuMine;
 import com.google.gson.Gson;
 import com.posagent.activities.home.Main;
 import com.posagent.activities.user.MessageList;
 import com.posagent.events.Events;
+import com.posagent.utils.ViewHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -127,6 +129,16 @@ public class BaseActivity extends Activity implements View.OnClickListener {
         tv.setText(value);
     }
 
+    protected String getText(String id) {
+        TextView tv = (TextView)findViewById(resouceId(id, "id"));
+        return tv.getText().toString();
+    }
+
+    protected String getValue(String id) {
+        EditText tv = (EditText)findViewById(resouceId(id, "id"));
+        return tv.getText().toString();
+    }
+
     protected void enterText(String id, String value) {
         EditText tv = (EditText)findViewById(resouceId(id, "id"));
         tv.setText(value);
@@ -140,6 +152,24 @@ public class BaseActivity extends Activity implements View.OnClickListener {
     protected void show(String id) {
         View tv = findViewById(resouceId(id, "id"));
         tv.setVisibility(View.VISIBLE);
+    }
+
+    protected void hideByTag(String tag) {
+        final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this
+                .findViewById(android.R.id.content)).getChildAt(0);
+        ArrayList<View> views = (ArrayList<View>) ViewHelper.getViewsByTag(viewGroup, tag);
+        for (View _view: views) {
+            _view.setVisibility(View.GONE);
+        }
+    }
+
+    protected void showByTag(String tag) {
+        final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this
+                .findViewById(android.R.id.content)).getChildAt(0);
+        ArrayList<View> views = (ArrayList<View>) ViewHelper.getViewsByTag(viewGroup, tag);
+        for (View _view: views) {
+            _view.setVisibility(View.VISIBLE);
+        }
     }
 
     protected void focusTabAtIndex(int index) {

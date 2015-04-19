@@ -1,17 +1,20 @@
-package com.example.zf_android.activity;
+package com.posagent.activities.agent;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.examlpe.zf_android.util.Tools;
 import com.examlpe.zf_android.util.XListView;
+import com.example.zf_android.entity.SonAgent;
 import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
 import com.posagent.MyApplication;
@@ -33,10 +36,10 @@ import java.util.List;
 
 /***
 *
-* 代理商管理首页
+* 代理商配货管理
 *
 */
-public class AgentManageActivity extends BaseActivity implements XListView.IXListViewListener {
+public class AgentCargoActivity extends BaseActivity implements XListView.IXListViewListener {
     private XListView Xlistview;
 
 
@@ -45,8 +48,8 @@ public class AgentManageActivity extends BaseActivity implements XListView.IXLis
     private LinearLayout eva_nodata;
     private boolean onRefresh_number = true;
     private AgentAdapter myAdapter;
-    List<OrderEntity> myList = new ArrayList<OrderEntity>();
-    List<OrderEntity> moreList = new ArrayList<OrderEntity>();
+    List<SonAgent> myList = new ArrayList<SonAgent>();
+    List<SonAgent> moreList = new ArrayList<SonAgent>();
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -65,7 +68,7 @@ public class AgentManageActivity extends BaseActivity implements XListView.IXLis
                             Toast.LENGTH_SHORT).show();
 
                     break;
-                case 2: // ����������
+                case 2:
                     Toast.makeText(getApplicationContext(), "no 3g or wifi content",
                             Toast.LENGTH_SHORT).show();
                     break;
@@ -81,12 +84,12 @@ public class AgentManageActivity extends BaseActivity implements XListView.IXLis
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.activity_agent_manage);
-		new TitleMenuUtil(AgentManageActivity.this, "管理下级代理商").show();
+		setContentView(R.layout.activity_agent_cargo);
+		new TitleMenuUtil(AgentCargoActivity.this, "配货管理").show();
 
         // 准备需要监听Click的数据
         HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{
-            put("ll_create_agent", AgentNewActivity.class);
+//            put("ll_create_agent", AgentNewActivity.class);
 //            put("ll_glph", AdressList.class);
 //            put("ll_gltp", UserList.class);
         }};
@@ -95,10 +98,16 @@ public class AgentManageActivity extends BaseActivity implements XListView.IXLis
 
         initXListView();
 
+        //配置 配货 按钮
+        TextView viewSetRate = (TextView)findViewById(R.id.next_sure);
+        viewSetRate.setText("配货");
+        viewSetRate.setVisibility(View.VISIBLE);
+        viewSetRate.setOnClickListener(this);
+
 	}
 
     private void initXListView() {
-        myAdapter = new AgentAdapter(AgentManageActivity.this, myList);
+        myAdapter = new AgentAdapter(AgentCargoActivity.this, myList);
         eva_nodata = (LinearLayout) findViewById(R.id.eva_nodata);
         Xlistview = (XListView) findViewById(R.id.x_listview);
         Xlistview.setPullLoadEnable(true);
@@ -214,6 +223,10 @@ public class AgentManageActivity extends BaseActivity implements XListView.IXLis
 	public void onClick(View v) {
         // 特殊 onclick 处理，如有特殊处理，
         // 则直接 return，不再调用 super 处理
+        if (v.getId() == R.id.next_sure) {
+            startActivity(new Intent(this, AgentCargoCreateActivity.class));
+            return;
+        }
 
         super.onClick(v);
 	}

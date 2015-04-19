@@ -20,7 +20,7 @@
             android:layout_marginTop="10dp"
             android:background="@color/Viewc2" />
         <LinearLayout
-            android:id="@+id/ll_glxjdls"
+            android:id="@+id/ll_profit"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
@@ -43,6 +43,7 @@
                 android:layout_weight="1" />
 
             <TextView
+                android:id="@+id/tv_profit"
                 android:gravity="center"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"

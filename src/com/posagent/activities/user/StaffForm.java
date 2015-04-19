@@ -173,7 +173,7 @@ public class StaffForm extends BaseActivity
         if (event.success()) {
             EventBus.getDefault().post(new Events.StaffListReloadEvent());
             finish();
-        } 
+        }
     }
 
     public void onEventMainThread(Events.StaffInfoCompleteEvent event) {

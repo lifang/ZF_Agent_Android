@@ -6,6 +6,8 @@ import com.example.zf_android.entity.ChanelEntitiy;
 import com.example.zf_android.entity.MessageEntity;
 import com.example.zf_android.entity.OrderEntity;
 import com.example.zf_android.entity.PosEntity;
+import com.example.zf_android.entity.SonAgent;
+import com.example.zf_android.entity.SonAgentInfo;
 import com.example.zf_android.entity.StaffEntity;
 import com.example.zf_android.entity.StockAgentEntity;
 import com.example.zf_android.entity.StockEntity;
@@ -725,5 +727,64 @@ public class Events {
     public static class StaffListReloadEvent extends CommonRequestEvent{}
 
 
+    //son agents
+    public static class SonAgentListEvent extends CommonRequestEvent {}
+    public static class SonAgentListCompleteEvent extends CommonCompleteEvent  {
+        private List<SonAgent> list = new ArrayList<SonAgent>();
+        public List<SonAgent> getList() {
+            if (list.size() < 1) {
+                String result = null;
+                try {
+                    result = getResult().getString("list");
+                    list = (new Gson()).fromJson(result,
+                            new TypeToken<List<SonAgent>>() {}.getType());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            return list;
+        }
+        public void setList(List<SonAgent> list) {
+            this.list = list;
+        }
+    }
+
+
+    public static class SonAgentListReloadEvent extends CommonRequestEvent {}
+
+    public static class SonAgentInfoEvent extends CommonRequestEvent {}
+    public static class SonAgentInfoCompleteEvent extends CommonCompleteEvent {
+        private SonAgentInfo entity;
+
+        public SonAgentInfo getEntity() {
+            String result = null;
+            result = getResult().toString();
+            entity = (new Gson()).fromJson(result, SonAgentInfo.class);
+            return entity;
+        }
+
+        public void setEntity(SonAgentInfo entity) {
+            this.entity = entity;
+        }
+    }
+
+    public static class SonAgentCreateEvent extends CommonRequestEvent {}
+    public static class SonAgentCreateCompleteEvent extends CommonCompleteEvent {}
+
+    public static class ChangeProfitEvent extends CommonRequestEvent {}
+    public static class ChangeProfitCompleteEvent extends CommonCompleteEvent {}
+
+    public static class ProfitListEvent extends CommonRequestEvent {}
+    public static class ProfitListCompleteEvent extends CommonCompleteEvent {}
+
+    public static class SetProfitEvent extends CommonRequestEvent {}
+    public static class SetProfitCompleteEvent extends CommonCompleteEvent {}
+
+    public static class DeleteProfitEvent extends CommonRequestEvent {}
+    public static class DeleteProfitCompleteEvent extends CommonCompleteEvent {}
+
+    public static class ChannelListEvent extends CommonRequestEvent {}
+    public static class ChannelListCompleteEvent extends CommonCompleteEvent {}
 
 }

@@ -50,7 +50,11 @@ public class TerminalDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_teminal_detail);
         new TitleMenuUtil(TerminalDetailActivity.this, "终端详情").show();
         item = gson.fromJson(getIntent().getStringExtra("json"), TerminalItem.class);
-        terminalId = item.getId();
+        if (null != item) {
+            terminalId = item.getId();
+        } else {
+            terminalId = getIntent().getIntExtra("id", 0);
+        }
         initView();
     }
 

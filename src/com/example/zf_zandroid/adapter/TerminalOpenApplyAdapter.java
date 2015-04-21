@@ -12,10 +12,14 @@ import android.widget.TextView;
 
 import com.example.zf_android.R;
 import com.example.zf_android.entity.TerminalApplyEntity;
+import com.example.zf_android.trade.ApplyDetailActivity;
 import com.posagent.activities.terminal.TerminalDetailActivity;
 import com.posagent.utils.Constants;
 
 import java.util.List;
+
+import static com.example.zf_android.trade.Constants.TerminalIntent.TERMINAL_ID;
+import static com.example.zf_android.trade.Constants.TerminalIntent.TERMINAL_STATUS;
 
 
 public class TerminalOpenApplyAdapter extends BaseAdapter{
@@ -45,7 +49,7 @@ public class TerminalOpenApplyAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        TerminalApplyEntity entity = list.get(position);
+        final TerminalApplyEntity entity = list.get(position);
 
         inflater = LayoutInflater.from(context);
         if(convertView == null){
@@ -80,7 +84,11 @@ public class TerminalOpenApplyAdapter extends BaseAdapter{
 
             @Override
             public void onClick(View arg0) {
-                Intent i = new Intent(context, TerminalDetailActivity.class);
+                Intent i = new Intent(context, ApplyDetailActivity.class);
+                i.putExtra("id", entity.getId());
+                i.putExtra(TERMINAL_ID, entity.getId());
+                i.putExtra(TERMINAL_STATUS, entity.getStatus());
+
                 context.startActivity(i);
             }
         });
@@ -89,7 +97,21 @@ public class TerminalOpenApplyAdapter extends BaseAdapter{
 
             @Override
             public void onClick(View arg0) {
+                Intent i = new Intent(context, ApplyDetailActivity.class);
+                i.putExtra("id", entity.getId());
+                i.putExtra(TERMINAL_ID, entity.getId());
+                i.putExtra(TERMINAL_STATUS, entity.getStatus());
+                context.startActivity(i);
+            }
+        });
+
+
+        convertView.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
                 Intent i = new Intent(context, TerminalDetailActivity.class);
+                i.putExtra("id", entity.getId());
                 context.startActivity(i);
             }
         });

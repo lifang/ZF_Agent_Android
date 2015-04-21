@@ -57,6 +57,10 @@ public class APIManager {
     public static final String UrlStockAgentList = BaseUrl + "/stock/info";
     public static final String UrlStockAgentTerminalList = BaseUrl + "/stock/terminallist";
     public static final String UrlTerminalApplyList = BaseUrl + "/apply/getApplyList";
+    public static final String UrlApplyDetail = BaseUrl + "/apply/getApplyDetails";
+    public static final String UrlAddOpeningApply = BaseUrl + "/apply/addOpeningApply";
+    public static final String UrlAgentDetail = BaseUrl + "/apply/getMerchant";
+    public static final String UrlApplyChannelList = BaseUrl + "/apply/getChannels";
     public static final String UrlAfterSaleMaintainList = BaseUrl + "/cs/agents/search";
     public static final String UrlAfterSaleCancelList = BaseUrl + "/cs/cancels/search";
     public static final String UrlAfterSaleUpdateList = BaseUrl + "/update/info/search";
@@ -686,6 +690,28 @@ public class APIManager {
         Events.CommonCompleteEvent completeEvent = new Events.UpdatePasswordCompleteEvent();
         CommonRequest(event, completeEvent, UrlSendPhoneVerificationCode);
     }
+
+    // terminal apply
+    public void onEventBackgroundThread(Events.ApplyDetailEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.ApplyDetailCompleteEvent();
+        CommonRequest(event, completeEvent, UrlApplyDetail);
+    }
+
+    public void onEventBackgroundThread(Events.AgentDetailEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.AgentDetailCompleteEvent();
+        CommonRequest(event, completeEvent, UrlAgentDetail);
+    }
+
+    public void onEventBackgroundThread(Events.ApplyChannelListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.ApplyChannelListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlApplyChannelList);
+    }
+
+    public void onEventBackgroundThread(Events.AddOpeningApplyEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.AddOpeningApplyCompleteEvent();
+        CommonRequest(event, completeEvent, UrlAddOpeningApply);
+    }
+
 
 
 

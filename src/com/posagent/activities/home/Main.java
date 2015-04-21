@@ -76,8 +76,8 @@ public class Main extends BaseActivity implements OnClickListener{
 
         initSlider();
 
-        Intent i = new Intent(Main.this, LoginActivity.class);
-        startActivity(i);
+//        Intent i = new Intent(Main.this, LoginActivity.class);
+//        startActivity(i);
     }
 
     private void initView() {

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.zf_android.trade.common.HttpCallback;
 import com.example.zf_android.trade.common.HttpRequest;
+import com.posagent.network.APIManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -90,7 +91,7 @@ public class API {
 	public static final String APPLY_CHANNEL_LIST = SCHEMA + HOST + "/ZFMerchant/api/apply/getChannels";
 
 	// upload image url
-	public static final String UPLOAD_IMAGE = SCHEMA + HOST + "/ZFMerchant/api/comment/upload/tempImage";
+	public static final String UPLOAD_IMAGE = APIManager.BaseUrl + "/agent/upload/register";
 	// Apply Submit
 	public static final String APPLY_SUBMIT = SCHEMA + HOST + "/ZFMerchant/api/apply/addOpeningApply";
 

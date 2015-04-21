@@ -12,6 +12,7 @@ import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -22,8 +23,8 @@ import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
+import com.example.zf_android.entity.AgentEntity;
 import com.example.zf_android.trade.common.CommonUtil;
-import com.example.zf_android.trade.common.HttpCallback;
 import com.example.zf_android.trade.common.StringUtil;
 import com.example.zf_android.trade.entity.ApplyChooseItem;
 import com.example.zf_android.trade.entity.ApplyCustomerDetail;
@@ -34,8 +35,10 @@ import com.example.zf_android.trade.entity.City;
 import com.example.zf_android.trade.entity.Merchant;
 import com.example.zf_android.trade.entity.Province;
 import com.example.zf_android.trade.widget.MyTabWidget;
-import com.google.gson.internal.LinkedTreeMap;
-import com.google.gson.reflect.TypeToken;
+import com.posagent.activities.terminal.ChooseChannel;
+import com.posagent.activities.trade.TradeAgentActivity;
+import com.posagent.events.Events;
+import com.posagent.utils.JsonParams;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,6 +49,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.greenrobot.event.EventBus;
+
 import static com.example.zf_android.trade.Constants.ApplyIntent.CHOOSE_ITEMS;
 import static com.example.zf_android.trade.Constants.ApplyIntent.CHOOSE_TITLE;
 import static com.example.zf_android.trade.Constants.ApplyIntent.REQUEST_CHOOSE_CHANNEL;
@@ -54,14 +59,13 @@ import static com.example.zf_android.trade.Constants.ApplyIntent.REQUEST_CHOOSE_
 import static com.example.zf_android.trade.Constants.ApplyIntent.REQUEST_TAKE_PHOTO;
 import static com.example.zf_android.trade.Constants.ApplyIntent.REQUEST_UPLOAD_IMAGE;
 import static com.example.zf_android.trade.Constants.ApplyIntent.SELECTED_ID;
-import static com.example.zf_android.trade.Constants.ApplyIntent.SELECTED_TITLE;
-import static com.example.zf_android.trade.Constants.CityIntent.SELECTED_CITY;
-import static com.example.zf_android.trade.Constants.CityIntent.SELECTED_PROVINCE;
 import static com.example.zf_android.trade.Constants.ShowWebImageIntent.IMAGE_NAMES;
 import static com.example.zf_android.trade.Constants.ShowWebImageIntent.IMAGE_URLS;
 import static com.example.zf_android.trade.Constants.ShowWebImageIntent.POSITION;
 import static com.example.zf_android.trade.Constants.TerminalIntent.TERMINAL_ID;
 import static com.example.zf_android.trade.Constants.TerminalIntent.TERMINAL_STATUS;
+import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_ID;
+import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_NAME;
 
 /**
  * Created by Leo on 2015/3/5.
@@ -84,9 +88,16 @@ public class ApplyDetailActivity extends FragmentActivity {
 	private int mTerminalId;
 	private int mTerminalStatus;
 
-	private Merchant mMerchant;
+    private Merchant mMerchant;
+    private AgentEntity mAgent;
 
-	private LayoutInflater mInflater;
+    private String mAgentName;
+    private int mAgentId;
+    private String mCityName;
+    private int mCityId;
+
+
+    private LayoutInflater mInflater;
 
 	private TextView mPosBrand;
 	private TextView mPosModel;
@@ -110,6 +121,7 @@ public class ApplyDetailActivity extends FragmentActivity {
 	private Province mMerchantProvince;
 	private City mMerchantCity;
 	private int mChannelId;
+	private int mBillingId;
 
 	private String photoPath;
 	private TextView uploadingTextView;
@@ -128,11 +140,23 @@ public class ApplyDetailActivity extends FragmentActivity {
 		mTerminalId = getIntent().getIntExtra(TERMINAL_ID, 0);
 		mTerminalStatus = getIntent().getIntExtra(TERMINAL_STATUS, 0);
 
+        try {
+            EventBus.getDefault().register(this);
+        } catch (RuntimeException ex) {
+            Log.d("UNCatchException", ex.getMessage());
+        }
+
 		initViews();
 		loadData(mApplyType);
 	}
 
-	private void initViews() {
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
+
+    private void initViews() {
 		mInflater = LayoutInflater.from(this);
 
 		mTab = (MyTabWidget) findViewById(R.id.apply_detail_tab);
@@ -162,39 +186,7 @@ public class ApplyDetailActivity extends FragmentActivity {
 		mApplySubmit.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Map<String, Object> params = new HashMap<String, Object>();
-				params.put("terminalId", mTerminalId);
-				params.put("status", mTerminalStatus == 2 ? 2 : 1);
-				params.put("applyCustomerId", mMerchant.getCustomerId());
-				params.put("publicPrivateStatus", mApplyType);
-
-				params.put("merchantId", mMerchantId);
-				params.put("name", getItemValue(mMerchantKeys[1]));
-				params.put("merchantName", getItemValue(mMerchantKeys[2]));
-				params.put("sex", getItemValue(mMerchantKeys[3]));
-				params.put("birthday", getItemValue(mMerchantKeys[4]));
-				params.put("cardId", getItemValue(mMerchantKeys[5]));
-				params.put("phone", getItemValue(mMerchantKeys[6]));
-				params.put("email", getItemValue(mMerchantKeys[7]));
-				params.put("cityId", null != mMerchantCity ? mMerchantCity.getId() : 0);
-
-				params.put("bankName", getItemValue(mBankKeys[0]));
-				params.put("bankCode", getItemValue(mBankKeys[1]));
-				params.put("bankNum", getItemValue(mBankKeys[2]));
-				params.put("registeredNo", getItemValue(mBankKeys[3]));
-				params.put("organizationNo", getItemValue(mBankKeys[4]));
-				params.put("channel", mChannelId);
-				API.submitApply(ApplyDetailActivity.this, params, new HttpCallback(ApplyDetailActivity.this) {
-					@Override
-					public void onSuccess(Object data) {
-						CommonUtil.toastShort(ApplyDetailActivity.this, data.toString());
-					}
-
-					@Override
-					public TypeToken getTypeToken() {
-						return null;
-					}
-				});
+				doSubmit();
 			}
 		});
 	}
@@ -205,40 +197,58 @@ public class ApplyDetailActivity extends FragmentActivity {
 		mMaterialContainer.removeAllViews();
 		initMerchantDetailKeys();
 
-		API.getApplyDetail(this, 80, mTerminalId, applyType, new HttpCallback<ApplyDetail>(this) {
-			@Override
-			public void onSuccess(ApplyDetail data) {
-				ApplyTerminalDetail terminalDetail = data.getTerminalDetail();
-				final List<ApplyChooseItem> merchants = data.getMerchants();
-				List<ApplyMaterial> materials = data.getMaterials();
-				List<ApplyCustomerDetail> customerDetails = data.getCustomerDetails();
+        JsonParams params = new JsonParams();
+        //Fixme
+//        params.put("terminalsId", 232);
+        params.put("terminalsId", mTerminalId);
+        params.put("status", mTerminalStatus);
+        String strParams = params.toString();
+        Events.CommonRequestEvent event = new Events.ApplyDetailEvent();
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
 
-				if (null != terminalDetail) {
-					mPosBrand.setText(terminalDetail.getBrandName());
-					mPosModel.setText(terminalDetail.getModelNumber());
-					mSerialNum.setText(terminalDetail.getSerialNumber());
-					mPayChannel.setText(terminalDetail.getChannelName());
-				}
-				// set the choosing merchant listener
-				View merchantChoose = mMerchantContainer.findViewWithTag(mMerchantKeys[0]);
-				merchantChoose.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						startChooseItemActivity(REQUEST_CHOOSE_MERCHANT, getString(R.string.title_apply_choose_merchant), mMerchantId, (ArrayList<ApplyChooseItem>) merchants);
-					}
-				});
-				// set the customer details
-				setCustomerDetail(customerDetails);
-
-			}
-
-			@Override
-			public TypeToken<ApplyDetail> getTypeToken() {
-				return new TypeToken<ApplyDetail>() {
-				};
-			}
-		});
 	}
+
+    // events
+    public void onEventMainThread(Events.ApplyDetailCompleteEvent event) {
+        ApplyDetail data = event.getEntity();
+        ApplyTerminalDetail terminalDetail = data.getTerminalDetail();
+        final List<ApplyChooseItem> merchants = data.getMerchants();
+        List<ApplyMaterial> materials = data.getMaterials();
+        List<ApplyCustomerDetail> customerDetails = data.getCustomerDetails();
+
+        if (null != terminalDetail) {
+            mPosBrand.setText(terminalDetail.getBrandName());
+            mPosModel.setText(terminalDetail.getModelNumber());
+            mSerialNum.setText(terminalDetail.getSerialNumber());
+            mPayChannel.setText(terminalDetail.getChannelName());
+        }
+        // set the choosing merchant listener
+        View merchantChoose = mMerchantContainer.findViewWithTag(mMerchantKeys[0]);
+        merchantChoose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ApplyDetailActivity.this, TradeAgentActivity.class);
+                intent.putExtra(AGENT_NAME, mAgentName);
+
+                startActivityForResult(intent, REQUEST_CHOOSE_MERCHANT);
+            }
+        });
+        // set the customer details
+        setCustomerDetail(customerDetails);
+    }
+
+
+    public void onEventMainThread(Events.AgentDetailCompleteEvent event) {
+        AgentEntity data = event.getEntity();
+        mAgent = data;
+        setMerchantDetailValues(data);
+        mApplySubmit.setEnabled(true);
+    }
+
+    public void onEventMainThread(Events.AddOpeningApplyCompleteEvent event) {
+        CommonUtil.toastShort(this, event.getMessage());
+    }
 
 	@Override
 	protected void onActivityResult(final int requestCode, int resultCode, final Intent data) {
@@ -246,33 +256,29 @@ public class ApplyDetailActivity extends FragmentActivity {
 		if (resultCode != RESULT_OK) return;
 		switch (requestCode) {
 			case REQUEST_CHOOSE_MERCHANT: {
-				mMerchantId = data.getIntExtra(SELECTED_ID, 0);
-				setItemValue(mMerchantKeys[0], data.getStringExtra(SELECTED_TITLE));
-				API.getApplyMerchantDetail(ApplyDetailActivity.this, mMerchantId, new HttpCallback<Merchant>(ApplyDetailActivity.this) {
-					@Override
-					public void onSuccess(Merchant data) {
-						mMerchant = data;
-						setMerchantDetailValues(data);
-						mApplySubmit.setEnabled(true);
-					}
 
-					@Override
-					public TypeToken<Merchant> getTypeToken() {
-						return new TypeToken<Merchant>() {
-						};
-					}
-				});
+				mAgentId = mMerchantId = data.getIntExtra(AGENT_ID, 0);
+                mAgentName = data.getStringExtra(AGENT_NAME);
+				setItemValue(mMerchantKeys[0], mAgentName);
+
+                getAgentInfo();
+
 				break;
 			}
 			case REQUEST_CHOOSE_CITY: {
-				mMerchantProvince = (Province) data.getSerializableExtra(SELECTED_PROVINCE);
-				mMerchantCity = (City) data.getSerializableExtra(SELECTED_CITY);
-				setItemValue(mMerchantKeys[8], mMerchantCity.getName());
+
+                String mCityName = data.getStringExtra(com.example.zf_android.trade.Constants.CityIntent.CITY_NAME);
+                int mCityId = data.getIntExtra(com.example.zf_android.trade.Constants.CityIntent.CITY_ID, 0);
+
+				setItemValue(mMerchantKeys[8], mCityName);
 				break;
 			}
 			case REQUEST_CHOOSE_CHANNEL: {
-				mChannelId = data.getIntExtra(SELECTED_ID, 0);
-				setItemValue(getString(R.string.apply_detail_channel), data.getStringExtra(SELECTED_TITLE));
+				mChannelId = data.getIntExtra("channel_id", 0);
+				mBillingId = data.getIntExtra("billing_id", 0);
+				String channelName = data.getStringExtra("channel_name");
+
+				setItemValue(getString(R.string.apply_detail_channel), channelName);
 				break;
 			}
 			case REQUEST_UPLOAD_IMAGE:
@@ -430,9 +436,12 @@ public class ApplyDetailActivity extends FragmentActivity {
 		merchantCity.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(ApplyDetailActivity.this, CityProvinceActivity.class);
-				intent.putExtra(SELECTED_PROVINCE, mMerchantProvince);
-				intent.putExtra(SELECTED_CITY, mMerchantCity);
+
+                Intent intent = new Intent(ApplyDetailActivity.this, CitySelectActivity.class);
+
+                if (mCityName != null) {
+                    intent.putExtra(com.example.zf_android.trade.Constants.CityIntent.CITY_NAME, mCityName);
+                }
 				startActivityForResult(intent, REQUEST_CHOOSE_CITY);
 			}
 		});
@@ -451,29 +460,10 @@ public class ApplyDetailActivity extends FragmentActivity {
 		chooseChannel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (mChannelItems.size() > 0) {
-					startChooseItemActivity(REQUEST_CHOOSE_CHANNEL, getString(R.string.title_apply_choose_channel), mChannelId, mChannelItems);
-				} else {
-					API.getApplyChannelList(ApplyDetailActivity.this, new HttpCallback<List>(ApplyDetailActivity.this) {
-						@Override
-						public void onSuccess(List data) {
-							for (Object obj : data) {
-								LinkedTreeMap map = (LinkedTreeMap) obj;
-								ApplyChooseItem item = new ApplyChooseItem();
-								item.setId((int) Math.floor((Double) map.get("id")));
-								item.setTitle((String) map.get("name"));
-								mChannelItems.add(item);
-							}
-							startChooseItemActivity(REQUEST_CHOOSE_CHANNEL, getString(R.string.title_apply_choose_channel), mChannelId, mChannelItems);
-						}
 
-						@Override
-						public TypeToken<List> getTypeToken() {
-							return new TypeToken<List>() {
-							};
-						}
-					});
-				}
+                Intent intent = new Intent(ApplyDetailActivity.this, ChooseChannel.class);
+                startActivityForResult(intent, REQUEST_CHOOSE_CHANNEL);
+
 			}
 		});
 		mCustomerContainer.addView(chooseChannel);
@@ -484,17 +474,11 @@ public class ApplyDetailActivity extends FragmentActivity {
 	 *
 	 * @param merchant
 	 */
-	private void setMerchantDetailValues(Merchant merchant) {
-		setItemValue(mMerchantKeys[1], merchant.getLegalPersonName());
+	private void setMerchantDetailValues(AgentEntity merchant) {
+		setItemValue(mMerchantKeys[1], merchant.getLegal_person_name());
 		setItemValue(mMerchantKeys[2], merchant.getTitle());
-		setItemValue(mMerchantKeys[5], merchant.getLegalPersonCardId());
+		setItemValue(mMerchantKeys[5], merchant.getLegal_person_card_id());
 		setItemValue(mMerchantKeys[6], merchant.getPhone());
-
-		setItemValue(mBankKeys[0], merchant.getAccountBankName());
-		setItemValue(mBankKeys[1], merchant.getAccountBankNum());
-		setItemValue(mBankKeys[2], merchant.getBankOpenAccount());
-		setItemValue(mBankKeys[3], merchant.getTaxRegisteredNo());
-		setItemValue(mBankKeys[4], merchant.getOrganizationCodeNo());
 	}
 
 	/**
@@ -506,11 +490,12 @@ public class ApplyDetailActivity extends FragmentActivity {
 	 * @param items       the items to choose
 	 */
 	private void startChooseItemActivity(int requestCode, String title, int selectedId, ArrayList<ApplyChooseItem> items) {
-		Intent intent = new Intent(ApplyDetailActivity.this, ApplyChooseActivity.class);
-		intent.putExtra(CHOOSE_TITLE, title);
-		intent.putExtra(SELECTED_ID, selectedId);
-		intent.putExtra(CHOOSE_ITEMS, items);
-		startActivityForResult(intent, requestCode);
+        Intent intent = new Intent(ApplyDetailActivity.this, ApplyChooseActivity.class);
+        intent.putExtra(CHOOSE_TITLE, title);
+        intent.putExtra(SELECTED_ID, selectedId);
+        intent.putExtra(CHOOSE_ITEMS, items);
+        startActivityForResult(intent, requestCode);
+
 	}
 
 	/**
@@ -664,5 +649,68 @@ public class ApplyDetailActivity extends FragmentActivity {
 			}
 		}
 	}
+
+    private void getAgentInfo() {
+        JsonParams params = new JsonParams();
+        //Fixme
+        params.put("merchantId", mMerchantId);
+        String strParams = params.toString();
+        Events.CommonRequestEvent event = new Events.AgentDetailEvent();
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
+    }
+
+    private void doSubmit() {
+        JsonParams allParams = new JsonParams();
+        List<Object> list = new ArrayList<Object>();
+
+        Map<String, Object> params = new HashMap<String, Object>();
+
+        //Fixme
+        params.put("terminalId", mTerminalId);
+        params.put("status", mTerminalStatus == 2 ? 2 : 1);
+        params.put("applyCustomerId", mAgent.getCustomer_id());
+        params.put("publicPrivateStatus", mApplyType);
+
+        params.put("merchantId", mMerchantId);
+        params.put("name", getItemValue(mMerchantKeys[1]));
+        params.put("merchantName", getItemValue(mMerchantKeys[2]));
+        params.put("sex", getItemValue(mMerchantKeys[3]));
+        params.put("birthday", getItemValue(mMerchantKeys[4]));
+        params.put("cardId", getItemValue(mMerchantKeys[5]));
+        params.put("phone", getItemValue(mMerchantKeys[6]));
+        params.put("email", getItemValue(mMerchantKeys[7]));
+        params.put("cityId", mCityId);
+        params.put("channel", mChannelId);
+        params.put("billingId", mBillingId);
+        params.put("cityId", mCityId);
+
+        params.put("bankName", getItemValue(mBankKeys[0]));
+        params.put("bankCode", getItemValue(mBankKeys[1]));
+        params.put("bankNum", getItemValue(mBankKeys[2]));
+        params.put("registeredNo", getItemValue(mBankKeys[3]));
+        params.put("organizationNo", getItemValue(mBankKeys[4]));
+
+        list.add(params);
+
+        //TODO add customer key ,value
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("key", "124");
+        map.put("value", "value123");
+        map.put("types", 1);
+        map.put("openingRequirementId", 1);
+        map.put("targetId", 1);
+
+        list.add(map);
+
+        allParams.put("paramMap", list);
+
+
+
+        String strParams = allParams.toString();
+        Events.CommonRequestEvent event = new Events.AddOpeningApplyEvent();
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
+    }
 
 }

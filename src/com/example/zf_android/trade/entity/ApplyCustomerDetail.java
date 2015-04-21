@@ -10,6 +10,14 @@ public class ApplyCustomerDetail {
     private String value;
 
     private int types;
+    private int id;
+    private int opening_applies_id;
+    private int target_id;
+
+    private long updated_at;
+    private long created_at;
+
+
 
     public String getKey() {
         return key;
@@ -33,5 +41,45 @@ public class ApplyCustomerDetail {
 
     public void setTypes(int types) {
         this.types = types;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getOpening_applies_id() {
+        return opening_applies_id;
+    }
+
+    public void setOpening_applies_id(int opening_applies_id) {
+        this.opening_applies_id = opening_applies_id;
+    }
+
+    public int getTarget_id() {
+        return target_id;
+    }
+
+    public void setTarget_id(int target_id) {
+        this.target_id = target_id;
+    }
+
+    public long getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(long updated_at) {
+        this.updated_at = updated_at;
+    }
+
+    public long getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(long created_at) {
+        this.created_at = created_at;
     }
 }

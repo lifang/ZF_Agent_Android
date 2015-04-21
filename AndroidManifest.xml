@@ -149,6 +149,10 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.posagent.activities.terminal.ChooseChannel"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.posagent.activities.terminal.TerminalChooseForm"
             android:screenOrientation="portrait" >
         </activity>

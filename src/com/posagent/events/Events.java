@@ -1,8 +1,10 @@
 package com.posagent.events;
 
 import com.example.zf_android.entity.AdressEntity;
+import com.example.zf_android.entity.AgentEntity;
 import com.example.zf_android.entity.AgentTerminalEntity;
 import com.example.zf_android.entity.ChanelEntitiy;
+import com.example.zf_android.entity.ChannelEntity;
 import com.example.zf_android.entity.ExchangeEntity;
 import com.example.zf_android.entity.MessageEntity;
 import com.example.zf_android.entity.OrderEntity;
@@ -18,6 +20,7 @@ import com.example.zf_android.entity.TerminalChoosePosItem;
 import com.example.zf_android.entity.User;
 import com.example.zf_android.entity.UserTerminal;
 import com.example.zf_android.trade.entity.AfterSaleRecord;
+import com.example.zf_android.trade.entity.ApplyDetail;
 import com.example.zf_android.trade.entity.TerminalDetail;
 import com.example.zf_android.trade.entity.TerminalItem;
 import com.example.zf_android.trade.entity.TradeAgent;
@@ -339,7 +342,7 @@ public class Events {
         }
     }
 
-    // terminal
+    // terminal apply
     public static class TerminalApplyListEvent extends CommonRequestEvent {}
     public static class TerminalApplyListCompleteEvent extends CommonCompleteEvent {
         private List<TerminalApplyEntity> list = new ArrayList<TerminalApplyEntity>();
@@ -360,6 +363,60 @@ public class Events {
             this.list = list;
         }
     }
+
+
+    public static class ApplyChannelListEvent extends CommonRequestEvent {}
+    public static class ApplyChannelListCompleteEvent extends CommonCompleteEvent {
+        private List<ChannelEntity> list = new ArrayList<ChannelEntity>();
+        public List<ChannelEntity> getList() {
+            if (list.size() < 1) {
+                String result = getArrResult().toString();
+                list = (new Gson()).fromJson(result,
+                        new TypeToken<List<ChannelEntity>>() {}.getType());
+
+            }
+            return list;
+        }
+        public void setList(List<ChannelEntity> list) {
+            this.list = list;
+        }
+    }
+
+    public static class ApplyDetailEvent extends CommonRequestEvent {}
+    public static class ApplyDetailCompleteEvent extends CommonCompleteEvent {
+        private ApplyDetail entity;
+
+        public ApplyDetail getEntity() {
+            String result = null;
+            result = getResult().toString();
+            entity = (new Gson()).fromJson(result, ApplyDetail.class);
+            return entity;
+        }
+
+        public void setEntity(ApplyDetail entity) {
+            this.entity = entity;
+        }
+    }
+
+    public static class AgentDetailEvent extends CommonRequestEvent {}
+    public static class AgentDetailCompleteEvent extends CommonCompleteEvent {
+        private AgentEntity entity;
+
+        public AgentEntity getEntity() {
+            String result = null;
+            result = getResult().toString();
+            entity = (new Gson()).fromJson(result, AgentEntity.class);
+            return entity;
+        }
+
+        public void setEntity(AgentEntity entity) {
+            this.entity = entity;
+        }
+    }
+
+    public static class AddOpeningApplyEvent extends CommonRequestEvent {}
+    public static class AddOpeningApplyCompleteEvent extends CommonCompleteEvent {}
+
 
     //after sale
     public static class AfterSaleMaintainListEvent extends CommonRequestEvent {}

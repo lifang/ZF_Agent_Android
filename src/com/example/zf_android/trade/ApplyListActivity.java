@@ -1,6 +1,5 @@
 package com.example.zf_android.trade;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +16,7 @@ import com.example.zf_android.trade.common.CommonUtil;
 import com.example.zf_android.trade.common.HttpCallback;
 import com.example.zf_android.trade.entity.TerminalItem;
 import com.google.gson.reflect.TypeToken;
+import com.posagent.activities.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ import static com.example.zf_android.trade.Constants.TerminalStatus.UNOPENED;
 /**
  * Created by Leo on 2015/3/5.
  */
-public class ApplyListActivity extends Activity {
+public class ApplyListActivity extends BaseActivity {
 
     private LayoutInflater mInflater;
     private ListView mApplyList;
@@ -132,6 +132,7 @@ public class ApplyListActivity extends Activity {
                     Intent intent = new Intent(ApplyListActivity.this, ApplyDetailActivity.class);
                     intent.putExtra(TERMINAL_ID, item.getId());
                     intent.putExtra(TERMINAL_STATUS, item.getStatus());
+                    intent.putExtra("json", gson.toJson(item));
                     startActivityForResult(intent, REQUEST_DETAIL);
                 }
             });

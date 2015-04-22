@@ -5,11 +5,13 @@ import com.example.zf_android.entity.AgentEntity;
 import com.example.zf_android.entity.AgentTerminalEntity;
 import com.example.zf_android.entity.ChanelEntitiy;
 import com.example.zf_android.entity.ChannelEntity;
+import com.example.zf_android.entity.ChannelTradeEntity;
 import com.example.zf_android.entity.ExchangeEntity;
 import com.example.zf_android.entity.MessageEntity;
 import com.example.zf_android.entity.OrderEntity;
 import com.example.zf_android.entity.PosEntity;
 import com.example.zf_android.entity.PrepareEntity;
+import com.example.zf_android.entity.ProfitEntity;
 import com.example.zf_android.entity.SonAgent;
 import com.example.zf_android.entity.SonAgentInfo;
 import com.example.zf_android.entity.StaffEntity;
@@ -880,9 +882,64 @@ public class Events {
 
     public static class ChangeProfitEvent extends CommonRequestEvent {}
     public static class ChangeProfitCompleteEvent extends CommonCompleteEvent {}
+    public static class GetDefaultProfitEvent extends CommonRequestEvent {}
+    public static class GetDefaultProfitCompleteEvent extends CommonCompleteEvent {
+        private String defautProfit;
+
+        public String getDefautProfit() {
+            String result = getResult().toString();
+            return result;
+        }
+
+        public void setDefautProfit(String defautProfit) {
+            this.defautProfit = defautProfit;
+        }
+    }
+
+    public static class ChannelTradeListEvent extends CommonRequestEvent {}
+    public static class ChannelTradeListCompleteEvent extends CommonCompleteEvent {
+
+        private List<ChannelTradeEntity> list = new ArrayList<ChannelTradeEntity>();
+        public List<ChannelTradeEntity> getList() {
+            if (list.size() < 1) {
+                String result = null;
+                try {
+                    result = getResult().getString("list");
+                    list = (new Gson()).fromJson(result,
+                            new TypeToken<List<ChannelTradeEntity>>() {}.getType());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            return list;
+        }
+        public void setList(List<ChannelTradeEntity> list) {
+            this.list = list;
+        }
+    }
 
     public static class ProfitListEvent extends CommonRequestEvent {}
-    public static class ProfitListCompleteEvent extends CommonCompleteEvent {}
+    public static class ProfitListCompleteEvent extends CommonCompleteEvent {
+        private List<ProfitEntity> list = new ArrayList<ProfitEntity>();
+        public List<ProfitEntity> getList() {
+            if (list.size() < 1) {
+                String result = null;
+                try {
+                    result = getResult().getString("list");
+                    list = (new Gson()).fromJson(result,
+                            new TypeToken<List<ProfitEntity>>() {}.getType());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            return list;
+        }
+        public void setList(List<ProfitEntity> list) {
+            this.list = list;
+        }
+    }
 
     public static class SetProfitEvent extends CommonRequestEvent {}
     public static class SetProfitCompleteEvent extends CommonCompleteEvent {}
@@ -891,7 +948,26 @@ public class Events {
     public static class DeleteProfitCompleteEvent extends CommonCompleteEvent {}
 
     public static class ChannelListEvent extends CommonRequestEvent {}
-    public static class ChannelListCompleteEvent extends CommonCompleteEvent {}
+    public static class ChannelListCompleteEvent extends CommonCompleteEvent {
+        private List<ChannelEntity> list = new ArrayList<ChannelEntity>();
+        public List<ChannelEntity> getList() {
+            if (list.size() < 1) {
+                String result = null;
+                try {
+                    result = getResult().getString("list");
+                    list = (new Gson()).fromJson(result,
+                            new TypeToken<List<ChannelEntity>>() {}.getType());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            return list;
+        }
+        public void setList(List<ChannelEntity> list) {
+            this.list = list;
+        }
+    }
 
     //配货
     public static class PrepareListEvent extends CommonRequestEvent {}

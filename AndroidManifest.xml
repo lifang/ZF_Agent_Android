@@ -215,7 +215,15 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.posagent.activities.agent.AgentProfit"
+            android:name="com.posagent.activities.agent.AgentDefaultProfit"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.posagent.activities.agent.AgentProfitList"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.posagent.activities.agent.ChannelList"
             android:screenOrientation="portrait" >
         </activity>
         <activity

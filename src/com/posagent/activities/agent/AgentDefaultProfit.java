@@ -17,7 +17,7 @@ import de.greenrobot.event.EventBus;
 /**
  * 设置默认分润
  */
-public class AgentProfit extends BaseActivity
+public class AgentDefaultProfit extends BaseActivity
 {
 
     private EditText et_profit;
@@ -28,7 +28,7 @@ public class AgentProfit extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agent_profit);
 
-        new TitleMenuUtil(AgentProfit.this, "默认分润比例").show();
+        new TitleMenuUtil(AgentDefaultProfit.this, "默认分润比例").show();
 
         initView();
     }

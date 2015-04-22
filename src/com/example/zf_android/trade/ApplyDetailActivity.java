@@ -197,11 +197,13 @@ public class ApplyDetailActivity extends FragmentActivity {
 		mMaterialContainer.removeAllViews();
 		initMerchantDetailKeys();
 
+        CommonUtil.toastShort(this, "loading...");
+
         JsonParams params = new JsonParams();
         //Fixme
 //        params.put("terminalsId", 232);
         params.put("terminalsId", mTerminalId);
-        params.put("status", mTerminalStatus);
+        params.put("status", mApplyType);
         String strParams = params.toString();
         Events.CommonRequestEvent event = new Events.ApplyDetailEvent();
         event.setParams(strParams);

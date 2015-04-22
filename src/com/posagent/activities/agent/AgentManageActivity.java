@@ -68,7 +68,7 @@ public class AgentManageActivity extends BaseActivity implements XListView.IXLis
 
         // 准备需要监听Click的数据
         HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{
-            put("ll_profit", AgentProfit.class);
+            put("ll_profit", AgentDefaultProfit.class);
             put("ll_create_agent", AgentNewActivity.class);
         }};
         this.setClickableMap(clickableMap);
@@ -87,6 +87,8 @@ public class AgentManageActivity extends BaseActivity implements XListView.IXLis
         Xlistview.setDivider(null);
         Xlistview.setAdapter(myAdapter);
         getData();
+
+        getDefaultProfit();
     }
 
     @Override
@@ -131,12 +133,23 @@ public class AgentManageActivity extends BaseActivity implements XListView.IXLis
         EventBus.getDefault().post(event);
     }
 
+    private void getDefaultProfit() {
+        JsonParams params = new JsonParams();
+        //Fixme
+        params.put("agentsId", 1);
+        String strParams = params.toString();
+        Events.CommonRequestEvent event = new Events.GetDefaultProfitEvent();
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
+    }
+
+
     @Override
     public void onClick(View v) {
         // 特殊 onclick 处理，如有特殊处理，
         // 则直接 return，不再调用 super 处理
         if (v.getId() == R.id.ll_profit) {
-            Intent i = new Intent(AgentManageActivity.this, AgentProfit.class);
+            Intent i = new Intent(AgentManageActivity.this, AgentDefaultProfit.class);
 
             startActivityForResult(i, Constants.REQUEST_CODE);
 
@@ -151,6 +164,10 @@ public class AgentManageActivity extends BaseActivity implements XListView.IXLis
         myList.addAll(event.getList());
         Xlistview.setPullLoadEnable(event.getList().size() >= rows);
         handler.sendEmptyMessage(0);
+    }
+
+    public void onEventMainThread(Events.GetDefaultProfitCompleteEvent event) {
+        setText("tv_profit", event.getDefautProfit() + "%");
     }
 
 

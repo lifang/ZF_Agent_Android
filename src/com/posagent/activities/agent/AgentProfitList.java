@@ -1,4 +1,4 @@
-package com.posagent.activities.stock;
+package com.posagent.activities.agent;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,18 +8,22 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.examlpe.zf_android.util.Tools;
 import com.examlpe.zf_android.util.XListView;
 import com.examlpe.zf_android.util.XListView.IXListViewListener;
 import com.example.zf_android.Config;
 import com.example.zf_android.R;
-import com.example.zf_android.entity.StockEntity;
+import com.example.zf_android.entity.ProfitEntity;
+import com.example.zf_android.entity.ProfitTradeEntity;
 import com.example.zf_android.trade.widget.MyTabWidget;
-import com.example.zf_zandroid.adapter.StockAdapter;
-import com.google.gson.Gson;
+import com.example.zf_zandroid.adapter.ProfitAdapter;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.activities.CommonInputer;
 import com.posagent.events.Events;
@@ -32,9 +36,9 @@ import java.util.List;
 import de.greenrobot.event.EventBus;
 
 /**
- * 库存管理
+ * 设置分润
  */
-public class StockList extends BaseActivity implements IXListViewListener {
+public class AgentProfitList extends BaseActivity implements IXListViewListener {
 
     private XListView Xlistview;
     private MyTabWidget mTabWidget;
@@ -42,12 +46,16 @@ public class StockList extends BaseActivity implements IXListViewListener {
     private int rows = Config.ROWS;
     private LinearLayout eva_nodata;
     private boolean onRefresh_number = true;
-    private StockAdapter myAdapter;
-    List<StockEntity> myList = new ArrayList<StockEntity>();
-    List<StockEntity> moreList = new ArrayList<StockEntity>();
+    private ProfitAdapter myAdapter;
+    List<ProfitEntity> myList = new ArrayList<ProfitEntity>();
+    List<ProfitEntity> moreList = new ArrayList<ProfitEntity>();
 
-    private StockEntity entity;
-    private int changingNamePostion;
+    private TextView tvCurrent;
+    private ProfitTradeEntity profitTradeEntity;
+    private ProfitEntity profitEntity;
+
+    private int sonAgentId;
+    private String filtedIds;
 
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
@@ -58,6 +66,9 @@ public class StockList extends BaseActivity implements IXListViewListener {
                     if (myList.size() == 0) {
                         Xlistview.setVisibility(View.GONE);
                         eva_nodata.setVisibility(View.VISIBLE);
+                    } else {
+                        Xlistview.setVisibility(View.VISIBLE);
+                        eva_nodata.setVisibility(View.GONE);
                     }
                     onRefresh_number = true;
                     myAdapter.notifyDataSetChanged();
@@ -69,9 +80,11 @@ public class StockList extends BaseActivity implements IXListViewListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stock_list);
+        setContentView(R.layout.activity_common_list);
 
-        new TitleMenuUtil(StockList.this, "库存管理").show();
+        new TitleMenuUtil(AgentProfitList.this, "设置分润").show();
+
+        sonAgentId = getIntent().getIntExtra("id", 0);
 
         initView();
         getData();
@@ -79,7 +92,22 @@ public class StockList extends BaseActivity implements IXListViewListener {
 
     private void initView() {
 
-        myAdapter = new StockAdapter(StockList.this, myList);
+        // Add icon show
+        ImageView addIcon = (ImageView) findViewById(R.id.iv_addIconEdge);
+
+        addIcon.setVisibility(View.VISIBLE);
+        addIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(AgentProfitList.this, ChannelList.class);
+                i.putExtra("filtedIds", filtedIds);
+                startActivityForResult(i, Constants.REQUEST_CODE);
+
+            }
+        });
+
+        myAdapter = new ProfitAdapter(AgentProfitList.this, myList);
         eva_nodata = (LinearLayout) findViewById(R.id.eva_nodata);
         Xlistview = (XListView) findViewById(R.id.x_listview);
         Xlistview.setPullLoadEnable(true);
@@ -91,16 +119,7 @@ public class StockList extends BaseActivity implements IXListViewListener {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Intent i = new Intent(StockList.this, StockDetail.class);
-                StockEntity entity = myList.get(position - 1);
-                //fixme
-                i.putExtra("agentId", 1);
 
-                Gson gson = new Gson();
-                String json = gson.toJson(entity);
-                i.putExtra("json", json);
-
-                startActivity(i);
             }
         });
         Xlistview.setAdapter(myAdapter);
@@ -139,11 +158,11 @@ public class StockList extends BaseActivity implements IXListViewListener {
     private void getData() {
         JsonParams params = new JsonParams();
         //Fixme
-        params.put("agentId", 1);
+        params.put("sonAgentsId", sonAgentId);
         params.put("page", page);
         params.put("rows", rows);
         String strParams = params.toString();
-        Events.CommonRequestEvent event = new Events.StockListEvent();
+        Events.CommonRequestEvent event = new Events.ProfitListEvent();
         event.setParams(strParams);
         EventBus.getDefault().post(event);
     }
@@ -156,16 +175,10 @@ public class StockList extends BaseActivity implements IXListViewListener {
     }
 
     // events
-    public void onEventMainThread(Events.StockListCompleteEvent event) {
+    public void onEventMainThread(Events.ProfitListCompleteEvent event) {
         myList.addAll(event.getList());
         Xlistview.setPullLoadEnable(event.getList().size() >= rows);
         handler.sendEmptyMessage(0);
-    }
-
-    public void onEventMainThread(Events.StockRenameCompleteEvent event) {
-        if (event.getSuccess()) {
-            toast(event.getMessage());
-        }
     }
 
     @Override
@@ -175,42 +188,70 @@ public class StockList extends BaseActivity implements IXListViewListener {
         Bundle bundle = data.getExtras();
 
         switch (requestCode) {
-            case Constants.CommonInputerConstant.REQUEST_CODE:
-                String content = bundle.getString(Constants.CommonInputerConstant.VALUE_KEY);
-                Log.d(TAG, content);
-                StockEntity entity = myList.get(changingNamePostion);
-                entity.setGoodname(content);
+            case Constants.REQUEST_CODE:
+                int selectChannelId = bundle.getInt("id", 0);
+                Log.d(TAG, "id " + selectChannelId);
+                ProfitEntity entity = new ProfitEntity();
+                entity.setChannel(((MyApplication)getApplication()).getChannelEntityWithId(selectChannelId));
+                myList.add(entity);
+                handler.sendEmptyMessage(0);
+                break;
 
-                changeName(entity);
+            case Constants.REQUEST_CODE2:
+                String percent = bundle.getString(Constants.CommonInputerConstant.VALUE_KEY);
 
-                Xlistview.invalidateViews();
+                tvCurrent.setText(percent + "%");
+                profitTradeEntity.setPercent(percent);
+
+                //doSave
+                doSaveOrEditProfit();
                 break;
         }
     }
 
-    public void goChangeName(StockEntity entity, int position) {
-        entity = entity;
-        changingNamePostion = position;
-        Intent intent = new Intent(StockList.this, CommonInputer.class);
 
-        intent.putExtra(Constants.CommonInputerConstant.TITLE_KEY, "商品更名");
+    public void changeProfit(TextView tv, ProfitEntity profit, ProfitTradeEntity trade) {
 
-        intent.putExtra(Constants.CommonInputerConstant.PLACEHOLDER_KEY, entity.getGoodname());
+        tvCurrent = tv;
+        profitEntity = profit;
+        profitTradeEntity = trade;
 
-        startActivityForResult(intent, Constants.CommonInputerConstant.REQUEST_CODE);
+        Intent i = new Intent(AgentProfitList.this, CommonInputer.class);
+        i.putExtra(Constants.CommonInputerConstant.TITLE_KEY, "设置百分比");
+        i.putExtra(Constants.CommonInputerConstant.PLACEHOLDER_KEY, trade.getPercent());
+
+        startActivityForResult(i, Constants.REQUEST_CODE2);
 
     }
 
-    private void changeName(StockEntity entity) {
+    private void doSaveOrEditProfit() {
+        Log.d(TAG, "doSaveOrEditProfit " + profitEntity.getChannel().getName());
+
+        String profitPercent;
+        List<String> list = new ArrayList<String>();
+        int sign = profitEntity.getId() == null ? 1 : 0;
+        for (ProfitTradeEntity trade: profitEntity.getDetail()) {
+            list.add(trade.getPercent() + "_" + trade.getTradeTypeId());
+        }
+        profitPercent = StringUtil.join(list, "|");
+
+
+        //do save
         JsonParams params = new JsonParams();
         //Fixme
-        params.put("agentId", 1);
-        params.put("goodId", entity.getGood_id());
-        params.put("goodname", entity.getGoodname());
+        params.put("agentsId", 1);
+
+        params.put("sonAgentsId", sonAgentId);
+        params.put("channelId", profitEntity.getChannel().getId());
+        params.put("profitPercent", profitPercent);
+        params.put("sign", sign);
         String strParams = params.toString();
-        Events.StockRenameEvent event = new Events.StockRenameEvent();
+        Events.CommonRequestEvent event = new Events.SetProfitEvent();
         event.setParams(strParams);
         EventBus.getDefault().post(event);
+
+
     }
+
 
 }

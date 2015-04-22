@@ -15,6 +15,7 @@ public class ChannelEntity extends BaseEntity {
     private String name;
 
     private List<BillingEntity> billings;
+    private List<ChannelTradeEntity> trades;
 
     public int getId() {
         return id;
@@ -40,7 +41,13 @@ public class ChannelEntity extends BaseEntity {
         this.billings = billings;
     }
 
+    public List<ChannelTradeEntity> getTrades() {
+        return trades;
+    }
 
+    public void setTrades(List<ChannelTradeEntity> trades) {
+        this.trades = trades;
+    }
 
     @Override
     public String toString() {

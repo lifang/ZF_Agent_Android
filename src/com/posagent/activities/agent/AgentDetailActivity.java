@@ -73,8 +73,9 @@ public class AgentDetailActivity extends BaseActivity {
         // 特殊 onclick 处理，如有特殊处理，
         // 则直接 return，不再调用 super 处理
         if (v.getId() == R.id.next_sure) {
-            //TODO go to 设置分润
-            startActivity(new Intent(this, AgentDetailActivity.class));
+            Intent i = new Intent(this, AgentProfitList.class);
+            i.putExtra("id", sonAgentsId);
+            startActivity(i);
             return;
         }
 

@@ -66,6 +66,17 @@
         android:visibility="gone"
         />
 
+    <ImageView
+        android:id="@+id/iv_addIconEdge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="11dp"
+        android:src="@drawable/delete_add"
+        android:visibility="gone"
+        />
+
     <TextView
         android:id="@+id/next_sure"
         android:layout_width="wrap_content"

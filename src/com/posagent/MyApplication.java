@@ -6,25 +6,27 @@ import android.app.Activity;
 import android.app.Application;
 
 import com.example.zf_android.entity.ApplyneedEntity;
+import com.example.zf_android.entity.ChannelEntity;
+import com.example.zf_android.entity.ChannelTradeEntity;
 import com.example.zf_android.entity.GoodinfoEntity;
 import com.example.zf_android.entity.PosSelectEntity;
 import com.example.zf_android.entity.User;
 import com.loopj.android.http.AsyncHttpClient;
+import com.posagent.events.Events;
 import com.posagent.network.APIManager;
+import com.posagent.utils.JsonParams;
 
 import java.util.LinkedList;
 import java.util.List;
- 
- 
- 
 
-public class MyApplication extends Application{
+import de.greenrobot.event.EventBus;
+
+
+public class MyApplication extends Application {
 	
 	private static MyApplication  mInstance=null;
 	//private ArrayList<Order> orderList = new ArrayList<Order>();
-	/**
-	 * ��֤��Ϣtoken
-	 */
+
 	private static  String versionCode="";
 	private static int notifyId=0;
 	private static Boolean isSelect=false;
@@ -86,13 +88,20 @@ public class MyApplication extends Application{
 		MyApplication.pse = pse;
 	}
 
-	public static List<ApplyneedEntity> pub = new LinkedList<ApplyneedEntity>();   
-	public static List<ApplyneedEntity> single = new LinkedList<ApplyneedEntity>();   
-	  
-	  
- 
+	public static List<ApplyneedEntity> pub = new LinkedList<ApplyneedEntity>();
+    public static List<ApplyneedEntity> single = new LinkedList<ApplyneedEntity>();
 
-	public static List<ApplyneedEntity> getPub() {
+    public static List<ChannelEntity> channels = new LinkedList<ChannelEntity>();
+
+    public static List<ChannelEntity> getChannels() {
+        return channels;
+    }
+
+    public static void setChannels(List<ChannelEntity> channels) {
+        MyApplication.channels = channels;
+    }
+
+    public static List<ApplyneedEntity> getPub() {
 		return pub;
 	}
 	public static void setPub(List<ApplyneedEntity> pub) {
@@ -122,8 +131,9 @@ public class MyApplication extends Application{
         mList.add(activity);    
     }    
     public void exit() {
-        try {    
-            for (Activity activity:mList) {    
+        try {
+            EventBus.getDefault().unregister(this);
+            for (Activity activity:mList) {
                 if (activity != null)    
                     activity.finish();    
             }    
@@ -140,11 +150,72 @@ public class MyApplication extends Application{
 		mInstance = this;
         //setup APIManager EventBus
         APIManager.getDefault();
+        EventBus.getDefault().register(this);
+
+        // prepare channel list
+        prepareChannelList();
+
     }
 
 	public static MyApplication getInstance() {
 		return mInstance;
 	}
-	
- 
+
+
+    //
+    private void prepareChannelList() {
+        JsonParams params = new JsonParams();
+        String strParams = params.toString();
+        Events.CommonRequestEvent event = new Events.ChannelListEvent();
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
+    }
+
+    private void getChannelTrade(ChannelEntity channel) {
+        JsonParams params = new JsonParams();
+
+        params.put("id", channel.getId());
+
+        String strParams = params.toString();
+        Events.CommonRequestEvent event = new Events.ChannelTradeListEvent();
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
+    }
+
+    // events
+    public void onEventMainThread(Events.ChannelListCompleteEvent event) {
+        setChannels(event.getList());
+        for (ChannelEntity channel: event.getList()) {
+            getChannelTrade(channel);
+        }
+
+    }
+
+    public void onEventMainThread(Events.ChannelTradeListCompleteEvent event) {
+        List<ChannelTradeEntity> list = event.getList();
+        ChannelTradeEntity trade = list.get(0);
+        for (ChannelEntity channel: getChannels()) {
+            if (channel.getName().equals(trade.getName())) {
+                channel.setTrades(list);
+                break;
+            }
+        }
+
+    }
+
+    public ChannelEntity getChannelEntityWithId(int id) {
+        for (ChannelEntity channel: getChannels()) {
+            if (channel.getId() == id) {
+                return channel;
+            }
+        }
+
+        return null;
+    }
+
+
+
+
+
+
 }

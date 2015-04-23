@@ -93,7 +93,7 @@ public class UserList extends BaseActivity implements IXListViewListener {
         if (forSelect) {
             //选择用户用
             // add icon show
-            ImageView addIcon = (ImageView) findViewById(R.id.iv_addIcon);
+            ImageView addIcon = (ImageView) findViewById(R.id.iv_addIconEdge);
             addIcon.setVisibility(View.VISIBLE);
             addIcon.setOnClickListener(new View.OnClickListener() {
                 @Override

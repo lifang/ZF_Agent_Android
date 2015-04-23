@@ -15,7 +15,7 @@ public class Config {
 	public static String goodcomment=PATHS+"comment/list";
 	//user/userRegistration
 	public final static String UserRegistration = PATHS+"user/userRegistration";
-	public static final String SHARED = "zfandroid";
+	public static final String SHARED = "zfagent";
 	public static final String FINDPASS = null;
 	public final static String RegistgetCode = PATHS+"user/sendPhoneVerificationCode/";
 	public static final String GRTONE =PATHS+"customers/getOne/";

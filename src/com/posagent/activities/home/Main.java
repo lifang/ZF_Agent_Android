@@ -12,6 +12,7 @@ import com.example.zf_android.entity.PicEntity;
 import com.example.zf_android.trade.CitySelectActivity;
 import com.example.zf_android.trade.entity.City;
 import com.example.zf_android.trade.entity.Province;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.activities.aftersale.AfterSaleGridActivity;
 import com.posagent.activities.order.OrderList;
@@ -74,8 +75,10 @@ public class Main extends BaseActivity implements OnClickListener{
 
         focusTabAtIndex(0);
 
-        Intent i = new Intent(Main.this, LoginActivity.class);
-        startActivity(i);
+        if (null == MyApplication.getCurrentUser()) {
+            Intent i = new Intent(Main.this, LoginActivity.class);
+            startActivity(i);
+        }
     }
 
     private void initView() {

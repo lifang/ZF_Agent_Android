@@ -208,47 +208,9 @@ public class APIManager {
     }
 
     public void onEventBackgroundThread(Events.DoLoginEvent event){
-        String username = event.getUsername();
-        String password = event.getPassword();
-        RequestBody body = RequestBody.create(JSON, "{\"username\": \""+ username +"\", \"password\": \""+ password +"\"}");
-        Log.d(TAG, body.toString());
 
-        Request request = this.request()
-                .url(UrlLogin)
-                .post(body)
-                .build();
-
-        Response response = null;
-        try {
-            response = client.newCall(request).execute();
-            String result = response.body().string();
-            Log.d(TAG, result);
-
-
-            JSONObject json = null;
-            String code = null;
-            try {
-
-                json = new JSONObject(result);
-                int intCode = json.getInt("code");
-                Events.LoginCompleteEvent loginEvent = new Events.LoginCompleteEvent("faceted");
-                loginEvent.setSuccess(intCode == Constants.SUCCESS_CODE);
-                loginEvent.setMessage(json.getString("message"));
-
-                //TODO 鐧诲綍鎴愬姛鍚庡仛涓�簺浜嬫儏
-                if(loginEvent.getSuccess()){
-                    String res =json.getString("result");
-                }
-
-                EventBus.getDefault().post(loginEvent);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Events.CommonCompleteEvent completeEvent = new Events.LoginCompleteEvent();
+        CommonRequest(event, completeEvent, UrlLogin);
     }
 
 

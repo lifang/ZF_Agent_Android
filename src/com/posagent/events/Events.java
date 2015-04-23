@@ -24,6 +24,7 @@ import com.example.zf_android.entity.StockEntity;
 import com.example.zf_android.entity.TerminalApplyEntity;
 import com.example.zf_android.entity.TerminalChoosePosItem;
 import com.example.zf_android.entity.User;
+import com.example.zf_android.entity.UserInfoEntity;
 import com.example.zf_android.entity.UserTerminal;
 import com.example.zf_android.trade.entity.AfterSaleRecord;
 import com.example.zf_android.trade.entity.ApplyDetail;
@@ -130,45 +131,21 @@ public class Events {
         public RefreshToMuch() {}
     }
 
-    public static class DoLoginEvent {
-        private String username;
-        private String password;
-
-        public String getUsername() { return username; }
-        public String getPassword() { return password; }
-
-        public DoLoginEvent(String _username, String _password) {
-            username = _username;
-            password = _password;
-        }
+    public static class DoLoginEvent extends CommonRequestEvent {
     }
 
-    public static class LoginCompleteEvent {
-        private String token;
-        private String message;
+    public static class LoginCompleteEvent extends CommonCompleteEvent {
+        private UserInfoEntity entity;
 
-        public String getMessage() {
-            return message;
+        public UserInfoEntity getEntity() {
+            String result = null;
+            result = getResult().toString();
+            entity = (new Gson()).fromJson(result, UserInfoEntity.class);
+            return entity;
         }
 
-        public void setMessage(String message) {
-            this.message = message;
-        }
-
-        private Boolean success;
-
-        public Boolean getSuccess() {
-            return success;
-        }
-
-        public void setSuccess(Boolean success) {
-            this.success = success;
-        }
-
-        public String getToken() { return token; }
-
-        public LoginCompleteEvent(String _token) {
-            token = _token;
+        public void setEntity(UserInfoEntity entity) {
+            this.entity = entity;
         }
     }
 

@@ -10,7 +10,7 @@ import com.example.zf_android.entity.ChannelEntity;
 import com.example.zf_android.entity.ChannelTradeEntity;
 import com.example.zf_android.entity.GoodinfoEntity;
 import com.example.zf_android.entity.PosSelectEntity;
-import com.example.zf_android.entity.User;
+import com.example.zf_android.entity.UserInfoEntity;
 import com.loopj.android.http.AsyncHttpClient;
 import com.posagent.events.Events;
 import com.posagent.network.APIManager;
@@ -49,12 +49,6 @@ public class MyApplication extends Application {
 	public static void setVersionCode(String versionCode) {
 		MyApplication.versionCode = versionCode;
 	}
-	public static User getCurrentUser() {
-		return currentUser;
-	}
-	public static void setCurrentUser(User currentUser) {
-		MyApplication.currentUser = currentUser;
-	}
 
 
 	private static String token="";
@@ -91,6 +85,16 @@ public class MyApplication extends Application {
 	public static List<ApplyneedEntity> pub = new LinkedList<ApplyneedEntity>();
     public static List<ApplyneedEntity> single = new LinkedList<ApplyneedEntity>();
 
+    public static UserInfoEntity currentUser;
+
+    public static UserInfoEntity getCurrentUser() {
+        return currentUser;
+    }
+
+    public static void setCurrentUser(UserInfoEntity currentUser) {
+        MyApplication.currentUser = currentUser;
+    }
+
     public static List<ChannelEntity> channels = new LinkedList<ChannelEntity>();
 
     public static List<ChannelEntity> getChannels() {
@@ -115,7 +119,7 @@ public class MyApplication extends Application {
 	}
 
 
-	public static User currentUser = new User();
+//	public static User currentUser = new User();
 	public static GoodinfoEntity gfe=new GoodinfoEntity();
 	 
     public static GoodinfoEntity getGfe() {

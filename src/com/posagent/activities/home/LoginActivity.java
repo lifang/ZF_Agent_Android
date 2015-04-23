@@ -20,8 +20,11 @@ import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.Config;
 import com.example.zf_android.R;
 import com.example.zf_android.activity.FindPass;
+import com.example.zf_android.entity.UserInfoEntity;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
+import com.posagent.utils.JsonParams;
 
 import de.greenrobot.event.EventBus;
 
@@ -51,6 +54,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
         initView();
         new TitleMenuUtil(LoginActivity.this, "登录").show();
+
+        findViewById(R.id.titleback_image_back).setVisibility(View.GONE);
     }
 
     private void initView() {
@@ -167,12 +172,23 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                 Toast.LENGTH_SHORT).show();
 
         if (event.getSuccess()) {
+            UserInfoEntity userinfo = event.getEntity();
+            //save user info
+            MyApplication.setCurrentUser(userinfo);
+
             finish();
         }
     }
 
     private void login() {
-        EventBus.getDefault().post(new Events.DoLoginEvent(username, password));
+        JsonParams params = new JsonParams();
+        params.put("username", username);
+        params.put("password", password);
+        String strParams = params.toString();
+        Events.CommonRequestEvent event = new Events.DoLoginEvent();
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
+
     }
 
     private boolean check() {

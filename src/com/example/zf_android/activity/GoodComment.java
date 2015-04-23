@@ -1,41 +1,30 @@
 package com.example.zf_android.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.Header;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
 
- 
- 
- 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.examlpe.zf_android.util.Tools;
 import com.examlpe.zf_android.util.XListView;
 import com.examlpe.zf_android.util.XListView.IXListViewListener;
- 
- 
-import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
-import com.posagent.MyApplication;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.GoodCommentEntity;
 import com.example.zf_zandroid.adapter.GoodCommentAdapter;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
+import com.posagent.activities.BaseActivity;
+import com.posagent.events.Events;
+import com.posagent.utils.JsonParams;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import de.greenrobot.event.EventBus;
+
 /***
  * 
 *    
@@ -61,40 +50,25 @@ public class GoodComment extends BaseActivity implements  IXListViewListener{
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
-			case 0:
-				onLoad( );
-				
-				if(myList.size()==0){
-				//	norecord_text_to.setText("��û����ص���Ʒ");
-					Xlistview.setVisibility(View.GONE);
-					eva_nodata.setVisibility(View.VISIBLE);
-				}
-				onRefresh_number = true; 
-			 	myAdapter.notifyDataSetChanged();
-				break;
-			case 1:
-				Toast.makeText(getApplicationContext(), (String) msg.obj,
-						Toast.LENGTH_SHORT).show();
-			 
-				break;
-			case 2: // ����������
-				Toast.makeText(getApplicationContext(), "no 3g or wifi content",
-						Toast.LENGTH_SHORT).show();
-				break;
-			case 3:
-				Toast.makeText(getApplicationContext(),  " refresh too much",
-						Toast.LENGTH_SHORT).show();
-				break;
-			}
+                case 0:
+                    onLoad();
+
+                    if (myList.size() == 0) {
+                        Xlistview.setVisibility(View.GONE);
+                        eva_nodata.setVisibility(View.VISIBLE);
+                    }
+                    onRefresh_number = true;
+                    myAdapter.notifyDataSetChanged();
+                    break;
+            }
 		}
 	};
 	 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.good_commet);
+		setContentView(R.layout.activity_good_commet);
 		title=getIntent().getStringExtra("commentsCount");
 		goodId=getIntent().getIntExtra("goodId", 1);
 		
@@ -104,13 +78,11 @@ public class GoodComment extends BaseActivity implements  IXListViewListener{
 	}
 
 	private void initView() {
-		// TODO Auto-generated method stub
-		
-		new TitleMenuUtil(GoodComment.this, "评论  ("+title+")").show();
+
+		new TitleMenuUtil(GoodComment.this, "评论列表").show();
 		myAdapter=new GoodCommentAdapter(GoodComment.this, myList);
 		eva_nodata=(LinearLayout) findViewById(R.id.eva_nodata);
 		Xlistview=(XListView) findViewById(R.id.x_listview);
-		// refund_listview.getmFooterView().getmHintView().setText("�Ѿ�û�������");
 		Xlistview.setPullLoadEnable(true);
 		Xlistview.setXListViewListener(this);
 		Xlistview.setDivider(null);
@@ -120,7 +92,6 @@ public class GoodComment extends BaseActivity implements  IXListViewListener{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				// TODO Auto-generated method stub
 			//	Intent i = new Intent(GoodComment.this, OrderDetail.class);
 			//	startActivity(i);
 			}
@@ -128,123 +99,58 @@ public class GoodComment extends BaseActivity implements  IXListViewListener{
 		Xlistview.setAdapter(myAdapter);
 	}
 
-	@Override
-	public void onRefresh() {
-		// TODO Auto-generated method stub
-		page = 1;
-		 System.out.println("onRefresh1");
-		myList.clear();
-		 System.out.println("onRefresh2");
-		getData();
-	}
+    @Override
+    public void onRefresh() {
+        page = 1;
+        myList.clear();
+        getData();
+    }
 
 
-	@Override
-	public void onLoadMore() {
-		// TODO Auto-generated method stub
-		if (onRefresh_number) {
-			page = page+1;
-			
-		//	onRefresh_number = false;
-		//	getData();
-			
-			if (Tools.isConnect(getApplicationContext())) {
-				onRefresh_number = false;
-				getData();
-			} else {
-				onRefresh_number = true;
-				handler.sendEmptyMessage(2);
-			}
-		}
-		else {
-			handler.sendEmptyMessage(3);
-		}
-	}
-	private void onLoad() {
-		Xlistview.stopRefresh();
-		Xlistview.stopLoadMore();
-		Xlistview.setRefreshTime(Tools.getHourAndMin());
-	}
+    @Override
+    public void onLoadMore() {
+        if (onRefresh_number) {
+            page = page + 1;
+            if (Tools.isConnect(getApplicationContext())) {
+                onRefresh_number = false;
+                getData();
+            } else {
+                onRefresh_number = true;
+                EventBus.getDefault().post(new Events.NoConnectEvent());
+            }
+        } else {
+            EventBus.getDefault().post(new Events.RefreshToMuch());
+        }
+    }
 
-	public void buttonClick() {
-		page = 1;
-		myList.clear();
-		getData();
-	}
- 
-	private void getData() {
-		// TODO Auto-generated method stub
-		 
-	 
+    private void onLoad() {
+        Xlistview.stopRefresh();
+        Xlistview.stopLoadMore();
+        Xlistview.setRefreshTime(Tools.getHourAndMin());
+    }
 
-		// TODO Auto-generated method stub
-		String url = Config.goodcomment;
-		RequestParams params = new RequestParams();
-		params.put("goodId", 1);
-		params.put("indexPage", page);
-	 	params.put("rows", rows);
-	 	System.out.println("---"+page);
-		params.setUseJsonStreamer(true);
+    private void getData() {
+        JsonParams params = new JsonParams();
+        params.put("goodId", goodId);
+        params.put("page", page);
+        params.put("rows", rows);
+        String strParams = params.toString();
+        Events.CommonRequestEvent event = new Events.GoodsCommentListEvent();
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
+    }
 
-		MyApplication.getInstance().getClient()
-				.post(url, params, new AsyncHttpResponseHandler() {
+    @Override
+    public void onClick(View v) {
+        // 特殊 onclick 处理，如有特殊处理，
+        // 则直接 return，不再调用 super 处理
+        super.onClick(v);
+    }
 
-					@Override
-					public void onSuccess(int statusCode, Header[] headers,
-							byte[] responseBody) {
-						String responseMsg = new String(responseBody)
-								.toString();
-						Log.e("print", responseMsg);
-
-					 
-						 
-						Gson gson = new Gson();
-						
-						JSONObject jsonobject = null;
-						String code = null;
-						try {
-							jsonobject = new JSONObject(responseMsg);
-							code = jsonobject.getString("code");
-							int a =jsonobject.getInt("code");
-							if(a==Config.CODE){  
-								String res =jsonobject.getString("result");
-								jsonobject = new JSONObject(res);
-								
-								moreList= gson.fromJson(jsonobject.getString("list"), new TypeToken<List<GoodCommentEntity>>() {
-			 					}.getType());
-			 				 
-								myList.addAll(moreList);
-				 				handler.sendEmptyMessage(0);
- 		 					  
-			 				 
-			 			 
-							}else{
-								code = jsonobject.getString("message");
-								Toast.makeText(getApplicationContext(), code, 1000).show();
-							}
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							 ;	
-							e.printStackTrace();
-							
-						}
-
-					}
-
-					@Override
-					public void onFailure(int statusCode, Header[] headers,
-							byte[] responseBody, Throwable error) {
-						// TODO Auto-generated method stub
-						System.out.println("-onFailure---");
-						Log.e("print", "-onFailure---" + error);
-					}
-				});
- 
-		 
-	
-		 
-		
-	//	System.out.println("getData");
-	//	handler.sendEmptyMessage(0);
-	}
+    // events
+    public void onEventMainThread(Events.GoodsCommentListCompleteEvent event) {
+        myList.addAll(event.getList());
+        Xlistview.setPullLoadEnable(event.getList().size() >= rows);
+        handler.sendEmptyMessage(0);
+    }
 }

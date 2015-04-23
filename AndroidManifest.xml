@@ -421,6 +421,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.posagent.activities.goods.RequireMaterial"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".activity.SearchFormActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" >

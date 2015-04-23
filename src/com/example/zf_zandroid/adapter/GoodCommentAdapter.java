@@ -1,10 +1,5 @@
 package com.example.zf_zandroid.adapter;
 
-import java.util.List;
-
-import com.example.zf_android.R;
-import com.example.zf_android.entity.GoodCommentEntity;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +7,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.example.zf_android.R;
+import com.example.zf_android.entity.GoodCommentEntity;
+
+import java.util.List;
 
 public class GoodCommentAdapter extends BaseAdapter {
 	private Context context;
@@ -67,7 +67,5 @@ public class GoodCommentAdapter extends BaseAdapter {
 	public final class ViewHolder {
 		public TextView tv_name, tv_ccc,tv_time;
 		public RatingBar si_rt_msxf;
-		
-
 	}
 }

@@ -7,6 +7,7 @@ import com.example.zf_android.entity.ChanelEntitiy;
 import com.example.zf_android.entity.ChannelEntity;
 import com.example.zf_android.entity.ChannelTradeEntity;
 import com.example.zf_android.entity.ExchangeEntity;
+import com.example.zf_android.entity.GoodCommentEntity;
 import com.example.zf_android.entity.GoodsEntity;
 import com.example.zf_android.entity.MessageEntity;
 import com.example.zf_android.entity.OrderEntity;
@@ -238,6 +239,27 @@ public class Events {
 
         public void setEntity(PayChannelInfoEntity entity) {
             this.entity = entity;
+        }
+    }
+
+    public static class GoodsCommentListEvent extends CommonRequestEvent {}
+    public static class GoodsCommentListCompleteEvent extends CommonCompleteEvent {
+        private List<GoodCommentEntity> list = new ArrayList<GoodCommentEntity>();
+        public List<GoodCommentEntity> getList() {
+            if (list.size() < 1) {
+                try {
+                    String result = getResult().getString("list");
+                    list = (new Gson()).fromJson(result,
+                            new TypeToken<List<GoodCommentEntity>>() {}.getType());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            return list;
+        }
+        public void setList(List<GoodCommentEntity> list) {
+            this.list = list;
         }
     }
 

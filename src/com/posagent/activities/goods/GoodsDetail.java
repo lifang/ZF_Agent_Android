@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
+import com.example.zf_android.activity.GoodComment;
 import com.example.zf_android.entity.FactoryEntity;
 import com.example.zf_android.entity.GoodinfoEntity;
 import com.example.zf_android.entity.GoodsEntity;
@@ -46,7 +47,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
                 tv_comment_count, tv_brand2, tv_shell_material,
                 tv_battery_info, tv_sign_order_way, tv_encrypt_card_way,
                 tv_factory_url, tv_factory_desc, tv_goods_desc,
-            tv_opening_requirement, tv_support_cancel;
+            tv_opening_requirement, tv_support_cancel, tv_require_material;
 
     ImageView iv_factory_logo;
 
@@ -97,6 +98,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         tv_terminal_kind = (TextView) findViewById(R.id.tv_terminal_kind);
         tv_sold_count = (TextView) findViewById(R.id.tv_sold_count);
         tv_comment_count = (TextView) findViewById(R.id.tv_comment_count);
+        tv_require_material = (TextView) findViewById(R.id.tv_require_material);
         tv_brand2 = (TextView) findViewById(R.id.tv_brand2);
         tv_shell_material = (TextView) findViewById(R.id.tv_shell_material);
         tv_battery_info = (TextView) findViewById(R.id.tv_battery_info);
@@ -258,6 +260,15 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
 
         // comment count
         tv_comment_count.setText("查看评论（" + entity.getCommentsCount() + "）");
+        tv_comment_count.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(GoodsDetail.this, GoodComment.class);
+                i.putExtra("commentsCount", entity.getCommentsCount());
+                i.putExtra("goodId", goodsId);
+                startActivity(i);
+            }
+        });
 
         factory = entity.getFactory();
 
@@ -291,6 +302,16 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         if (opening_requirement != null) {
             tv_opening_requirement.setText(opening_requirement);
         }
+
+        tv_require_material.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(GoodsDetail.this, RequireMaterial.class);
+                i.putExtra("json_pra", gson.toJson(paychannelinfo.getRequireMaterial_pra()));
+                i.putExtra("json_pub", gson.toJson(paychannelinfo.getRequireMaterial_pub()));
+                startActivity(i);
+            }
+        });
 
         //area
         List<String> areas = paychannelinfo.getSupportAreas();
@@ -337,7 +358,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
                 StandardRateEntity rate = standard_rates.get(i);
                 List<String> list = new ArrayList<String>();
                 list.add(rate.getName());
-                list.add("" + rate.getStandard_rate());
+                list.add("" + rate.getStandard_rate() + "‰");
                 list.add(rate.getDescription());
                 TableRow tr = ViewHelper.tableRow(this, list, R.color.tmc, 12, isLast);
                 tl_standard_rates.addView(tr,
@@ -371,7 +392,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
                 TDateEntity rate = tDates.get(i);
                 List<String> list = new ArrayList<String>();
                 list.add(rate.getName());
-                list.add("" + rate.getService_rate());
+                list.add("" + rate.getService_rate() + "‰");
                 list.add(rate.getDescription());
                 TableRow tr = ViewHelper.tableRow(this, list, R.color.tmc, 12, isLast);
                 tl_tDates.addView(tr,
@@ -406,7 +427,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
                 OtherRateEntity rate = other_rate.get(i);
                 List<String> list = new ArrayList<String>();
                 list.add(rate.getTrade_value());
-                list.add("" + rate.getTerminal_rate());
+                list.add("" + rate.getTerminal_rate() + "‰");
                 list.add(rate.getDescription());
                 TableRow tr = ViewHelper.tableRow(this, list, R.color.tmc, 12, isLast);
                 tl_other_rate.addView(tr,

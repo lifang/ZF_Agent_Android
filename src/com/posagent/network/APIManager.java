@@ -44,6 +44,7 @@ public class APIManager {
     public static final String UrlGoodsList = BaseUrl + "/good/list";
     public static final String UrlGoodsDetail = BaseUrl + "/good/goodinfo";
     public static final String UrlPayChannelInfo = BaseUrl + "/paychannel/info";
+    public static final String UrlCommentList = BaseUrl + "/comment/list";
     public static final String UrlCreateOrder = BaseUrl + "/order/agent";
     public static final String UrlAddressList = BaseUrl + "/agents/getAddressList";
     public static final String UrlCreateAddress = BaseUrl + "/agents/insertAddress";
@@ -347,6 +348,11 @@ public class APIManager {
     public void onEventBackgroundThread(Events.PayChannelInfoEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.PayChannelInfoCompleteEvent();
         CommonRequest(event, completeEvent, UrlPayChannelInfo);
+    }
+
+    public void onEventBackgroundThread(Events.GoodsCommentListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.GoodsCommentListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlCommentList);
     }
 
     public void onEventBackgroundThread(Events.CreateOrderEvent event) {

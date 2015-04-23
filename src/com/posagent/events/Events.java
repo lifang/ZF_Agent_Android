@@ -9,6 +9,7 @@ import com.example.zf_android.entity.ChannelTradeEntity;
 import com.example.zf_android.entity.ExchangeEntity;
 import com.example.zf_android.entity.MessageEntity;
 import com.example.zf_android.entity.OrderEntity;
+import com.example.zf_android.entity.PicEntity;
 import com.example.zf_android.entity.PosEntity;
 import com.example.zf_android.entity.PrepareEntity;
 import com.example.zf_android.entity.ProfitEntity;
@@ -1053,6 +1054,29 @@ public class Events {
 
         public void setEntity(ExchangeEntity entity) {
             this.entity = entity;
+        }
+    }
+
+    //banner
+    public static class BannerDataEvent extends CommonRequestEvent {}
+    public static class BannerDataCompleteEvent extends CommonCompleteEvent {
+        private List<PicEntity> list = new ArrayList<PicEntity>();
+        public List<PicEntity> getList() {
+            if (list.size() < 1) {
+                String result = null;
+                try {
+                    result = getResult().getString("list");
+                    list = (new Gson()).fromJson(result,
+                            new TypeToken<List<PicEntity>>() {}.getType());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            return list;
+        }
+        public void setList(List<PicEntity> list) {
+            this.list = list;
         }
     }
 }

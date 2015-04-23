@@ -122,6 +122,9 @@ public class APIManager {
     public static final String UrlExchangeInfo = BaseUrl + "/exchangegood/info";
     public static final String UrlExchangeAdd = BaseUrl + "/exchangegood/add";
 
+    //banner
+    public static final String UrlBannerData = BaseUrl + "/index/sysshufflingfigure";
+
 
     /** Convenience singleton for apps using a process-wide EventBus instance. */
     public static APIManager getDefault() {
@@ -722,6 +725,12 @@ public class APIManager {
     public void onEventBackgroundThread(Events.AddOpeningApplyEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.AddOpeningApplyCompleteEvent();
         CommonRequest(event, completeEvent, UrlAddOpeningApply);
+    }
+
+    //banner
+    public void onEventBackgroundThread(Events.BannerDataEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.BannerDataCompleteEvent();
+        CommonRequest(event, completeEvent, UrlBannerData);
     }
 
 

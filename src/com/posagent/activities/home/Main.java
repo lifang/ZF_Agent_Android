@@ -6,31 +6,28 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-import com.example.zf_android.Config;
 import com.example.zf_android.R;
 import com.example.zf_android.activity.AllProduct;
+import com.example.zf_android.entity.PicEntity;
+import com.example.zf_android.trade.CitySelectActivity;
+import com.example.zf_android.trade.entity.City;
+import com.example.zf_android.trade.entity.Province;
+import com.posagent.activities.BaseActivity;
+import com.posagent.activities.aftersale.AfterSaleGridActivity;
 import com.posagent.activities.order.OrderList;
 import com.posagent.activities.stock.StockList;
 import com.posagent.activities.terminal.Terminal;
 import com.posagent.activities.terminal.TerminalOpenApply;
-import com.posagent.activities.user.UserList;
-import com.example.zf_android.entity.PicEntity;
-import com.posagent.activities.aftersale.AfterSaleGridActivity;
-import com.example.zf_android.trade.CitySelectActivity;
 import com.posagent.activities.trade.TradeFlowActivity;
-import com.example.zf_android.trade.entity.City;
-import com.example.zf_android.trade.entity.Province;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.posagent.activities.BaseActivity;
+import com.posagent.activities.user.UserList;
+import com.posagent.events.Events;
 import com.posagent.fragments.HMSlideFragment;
+import com.posagent.utils.JsonParams;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 import static com.example.zf_android.trade.Constants.CityIntent.CITY_ID;
 import static com.example.zf_android.trade.Constants.CityIntent.CITY_NAME;
@@ -49,6 +46,9 @@ public class Main extends BaseActivity implements OnClickListener{
     private City city;
     public static final int REQUEST_CITY = 1;
     public static final int REQUEST_CITY_WHEEL = 2;
+
+
+    private List<PicEntity> banners;
 
 
     @Override
@@ -74,8 +74,6 @@ public class Main extends BaseActivity implements OnClickListener{
 
         focusTabAtIndex(0);
 
-        initSlider();
-
 //        Intent i = new Intent(Main.this, LoginActivity.class);
 //        startActivity(i);
     }
@@ -84,6 +82,24 @@ public class Main extends BaseActivity implements OnClickListener{
         citySelect = findViewById(R.id.titleback_linear_back);
         cityTextView = (TextView) findViewById(R.id.tv_city);
         citySelect.setOnClickListener(this);
+
+        getData();
+    }
+
+    private void getData() {
+        //banner slider
+        JsonParams params = new JsonParams();
+        String strParams = params.toString();
+        Events.CommonRequestEvent event = new Events.BannerDataEvent();
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
+    }
+
+
+    // events
+    public void onEventMainThread(Events.BannerDataCompleteEvent event) {
+        banners = event.getList();
+        initSlider();
     }
 
     @Override
@@ -123,28 +139,7 @@ public class Main extends BaseActivity implements OnClickListener{
 
     private void initSlider() {
         HMSlideFragment slideFragment = (HMSlideFragment) getFragmentManager().findFragmentById(R.id.headlines_fragment);
-
-        String jsonData = "{'code':1,'message':'success','result':[{'id':5,'picture_url':'http://file.youboy.com/a/142/67/57/6/660666.jpg','website_url':'http://baidu.com'},{'id':4,'picture_url':'http://img1.100ye.com/img1/4/1181/892/10772392/msgpic/61260332.jpg','website_url':'http://baidu.com'},{'id':3,'picture_url':'http://image5.huangye88.com/2013/01/08/db4ed2c6a01ec5ef.jpg','website_url':'http://baidu.com'},{'id':2,'picture_url':'http://file.youboy.com/a/149/94/17/5/669625.jpg','website_url':'http://baidu.com'}]}";
-
-        Gson gson = new Gson();
-
-        JSONObject jsonobject = null;
-        String code = null;
-        try {
-            jsonobject = new JSONObject(jsonData);
-            code = jsonobject.getString("code");
-            int a =jsonobject.getInt("code");
-            if(a== Config.CODE){
-                String res =jsonobject.getString("result");
-                ArrayList<PicEntity> myList = gson.fromJson(res, new TypeToken<List<PicEntity>>() {
-                }.getType());
-
-                slideFragment.feedData(myList);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-
-        }
+        slideFragment.feedData(banners);
     }
 
 }

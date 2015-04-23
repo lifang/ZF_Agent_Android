@@ -26,6 +26,8 @@ import com.example.zf_android.entity.PicEntity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by holin on 4/1/15.
@@ -36,17 +38,23 @@ public class HMSlideFragment extends Fragment {
     private Context context;
     private String jsonData;
 
-    private ArrayList<String> mal = new ArrayList<String>();
-    private ArrayList<PicEntity> myList = new ArrayList<PicEntity>();
+    private List<String> mal = new ArrayList<String>();
+    private List<PicEntity> myList = new ArrayList<PicEntity>();
     private ViewPager viewPager;
     private MyAdapter adapter ;
     private ImageView[] indicator_imgs  ;//存放引到图片数组
     private View item ;
     private LayoutInflater inflater;
     private ImageView image;
-    private ArrayList<String> ma = new ArrayList<String>();
-    List<View> list = new ArrayList<View>();
+    private List<String> ma = new ArrayList<String>();
+    private List<View> list = new ArrayList<View>();
     private int index_ima;
+
+
+    Timer timer;
+    int page = 1;
+
+
 
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
@@ -110,9 +118,11 @@ public class HMSlideFragment extends Fragment {
         return mainContainer;
     }
 
-    public void feedData(ArrayList<PicEntity> list) {
+    public void feedData(List<PicEntity> list) {
         myList= list;
         handler.sendEmptyMessage(0);
+
+        pageSwitcher(2);
     }
 
     private void initIndicator(){
@@ -256,5 +266,32 @@ public class HMSlideFragment extends Fragment {
 
     private void setCurrentDot(ImageView _imageView) {
         _imageView.setBackgroundDrawable(dotWithColor(Color.argb(0xff, 0xff, 0xff, 0xff)));
+    }
+
+
+
+    //switcher
+    public void pageSwitcher(int seconds) {
+        timer = new Timer(); // At this line a new Thread will be created
+        timer.scheduleAtFixedRate(new RemindTask(), 0, seconds * 1000); // delay
+    }
+
+    // this is an inner class...
+    class RemindTask extends TimerTask {
+
+        @Override
+        public void run() {
+
+            getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    page++;
+                    if (page > myList.size()) { // In my case the number of pages are 5
+                        page = 0;
+                    }
+                    viewPager.setCurrentItem(page);
+                }
+            });
+
+        }
     }
 }

@@ -15,14 +15,6 @@ public class GoodinfoEntity {
 	private int retail_price;
     private int purchase_price;
 
-    public int getPurchase_price() {
-        return purchase_price;
-    }
-
-    public void setPurchase_price(int purchase_price) {
-        this.purchase_price = purchase_price;
-    }
-
     //     "battery_info": "电池信息2",
 	private String battery_info;
 //     "lease_price": 111,
@@ -205,5 +197,13 @@ public class GoodinfoEntity {
 	public void setModel_number(String model_number) {
 		Model_number = model_number;
 	}
-	
+
+    public int getPurchase_price() {
+        return purchase_price;
+    }
+
+    public void setPurchase_price(int purchase_price) {
+        this.purchase_price = purchase_price;
+    }
+
 }

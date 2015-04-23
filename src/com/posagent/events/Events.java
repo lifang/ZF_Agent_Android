@@ -7,8 +7,10 @@ import com.example.zf_android.entity.ChanelEntitiy;
 import com.example.zf_android.entity.ChannelEntity;
 import com.example.zf_android.entity.ChannelTradeEntity;
 import com.example.zf_android.entity.ExchangeEntity;
+import com.example.zf_android.entity.GoodsEntity;
 import com.example.zf_android.entity.MessageEntity;
 import com.example.zf_android.entity.OrderEntity;
+import com.example.zf_android.entity.PayChannelInfoEntity;
 import com.example.zf_android.entity.PicEntity;
 import com.example.zf_android.entity.PosEntity;
 import com.example.zf_android.entity.PrepareEntity;
@@ -208,7 +210,36 @@ public class Events {
     }
 
     public static class GoodsDetailEvent extends CommonRequestEvent {}
-    public static class GoodsDetailCompleteEvent extends CommonCompleteEvent {}
+    public static class GoodsDetailCompleteEvent extends CommonCompleteEvent {
+        private GoodsEntity entity;
+
+        public GoodsEntity getEntity() {
+            String result = null;
+            result = getResult().toString();
+            entity = (new Gson()).fromJson(result, GoodsEntity.class);
+            return entity;
+        }
+
+        public void setEntity(GoodsEntity entity) {
+            this.entity = entity;
+        }
+    }
+
+    public static class PayChannelInfoEvent extends CommonRequestEvent {}
+    public static class PayChannelInfoCompleteEvent extends CommonCompleteEvent {
+        private PayChannelInfoEntity entity;
+
+        public PayChannelInfoEntity getEntity() {
+            String result = null;
+            result = getResult().toString();
+            entity = (new Gson()).fromJson(result, PayChannelInfoEntity.class);
+            return entity;
+        }
+
+        public void setEntity(PayChannelInfoEntity entity) {
+            this.entity = entity;
+        }
+    }
 
     // find password
     public static class SendEmailVerificationCodeEvent extends CommonRequestEvent {}

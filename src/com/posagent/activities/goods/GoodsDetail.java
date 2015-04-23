@@ -16,8 +16,13 @@ import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.FactoryEntity;
 import com.example.zf_android.entity.GoodinfoEntity;
+import com.example.zf_android.entity.GoodsEntity;
+import com.example.zf_android.entity.OtherRateEntity;
+import com.example.zf_android.entity.PayChannelEntity;
+import com.example.zf_android.entity.PayChannelInfoEntity;
 import com.example.zf_android.entity.PicEntity;
-import com.google.gson.Gson;
+import com.example.zf_android.entity.StandardRateEntity;
+import com.example.zf_android.entity.TDateEntity;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.fragments.HMSlideFragment;
@@ -25,10 +30,6 @@ import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
 import com.posagent.utils.ViewHelper;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,14 +56,15 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
 
     Button btn_confirm_order;
 
-    JSONObject paychannelinfo;
-    JSONArray payChannelList;
+
     FactoryEntity factory;
     GoodinfoEntity goodinfo;
-    JSONArray goodPics;
+    PayChannelInfoEntity paychannelinfo;
     int commentCount;
     int orderType = Constants.Goods.OrderTypePigou;
     String goodFaceUrl;
+
+    private GoodsEntity entity;
 
     int goodsId;
 
@@ -155,9 +157,13 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
 
     private void getData() {
         JsonParams params = new JsonParams();
-        params.put("goodId", goodsId);
-        // Fixme
-//        params.put("goodId", 1);
+        //Fixme
+        params.put("agentId", 1);
+        params.put("goodId", 110);
+//        params.put("goodId", goodsId);
+        params.put("cityId", 0);
+//        params.put("type", goodsId);
+
         String strParams = params.toString();
         Events.GoodsDetailEvent event = new Events.GoodsDetailEvent();
         event.setParams(strParams);
@@ -167,69 +173,35 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
     // events
     public void onEventMainThread(Events.GoodsDetailCompleteEvent event) {
         if (event.getSuccess()) {
-            JSONObject result = event.getResult();
-
-            Log.d(TAG, String.valueOf(result));
-
-            Gson gson = new Gson();
-
-            try {
-                paychannelinfo = result.getJSONObject("paychannelinfo");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                commentCount = result.getInt("commentsCount");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                payChannelList = result.getJSONArray("payChannelList");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            try {
-                factory = gson.fromJson(result.getString("factory"), FactoryEntity.class);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            try {
-                goodinfo = gson.fromJson(result.getString("goodinfo"), GoodinfoEntity.class);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            try {
-                goodPics = result.getJSONArray("goodPics");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-
+            entity = event.getEntity();
             updateInfo();
+        }
+    }
+
+    public void onEventMainThread(Events.PayChannelInfoCompleteEvent event) {
+        if (event.getSuccess()) {
+            paychannelinfo = event.getEntity();
+            Log.d(TAG, "updateChannelInfo");
+            updateChannelInfo();
         }
     }
 
     private void updateInfo() {
         // slider
         ArrayList<PicEntity> list = new ArrayList<PicEntity>();
-        int len = goodPics.length();
+        int len = entity.getGoodPics().size();
         for(int i=0;i < len; i++) {
-            try {
-                String url = goodPics.getString(i);
-                if (goodFaceUrl == null) {
-                    goodFaceUrl = url;
-                }
-                PicEntity picEntity = new PicEntity();
-                picEntity.setPicture_url(url);
-                list.add(picEntity);
-            } catch (JSONException e) {
-                e.printStackTrace();
+            String url = entity.getGoodPics().get(i);
+            if (goodFaceUrl == null) {
+                goodFaceUrl = url;
             }
+            PicEntity picEntity = new PicEntity();
+            picEntity.setPicture_url(url);
+            list.add(picEntity);
         }
         initSlider(list);
 
+        goodinfo = entity.getGoodinfo();
         //goodinfo
         tvTitle.setText(goodinfo.getTitle());
         tvSubtitle.setText(goodinfo.getSecond_title());
@@ -246,32 +218,37 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         tv_encrypt_card_way.setText(goodinfo.getEncrypt_card_way());
         tv_goods_desc.setText(goodinfo.getDescription());
 
-        //Fixme
-        tv_terminal_kind.setText("fixme");
 
+        List<PayChannelEntity> payChannelList = entity.getPayChannelList();
 
         //pay channel list
         if (payChannelList != null) {
             ll_pay_channel.removeAllViews();
-            len = payChannelList.length();
-            for (int i = 0; i < len; i++) {
-                try {
-                    JSONObject channel = payChannelList.getJSONObject(i);
-                    TextView tv = new TextView(this);
-                    tv.setText(channel.getString("name"));
-                    tv.setTag(channel);
-                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.WRAP_CONTENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT);
-                    lp.setMargins(0, 0, 5, 0);
-                    tv.setLayoutParams(lp);
 
+            for (final PayChannelEntity channel: payChannelList) {
 
-                    tv.setTextSize(10);
-                    ll_pay_channel.addView(tv);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                final PayChannelEntity mychannel = channel;
+
+                TextView tv = new TextView(this);
+                tv.setText(channel.getName());
+                tv.setTag(channel);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                lp.setMargins(0, 0, 10, 0);
+                tv.setLayoutParams(lp);
+                tv.setBackgroundResource(R.drawable.bg_shape);
+                tv.setPadding(5, 5, 5, 5);
+                tv.setTextSize(10);
+                ll_pay_channel.addView(tv);
+
+                tv.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        changePayChannel(channel);
+                    }
+                });
+
             }
         }
 
@@ -280,187 +257,167 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         updateChannelInfo();
 
         // comment count
-        tv_comment_count.setText("查看评论（" + commentCount + "）");
+        tv_comment_count.setText("查看评论（" + entity.getCommentsCount() + "）");
 
+        factory = entity.getFactory();
+
+        updateFactory();
+    }
+
+    private void updateFactory() {
         //factory
         Picasso.with(this.getApplicationContext()).load(factory.getLogo_file_path())
                 .into(iv_factory_logo);
         tv_factory_url.setText(factory.getWebsite_url());
         tv_factory_desc.setText(factory.getDescription());
-
     }
 
     private void updateChannelInfo() {
+
+        paychannelinfo = entity.getPaychannelinfo();
 
         if (paychannelinfo == null) {
             return;
         }
 
-        try {
-            boolean support_cancel_flag = paychannelinfo.getBoolean("support_cancel_flag");
-            if (support_cancel_flag) {
-                tv_support_cancel.setText("支持");
-            } else {
-                tv_support_cancel.setText("不支持");
+        boolean support_cancel_flag = paychannelinfo.isSupport_cancel_flag();
+        if (support_cancel_flag) {
+            tv_support_cancel.setText("支持");
+        } else {
+            tv_support_cancel.setText("不支持");
+        }
+
+        String opening_requirement = paychannelinfo.getOpening_requirement();
+        if (opening_requirement != null) {
+            tv_opening_requirement.setText(opening_requirement);
+        }
+
+        //area
+        List<String> areas = paychannelinfo.getSupportAreas();
+        if (areas != null) {
+            ll_support_areas.removeAllViews();
+            for (String area: areas) {
+                TextView tv = new TextView(this);
+                tv.setText(area);
+                tv.setTextColor(getResources().getColor(R.color.tmc));
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                lp.setMargins(0, 0, 5, 0);
+                tv.setLayoutParams(lp);
+
+
+                tv.setTextSize(12);
+                ll_support_areas.addView(tv);
             }
+        }
 
-            String opening_requirement = paychannelinfo.getString("opening_requirement");
-            if (opening_requirement != null) {
-                tv_opening_requirement.setText(opening_requirement);
-            }
-
-            //area
-            JSONArray areas = paychannelinfo.getJSONArray("supportArea");
-            if (areas != null) {
-                ll_support_areas.removeAllViews();
-                int len = areas.length();
-                for (int i = 0; i < len; i++) {
-                    try {
-                        String area = areas.getString(i);
-                        TextView tv = new TextView(this);
-                        tv.setText(area);
-                        tv.setTextColor(getResources().getColor(R.color.tmc));
-                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.WRAP_CONTENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT);
-                        lp.setMargins(0, 0, 5, 0);
-                        tv.setLayoutParams(lp);
-
-
-                        tv.setTextSize(12);
-                        ll_support_areas.addView(tv);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+        //standard rate
+        List<StandardRateEntity> standard_rates = paychannelinfo.getStandard_rates();
+        if (standard_rates != null) {
+            tl_standard_rates.removeAllViews();
+            int len = standard_rates.size();
+            boolean isLast = false;
+            for (int i = 0; i < len; i++) {
+                if (i == len - 1) {
+                    isLast = true;
                 }
-            }
 
-            //standard rate
-            JSONArray standard_rates = paychannelinfo.getJSONArray("standard_rates");
-            if (standard_rates != null) {
-                tl_standard_rates.removeAllViews();
-                int len = standard_rates.length();
-                boolean isLast = false;
-                for (int i = 0; i < len; i++) {
-                    try {
-
-                        if (i == len - 1) {
-                            isLast = true;
-                        }
-
-                        if (i == 0) {
-                            List<String> list = new ArrayList<String>();
-                            list.add("商户类型");
-                            list.add("费率");
-                            list.add("说明");
-                            TableRow tr = ViewHelper.tableRow(this, list, R.color.text292929, 12, isLast);
-                            tl_standard_rates.addView(tr,
-                                    new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
-                                            TableLayout.LayoutParams.WRAP_CONTENT));
-                        }
-
-                        JSONObject rate = standard_rates.getJSONObject(i);
-                        List<String> list = new ArrayList<String>();
-                        list.add(rate.getString("name"));
-                        list.add(rate.getString("standard_rate"));
-                        list.add(rate.getString("description"));
-                        TableRow tr = ViewHelper.tableRow(this, list, R.color.tmc, 12, isLast);
-                        tl_standard_rates.addView(tr,
-                                new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
-                                        TableLayout.LayoutParams.WRAP_CONTENT));
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                if (i == 0) {
+                    List<String> list = new ArrayList<String>();
+                    list.add("商户类型");
+                    list.add("费率");
+                    list.add("说明");
+                    TableRow tr = ViewHelper.tableRow(this, list, R.color.text292929, 12, isLast);
+                    tl_standard_rates.addView(tr,
+                            new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
+                                    TableLayout.LayoutParams.WRAP_CONTENT));
                 }
+
+                StandardRateEntity rate = standard_rates.get(i);
+                List<String> list = new ArrayList<String>();
+                list.add(rate.getName());
+                list.add("" + rate.getStandard_rate());
+                list.add(rate.getDescription());
+                TableRow tr = ViewHelper.tableRow(this, list, R.color.tmc, 12, isLast);
+                tl_standard_rates.addView(tr,
+                        new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
+                                TableLayout.LayoutParams.WRAP_CONTENT));
             }
+        }
 
-            //tl_tDates rate
-            JSONArray tDates = paychannelinfo.getJSONArray("tDates");
-            if (tDates != null) {
-                tl_tDates.removeAllViews();
-                int len = tDates.length();
-                boolean isLast = false;
-                for (int i = 0; i < len; i++) {
-                    try {
-
-                        if (i == len - 1) {
-                            isLast = true;
-                        }
-
-                        if (i == 0) {
-                            List<String> list = new ArrayList<String>();
-                            list.add("结算周期");
-                            list.add("费率");
-                            list.add("说明");
-                            TableRow tr = ViewHelper.tableRow(this, list, R.color.text292929, 12, isLast);
-                            tl_tDates.addView(tr,
-                                    new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
-                                            TableLayout.LayoutParams.WRAP_CONTENT));
-                        }
-
-                        JSONObject rate = tDates.getJSONObject(i);
-                        List<String> list = new ArrayList<String>();
-                        list.add(rate.getString("name"));
-                        list.add(rate.getString("service_rate"));
-                        list.add(rate.getString("description"));
-                        TableRow tr = ViewHelper.tableRow(this, list, R.color.tmc, 12, isLast);
-                        tl_tDates.addView(tr,
-                                new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
-                                        TableLayout.LayoutParams.WRAP_CONTENT));
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+        //tl_tDates rate
+        List<TDateEntity> tDates = paychannelinfo.gettDates();
+        if (tDates != null) {
+            tl_tDates.removeAllViews();
+            int len = tDates.size();
+            boolean isLast = false;
+            for (int i = 0; i < len; i++) {
+                if (i == len - 1) {
+                    isLast = true;
                 }
-            }
 
-
-            //tl_other_rate rate
-            JSONArray other_rate = paychannelinfo.getJSONArray("other_rate");
-            if (other_rate != null) {
-                tl_other_rate.removeAllViews();
-                int len = other_rate.length();
-                boolean isLast = false;
-                for (int i = 0; i < len; i++) {
-                    try {
-
-                        if (i == len - 1) {
-                            isLast = true;
-                        }
-
-                        if (i == 0) {
-                            List<String> list = new ArrayList<String>();
-                            list.add("交易类型");
-                            list.add("费率");
-                            list.add("说明");
-                            TableRow tr = ViewHelper.tableRow(this, list, R.color.text292929, 12, isLast);
-                            tl_other_rate.addView(tr,
-                                    new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
-                                            TableLayout.LayoutParams.WRAP_CONTENT));
-                        }
-
-                        JSONObject rate = other_rate.getJSONObject(i);
-                        List<String> list = new ArrayList<String>();
-                        list.add(rate.getString("trade_value"));
-                        list.add(rate.getString("terminal_rate"));
-                        list.add(rate.getString("description"));
-                        TableRow tr = ViewHelper.tableRow(this, list, R.color.tmc, 12, isLast);
-                        tl_other_rate.addView(tr,
-                                new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
-                                        TableLayout.LayoutParams.WRAP_CONTENT));
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                if (i == 0) {
+                    List<String> list = new ArrayList<String>();
+                    list.add("结算周期");
+                    list.add("费率");
+                    list.add("说明");
+                    TableRow tr = ViewHelper.tableRow(this, list, R.color.text292929, 12, isLast);
+                    tl_tDates.addView(tr,
+                            new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
+                                    TableLayout.LayoutParams.WRAP_CONTENT));
                 }
+
+                TDateEntity rate = tDates.get(i);
+                List<String> list = new ArrayList<String>();
+                list.add(rate.getName());
+                list.add("" + rate.getService_rate());
+                list.add(rate.getDescription());
+                TableRow tr = ViewHelper.tableRow(this, list, R.color.tmc, 12, isLast);
+                tl_tDates.addView(tr,
+                        new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
+                                TableLayout.LayoutParams.WRAP_CONTENT));
             }
+        }
 
 
+        //tl_other_rate rate
+        List<OtherRateEntity> other_rate = paychannelinfo.getOther_rates();
+        if (other_rate != null) {
+            tl_other_rate.removeAllViews();
+            int len = other_rate.size();
+            boolean isLast = false;
+            for (int i = 0; i < len; i++) {
+                if (i == len - 1) {
+                    isLast = true;
+                }
 
+                if (i == 0) {
+                    List<String> list = new ArrayList<String>();
+                    list.add("交易类型");
+                    list.add("费率");
+                    list.add("说明");
+                    TableRow tr = ViewHelper.tableRow(this, list, R.color.text292929, 12, isLast);
+                    tl_other_rate.addView(tr,
+                            new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
+                                    TableLayout.LayoutParams.WRAP_CONTENT));
+                }
 
-        } catch (JSONException e) {
-            e.printStackTrace();
+                OtherRateEntity rate = other_rate.get(i);
+                List<String> list = new ArrayList<String>();
+                list.add(rate.getTrade_value());
+                list.add("" + rate.getTerminal_rate());
+                list.add(rate.getDescription());
+                TableRow tr = ViewHelper.tableRow(this, list, R.color.tmc, 12, isLast);
+                tl_other_rate.addView(tr,
+                        new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
+                                TableLayout.LayoutParams.WRAP_CONTENT));
+            }
+        }
+
+        if (null != paychannelinfo.getPcfactory()) {
+            factory = paychannelinfo.getPcfactory();
+            updateFactory();
         }
 
     }
@@ -469,5 +426,14 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
     private void initSlider(ArrayList<PicEntity> list) {
         HMSlideFragment slideFragment = (HMSlideFragment) getFragmentManager().findFragmentById(R.id.headlines_fragment);
         slideFragment.feedData(list);
+    }
+
+    private void changePayChannel(PayChannelEntity channel) {
+        JsonParams params = new JsonParams();
+        params.put("pcid", channel.getId());
+        String strParams = params.toString();
+        Events.CommonRequestEvent event = new Events.PayChannelInfoEvent();
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
     }
 }

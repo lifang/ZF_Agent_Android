@@ -282,6 +282,10 @@ public class HMSlideFragment extends Fragment {
         @Override
         public void run() {
 
+            if (null == getActivity()) {
+                return;
+            }
+
             getActivity().runOnUiThread(new Runnable() {
                 public void run() {
                     page++;

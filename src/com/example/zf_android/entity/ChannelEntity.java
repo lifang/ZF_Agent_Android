@@ -12,6 +12,7 @@ import java.util.List;
 public class ChannelEntity extends BaseEntity {
 
     private int id;
+    private int opening_cost;
     private String name;
 
     private List<BillingEntity> billings;
@@ -47,6 +48,14 @@ public class ChannelEntity extends BaseEntity {
 
     public void setTrades(List<ChannelTradeEntity> trades) {
         this.trades = trades;
+    }
+
+    public int getOpening_cost() {
+        return opening_cost;
+    }
+
+    public void setOpening_cost(int opening_cost) {
+        this.opening_cost = opening_cost;
     }
 
     @Override

@@ -193,6 +193,9 @@ public class MyApplication extends Application {
 
     public void onEventMainThread(Events.ChannelTradeListCompleteEvent event) {
         List<ChannelTradeEntity> list = event.getList();
+        if (list.size() < 1) {
+            return;
+        }
         ChannelTradeEntity trade = list.get(0);
         for (ChannelEntity channel: getChannels()) {
             if (channel.getName().equals(trade.getName())) {

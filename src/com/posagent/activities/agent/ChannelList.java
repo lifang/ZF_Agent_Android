@@ -11,6 +11,8 @@ import com.example.zf_android.entity.ChannelEntity;
 import com.posagent.MyApplication;
 import com.posagent.activities.BaseListActivity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,9 +23,10 @@ import java.util.Map;
 public class ChannelList extends BaseListActivity {
 
     private String selectAgentName;
-    private List<ChannelEntity> myList;
+    private List<ChannelEntity> myList = new ArrayList<ChannelEntity>();
 
-    private String filteredIds;
+    private String filtedIds;
+    private List<String> listIds = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +34,11 @@ public class ChannelList extends BaseListActivity {
         setContentView(R.layout.activity_simple_list);
         new TitleMenuUtil(this, "选择支付通道").show();
 
-        filteredIds = getIntent().getStringExtra("filteredIds");
+        filtedIds = getIntent().getStringExtra("filtedIds");
+
+        if (null != filtedIds) {
+            listIds = new ArrayList<String>(Arrays.asList(filtedIds.split(",")));
+        }
 
         getData();
 
@@ -49,7 +56,11 @@ public class ChannelList extends BaseListActivity {
 
     private void getData() {
 
-        myList = ((MyApplication)getApplication()).getChannels();
+        for(ChannelEntity channel: ((MyApplication)getApplication()).getChannels()) {
+            if (!listIds.contains("" + channel.getId())) {
+               myList.add(channel);
+            }
+        }
 
         reloadList();
     }

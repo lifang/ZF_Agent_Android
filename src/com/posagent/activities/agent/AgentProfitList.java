@@ -1,6 +1,8 @@
 package com.posagent.activities.agent;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
@@ -72,6 +75,9 @@ public class AgentProfitList extends BaseActivity implements IXListViewListener 
                     }
                     onRefresh_number = true;
                     myAdapter.notifyDataSetChanged();
+
+                    updateFiltedIds();
+
                     break;
             }
         }
@@ -210,6 +216,29 @@ public class AgentProfitList extends BaseActivity implements IXListViewListener 
     }
 
 
+    public void deleteProfit(final ProfitEntity profit) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(AgentProfitList.this);
+        builder.setMessage("确定删除吗？");
+        builder.setTitle("请确认");
+
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                sendDelete(profit);
+                Toast.makeText(AgentProfitList.this, "正在删除...", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.create().show();
+
+    }
+
     public void changeProfit(TextView tv, ProfitEntity profit, ProfitTradeEntity trade) {
 
         tvCurrent = tv;
@@ -251,6 +280,35 @@ public class AgentProfitList extends BaseActivity implements IXListViewListener 
         EventBus.getDefault().post(event);
 
 
+    }
+
+
+
+    private void sendDelete(ProfitEntity profit) {
+
+        if (profit.getId() != null) {
+            JsonParams params = new JsonParams();
+            //Fixme
+            params.put("agentsId", 1);
+            params.put("sonAgentsId", sonAgentId);
+            params.put("payChannelId", profit.getChannel().getId());
+
+            String strParams = params.toString();
+            Events.CommonRequestEvent event = new Events.DeleteProfitEvent();
+            event.setParams(strParams);
+            EventBus.getDefault().post(event);
+        }
+
+        myList.remove(profit);
+        handler.sendEmptyMessage(0);
+    }
+
+    private void updateFiltedIds() {
+        List<String> list = new ArrayList<String>();
+        for (ProfitEntity profit: myList) {
+            list.add("" + profit.getChannel().getId());
+        }
+        filtedIds = StringUtil.join(list, ",");
     }
 
 

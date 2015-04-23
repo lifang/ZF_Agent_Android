@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -56,6 +57,15 @@ public class ProfitAdapter extends BaseAdapter{
             //init
 
             ChannelEntity channel = entity.getChannel();
+            holder.iv_delete = (ImageView)convertView.findViewById(R.id.iv_delete);
+            holder.iv_delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((AgentProfitList)context).deleteProfit(entity);
+
+                }
+            });
+
             holder.tv_channel = (TextView)convertView.findViewById(R.id.tv_channel);
             holder.tv_channel.setText("支付通道：" + channel.getName());
 
@@ -100,6 +110,7 @@ public class ProfitAdapter extends BaseAdapter{
     public final class ViewHolder {
         public TextView tv_channel;
         public LinearLayout ll_trade_container;
+        public ImageView iv_delete;
     }
 
     public ProfitTradeEntity getProfitTradeEntity(ProfitEntity profit, ChannelTradeEntity channelTradeEntity) {

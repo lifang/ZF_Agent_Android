@@ -10,6 +10,6 @@
 
     <stroke
         android:width="2px"
-        android:color="@color/bgtitle" />
+        android:color="@color/tmc" />
 
 </shape>

@@ -218,6 +218,11 @@ public class BaseActivity extends Activity implements View.OnClickListener {
                 "刷新太频繁",
                 Toast.LENGTH_SHORT).show();
     }
+    public void onEventMainThread(Events.NetworkLoading event) {
+//        Toast.makeText(getApplicationContext(), "加载中...", Toast.LENGTH_SHORT).show();
+    }
+
+
 
     //helper
     protected void toast(String msg) {

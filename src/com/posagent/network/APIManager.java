@@ -146,6 +146,9 @@ public class APIManager {
                                Events.CommonCompleteEvent completeEvent,
                                String url)
     {
+
+        EventBus.getDefault().post(new Events.NetworkLoading());
+
         String params = event.getParams();
         RequestBody body = RequestBody.create(JSON, params);
         Log.d(TAG, params);
@@ -154,6 +157,7 @@ public class APIManager {
                 .url(url)
                 .post(body)
                 .build();
+
 
         Response response = null;
         try {

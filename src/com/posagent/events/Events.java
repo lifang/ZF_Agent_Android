@@ -120,6 +120,9 @@ public class Events {
         }
     }
 
+    public static class NetworkLoading {
+        public NetworkLoading() {}
+    }
     public static class NoConnectEvent {
         public NoConnectEvent() {}
     }

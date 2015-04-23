@@ -79,6 +79,11 @@ public class MessageList extends BaseActivity implements IXListViewListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message_list);
+
+        setupCommonViews();
+
+        focusTabAtIndex(2);
+
         initView();
         getData();
     }

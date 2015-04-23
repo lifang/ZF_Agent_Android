@@ -61,6 +61,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
     FactoryEntity factory;
     GoodinfoEntity goodinfo;
     PayChannelInfoEntity paychannelinfo;
+    List<PayChannelEntity> payChannelList;
     int commentCount;
     int orderType = Constants.Goods.OrderTypePigou;
     String goodFaceUrl;
@@ -68,6 +69,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
     private GoodsEntity entity;
 
     int goodsId;
+    int payChannelId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,8 +146,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
 
             i2.putExtra("faceUrl", goodFaceUrl);
             i2.putExtra("orderType", orderType);
-            //Fixme
-            i2.putExtra("paychannelId", 11);
+            i2.putExtra("paychannelId", payChannelId);
             i2.putExtra("goodId", goodinfo.getId());
             startActivity(i2);
 
@@ -161,8 +162,8 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         JsonParams params = new JsonParams();
         //Fixme
         params.put("agentId", 1);
-        params.put("goodId", 110);
-//        params.put("goodId", goodsId);
+//        params.put("goodId", 110);
+        params.put("goodId", goodsId);
         params.put("cityId", 0);
 //        params.put("type", goodsId);
 
@@ -221,40 +222,13 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         tv_goods_desc.setText(goodinfo.getDescription());
 
 
-        List<PayChannelEntity> payChannelList = entity.getPayChannelList();
+        payChannelList = entity.getPayChannelList();
+        paychannelinfo = entity.getPaychannelinfo();
+        payChannelId = paychannelinfo.getId();
+        factory = entity.getFactory();
 
-        //pay channel list
-        if (payChannelList != null) {
-            ll_pay_channel.removeAllViews();
-
-            for (final PayChannelEntity channel: payChannelList) {
-
-                final PayChannelEntity mychannel = channel;
-
-                TextView tv = new TextView(this);
-                tv.setText(channel.getName());
-                tv.setTag(channel);
-                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT);
-                lp.setMargins(0, 0, 10, 0);
-                tv.setLayoutParams(lp);
-                tv.setBackgroundResource(R.drawable.bg_shape);
-                tv.setPadding(5, 5, 5, 5);
-                tv.setTextSize(10);
-                ll_pay_channel.addView(tv);
-
-                tv.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        changePayChannel(channel);
-                    }
-                });
-
-            }
-        }
-
-
+        updateFactory();
+        updateChannelList();
         //pay channel info
         updateChannelInfo();
 
@@ -270,9 +244,6 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
             }
         });
 
-        factory = entity.getFactory();
-
-        updateFactory();
     }
 
     private void updateFactory() {
@@ -283,9 +254,50 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         tv_factory_desc.setText(factory.getDescription());
     }
 
-    private void updateChannelInfo() {
+    private void updateChannelList() {
+        //pay channel list
+        if (payChannelList != null) {
+            ll_pay_channel.removeAllViews();
 
-        paychannelinfo = entity.getPaychannelinfo();
+            for (final PayChannelEntity channel: payChannelList) {
+
+                final PayChannelEntity mychannel = channel;
+
+                if (payChannelId < 1) {
+                    payChannelId = channel.getId();
+                }
+
+                TextView tv = new TextView(this);
+                tv.setText(channel.getName());
+                tv.setTag(channel);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                lp.setMargins(0, 0, 10, 0);
+                tv.setLayoutParams(lp);
+
+                if (channel.getId() == payChannelId) {
+                    tv.setBackgroundResource(R.drawable.bg_shape);
+                } else {
+                    tv.setBackgroundResource(R.drawable.bg_gray_shape);
+                }
+
+                tv.setPadding(5, 5, 5, 5);
+                tv.setTextSize(10);
+                ll_pay_channel.addView(tv);
+
+                tv.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        changePayChannel(channel.getId());
+                    }
+                });
+
+            }
+        }
+    }
+
+    private void updateChannelInfo() {
 
         if (paychannelinfo == null) {
             return;
@@ -449,9 +461,13 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         slideFragment.feedData(list);
     }
 
-    private void changePayChannel(PayChannelEntity channel) {
+    private void changePayChannel(int id) {
+
+        payChannelId = id;
+        updateChannelList();
+
         JsonParams params = new JsonParams();
-        params.put("pcid", channel.getId());
+        params.put("pcid", payChannelId);
         String strParams = params.toString();
         Events.CommonRequestEvent event = new Events.PayChannelInfoEvent();
         event.setParams(strParams);

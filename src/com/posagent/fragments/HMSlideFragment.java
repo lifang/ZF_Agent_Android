@@ -249,6 +249,9 @@ public class HMSlideFragment extends Fragment {
             ImageView _imageView;
             for (int i = 0; i < indicator_imgs.length; i++) {
                 _imageView = indicator_imgs[i];
+                if (null == _imageView) {
+                    continue;
+                }
                 if (position == i) {
                     setCurrentDot(_imageView);
                 } else {

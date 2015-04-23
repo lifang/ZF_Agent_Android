@@ -74,8 +74,8 @@ public class Main extends BaseActivity implements OnClickListener{
 
         focusTabAtIndex(0);
 
-//        Intent i = new Intent(Main.this, LoginActivity.class);
-//        startActivity(i);
+        Intent i = new Intent(Main.this, LoginActivity.class);
+        startActivity(i);
     }
 
     private void initView() {

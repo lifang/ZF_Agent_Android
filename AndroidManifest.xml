@@ -426,6 +426,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.posagent.activities.ImageViewer"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".activity.SearchFormActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" >

@@ -3,23 +3,32 @@ package com.posagent.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zf_android.R;
 import com.example.zf_android.trade.CitySelectActivity;
+import com.example.zf_android.trade.common.CommonUtil;
 import com.posagent.activities.CommonInputer;
+import com.posagent.activities.ImageViewer;
 import com.posagent.events.Events;
 import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
+import com.posagent.utils.PhotoManager;
 
 import de.greenrobot.event.EventBus;
+
+import static com.example.zf_android.trade.Constants.ApplyIntent.REQUEST_TAKE_PHOTO;
+import static com.example.zf_android.trade.Constants.ApplyIntent.REQUEST_UPLOAD_IMAGE;
 
 /**
  * Created by Leo on 2015/2/6.
@@ -27,6 +36,8 @@ import de.greenrobot.event.EventBus;
 public class RegisterFragment extends Fragment implements View.OnClickListener {
 
     static String TAG = "RegisterFragment";
+
+    private View thisview;
 
     private int userKind;
     private LayoutInflater mInflater;
@@ -37,9 +48,14 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
 
     private int cityId;
-    private String cardIdPhotoPath = "uploadFiles/tmp/1428715403214.jp";
-    private String licenseNoPicPath = "uploadFiles/tmp/1428715403214.jp";
-    private String taxNoPicPath = "uploadFiles/tmp/1428715403214.jp";
+    private String cardIdPhotoPath;
+    private String licenseNoPicPath;
+    private String taxNoPicPath;
+
+    private String photoPath;
+    private String currentKind;
+
+    private PhotoManager photoManager;
 
 
     public static RegisterFragment newInstance(int userKind) {
@@ -65,6 +81,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         if (getArguments() != null) {
             userKind = getArguments().getInt(Constants.USER_KIND);
         }
+        photoManager = new PhotoManager(this);
     }
 
     @Override
@@ -76,7 +93,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        thisview = view;
         initViews(view);
 
     }
@@ -91,15 +108,69 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
         view.findViewById(R.id.mi_select_city).setOnClickListener(this);
 
-//        String tag = getString(R.string.tag_destination_get);
-//        ArrayList<View> views = (ArrayList<View>) ViewHelper.getViewsByTag((ViewGroup) view, tag);
-//        for (View _view: views) {
-//            _view.setOnClickListener(this);
-//        }
+        view.findViewById(R.id.btn_submit).setOnClickListener(this);
 
         tvCityName = (TextView) view.findViewById(R.id.tv_city_name);
-//        View v = view.findViewById(R.id.btn_submit);
-//        v.setOnClickListener(this);
+
+        //photo
+        TextView tv_card_photo = (TextView) view.findViewById(R.id.tv_card_photo);
+        tv_card_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentKind = "card";
+                photoManager.prompt();
+            }
+        });
+
+        TextView tv_license_photo = (TextView) view.findViewById(R.id.tv_license_photo);
+        tv_license_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentKind = "license";
+                photoManager.prompt();
+            }
+        });
+        TextView tv_tax_photo = (TextView) view.findViewById(R.id.tv_tax_photo);
+        tv_tax_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentKind = "tax";
+                photoManager.prompt();
+            }
+        });
+
+        ImageView iv_card_photo = (ImageView) view.findViewById(R.id.iv_card_photo);
+        iv_card_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentKind = "card";
+                Intent i = new Intent(getActivity(), ImageViewer.class);
+                i.putExtra("url", cardIdPhotoPath);
+                startActivityForResult(i, Constants.REQUEST_CODE);
+            }
+        });
+
+        ImageView iv_license_photo = (ImageView) view.findViewById(R.id.iv_license_photo);
+        iv_license_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentKind = "license";
+                Intent i = new Intent(getActivity(), ImageViewer.class);
+                i.putExtra("url", licenseNoPicPath);
+                startActivityForResult(i, Constants.REQUEST_CODE);
+            }
+        });
+
+        ImageView iv_tax_photo = (ImageView) view.findViewById(R.id.iv_tax_photo);
+        iv_tax_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentKind = "tax";
+                Intent i = new Intent(getActivity(), ImageViewer.class);
+                i.putExtra("url", taxNoPicPath);
+                startActivityForResult(i, Constants.REQUEST_CODE);
+            }
+        });
 
     }
 
@@ -114,22 +185,47 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(final int requestCode, int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) return;
-        Bundle bundle = data.getExtras();
 
         switch (requestCode) {
             case Constants.CommonInputerConstant.REQUEST_CODE:
+
+                Bundle bundle = data.getExtras();
                 String content = bundle.getString(Constants.CommonInputerConstant.VALUE_KEY);
                 tvContent.setText(content);
                 Log.d(TAG, data.toString());
                 break;
             case Constants.CommonInputerConstant.REQUEST_CITY_CODE:
-                cityName = bundle.getString(com.example.zf_android.trade.Constants.CityIntent.CITY_NAME);
-                cityId = bundle.getInt(com.example.zf_android.trade.Constants.CityIntent.CITY_ID);
+
+                Bundle bundle2 = data.getExtras();
+                cityName = bundle2.getString(com.example.zf_android.trade.Constants.CityIntent.CITY_NAME);
+                cityId = bundle2.getInt(com.example.zf_android.trade.Constants.CityIntent.CITY_ID);
                 tvCityName.setText(cityName);
                 break;
+            case Constants.REQUEST_CODE:
+                String url = data.getStringExtra("url");
+                updatePhotoUrl(url);
+                break;
+            case REQUEST_UPLOAD_IMAGE:
+            case REQUEST_TAKE_PHOTO: {
+
+                final Handler handler = new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        if (msg.what == 1) {
+                            String url = (String) msg.obj;
+                            updatePhotoUrl(url);
+                        } else {
+                            CommonUtil.toastShort(getActivity(), getString(R.string.toast_upload_failed));
+                        }
+
+                    }
+                };
+                photoManager.onActivityResult(requestCode, resultCode, data, handler);
+                break;
+            }
         }
     }
 
@@ -151,6 +247,11 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             return;
         }
 
+        if (v.getTag().equals("tag_man_photo")) {
+            photoManager.prompt();
+            return;
+        }
+
         String tag = getString(R.string.tag_destination_get);
         if (v.getTag().equals(tag)) {
             Intent intent = new Intent(getActivity(), CommonInputer.class);
@@ -162,9 +263,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             tag = getString(R.string.tag_destination);
             tvContent = tv = (TextView) v.findViewWithTag(tag);
             intent.putExtra(Constants.CommonInputerConstant.PLACEHOLDER_KEY, tv.getText());
-
-
-
 
             startActivityForResult(intent, Constants.CommonInputerConstant.REQUEST_CODE);
         }
@@ -244,4 +342,24 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     private int resouceId(String name, String kind) {
         return this.getResources().getIdentifier(name, kind, this.getActivity().getPackageName());
     }
+
+    private void updatePhotoUrl(String url) {
+        Log.d(TAG, url);
+        if (currentKind.equals("card")) {
+            cardIdPhotoPath = url;
+            thisview.findViewById(R.id.iv_card_photo).setVisibility(View.VISIBLE);
+            thisview.findViewById(R.id.tv_card_photo).setVisibility(View.GONE);
+        } else if (currentKind.equals("license")) {
+            licenseNoPicPath = url;
+            thisview.findViewById(R.id.iv_license_photo).setVisibility(View.VISIBLE);
+            thisview.findViewById(R.id.tv_license_photo).setVisibility(View.GONE);
+        } else if (currentKind.equals("tax")) {
+            taxNoPicPath = url;
+            thisview.findViewById(R.id.iv_tax_photo).setVisibility(View.VISIBLE);
+            thisview.findViewById(R.id.tv_tax_photo).setVisibility(View.GONE);
+        }
+    }
+
+
+
 }

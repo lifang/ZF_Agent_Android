@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.Tools;
 import com.examlpe.zf_android.util.XListView;
 import com.example.zf_android.Config;
@@ -20,6 +21,7 @@ import com.example.zf_android.activity.AllProduct;
 import com.example.zf_android.activity.SearchFormActivity;
 import com.example.zf_android.entity.PosEntity;
 import com.example.zf_zandroid.adapter.PosAdapter;
+import com.google.gson.reflect.TypeToken;
 import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
@@ -46,8 +48,18 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
     private int page = 1;
     private int rows = Config.ROWS;
     int orderType = Constants.Goods.OrderTypePigou;
+
     private String keys;
-    private Map<String, String> mapFilter;
+    private String minPrice;
+    private String maxPrice;
+    private Map<String, Object> mapFilter;
+    private List<Integer> selectedCategoryIds = new ArrayList<Integer>();
+    private List<Integer> selectedBrandsIds = new ArrayList<Integer>();
+    private List<Integer> selectedPayChannelsIds = new ArrayList<Integer>();
+    private List<Integer> selectedPayCardIds = new ArrayList<Integer>();
+    private List<Integer> selectedTradeTypeIds = new ArrayList<Integer>();
+    private List<Integer> selectedSaleSlipIds = new ArrayList<Integer>();
+    private List<Integer> selectedTDateIds = new ArrayList<Integer>();
 
     private LinearLayout eva_nodata;
     private PosAdapter myAdapter;
@@ -108,7 +120,7 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
             public void onClick(View v) {
                 Intent i = new Intent(GoodsList.this, FilterForm.class);
                 i.putExtra("json", gson.toJson(mapFilter));
-                startActivityForResult(i, Constants.REQUEST_CODE);
+                startActivityForResult(i, Constants.REQUEST_CODE2);
             }
         });
 
@@ -239,6 +251,33 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
         if (keys != null) {
             params.put("keys", keys);
         }
+        if (selectedBrandsIds != null && selectedBrandsIds.size() > 0) {
+            params.put("brandsId", StringUtil.integerList(selectedBrandsIds));
+        }
+        if (selectedCategoryIds != null && selectedCategoryIds.size() > 0) {
+            params.put("category", StringUtil.integerList(selectedCategoryIds));
+        }
+        if (selectedPayChannelsIds != null && selectedPayChannelsIds.size() > 0) {
+            params.put("payChannelId", StringUtil.integerList(selectedPayChannelsIds));
+        }
+        if (selectedPayCardIds != null && selectedPayCardIds.size() > 0) {
+            params.put("payCardId", StringUtil.integerList(selectedPayCardIds));
+        }
+        if (selectedTradeTypeIds != null && selectedTradeTypeIds.size() > 0) {
+            params.put("tradeTypeId", StringUtil.integerList(selectedTradeTypeIds));
+        }
+        if (selectedSaleSlipIds != null && selectedSaleSlipIds.size() > 0) {
+            params.put("saleSlipId", StringUtil.integerList(selectedSaleSlipIds));
+        }
+        if (selectedTDateIds != null && selectedTDateIds.size() > 0) {
+            params.put("tDate", StringUtil.integerList(selectedTDateIds));
+        }
+        if (minPrice != null && !"".equals(minPrice)) {
+            params.put("minPrice", Double.parseDouble(minPrice));
+        }
+        if (maxPrice != null && !"".equals(maxPrice)) {
+            params.put("maxPrice", Double.parseDouble(maxPrice));
+        }
 
         params.put("page", page);
         params.put("rows", rows);
@@ -263,6 +302,14 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
             case Constants.REQUEST_CODE:
                 keys = data.getStringExtra("keys");
                 onRefresh();
+                break;
+            case Constants.REQUEST_CODE2:
+                String json = data.getStringExtra("json");
+                if (null != json) {
+                    mapFilter = gson.fromJson(json, new TypeToken<Map<String, Object>>() {}.getType());
+
+                }
+                searchWithFilter();
                 break;
         }
     }
@@ -293,5 +340,23 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
         tv.setTextColor(getResources().getColor(R.color.bg_item));
 
     }
+
+    private void searchWithFilter() {
+
+        selectedCategoryIds = (List<Integer>)mapFilter.get("selectedCategoryIds");
+        selectedBrandsIds = (List<Integer>)mapFilter.get("selectedBrandsIds");
+        selectedPayChannelsIds = (List<Integer>)mapFilter.get("selectedPayChannelsIds");
+        selectedPayCardIds = (List<Integer>)mapFilter.get("selectedPayCardIds");
+        selectedTradeTypeIds = (List<Integer>)mapFilter.get("selectedTradeTypeIds");
+        selectedSaleSlipIds = (List<Integer>)mapFilter.get("selectedSaleSlipIds");
+        selectedTDateIds = (List<Integer>)mapFilter.get("selectedTDateIds");
+
+        minPrice = (String)mapFilter.get("minPrice");
+        maxPrice = (String)mapFilter.get("maxPrice");
+
+
+        onRefresh();
+    }
+
 	 
 }

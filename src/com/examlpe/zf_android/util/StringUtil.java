@@ -223,4 +223,17 @@ public class StringUtil {
 
         return sb.toString();
     }
+
+    public static List<Integer> integerList(List<Integer> list) {
+        List<Integer> newIds = new ArrayList<Integer>();
+        for (Object id: list) {
+            if (id instanceof Double) {
+                newIds.add(((Double)id).intValue());
+            } else if (id instanceof Integer) {
+                newIds.add((Integer)id);
+            }
+        }
+
+        return newIds;
+    }
 }

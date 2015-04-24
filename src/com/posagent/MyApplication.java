@@ -1,7 +1,6 @@
 package com.posagent;
 
- 
- 
+
 import android.app.Activity;
 import android.app.Application;
 
@@ -11,13 +10,16 @@ import com.example.zf_android.entity.ChannelTradeEntity;
 import com.example.zf_android.entity.GoodinfoEntity;
 import com.example.zf_android.entity.PosSelectEntity;
 import com.example.zf_android.entity.UserInfoEntity;
+import com.example.zf_android.entity.UserRole;
 import com.loopj.android.http.AsyncHttpClient;
 import com.posagent.events.Events;
 import com.posagent.network.APIManager;
 import com.posagent.utils.JsonParams;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
@@ -93,7 +95,25 @@ public class MyApplication extends Application {
 
     public static void setCurrentUser(UserInfoEntity currentUser) {
         MyApplication.currentUser = currentUser;
+
+        //update roles
+        roles = new HashMap<String, String>();
+        for (UserRole role: currentUser.getMachtigingen()) {
+            roles.put(role.getRole_id(), "true");
+        }
     }
+
+    public static Map<String, String> roles;
+
+    public static Map<String, String> getRoles() {
+        return roles;
+    }
+
+    public static boolean hasRole(String roleId) {
+        return roles.get(roleId) != null;
+    }
+
+
 
     public static List<ChannelEntity> channels = new LinkedList<ChannelEntity>();
 

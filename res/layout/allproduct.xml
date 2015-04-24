@@ -30,7 +30,7 @@
         android:orientation="vertical" >
 
         <LinearLayout
-            android:id="@+id/ll_qpg"
+            android:id="@+id/ll_pigou"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
@@ -39,7 +39,7 @@
 
             <Button
                 android:background="@drawable/pifa_button"
-                android:id="@+id/btn_qpg"
+                android:id="@+id/btn_pigou"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="去批购"
@@ -48,7 +48,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ll_qdg"
+            android:id="@+id/ll_daigou"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
@@ -58,7 +58,7 @@
 
             <Button
                 android:background="@drawable/daigou_button"
-                android:id="@+id/btn_qdg"
+                android:id="@+id/btn_daigou"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="去代购"

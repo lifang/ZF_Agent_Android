@@ -22,6 +22,18 @@ public class Constants {
         public static final int OrderTypePigou = 5;
     }
 
+    public static class Roles {
+        public static final int Pigou = 1;
+        public static final int Daigou = 2;
+        public static final int TerminalAndAfterSale = 3;
+        public static final int TradeFlowAndProfit = 4;
+        public static final int SonAgent = 5;
+        public static final int ManUser = 6;
+        public static final int ManStaff = 7;
+        public static final int AgentInfo = 8;
+        public static final int Stock = 9;
+    }
+
 
 
     public static class CommonInputerConstant {

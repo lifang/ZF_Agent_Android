@@ -10,8 +10,6 @@ import com.posagent.activities.BaseActivity;
 import com.posagent.activities.goods.GoodsList;
 import com.posagent.utils.Constants;
 
-import java.util.HashMap;
-
 /***
  * 
  * 
@@ -28,12 +26,6 @@ public class AllProduct extends BaseActivity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.allproduct);
 
-        // 准备需要监听Click的数据
-        HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{
-            put("btn_qpg", GoodsList.class);
-        }};
-        this.setClickableMap(clickableMap);
-
         setupCommonViews();
 
         focusTabAtIndex(1);
@@ -42,9 +34,22 @@ public class AllProduct extends BaseActivity implements OnClickListener {
 	}
 
     private void initView() {
-        findViewById(R.id.btn_qdg).setOnClickListener(new OnClickListener() {
+        findViewById(R.id.btn_pigou).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (!checkRole(Constants.Roles.Pigou)) {return;}
+
+                Intent i2 =new Intent(AllProduct.this, GoodsList.class);
+                i2.putExtra("orderType", Constants.Goods.OrderTypePigou);
+                startActivity(i2);
+            }
+        });
+        findViewById(R.id.btn_daigou).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!checkRole(Constants.Roles.Daigou)) {return;}
+
                 Intent i2 =new Intent(AllProduct.this, GoodsList.class);
                 i2.putExtra("orderType", Constants.Goods.OrderTypeDaigou);
                 startActivity(i2);

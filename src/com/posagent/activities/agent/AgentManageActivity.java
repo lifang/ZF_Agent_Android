@@ -68,11 +68,20 @@ public class AgentManageActivity extends BaseActivity implements XListView.IXLis
 
         // 准备需要监听Click的数据
         HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{
-            put("ll_profit", AgentDefaultProfit.class);
             put("ll_create_agent", AgentNewActivity.class);
         }};
         this.setClickableMap(clickableMap);
         this.bindClickListener();
+
+        findViewById(R.id.ll_profit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!checkRole(Constants.Roles.TradeFlowAndProfit)) {return;}
+
+                Intent i2 =new Intent(AgentManageActivity.this, AgentDefaultProfit.class);
+                startActivity(i2);
+            }
+        });
 
         initXListView();
 

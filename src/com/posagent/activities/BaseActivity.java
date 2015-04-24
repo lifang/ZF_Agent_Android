@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.zf_android.R;
 import com.example.zf_android.activity.AllProduct;
+import com.posagent.MyApplication;
 import com.posagent.activities.user.MenuMine;
 import com.google.gson.Gson;
 import com.posagent.activities.home.Main;
@@ -227,5 +228,18 @@ public class BaseActivity extends Activity implements View.OnClickListener {
     //helper
     protected void toast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+    }
+    protected void noRightToast() {
+        Toast.makeText(this, "您没有管理当前模块的权限", Toast.LENGTH_LONG).show();
+    }
+    protected boolean checkRole(int roleId) {
+        if (!MyApplication.hasRole("" + roleId)) {
+
+            noRightToast();
+
+            return  false;
+        }
+
+        return true;
     }
 }

@@ -23,6 +23,7 @@ import com.posagent.activities.trade.TradeFlowActivity;
 import com.posagent.activities.user.UserList;
 import com.posagent.events.Events;
 import com.posagent.fragments.HMSlideFragment;
+import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
 
 import java.util.HashMap;
@@ -62,12 +63,6 @@ public class Main extends BaseActivity implements OnClickListener{
         HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{
             put("main_buy_pos", AllProduct.class);
             put("main_order_manage", OrderList.class);
-            put("main_stock_manage", StockList.class);
-            put("main_trade_list", TradeFlowActivity.class);
-            put("main_terminal_manage", Terminal.class);
-            put("main_user_list", UserList.class);
-            put("click_apply_open", TerminalOpenApply.class);
-            put("click_after_sale", AfterSaleGridActivity.class);
         }};
         this.setClickableMap(clickableMap);
 
@@ -85,6 +80,64 @@ public class Main extends BaseActivity implements OnClickListener{
         citySelect = findViewById(R.id.titleback_linear_back);
         cityTextView = (TextView) findViewById(R.id.tv_city);
         citySelect.setOnClickListener(this);
+
+
+
+        findViewById(R.id.main_stock_manage).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!checkRole(Constants.Roles.Stock)) {return;}
+
+                Intent i2 =new Intent(Main.this, StockList.class);
+                startActivity(i2);
+            }
+        });
+        findViewById(R.id.click_after_sale).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!checkRole(Constants.Roles.TerminalAndAfterSale)) {return;}
+
+                Intent i2 =new Intent(Main.this, AfterSaleGridActivity.class);
+                startActivity(i2);
+            }
+        });
+        findViewById(R.id.click_apply_open).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!checkRole(Constants.Roles.TerminalAndAfterSale)) {return;}
+
+                Intent i2 =new Intent(Main.this, TerminalOpenApply.class);
+                startActivity(i2);
+            }
+        });
+        findViewById(R.id.main_terminal_manage).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!checkRole(Constants.Roles.TerminalAndAfterSale)) {return;}
+
+                Intent i2 =new Intent(Main.this, Terminal.class);
+                startActivity(i2);
+            }
+        });
+        findViewById(R.id.main_trade_list).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!checkRole(Constants.Roles.TradeFlowAndProfit)) {return;}
+
+                Intent i2 =new Intent(Main.this, TradeFlowActivity.class);
+                startActivity(i2);
+            }
+        });
+
+        findViewById(R.id.main_user_list).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!checkRole(Constants.Roles.ManUser)) {return;}
+
+                Intent i2 =new Intent(Main.this, UserList.class);
+                startActivity(i2);
+            }
+        });
 
         getData();
     }

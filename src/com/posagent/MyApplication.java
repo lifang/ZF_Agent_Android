@@ -110,6 +110,9 @@ public class MyApplication extends Application {
     }
 
     public static boolean hasRole(String roleId) {
+        if (null == roles) {
+            return false;
+        }
         return roles.get(roleId) != null;
     }
 

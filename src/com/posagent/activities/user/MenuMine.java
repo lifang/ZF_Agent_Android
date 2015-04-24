@@ -1,6 +1,7 @@
 package com.posagent.activities.user;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -44,6 +45,10 @@ public class MenuMine extends BaseActivity {
         ll_wdxx.setOnClickListener(this);
         ll_yg=(LinearLayout) findViewById(R.id.ll_yg);
         ll_yg.setOnClickListener(this);
+
+        findViewById(R.id.ll_400).setOnClickListener(this);
+
+
     }
 
 
@@ -87,6 +92,12 @@ public class MenuMine extends BaseActivity {
             case R.id.main_rl_pos1:
                 startActivity(new Intent(MenuMine.this, SystemMessage.class));
                 break;
+            case R.id.ll_400:
+                Intent intent = new Intent(
+                        Intent.ACTION_DIAL, Uri.parse("tel:4000908076"));
+                startActivity(intent);
+                break;
+
             default:
                 break;
         }

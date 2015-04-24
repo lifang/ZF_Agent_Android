@@ -42,6 +42,7 @@ public class APIManager {
     public static final String UrlSendPhoneVerificationCode = BaseUrl + "/agent/sendPhoneVerificationCode";
     public static final String UrlUpdatePassword = BaseUrl + "/agent/updatePassword";
     public static final String UrlGoodsList = BaseUrl + "/good/list";
+    public static final String UrlGoodsSearchItem = BaseUrl + "/good/search";
     public static final String UrlGoodsDetail = BaseUrl + "/good/goodinfo";
     public static final String UrlPayChannelInfo = BaseUrl + "/paychannel/info";
     public static final String UrlCommentList = BaseUrl + "/comment/list";
@@ -305,6 +306,11 @@ public class APIManager {
         }
     }
 
+
+    public void onEventBackgroundThread(Events.GoodsSearchItemEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.GoodsSearchItemCompleteEvent();
+        CommonRequest(event, completeEvent, UrlGoodsSearchItem);
+    }
 
     public void onEventBackgroundThread(Events.GoodsDetailEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.GoodsDetailCompleteEvent();

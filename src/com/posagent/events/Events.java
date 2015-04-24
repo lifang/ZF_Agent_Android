@@ -9,6 +9,7 @@ import com.example.zf_android.entity.ChannelTradeEntity;
 import com.example.zf_android.entity.ExchangeEntity;
 import com.example.zf_android.entity.GoodCommentEntity;
 import com.example.zf_android.entity.GoodsEntity;
+import com.example.zf_android.entity.GoodsSearchEntity;
 import com.example.zf_android.entity.MessageEntity;
 import com.example.zf_android.entity.OrderEntity;
 import com.example.zf_android.entity.PayChannelInfoEntity;
@@ -187,6 +188,34 @@ public class Events {
 
         public GoodsListCompleteEvent(Boolean _success) {
             super(_success);
+        }
+    }
+
+    public static class GoodsSearchItemEvent extends CommonRequestEvent {}
+    public static class GoodsSearchItemCompleteEvent extends CommonCompleteEvent {
+        private GoodsSearchEntity entity;
+
+        public GoodsSearchEntity getEntity() {
+            String result = null;
+            result = getResult().toString();
+            entity = (new Gson()).fromJson(result, GoodsSearchEntity.class);
+            return entity;
+        }
+
+        public void setEntity(GoodsSearchEntity entity) {
+            this.entity = entity;
+        }
+    }
+
+    public static class GoodsDoSearchCompleteEvent extends CompleteEvent {
+        private String keys;
+
+        public String getKeys() {
+            return keys;
+        }
+
+        public void setKeys(String keys) {
+            this.keys = keys;
         }
     }
 

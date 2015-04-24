@@ -14,11 +14,10 @@ import android.widget.Toast;
 
 import com.example.zf_android.R;
 import com.example.zf_android.activity.AllProduct;
-import com.posagent.MyApplication;
-import com.posagent.activities.agent.AgentManageMainActivity;
-import com.posagent.activities.user.MenuMine;
 import com.google.gson.Gson;
+import com.posagent.MyApplication;
 import com.posagent.activities.home.Main;
+import com.posagent.activities.user.MenuMine;
 import com.posagent.activities.user.MessageList;
 import com.posagent.events.Events;
 import com.posagent.utils.Constants;
@@ -118,7 +117,7 @@ public class BaseActivity extends Activity implements View.OnClickListener {
 
         if (v.getId() == R.id.tab_index1) {
             if (checkRole(Constants.Roles.AllProduct)) {
-                startActivity(new Intent(this, AgentManageMainActivity.class));
+                startActivity(new Intent(this, AllProduct.class));
             }
             return;
         }

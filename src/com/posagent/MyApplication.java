@@ -125,19 +125,17 @@ public class MyApplication extends Application {
             return false;
         }
 
-        if (currentUser.getId() == currentUser.getAgentId()) {
+        if (currentUser.getId() == currentUser.getAgentUserId()) {
             //是代理商
-            if (currentUser.getAgentId() != currentUser.getAgentUserId()) {
+            if (currentUser.getParent_id() > 0) {
                 //二级代理商
                 switch (intRoleId) {
                     case Constants.Roles.AllProduct:
                     case Constants.Roles.Order:
                         return false;
                 }
-            } else {
-                //一级代理商
-                return true;
             }
+            return true;
 
         } else {
             switch (intRoleId) {
@@ -147,8 +145,6 @@ public class MyApplication extends Application {
             }
             return roles.get(roleId) != null;
         }
-
-        return false;
 
     }
 

@@ -167,9 +167,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
     // 用户登录完成
     public void onEventMainThread(Events.LoginCompleteEvent event) {
-        Toast.makeText(getApplicationContext(),
-                event.getMessage(),
-                Toast.LENGTH_SHORT).show();
 
         if (event.getSuccess()) {
             UserInfoEntity userinfo = event.getEntity();
@@ -177,6 +174,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
             MyApplication.setCurrentUser(userinfo);
 
             finish();
+        } else {
+            toast(event.getMessage());
         }
     }
 

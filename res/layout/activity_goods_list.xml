@@ -7,6 +7,7 @@
     >
 
     <include layout="@layout/title_search_one" />
+
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -93,6 +94,19 @@
         android:layout_height="1dp"
         android:background="@color/Viewc2"
         />
+
+
+    <LinearLayout
+        android:id="@+id/eva_nodata"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:background="@color/ffffff"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <include layout="@layout/include_norecord" />
+    </LinearLayout>
 
     <!-- XListView -->
     <com.examlpe.zf_android.util.XListView

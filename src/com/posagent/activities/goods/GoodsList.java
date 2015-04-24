@@ -1,6 +1,7 @@
 package com.posagent.activities.goods;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,6 +20,7 @@ import com.example.zf_android.activity.AllProduct;
 import com.example.zf_android.activity.SearchFormActivity;
 import com.example.zf_android.entity.PosEntity;
 import com.example.zf_zandroid.adapter.PosAdapter;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.Constants;
@@ -27,6 +29,7 @@ import com.posagent.utils.JsonParams;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
@@ -43,6 +46,8 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
     private int page = 1;
     private int rows = Config.ROWS;
     int orderType = Constants.Goods.OrderTypePigou;
+    private String keys;
+    private Map<String, String> mapFilter;
 
     private LinearLayout eva_nodata;
     private PosAdapter myAdapter;
@@ -57,6 +62,9 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
                     if (myList.size() == 0) {
                         Xlistview.setVisibility(View.GONE);
                         eva_nodata.setVisibility(View.VISIBLE);
+                    } else {
+                        Xlistview.setVisibility(View.VISIBLE);
+                        eva_nodata.setVisibility(View.GONE);
                     }
                     onRefresh_number = true;
                     myAdapter.notifyDataSetChanged();
@@ -76,7 +84,6 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
         // 准备需要监听Click的数据
         HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{
             put("titleback_linear_back", AllProduct.class);
-            put("serch_edit", SearchFormActivity.class);
         }};
         this.setClickableMap(clickableMap);
         this.bindClickListener();
@@ -86,6 +93,27 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
 	}
 
     private void initView() {
+
+        findViewById(R.id.serch_edit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(GoodsList.this, SearchFormActivity.class);
+                i.putExtra("keys", keys);
+                startActivityForResult(i, Constants.REQUEST_CODE);
+            }
+        });
+
+        findViewById(R.id.iv_filter).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(GoodsList.this, FilterForm.class);
+                i.putExtra("json", gson.toJson(mapFilter));
+                startActivityForResult(i, Constants.REQUEST_CODE);
+            }
+        });
+
+
+
         //order type
         View v = findViewById(R.id.btn_ordertype_0);
         v.setOnClickListener(new View.OnClickListener() {
@@ -204,9 +232,15 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
 
     private void getData() {
         JsonParams params = new JsonParams();
-        params.put("cityId", Tools.cityId());
-        params.put("page", page);
+        params.put("cityId", MyApplication.user().getAgentCityId());
+        params.put("agentId", MyApplication.user().getAgentId());
         params.put("orderType", orderType);
+
+        if (keys != null) {
+            params.put("keys", keys);
+        }
+
+        params.put("page", page);
         params.put("rows", rows);
         String strParams = params.toString();
         EventBus.getDefault().post(new Events.GoodsListEvent(strParams));
@@ -219,11 +253,32 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
         super.onClick(v);
 	}
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != Activity.RESULT_OK) return;
+        Bundle bundle = data.getExtras();
+
+        switch (requestCode) {
+            case Constants.REQUEST_CODE:
+                keys = data.getStringExtra("keys");
+                onRefresh();
+                break;
+        }
+    }
+
     // events
     public void onEventMainThread(Events.GoodsListCompleteEvent event) {
-        myList.addAll(event.getList());
+        if (null != event.getList()) {
+            myList.addAll(event.getList());
+        }
+
         Xlistview.setPullLoadEnable(event.getList().size() >= rows);
         handler.sendEmptyMessage(0);
+    }
+    public void onEventMainThread(Events.GoodsDoSearchCompleteEvent event) {
+        keys = event.getKeys();
+        onRefresh();
     }
 
 

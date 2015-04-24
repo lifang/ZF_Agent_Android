@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.Constants;
@@ -93,8 +94,7 @@ public class TerminalChoosePos extends BaseActivity {
 //                "": 12435,
 //                "": 1,
 //                "":1
-        // Fixme
-        params.put("agentId", 1);
+        params.put("agentId", MyApplication.user().getAgentId());
         params.put("title", posName);
         params.put("channelsId", channelId);
         params.put("minPrice", Integer.parseInt(et_min_price.getText().toString()));

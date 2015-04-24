@@ -754,7 +754,7 @@
                 android:id="@+id/btn_exit"
                 android:layout_height="42dp"
                 android:layout_width="184dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="20dp"
                 android:text="退出登录"
                 android:background="@drawable/bg_red_dra"
                 android:layout_gravity="center_horizontal"

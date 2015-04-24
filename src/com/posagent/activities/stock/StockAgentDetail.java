@@ -19,6 +19,7 @@ import com.example.zf_android.entity.StockEntity;
 import com.example.zf_android.trade.widget.MyTabWidget;
 import com.example.zf_zandroid.adapter.StockAgentTerminalAdapter;
 import com.google.gson.Gson;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
@@ -145,8 +146,7 @@ public class StockAgentDetail extends BaseActivity implements IXListViewListener
 
     private void getData() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("agentId", agentId);
+        params.put("agentId", MyApplication.user().getAgentId());
         params.put("paychannelId", stockEntity.getPaychannel_id());
         params.put("goodId", stockEntity.getGood_id());
         params.put("page", page);

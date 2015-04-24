@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.CitySelectActivity;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.activities.CommonInputer;
 import com.posagent.events.Events;
@@ -151,8 +152,7 @@ public class AdressEdit extends BaseActivity {
     private String data() {
         JsonParams data = new JsonParams();
         data.put("cityId", cityId);
-        //Fixme
-        data.put("customerId", 1);
+        data.put("customerId", MyApplication.user().getId());
 
         String[] arr = {"tv_receiver", "tv_moblephone",
                 "tv_zipCode", "tv_address",

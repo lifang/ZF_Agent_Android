@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.entity.TradeDetail;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
@@ -40,9 +41,10 @@ public class TradeDetailActivity extends BaseActivity {
 
     private void getData() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("agentId", 1);
+        params.put("agentId", MyApplication.user().getAgentId());
         params.put("id", id);
+
+        //Fixme
         params.put("isHaveProfit", 1);
 
         String strParams = params.toString();

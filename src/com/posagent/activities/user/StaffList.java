@@ -25,6 +25,7 @@ import com.example.zf_android.entity.StaffEntity;
 import com.example.zf_android.trade.widget.MyTabWidget;
 import com.example.zf_zandroid.adapter.StaffAdapter;
 import com.google.gson.Gson;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.Constants;
@@ -178,8 +179,7 @@ public class StaffList extends BaseActivity implements IXListViewListener {
 
     private void getData() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("agentsId", 1);
+        params.put("agentsId",  MyApplication.user().getAgentId());
         params.put("page", page);
         params.put("rows", rows);
         String strParams = params.toString();
@@ -190,9 +190,8 @@ public class StaffList extends BaseActivity implements IXListViewListener {
 
     private void sendDelete() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("agentsId", 1);
-        params.put("loginId", 1);
+        params.put("agentsId",  MyApplication.user().getAgentId());
+        params.put("loginId",  MyApplication.user().getId());
         params.put("customerIds", StringUtil.join(deleteIds, ","));
 
         String strParams = params.toString();

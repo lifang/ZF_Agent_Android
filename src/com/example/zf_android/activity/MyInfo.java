@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.entity.UserInfo;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.activities.home.LoginActivity;
 import com.posagent.activities.user.AddressList;
@@ -73,9 +74,7 @@ public class MyInfo extends BaseActivity {
 
     private void getData() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("customerId", 40);
-
+        params.put("customerId", MyApplication.user().getId());
         String strParams = params.toString();
         Events.UserInfoEvent event = new Events.UserInfoEvent();
         event.setParams(strParams);
@@ -145,6 +144,7 @@ public class MyInfo extends BaseActivity {
     }
 
 	private void exit() {
+        MyApplication.setCurrentUser(null);
 		startActivity(new Intent(MyInfo.this,LoginActivity.class));
 	}
 

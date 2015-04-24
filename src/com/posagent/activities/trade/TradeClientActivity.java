@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.entity.TradeClient;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseListActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
@@ -50,8 +51,7 @@ public class TradeClientActivity extends BaseListActivity {
 
     private void getData() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("agentId", 1);
+        params.put("agentId", MyApplication.user().getAgentId());
         params.put("page", page);
         params.put("rows", rows);
         String strParams = params.toString();

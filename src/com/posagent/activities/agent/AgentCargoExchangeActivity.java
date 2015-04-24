@@ -20,6 +20,7 @@ import com.example.zf_android.Config;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.ExchangeEntity;
 import com.example.zf_zandroid.adapter.ExchangeAdapter;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.activities.trade.TradeAgentActivity;
 import com.posagent.events.Events;
@@ -166,8 +167,7 @@ public class AgentCargoExchangeActivity extends BaseActivity implements XListVie
 
     private void getData() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("agentId", 1);
+        params.put("agentId", MyApplication.user().getAgentId());
         params.put("sonAgentId", sonAgentId);
         params.put("startTime", tradeStartDate);
         params.put("endTime", tradeEndDate);

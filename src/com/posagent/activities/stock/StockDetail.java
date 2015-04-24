@@ -24,6 +24,7 @@ import com.example.zf_android.entity.StockEntity;
 import com.example.zf_android.trade.widget.MyTabWidget;
 import com.example.zf_zandroid.adapter.StockAgentAdapter;
 import com.google.gson.Gson;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.activities.CommonInputer;
 import com.posagent.activities.goods.GoodsDetail;
@@ -197,8 +198,7 @@ public class StockDetail extends BaseActivity implements IXListViewListener {
 
     private void getData() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("agentId", agentId);
+        params.put("agentId", MyApplication.user().getAgentId());
         params.put("paychannelId", entity.getPaychannel_id());
         params.put("goodId", entity.getGood_id());
         params.put("page", page);
@@ -259,8 +259,7 @@ public class StockDetail extends BaseActivity implements IXListViewListener {
 
     private void changeName(StockEntity entity) {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("agentId", 1);
+        params.put("agentId", MyApplication.user().getAgentId());
         params.put("goodId", entity.getGood_id());
         params.put("goodname", entity.getGoodname());
         String strParams = params.toString();

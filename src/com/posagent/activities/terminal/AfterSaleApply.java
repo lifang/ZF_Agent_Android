@@ -12,6 +12,7 @@ import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.AdressEntity;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.activities.user.ChangeAdress;
 import com.posagent.events.Events;
@@ -74,8 +75,7 @@ public class AfterSaleApply extends BaseActivity {
 
         JsonParams params = new JsonParams();
 
-        //Fixme
-        params.put("customerId", 1);
+        params.put("customerId", MyApplication.user().getId());
 
         String strParams = params.toString();
         Events.AddressListEvent event = new Events.AddressListEvent();
@@ -167,8 +167,7 @@ public class AfterSaleApply extends BaseActivity {
     private void doSubmit() {
 
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("customerId", 1);
+        params.put("customerId", MyApplication.user().getId());
         params.put("terminalsQuantity", selectedList.size());
         params.put("address", tv_address.getText().toString());
         params.put("reciver", tv_receiver.getText().toString());

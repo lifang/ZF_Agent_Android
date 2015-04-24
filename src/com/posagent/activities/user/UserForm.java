@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.CitySelectActivity;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.Constants;
@@ -130,8 +131,7 @@ public class UserForm extends BaseActivity implements View.OnClickListener
         if(check()) {
             JsonParams params = new JsonParams();
 
-            //Fixme
-            params.put("agentId", 1);
+            params.put("agentId",  MyApplication.user().getAgentId());
             params.put("codeNumber", et_mobile.getText().toString());
             params.put("name", et_username.getText().toString());
             params.put("password", et_password.getText().toString());

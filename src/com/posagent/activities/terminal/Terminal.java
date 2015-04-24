@@ -20,6 +20,7 @@ import com.example.zf_android.R;
 import com.example.zf_android.trade.entity.TerminalItem;
 import com.example.zf_android.trade.widget.MyTabWidget;
 import com.example.zf_zandroid.adapter.TerminalAdapter;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
@@ -150,8 +151,7 @@ public class Terminal extends BaseActivity implements IXListViewListener,
 
     private void getData() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("agentId", 1);
+        params.put("agentId", MyApplication.user().getAgentId());
         if (status != 0) {
             params.put("status", status);
         }

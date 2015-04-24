@@ -10,6 +10,7 @@ import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.StaffEntity;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
@@ -86,8 +87,7 @@ public class StaffForm extends BaseActivity
     private void getData() {
         JsonParams params = new JsonParams();
 
-        //Fixme
-        params.put("agentsId", 1);
+        params.put("agentsId",  MyApplication.user().getAgentId());
         params.put("customerId", entity.getId());
 
         String strParams = params.toString();
@@ -124,8 +124,7 @@ public class StaffForm extends BaseActivity
         if(check()) {
             JsonParams params = new JsonParams();
 
-            //Fixme
-            params.put("agentsId", 1);
+            params.put("agentsId",  MyApplication.user().getAgentId());
 
 
             List<String> checkedRoles = new ArrayList<String>(roles.length);

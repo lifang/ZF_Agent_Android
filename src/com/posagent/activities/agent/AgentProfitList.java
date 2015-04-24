@@ -163,7 +163,6 @@ public class AgentProfitList extends BaseActivity implements IXListViewListener 
 
     private void getData() {
         JsonParams params = new JsonParams();
-        //Fixme
         params.put("sonAgentsId", sonAgentId);
         params.put("page", page);
         params.put("rows", rows);
@@ -267,8 +266,7 @@ public class AgentProfitList extends BaseActivity implements IXListViewListener 
 
         //do save
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("agentsId", 1);
+        params.put("agentsId", MyApplication.user().getId());
 
         params.put("sonAgentsId", sonAgentId);
         params.put("channelId", profitEntity.getChannel().getId());
@@ -288,8 +286,7 @@ public class AgentProfitList extends BaseActivity implements IXListViewListener 
 
         if (profit.getId() != null) {
             JsonParams params = new JsonParams();
-            //Fixme
-            params.put("agentsId", 1);
+            params.put("agentsId", MyApplication.user().getId());
             params.put("sonAgentsId", sonAgentId);
             params.put("payChannelId", profit.getChannel().getId());
 

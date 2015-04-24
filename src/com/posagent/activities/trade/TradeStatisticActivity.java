@@ -67,7 +67,6 @@ public class TradeStatisticActivity extends BaseActivity {
 
     private void getData() {
         JsonParams params = new JsonParams();
-        //Fixme
         params.put("agentId", mAgentId);
         params.put("sonagentId", mSonAgentId);
 

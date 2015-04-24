@@ -24,6 +24,7 @@ import com.example.zf_android.Config;
 import com.example.zf_android.R;
 import com.example.zf_android.activity.PayFromCar;
 import com.example.zf_android.entity.AdressEntity;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.activities.user.ChangeAdress;
 import com.posagent.events.Events;
@@ -75,7 +76,6 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
 
         orderType=getIntent().getIntExtra("orderType", Constants.Goods.OrderTypePigou);
 
-        //Fixme
         paychannelId=getIntent().getIntExtra("paychannelId", 1);
         tv_pay.setText("实付：￥ "+pirce);
         tv_real_amount.setText("实付：￥ "+pirce);
@@ -175,8 +175,7 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
 
         JsonParams params = new JsonParams();
 
-        //Fixme
-        params.put("customerId", 1);
+        params.put("customerId", MyApplication.user().getId());
 
         String strParams = params.toString();
         Events.AddressListEvent event = new Events.AddressListEvent();
@@ -256,10 +255,9 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
         quantity= Integer.parseInt( buyCountEdit.getText().toString() );
         comment=comment_et.getText().toString();
         JsonParams params = new JsonParams();
-        // Fixme
-        params.put("customerId", 80);
-        params.put("agentId", 42);
-        params.put("orderType", 5);
+        params.put("customerId", MyApplication.user().getId());
+        params.put("agentId", MyApplication.user().getAgentId());
+        params.put("orderType", orderType);
         params.put("goodId", goodId);
         params.put("paychannelId", paychannelId);
         params.put("addressId", addressEntity.getId());

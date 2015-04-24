@@ -21,6 +21,7 @@ import com.example.zf_android.trade.entity.TradeRecord;
 import com.example.zf_android.trade.widget.MyTabWidget;
 import com.example.zf_android.trade.widget.MyViewPager;
 import com.example.zf_zandroid.adapter.TradeFlowAdapter;
+import com.posagent.MyApplication;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
 
@@ -184,14 +185,10 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
 
         JsonParams params = new JsonParams();
 
-        //Fixme
-        params.put("agentId", 80);
+        params.put("agentId", MyApplication.user().getAgentId());
         params.put("tradeTypeId", map.get("tradeTypeId"));
-//        params.put("terminalNumber", map.get("terminalNumber"));
-        //Fixme
-        params.put("terminalNumber", "501000012002");
-//        params.put("sonagentId", map.get("sonagentId"));
-        params.put("sonagentId", 81);
+        params.put("terminalNumber", map.get("terminalNumber"));
+        params.put("sonagentId", map.get("sonagentId"));
         params.put("startTime", map.get("startTime"));
         params.put("endTime", map.get("endTime"));
         params.put("page", page);

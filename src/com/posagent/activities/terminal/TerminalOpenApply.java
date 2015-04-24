@@ -19,6 +19,7 @@ import com.example.zf_android.entity.OrderEntity;
 import com.example.zf_android.entity.TerminalApplyEntity;
 import com.example.zf_android.trade.widget.MyTabWidget;
 import com.example.zf_zandroid.adapter.TerminalOpenApplyAdapter;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
@@ -119,8 +120,7 @@ public class TerminalOpenApply extends BaseActivity implements IXListViewListene
 
     private void getData() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("agentId", 1);
+        params.put("agentId", MyApplication.user().getAgentId());
         params.put("page", page);
         params.put("rows", rows);
         String strParams = params.toString();

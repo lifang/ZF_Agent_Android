@@ -21,6 +21,7 @@ import com.example.zf_android.R;
 import com.example.zf_android.entity.OrderEntity;
 import com.example.zf_android.trade.widget.MyTabWidget;
 import com.example.zf_zandroid.adapter.OrderAdapter;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
@@ -182,8 +183,7 @@ public class OrderList extends BaseActivity implements IXListViewListener,
 
     private void getData() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("customerId", 1);
+        params.put("customerId", MyApplication.user().getId());
         params.put("p", p);
         if (q > 0) {
            params.put("q", q);

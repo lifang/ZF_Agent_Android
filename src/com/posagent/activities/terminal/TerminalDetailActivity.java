@@ -73,8 +73,7 @@ public class TerminalDetailActivity extends BaseActivity {
 
     private void getData() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("terminalsId", 1);
+        params.put("terminalsId", terminalId);
 
         String strParams = params.toString();
         Events.TerminalDetailEvent event = new Events.TerminalDetailEvent();

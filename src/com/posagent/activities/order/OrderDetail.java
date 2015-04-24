@@ -97,7 +97,6 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
 
     private void getData() {
         JsonParams params = new JsonParams();
-        //Fixme
         params.put("id", id);
 
         String strParams = params.toString();

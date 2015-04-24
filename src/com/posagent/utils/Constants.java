@@ -32,6 +32,8 @@ public class Constants {
         public static final int ManStaff = 7;
         public static final int AgentInfo = 8;
         public static final int Stock = 9;
+        public static final int Order = 100;
+        public static final int AllProduct = 101;
     }
 
 

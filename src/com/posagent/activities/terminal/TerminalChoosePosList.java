@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.TerminalChoosePosItem;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseListActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
@@ -33,8 +34,7 @@ public class TerminalChoosePosList extends BaseListActivity {
 
     private void getData() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("customerId", 80);
+        params.put("customerId", MyApplication.user().getId());
 //        params.put("page", page);
 //        params.put("rows", rows);
         String strParams = params.toString();

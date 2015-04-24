@@ -9,6 +9,7 @@ import android.widget.ListView;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.ChanelEntitiy;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseListActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.Constants;
@@ -50,8 +51,7 @@ public class TerminalChooseChannelList extends BaseListActivity {
 
     private void getData() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("customerId", 80);
+        params.put("customerId", MyApplication.user().getId());
 //        params.put("page", page);
 //        params.put("rows", rows);
         String strParams = params.toString();

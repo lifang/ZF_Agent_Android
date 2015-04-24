@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.example.zf_android.Config;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.entity.TradeRecord;
+import com.posagent.MyApplication;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -261,9 +262,8 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
                 break;
             case R.id.trade_statistic:
                 Intent intent = new Intent(getActivity(), TradeStatisticActivity.class);
-                //Fixme
-                intent.putExtra(AGENT_ID, 1);
-                intent.putExtra(SON_AGENT_ID, 1);
+                intent.putExtra(AGENT_ID, MyApplication.user().getAgentId());
+                intent.putExtra(SON_AGENT_ID, MyApplication.user().getAgentUserId());
                 intent.putExtra(TRADE_TYPE, mTradeType);
                 intent.putExtra(TRADE_TYPE, mTradeType);
                 intent.putExtra(CLIENT_NUMBER, tradeClientName);

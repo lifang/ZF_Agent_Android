@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
@@ -76,8 +77,7 @@ public class ChangeEmail extends BaseActivity
         if(check()) {
             JsonParams params = new JsonParams();
 
-            //Fixme
-            params.put("customerId", 40);
+            params.put("customerId",  MyApplication.user().getId());
             params.put("email", et_new_email.getText().toString());
 
             String strParams = params.toString();

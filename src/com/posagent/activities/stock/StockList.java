@@ -20,6 +20,7 @@ import com.example.zf_android.entity.StockEntity;
 import com.example.zf_android.trade.widget.MyTabWidget;
 import com.example.zf_zandroid.adapter.StockAdapter;
 import com.google.gson.Gson;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.activities.CommonInputer;
 import com.posagent.events.Events;
@@ -93,8 +94,7 @@ public class StockList extends BaseActivity implements IXListViewListener {
                                     int position, long id) {
                 Intent i = new Intent(StockList.this, StockDetail.class);
                 StockEntity entity = myList.get(position - 1);
-                //fixme
-                i.putExtra("agentId", 1);
+                i.putExtra("agentId", MyApplication.user().getAgentId());
 
                 Gson gson = new Gson();
                 String json = gson.toJson(entity);
@@ -138,8 +138,7 @@ public class StockList extends BaseActivity implements IXListViewListener {
 
     private void getData() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("agentId", 1);
+        params.put("agentId", MyApplication.user().getAgentId());
         params.put("page", page);
         params.put("rows", rows);
         String strParams = params.toString();
@@ -203,8 +202,7 @@ public class StockList extends BaseActivity implements IXListViewListener {
 
     private void changeName(StockEntity entity) {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("agentId", 1);
+        params.put("agentId", MyApplication.user().getAgentId());
         params.put("goodId", entity.getGood_id());
         params.put("goodname", entity.getGoodname());
         String strParams = params.toString();

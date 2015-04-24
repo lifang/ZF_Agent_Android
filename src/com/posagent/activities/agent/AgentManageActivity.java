@@ -15,6 +15,7 @@ import com.example.zf_android.Config;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.SonAgent;
 import com.example.zf_zandroid.adapter.AgentAdapter;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.Constants;
@@ -132,8 +133,7 @@ public class AgentManageActivity extends BaseActivity implements XListView.IXLis
 
     private void getData() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("agentsId", 1);
+        params.put("agentsId", MyApplication.user().getId());
         params.put("page", page);
         params.put("rows", rows);
         String strParams = params.toString();
@@ -144,8 +144,7 @@ public class AgentManageActivity extends BaseActivity implements XListView.IXLis
 
     private void getDefaultProfit() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("agentsId", 1);
+        params.put("agentsId", MyApplication.user().getId());
         String strParams = params.toString();
         Events.CommonRequestEvent event = new Events.GetDefaultProfitEvent();
         event.setParams(strParams);

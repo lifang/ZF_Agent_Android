@@ -43,9 +43,7 @@ public class AgentCargoDetail extends BaseActivity {
 
     private void getData() {
         JsonParams params = new JsonParams();
-        //Fixme
         params.put("id", id);
-
         String strParams = params.toString();
         Events.CommonRequestEvent event = new Events.PrepareInfoEvent();
         event.setParams(strParams);

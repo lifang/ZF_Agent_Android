@@ -17,6 +17,7 @@ import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.AdressEntity;
 import com.example.zf_zandroid.adapter.AddressAdapter;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
@@ -120,8 +121,7 @@ public class AddressList extends BaseActivity  {
 
         JsonParams params = new JsonParams();
 
-        //Fixme
-        params.put("customerId", 1);
+        params.put("customerId", MyApplication.user().getId());
 
         String strParams = params.toString();
         Events.AddressListEvent event = new Events.AddressListEvent();

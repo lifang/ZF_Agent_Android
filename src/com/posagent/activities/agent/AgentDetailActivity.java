@@ -60,7 +60,6 @@ public class AgentDetailActivity extends BaseActivity {
 
     private void getData() {
         JsonParams params = new JsonParams();
-        //Fixme
         params.put("sonAgentsId", sonAgentsId);
         String strParams = params.toString();
         Events.CommonRequestEvent event = new Events.SonAgentInfoEvent();

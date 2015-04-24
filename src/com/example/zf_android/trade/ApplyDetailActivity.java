@@ -200,8 +200,6 @@ public class ApplyDetailActivity extends FragmentActivity {
         CommonUtil.toastShort(this, "loading...");
 
         JsonParams params = new JsonParams();
-        //Fixme
-//        params.put("terminalsId", 232);
         params.put("terminalsId", mTerminalId);
         params.put("status", mApplyType);
         String strParams = params.toString();
@@ -654,7 +652,6 @@ public class ApplyDetailActivity extends FragmentActivity {
 
     private void getAgentInfo() {
         JsonParams params = new JsonParams();
-        //Fixme
         params.put("merchantId", mMerchantId);
         String strParams = params.toString();
         Events.CommonRequestEvent event = new Events.AgentDetailEvent();
@@ -668,7 +665,6 @@ public class ApplyDetailActivity extends FragmentActivity {
 
         Map<String, Object> params = new HashMap<String, Object>();
 
-        //Fixme
         params.put("terminalId", mTerminalId);
         params.put("status", mTerminalStatus == 2 ? 2 : 1);
         params.put("applyCustomerId", mAgent.getCustomer_id());

@@ -9,6 +9,7 @@ import android.view.View;
 import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.activities.terminal.TerminalChooseForm;
 import com.posagent.activities.trade.TradeAgentActivity;
@@ -113,8 +114,7 @@ public class AgentCargoExchangeCreateActivity extends BaseActivity {
 
     private void doSubmit() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("customerId", 80);
+        params.put("customerId", MyApplication.user().getId());
 
         params.put("toAgentId", toSonAgentId);
         params.put("fromAgentId", fromSonAgentId);

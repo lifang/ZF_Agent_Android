@@ -14,6 +14,7 @@ import com.example.zf_android.entity.UserRole;
 import com.loopj.android.http.AsyncHttpClient;
 import com.posagent.events.Events;
 import com.posagent.network.APIManager;
+import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
 
 import java.util.HashMap;
@@ -92,9 +93,17 @@ public class MyApplication extends Application {
     public static UserInfoEntity getCurrentUser() {
         return currentUser;
     }
+    public static UserInfoEntity user() {
+        return currentUser;
+    }
 
     public static void setCurrentUser(UserInfoEntity currentUser) {
         MyApplication.currentUser = currentUser;
+
+        if (null == currentUser) {
+            roles = null;
+            return;
+        }
 
         //update roles
         roles = new HashMap<String, String>();
@@ -110,10 +119,37 @@ public class MyApplication extends Application {
     }
 
     public static boolean hasRole(String roleId) {
+        int intRoleId = Integer.parseInt(roleId);
+
         if (null == roles) {
             return false;
         }
-        return roles.get(roleId) != null;
+
+        if (currentUser.getId() == currentUser.getAgentId()) {
+            //是代理商
+            if (currentUser.getAgentId() != currentUser.getAgentUserId()) {
+                //二级代理商
+                switch (intRoleId) {
+                    case Constants.Roles.AllProduct:
+                    case Constants.Roles.Order:
+                        return false;
+                }
+            } else {
+                //一级代理商
+                return true;
+            }
+
+        } else {
+            switch (intRoleId) {
+                case Constants.Roles.AllProduct:
+                case Constants.Roles.Order:
+                    return true;
+            }
+            return roles.get(roleId) != null;
+        }
+
+        return false;
+
     }
 
 

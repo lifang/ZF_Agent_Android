@@ -8,6 +8,7 @@ import android.widget.EditText;
 import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
@@ -78,8 +79,7 @@ public class ChangePassword extends BaseActivity {
         if(check()) {
             JsonParams params = new JsonParams();
 
-            //Fixme
-            params.put("customerId", 40);
+            params.put("customerId", MyApplication.user().getId());
             params.put("passwordOld", StringUtil.Md5(et_password.getText().toString()));
             params.put("password", StringUtil.Md5(et_new_password.getText().toString()));
 

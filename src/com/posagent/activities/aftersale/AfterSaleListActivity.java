@@ -21,6 +21,7 @@ import com.example.zf_android.R;
 import com.example.zf_android.trade.common.CommonUtil;
 import com.example.zf_android.trade.entity.AfterSaleRecord;
 import com.example.zf_android.trade.widget.XListView;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
@@ -167,8 +168,7 @@ public class AfterSaleListActivity extends BaseActivity implements XListView.IXL
 
     private void loadData() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("customerId", 1);
+        params.put("customerId", MyApplication.user().getId());
         if (q > 0) {
             params.put("q", q);
         }

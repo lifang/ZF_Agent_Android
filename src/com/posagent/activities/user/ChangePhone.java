@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
@@ -90,8 +91,7 @@ public class ChangePhone extends BaseActivity
 
         //do get verify code
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("customerId", 40);
+        params.put("customerId",  MyApplication.user().getId());
         params.put("phone", tv_old_phone.getText().toString());
         String strParams = params.toString();
         Events.UserVerifyCodeEvent event = new Events.UserVerifyCodeEvent();
@@ -109,8 +109,7 @@ public class ChangePhone extends BaseActivity
         if(check()) {
             JsonParams params = new JsonParams();
 
-            //Fixme
-            params.put("customerId", 40);
+            params.put("customerId",  MyApplication.user().getId());
             params.put("phone", et_new_phone.getText().toString());
             params.put("dentcode", et_verify_code.getText().toString());
 

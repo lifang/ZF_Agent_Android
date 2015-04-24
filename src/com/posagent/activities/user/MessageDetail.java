@@ -13,6 +13,7 @@ import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.MessageEntity;
 import com.google.gson.Gson;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
@@ -69,8 +70,7 @@ public class MessageDetail extends BaseActivity {
 
     private void sendDelete() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("customerId", 80);
+        params.put("customerId",  MyApplication.user().getId());
         params.put("ids", deleteIds);
         params.put("page", 1);
         params.put("rows", 10);

@@ -24,6 +24,7 @@ import com.example.zf_android.entity.PayChannelInfoEntity;
 import com.example.zf_android.entity.PicEntity;
 import com.example.zf_android.entity.StandardRateEntity;
 import com.example.zf_android.entity.TDateEntity;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.fragments.HMSlideFragment;
@@ -160,9 +161,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
 
     private void getData() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("agentId", 1);
-//        params.put("goodId", 110);
+        params.put("agentId", MyApplication.user().getAgentId());
         params.put("goodId", goodsId);
         params.put("cityId", 0);
 //        params.put("type", goodsId);

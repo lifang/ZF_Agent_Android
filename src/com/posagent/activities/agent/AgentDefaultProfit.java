@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
@@ -77,8 +78,7 @@ public class AgentDefaultProfit extends BaseActivity
         if(check()) {
             JsonParams params = new JsonParams();
 
-            //Fixme
-            params.put("agentsId", 1);
+            params.put("agentsId", MyApplication.user().getId());
 
             params.put("defaultProfit", et_profit.getText().toString());
 

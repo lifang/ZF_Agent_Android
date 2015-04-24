@@ -23,6 +23,7 @@ import com.example.zf_android.entity.MessageEntity;
 import com.example.zf_android.trade.widget.MyTabWidget;
 import com.example.zf_zandroid.adapter.NewMessageAdapter;
 import com.google.gson.Gson;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.Constants;
@@ -168,8 +169,7 @@ public class MessageList extends BaseActivity implements IXListViewListener {
 
     private void getData() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("customerId", 80);
+        params.put("customerId",  MyApplication.user().getId());
         params.put("page", page);
         params.put("rows", rows);
         String strParams = params.toString();
@@ -180,8 +180,7 @@ public class MessageList extends BaseActivity implements IXListViewListener {
 
     private void sendDelete() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("customerId", 80);
+        params.put("customerId",  MyApplication.user().getId());
         params.put("ids", deleteIds);
         params.put("page", 1);
         params.put("rows", 10);
@@ -199,8 +198,7 @@ public class MessageList extends BaseActivity implements IXListViewListener {
 
     private void sendMakeReadAll() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("customerId", 1);
+        params.put("customerId",  MyApplication.user().getId());
         params.put("ids", deleteIds);
         params.put("page", 1);
         params.put("rows", 10);

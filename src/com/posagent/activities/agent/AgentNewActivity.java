@@ -14,6 +14,7 @@ import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.CitySelectActivity;
 import com.example.zf_android.trade.widget.MyTabWidget;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.Constants;
@@ -128,8 +129,7 @@ public class AgentNewActivity extends BaseActivity {
 
     private void doSubmit() {
         JsonParams params = new JsonParams();
-        //Fixme
-        params.put("agentsId", 1);
+        params.put("agentsId", MyApplication.user().getId());
         params.put("agentType", types);
         params.put("cityId", cityId);
 

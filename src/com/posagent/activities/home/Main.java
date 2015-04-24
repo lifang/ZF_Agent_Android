@@ -26,7 +26,6 @@ import com.posagent.fragments.HMSlideFragment;
 import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
 
-import java.util.HashMap;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -59,13 +58,6 @@ public class Main extends BaseActivity implements OnClickListener{
         setContentView(R.layout.activity_main);
         initView();
 
-        // 准备需要监听Click的数据
-        HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{
-            put("main_buy_pos", AllProduct.class);
-            put("main_order_manage", OrderList.class);
-        }};
-        this.setClickableMap(clickableMap);
-
         setupCommonViews();
 
         focusTabAtIndex(0);
@@ -83,6 +75,23 @@ public class Main extends BaseActivity implements OnClickListener{
 
 
 
+        findViewById(R.id.main_buy_pos).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!checkRole(Constants.Roles.AllProduct)) {return;}
+                Intent i2 =new Intent(Main.this, AllProduct.class);
+                startActivity(i2);
+            }
+        });
+
+        findViewById(R.id.main_order_manage).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!checkRole(Constants.Roles.Order)) {return;}
+                Intent i2 =new Intent(Main.this, OrderList.class);
+                startActivity(i2);
+            }
+        });
         findViewById(R.id.main_stock_manage).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

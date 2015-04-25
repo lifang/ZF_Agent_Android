@@ -9,21 +9,18 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
-import com.example.zf_android.trade.common.CommonUtil;
 import com.example.zf_android.trade.common.HttpCallback;
 import com.example.zf_android.trade.entity.TerminalItem;
+import com.example.zf_android.video.VideoActivity;
 import com.google.gson.reflect.TypeToken;
 import com.posagent.activities.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.zf_android.trade.Constants.TerminalIntent.REQUEST_DETAIL;
-import static com.example.zf_android.trade.Constants.TerminalIntent.TERMINAL_ID;
-import static com.example.zf_android.trade.Constants.TerminalIntent.TERMINAL_STATUS;
+import static com.example.zf_android.trade.Constants.TerminalIntent.*;
 import static com.example.zf_android.trade.Constants.TerminalStatus.PART_OPENED;
 import static com.example.zf_android.trade.Constants.TerminalStatus.UNOPENED;
 
@@ -139,7 +136,10 @@ public class ApplyListActivity extends BaseActivity {
             holder.btnVideo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    CommonUtil.toastShort(ApplyListActivity.this, "not yet completed...");
+                    //添加视频审核
+                    Intent intent = new Intent(ApplyListActivity.this, VideoActivity.class);
+                    intent.putExtra(TERMINAL_ID, item.getId());
+                    startActivity(intent);
                 }
             });
             return convertView;

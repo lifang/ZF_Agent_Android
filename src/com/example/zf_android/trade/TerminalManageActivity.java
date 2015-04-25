@@ -21,6 +21,7 @@ import com.example.zf_android.trade.common.HttpCallback;
 import com.example.zf_android.trade.common.Page;
 import com.example.zf_android.trade.entity.TerminalItem;
 import com.example.zf_android.trade.widget.XListView;
+import com.example.zf_android.video.VideoActivity;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
@@ -129,8 +130,12 @@ public class TerminalManageActivity extends Activity implements XListView.IXList
 		mVideoListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				CommonUtil.toastShort(TerminalManageActivity.this, "not yet completed...");
-			}
+                //添加视频审核
+                TerminalItem item = (TerminalItem) view.getTag();
+                Intent intent = new Intent(TerminalManageActivity.this, VideoActivity.class);
+                intent.putExtra(TERMINAL_ID, item.getId());
+                startActivity(intent);
+            }
 		};
 	}
 

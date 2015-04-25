@@ -1,7 +1,11 @@
 package com.example.zf_android;
 
 public class Config {
-	
+
+    //视频通话
+    public static final String VIDEO_SERVER_IP = "121.40.84.2";
+    public static final int VIDEO_SERVER_PORT = 8906;
+
     public final static String PATHS = "http://114.215.149.242:18080/ZFMerchant/api/";
     public final static String IMAGE_PATH = "";
 	public static String checkVersion=PATHS+"";

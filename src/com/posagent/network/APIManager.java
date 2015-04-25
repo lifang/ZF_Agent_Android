@@ -187,6 +187,11 @@ public class APIManager {
                                 completeEvent.setArrResult(json.getJSONArray("result"));
                             } catch (Exception ex) {
                                 Log.d("UnCatchException2", ex.getMessage());
+                                try {
+                                    completeEvent.setIntResult(json.getInt("result"));
+                                } catch (Exception e3) {
+                                    Log.d("UnCatchException3", ex.getMessage());
+                                }
                             }
                         }
                     }

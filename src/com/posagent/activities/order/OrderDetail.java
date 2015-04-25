@@ -2,6 +2,7 @@ package com.posagent.activities.order;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.examlpe.zf_android.util.ScrollViewWithListView;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
+import com.example.zf_android.activity.PayFromCar;
 import com.example.zf_android.entity.Goodlist;
 import com.example.zf_android.entity.MarkEntity;
 import com.example.zf_android.entity.OrderDetailEntity;
@@ -231,6 +233,11 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
                 Toast.makeText(getApplicationContext(), "请先付款···", Toast.LENGTH_LONG).show();
                 break;
             case R.id.btn_pay:
+                Intent i = new Intent (OrderDetail.this, PayFromCar.class);
+                i.putExtra("p", p);
+                i.putExtra("orderId", id+"");
+                startActivity(i);
+                finish();
                 break;
             case R.id.btn_comment:
                 break;

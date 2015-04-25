@@ -85,6 +85,7 @@ public class Events {
     public static class CommonCompleteEvent extends CompleteEvent {
         private JSONObject result;
         private JSONArray arrResult;
+        private int intResult;
 
         public JSONArray getArrResult() {
             return arrResult;
@@ -100,6 +101,14 @@ public class Events {
 
         public void setResult(JSONObject result) {
             this.result = result;
+        }
+
+        public int getIntResult() {
+            return intResult;
+        }
+
+        public void setIntResult(int intResult) {
+            this.intResult = intResult;
         }
     }
 

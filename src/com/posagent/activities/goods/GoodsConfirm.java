@@ -278,12 +278,13 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
     // events
     public void onEventMainThread(Events.CreateOrderCompleteEvent event) {
         if (event.getSuccess()) {
-
+            Intent i = new Intent (GoodsConfirm.this, PayFromCar.class);
+            i.putExtra("p", 1);
+            i.putExtra("orderId", event.getIntResult()+"");
+            startActivity(i);
         } else {
             Toast.makeText(getApplicationContext(), event.getMessage(), Toast.LENGTH_LONG).show();
         }
-        Intent i = new Intent (GoodsConfirm.this, PayFromCar.class);
-        startActivity(i);
     }
 
     private void updateAddress() {

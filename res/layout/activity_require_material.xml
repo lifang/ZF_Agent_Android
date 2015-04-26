@@ -16,7 +16,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:textSize="18dp"
+            android:textSize="15dp"
             android:text="对个人开通"
             />
         <View
@@ -39,7 +39,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:textSize="18dp"
+            android:textSize="15dp"
             android:text="对公开通"
             />
         <View

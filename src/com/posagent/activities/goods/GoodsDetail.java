@@ -12,6 +12,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.activity.GoodComment;
@@ -34,13 +35,11 @@ import com.posagent.utils.ViewHelper;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
 public class GoodsDetail extends BaseActivity implements OnClickListener {
-    static final String TAG = "GoodsDetail";
 
 
     TextView tvTitle, tvSubtitle, tvQuantity, tvBrand, tv_origin_price,
@@ -48,11 +47,12 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
                 tv_comment_count, tv_brand2, tv_shell_material,
                 tv_battery_info, tv_sign_order_way, tv_encrypt_card_way,
                 tv_factory_url, tv_factory_desc, tv_goods_desc,
-            tv_opening_requirement, tv_support_cancel, tv_require_material;
+            tv_opening_requirement, tv_support_cancel, tv_require_material,
+            tv_daigoumai, tv_daizulin;
 
-    ImageView iv_factory_logo;
+    ImageView iv_factory_logo, iv_factory_info;
 
-    LinearLayout ll_pay_channel, ll_support_areas, ll_orderType;
+    LinearLayout ll_pay_channel, ll_support_areas, ll_buyType;
 
     TableLayout tl_standard_rates, tl_tDates, tl_other_rate;
 
@@ -64,7 +64,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
     PayChannelInfoEntity paychannelinfo;
     List<PayChannelEntity> payChannelList;
     int commentCount;
-    int orderType = Constants.Goods.OrderTypePigou;
+    int buyType;
     String goodFaceUrl;
 
     private GoodsEntity entity;
@@ -72,25 +72,28 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
     int goodsId;
     int payChannelId;
 
+    int finalPrice, originPrice;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_good_detail);
         goodsId = getIntent().getIntExtra("id", 0);
-        orderType = getIntent().getIntExtra("orderType", Constants.Goods.OrderTypePigou);
+        buyType = getIntent().getIntExtra("buyType", 0);
 
         initView();
-        // 准备需要监听Click的数据
-        HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{
 
-        }};
-        this.setClickableMap(clickableMap);
         new TitleMenuUtil(GoodsDetail.this, "商品详情").show();
 
     }
 
     private void initView() {
         //init id elements
+        tv_daigoumai = (TextView) findViewById(R.id.tv_daigoumai);
+        tv_daigoumai.setOnClickListener(this);
+        tv_daizulin = (TextView) findViewById(R.id.tv_daizulin);
+        tv_daizulin.setOnClickListener(this);
+
         tvTitle = (TextView) findViewById(R.id.tv_title);
         tvSubtitle = (TextView) findViewById(R.id.tv_subtitle);
         tvQuantity = (TextView) findViewById(R.id.tv_quantity);
@@ -115,12 +118,16 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         tv_support_cancel = (TextView) findViewById(R.id.tv_support_cancel);
         btn_confirm_order = (Button) findViewById(R.id.btn_confirm_order);
 
-        ll_orderType = (LinearLayout) findViewById(R.id.ll_orderType);
-        if (orderType != Constants.Goods.OrderTypePigou) {
-            ll_orderType.setVisibility(View.VISIBLE);
+        ll_buyType = (LinearLayout) findViewById(R.id.ll_buyType);
+        if (buyType != Constants.Goods.OrderTypePigou) {
+            ll_buyType.setVisibility(View.VISIBLE);
             btn_confirm_order.setText("立即代购");
+            setText("tv_price_name", "价格");
+            hide("tv_origin_price");
+            hide("tv_quantity_name");
+            hide("tv_quantity");
         } else {
-            ll_orderType.setVisibility(View.GONE);
+            ll_buyType.setVisibility(View.GONE);
         }
 
         ll_pay_channel = (LinearLayout) findViewById(R.id.ll_pay_channel);
@@ -133,6 +140,9 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         View btn_confirm_order = (View) findViewById(R.id.btn_confirm_order);
         btn_confirm_order.setOnClickListener(this);
 
+        findViewById(R.id.iv_factory_info).setOnClickListener(this);
+        findViewById(R.id.tv_tdate_list).setOnClickListener(this);
+
         getData();
     }
 
@@ -142,15 +152,50 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         if (v.getId() == R.id.btn_confirm_order) {
             Intent i2 =new Intent(GoodsDetail.this, GoodsConfirm.class);
             i2.putExtra("getTitle", goodinfo.getTitle());
-            i2.putExtra("price", goodinfo.getPurchase_price());
+            i2.putExtra("price", finalPrice);
+            i2.putExtra("originPrice", originPrice);
+            i2.putExtra("minQuantity", goodinfo.getFloor_purchase_quantity());
             i2.putExtra("model", goodinfo.getModel_number());
 
             i2.putExtra("faceUrl", goodFaceUrl);
-            i2.putExtra("orderType", orderType);
+            i2.putExtra("buyType", buyType);
             i2.putExtra("paychannelId", payChannelId);
             i2.putExtra("goodId", goodinfo.getId());
+
+            i2.putExtra("jsonGoodinfo", gson.toJson(goodinfo));
+            i2.putExtra("jsonPayChannelInfo", gson.toJson(paychannelinfo));
+
+
             startActivity(i2);
 
+            return;
+        }
+
+        if (v.getId() == R.id.iv_factory_info) {
+            Intent i = new Intent(GoodsDetail.this, FactoryInfo.class);
+            i.putExtra("json", gson.toJson(entity.getFactory()));
+            startActivity(i);
+        }
+
+        if (v.getId() == R.id.tv_tdate_list) {
+            Intent i = new Intent(GoodsDetail.this, TDateList.class);
+            i.putExtra("json", gson.toJson(paychannelinfo.gettDates()));
+            startActivity(i);
+        }
+
+        if (v.getId() == R.id.tv_daigoumai) {
+            tv_daigoumai.setBackgroundResource(R.drawable.bg_shape);
+            tv_daizulin.setBackgroundResource(R.drawable.bg_gray_shape);
+            buyType = Constants.Goods.OrderTypeDaigou;
+            updatePrice();
+            return;
+        }
+
+        if (v.getId() == R.id.tv_daizulin) {
+            tv_daizulin.setBackgroundResource(R.drawable.bg_shape);
+            tv_daigoumai.setBackgroundResource(R.drawable.bg_gray_shape);
+            buyType = Constants.Goods.OrderTypeDaizulin;
+            updatePrice();
             return;
         }
 
@@ -163,8 +208,8 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         JsonParams params = new JsonParams();
         params.put("agentId", MyApplication.user().getAgentId());
         params.put("goodId", goodsId);
-        params.put("cityId", 0);
-//        params.put("type", goodsId);
+        params.put("cityId", MyApplication.user().getAgentCityId());
+        params.put("type", buyType);
 
         String strParams = params.toString();
         Events.GoodsDetailEvent event = new Events.GoodsDetailEvent();
@@ -219,6 +264,8 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         tv_sign_order_way.setText(goodinfo.getSign_order_way());
         tv_encrypt_card_way.setText(goodinfo.getEncrypt_card_way());
         tv_goods_desc.setText(goodinfo.getDescription());
+
+        setText("tv_quantity", "" + goodinfo.getFloor_purchase_quantity() + "件");
 
 
         payChannelList = entity.getPayChannelList();
@@ -448,9 +495,11 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         }
 
         if (null != paychannelinfo.getPcfactory()) {
-            factory = paychannelinfo.getPcfactory();
+//            factory = paychannelinfo.getPcfactory();
             updateFactory();
         }
+
+        updatePrice();
 
     }
 
@@ -471,5 +520,20 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         Events.CommonRequestEvent event = new Events.PayChannelInfoEvent();
         event.setParams(strParams);
         EventBus.getDefault().post(event);
+    }
+
+    private void updatePrice() {
+        int price = 0;
+        originPrice = goodinfo.getPrice() + paychannelinfo.getOpening_cost();
+        if (buyType == Constants.Goods.OrderTypePigou) {
+            price = goodinfo.getPurchase_price() + paychannelinfo.getOpening_cost();
+        } else if (buyType == Constants.Goods.OrderTypeDaigou) {
+            price = goodinfo.getRetail_price() + paychannelinfo.getOpening_cost();
+        } else {
+            price = goodinfo.getLease_price() + goodinfo.getLease_deposit() + paychannelinfo.getOpening_cost();
+        }
+        finalPrice = price;
+        setText("tv_price", "￥" + StringUtil.priceShow(price));
+        setText("tv_origin_price", "原价￥" + StringUtil.priceShow(originPrice));
     }
 }

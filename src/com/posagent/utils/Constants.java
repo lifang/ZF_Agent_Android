@@ -17,9 +17,9 @@ public class Constants {
 
 
     public static class Goods {
-        public static final int OrderTypeDaigou = 3;
-        public static final int OrderTypeDaizulin = 4;
-        public static final int OrderTypePigou = 5;
+        public static final int OrderTypeDaigou = 2;
+        public static final int OrderTypeDaizulin = 3;
+        public static final int OrderTypePigou = 1;
     }
 
     public static class Roles {

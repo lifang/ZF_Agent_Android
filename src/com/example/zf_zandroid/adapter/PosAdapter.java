@@ -9,9 +9,10 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.examlpe.zf_android.util.ImageCacheUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.PosEntity;
-import com.squareup.picasso.Picasso;
+import com.posagent.activities.goods.GoodsList;
 
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class PosAdapter extends BaseAdapter {
 		inflater = LayoutInflater.from(context);
 		if (convertView == null) {
 			holder = new ViewHolder();
-			convertView = inflater.inflate(R.layout.pos_item, null);
+			convertView = inflater.inflate(pos_item_layout(), null);
             holder.title = (TextView) convertView.findViewById(R.id.title);
             holder.img_type = (ImageView) convertView.findViewById(R.id.img_type);
             holder.img_face = (ImageView) convertView.findViewById(R.id.img_face);
@@ -62,21 +63,27 @@ public class PosAdapter extends BaseAdapter {
 
         PosEntity entity = list.get(position);
 
-        Picasso.with(context).load(entity.getUrl_path()).into(holder.img_face);
-
+        ImageCacheUtil.IMAGE_CACHE.get(entity.getUrl_path(), holder.img_face);
 
         holder.title.setText(entity.getTitle());
         holder.tv_price.setText("￥"+entity.getRetail_price()/100+"");
-        holder.tv_quantity.setText("" + entity.getFloor_purchase_quantity());
-		holder.content1.setText(entity.getModel_number());
+        if (null != holder.tv_quantity) {
+            holder.tv_quantity.setText("" + entity.getFloor_purchase_quantity());
+        }
+        if (null != holder.content1) {
+            holder.content1.setText(entity.getModel_number());
+        }
 		holder.tv_td.setText(entity.getPay_channe());
 		holder.ys.setText("已售"+entity.getVolume_number());
-		
-		if(entity.getHas_lease()==null||entity.getHas_lease()){
-			holder.img_type.setVisibility(View.VISIBLE);
-		}else{
-			holder.img_type.setVisibility(View.INVISIBLE);
-		}
+
+        if (null != holder.img_type) {
+            if(entity.getHas_lease()==null||entity.getHas_lease()){
+                holder.img_type.setVisibility(View.VISIBLE);
+            }else{
+                holder.img_type.setVisibility(View.INVISIBLE);
+            }
+
+        }
 	 
 		return convertView;
 	}
@@ -87,4 +94,8 @@ public class PosAdapter extends BaseAdapter {
 		public ImageView img_type, img_face;
 
 	}
+
+    private int pos_item_layout() {
+        return ((GoodsList)context).pos_item_layout();
+    }
 }

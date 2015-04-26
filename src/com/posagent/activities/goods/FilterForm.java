@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -43,6 +44,7 @@ public class FilterForm extends BaseActivity {
             tv_pay_card, tv_trade_type, tv_sale_slip, tv_tdate;
 
     private EditText et_min_price, et_max_price;
+    private ImageView img_on_off;
 
 
     private GoodsSearchEntity entity;
@@ -50,6 +52,7 @@ public class FilterForm extends BaseActivity {
 
     private Map<String, Object> mapFilter = new HashMap<String, Object>();
 
+    private Boolean hasLease = false;
     private List<Integer> selectedCategoryIds = new ArrayList<Integer>();
     private List<Integer> selectedBrandsIds = new ArrayList<Integer>();
     private List<Integer> selectedPayChannelsIds = new ArrayList<Integer>();
@@ -75,6 +78,7 @@ public class FilterForm extends BaseActivity {
                 selectedTradeTypeIds = (List<Integer>)mapFilter.get("selectedTradeTypeIds");
                 selectedSaleSlipIds = (List<Integer>)mapFilter.get("selectedSaleSlipIds");
                 selectedTDateIds = (List<Integer>)mapFilter.get("selectedTDateIds");
+                hasLease = (Boolean)mapFilter.get("hasLease");
 
                 enterText("et_min_price", (String)mapFilter.get("minPrice"));
                 enterText("et_max_price", (String)mapFilter.get("maxPrice"));
@@ -108,6 +112,12 @@ public class FilterForm extends BaseActivity {
         ll_tdate.setOnClickListener(this);
 
 
+        img_on_off = (ImageView)findViewById(R.id.img_on_off);
+        img_on_off.setOnClickListener(this);
+
+
+
+
         tv_brands = (TextView)findViewById(R.id.tv_brands);
         tv_tdate = (TextView)findViewById(R.id.tv_tdate);
         tv_sale_slip = (TextView)findViewById(R.id.tv_sale_slip);
@@ -139,6 +149,9 @@ public class FilterForm extends BaseActivity {
     }
 
     private void updateView() {
+
+        updateHasRelease();
+
         if (null == entity) {
             return;
         }
@@ -165,6 +178,10 @@ public class FilterForm extends BaseActivity {
         // 则直接 return，不再调用 super 处理
         Intent i = new Intent(FilterForm.this, FilterItemSelect.class);
         switch (v.getId()) {
+            case R.id.img_on_off:
+                hasLease = !hasLease;
+                updateHasRelease();
+                break;
             case R.id.ll_brands:
                 currentKind = "brands";
                 i.putExtra("json", gson.toJson(entity.getBrands()));
@@ -294,6 +311,8 @@ public class FilterForm extends BaseActivity {
                 }
             }
             tv.setText(StringUtil.join(names, ","));
+        } else {
+            tv.setText("全部");
         }
     }
 
@@ -327,6 +346,8 @@ public class FilterForm extends BaseActivity {
             }
 
             tv_category.setText(StringUtil.join(names, ","));
+        } else {
+            tv_category.setText("全部");
         }
     }
 
@@ -341,12 +362,29 @@ public class FilterForm extends BaseActivity {
         mapFilter.put("selectedTDateIds", selectedTDateIds);
         mapFilter.put("minPrice", getValue("et_min_price"));
         mapFilter.put("maxPrice", getValue("et_max_price"));
+        mapFilter.put("hasLease", hasLease);
 
 
         Intent i = getIntent();
         i.putExtra("json", gson.toJson(mapFilter));
         setResult(RESULT_OK, i);
         finish();
+    }
+
+    private List<Integer> allList() {
+        return new ArrayList<Integer>() {
+            {
+                add(0);
+            }
+        };
+    }
+
+    private void updateHasRelease() {
+        if(hasLease){
+            img_on_off.setBackgroundResource(R.drawable.pos_on);
+        }else{
+            img_on_off.setBackgroundResource(R.drawable.pos_off);
+        }
     }
 
 

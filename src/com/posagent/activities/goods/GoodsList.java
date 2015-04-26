@@ -47,7 +47,8 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
 
     private int page = 1;
     private int rows = Config.ROWS;
-    int orderType = Constants.Goods.OrderTypePigou;
+    int buyType = Constants.Goods.OrderTypePigou;
+    int orderType;
 
     private String keys;
     private String minPrice;
@@ -60,6 +61,7 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
     private List<Integer> selectedTradeTypeIds = new ArrayList<Integer>();
     private List<Integer> selectedSaleSlipIds = new ArrayList<Integer>();
     private List<Integer> selectedTDateIds = new ArrayList<Integer>();
+    private Boolean hasLease = false;
 
     private LinearLayout eva_nodata;
     private PosAdapter myAdapter;
@@ -91,7 +93,7 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
 
 		setContentView(R.layout.activity_goods_list);
 
-        orderType = getIntent().getIntExtra("orderType", Constants.Goods.OrderTypePigou);
+        buyType = getIntent().getIntExtra("buyType", Constants.Goods.OrderTypePigou);
 
         // 准备需要监听Click的数据
         HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{
@@ -196,7 +198,7 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
                                     int position, long id) {
                 Intent i = new Intent (GoodsList.this, GoodsDetail.class);
                 i.putExtra("id", myList.get(position - 1).getId());
-                i.putExtra("orderType", orderType);
+                i.putExtra("buyType", buyType);
                 startActivity(i);
             }
         });
@@ -278,6 +280,11 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
         if (maxPrice != null && !"".equals(maxPrice)) {
             params.put("maxPrice", Double.parseDouble(maxPrice));
         }
+        if (hasLease) {
+            params.put("hasLease", 1);
+        }
+
+
 
         params.put("page", page);
         params.put("rows", rows);
@@ -328,6 +335,13 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
         onRefresh();
     }
 
+    public int pos_item_layout() {
+        if (buyType == Constants.Goods.OrderTypePigou) {
+            return R.layout.pos_item;
+        }
+        return R.layout.pos_item_daigou;
+    }
+
 
     // after reset order type
     private void afterResetOrderType(TextView tv) {
@@ -350,6 +364,7 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
         selectedTradeTypeIds = (List<Integer>)mapFilter.get("selectedTradeTypeIds");
         selectedSaleSlipIds = (List<Integer>)mapFilter.get("selectedSaleSlipIds");
         selectedTDateIds = (List<Integer>)mapFilter.get("selectedTDateIds");
+        hasLease = (Boolean)mapFilter.get("hasLease");
 
         minPrice = (String)mapFilter.get("minPrice");
         maxPrice = (String)mapFilter.get("maxPrice");

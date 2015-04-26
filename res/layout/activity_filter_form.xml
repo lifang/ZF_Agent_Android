@@ -23,6 +23,52 @@
                 android:background="@color/Viewc2"
                 />
             <LinearLayout
+                android:tag="@string/tag_destination_get"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bg_item" >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:singleLine="true"
+                    android:text="只包含租赁"
+                    android:textColor="@color/text292929"
+                    android:textSize="17sp" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="1dp"
+
+                    />
+
+
+                <ImageView
+                    android:id="@+id/img_on_off"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="7dp"
+                    android:background="@drawable/pos_on"
+                    android:layout_marginRight="7dp"
+                    />
+
+            </LinearLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:layout_marginBottom="10dp"
+                android:background="@color/Viewc2"
+                />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="@color/Viewc2"
+                />
+            <LinearLayout
                 android:id="@+id/ll_brands"
                 android:tag="@string/tag_destination_get"
                 android:layout_width="fill_parent"

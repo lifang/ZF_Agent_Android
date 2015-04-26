@@ -8,8 +8,17 @@ public class GoodinfoEntity {
 	private String encrypt_card_way;
 //     "total_score": 5,
 	private int total_score;
-	
-//     "sign_order_way": "签购单打印方式2",
+    private int floor_purchase_quantity;
+
+    public int getFloor_purchase_quantity() {
+        return floor_purchase_quantity;
+    }
+
+    public void setFloor_purchase_quantity(int floor_purchase_quantity) {
+        this.floor_purchase_quantity = floor_purchase_quantity;
+    }
+
+    //     "sign_order_way": "签购单打印方式2",
 	private String sign_order_way;
 //     "retail_price": 12415,
 	private int retail_price;

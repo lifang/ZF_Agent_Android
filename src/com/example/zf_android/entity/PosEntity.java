@@ -16,6 +16,9 @@ public class PosEntity {
     private String url_path;
 
     public String getUrl_path() {
+//       if (null != url_path && url_path.indexOf("121.40.84.2:8888") > 0) {
+//           url_path = url_path.replace("http://121.40.84.2:8888/", "");
+//       }
         return url_path;
     }
 

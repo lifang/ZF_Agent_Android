@@ -236,4 +236,10 @@ public class StringUtil {
 
         return newIds;
     }
+
+    public static String priceShow(int price) {
+        double d = price / 100.0;
+        String strPrice = String.format("%.2f", d);
+        return strPrice;
+    }
 }

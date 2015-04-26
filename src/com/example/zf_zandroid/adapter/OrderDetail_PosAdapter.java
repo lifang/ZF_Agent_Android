@@ -6,8 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.examlpe.zf_android.util.ImageCacheUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.Goodlist;
 
@@ -44,12 +46,13 @@ public class OrderDetail_PosAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        final Goodlist entity = list.get(position);
         inflater = LayoutInflater.from(context);
         if(convertView == null){
             holder = new ViewHolder();
             convertView = inflater.inflate(R.layout.order_detail_positem, null);
             holder.content = (TextView) convertView.findViewById(R.id.content_pp);
-            holder.btn_ishow = (Button) convertView.findViewById(R.id.btn_ishow);
+            holder.evevt_img = (ImageView) convertView.findViewById(R.id.evevt_img);
             holder.tv_price = (TextView) convertView.findViewById(R.id.tv_price);
             holder.tv_x = (TextView) convertView.findViewById(R.id.tv_x);
             convertView.setTag(holder);
@@ -58,9 +61,9 @@ public class OrderDetail_PosAdapter extends BaseAdapter{
         }
 
         holder.content.setText(list.get(position).getGood_name());
-        holder.tv_price .setText("￥ "+list.get(position).getGood_actualprice());
+        holder.tv_price .setText("￥ "+entity.getGood_actualprice());
 //        holder.tv_x .setText(list.get(position).getGood_actualprice());
-        holder.btn_ishow.setVisibility(state==3?View.VISIBLE:View.GONE);
+        ImageCacheUtil.IMAGE_CACHE.get(entity.getGood_logo(), holder.evevt_img);
 
 
         return convertView;
@@ -68,6 +71,7 @@ public class OrderDetail_PosAdapter extends BaseAdapter{
 
     public final class ViewHolder {
         public TextView content,tv_price,tv_x;
+        public ImageView evevt_img;
         public Button btn_ishow;
     }
 }

@@ -23,7 +23,7 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:background="@drawable/button_background"
+            android:background="@drawable/bg_gray_shape"
             android:onClick="onEndCall"
             android:text="@string/endCall1"
             android:textColor="#ffffff" />     
@@ -37,7 +37,7 @@
             android:id="@+id/btn_speakControl"
             android:layout_width="52dp"
             android:layout_height="fill_parent"
-            android:background="@drawable/button_background"
+            android:background="@drawable/bg_gray_shape"
             android:src="@drawable/speak_on"/>
         
         <View
@@ -49,7 +49,7 @@
             android:id="@+id/btn_cameraControl"
             android:layout_width="52dp"
             android:layout_height="fill_parent"
-            android:background="@drawable/button_background"
+            android:background="@drawable/bg_gray_shape"
             android:src="@drawable/camera_on"/>
         
         <View
@@ -61,7 +61,7 @@
             android:id="@+id/ImgSwichVideo"
             android:layout_width="52dp"
             android:layout_height="fill_parent"
-            android:background="@drawable/button_background"
+            android:background="@drawable/bg_gray_shape"
             android:src="@drawable/switchvideo" />
 
     </LinearLayout>

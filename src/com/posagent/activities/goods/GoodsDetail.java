@@ -12,6 +12,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.examlpe.zf_android.util.ImageCacheUtil;
 import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
@@ -32,7 +33,6 @@ import com.posagent.fragments.HMSlideFragment;
 import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
 import com.posagent.utils.ViewHelper;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -294,8 +294,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
 
     private void updateFactory() {
         //factory
-        Picasso.with(this.getApplicationContext()).load(factory.getLogo_file_path())
-                .into(iv_factory_logo);
+        ImageCacheUtil.IMAGE_CACHE.get(factory.getLogo_file_path(), iv_factory_logo);
         tv_factory_url.setText(factory.getWebsite_url());
         tv_factory_desc.setText(factory.getDescription());
     }

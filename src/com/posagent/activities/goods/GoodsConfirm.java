@@ -380,7 +380,7 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
     public void onEventMainThread(Events.CreateOrderCompleteEvent event) {
         if (event.getSuccess()) {
             Intent i = new Intent (GoodsConfirm.this, PayFromCar.class);
-            i.putExtra("p", 1);
+            i.putExtra("p", mapBuyType());
             i.putExtra("orderId", event.getIntResult()+"");
             startActivity(i);
         } else {

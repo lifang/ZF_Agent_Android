@@ -8,11 +8,11 @@ import android.os.Message;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.examlpe.zf_android.util.ImageCacheUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.common.CommonUtil;
 import com.posagent.utils.PhotoManager;
-import com.squareup.picasso.Picasso;
 
 import static com.example.zf_android.trade.Constants.ApplyIntent.REQUEST_TAKE_PHOTO;
 import static com.example.zf_android.trade.Constants.ApplyIntent.REQUEST_UPLOAD_IMAGE;
@@ -46,7 +46,8 @@ public class ImageViewer extends BaseActivity {
 
     private void initView() {
         iv_viewer = (ImageView)findViewById(R.id.iv_viewer);
-        Picasso.with(this).load(url).into(iv_viewer);
+        ImageCacheUtil.IMAGE_CACHE.get(url, iv_viewer);
+
 
         findViewById(R.id.tv_reupload).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +84,7 @@ public class ImageViewer extends BaseActivity {
     }
 
     private void updatePhotoUrl(String _url) {
-        Picasso.with(this).load(_url).into(iv_viewer);
+        ImageCacheUtil.IMAGE_CACHE.get(_url, iv_viewer);
         Intent i = getIntent();
         i.putExtra("url", _url);
         i.putExtra("kind", kind);

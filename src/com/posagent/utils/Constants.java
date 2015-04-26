@@ -20,6 +20,10 @@ public class Constants {
         public static final int OrderTypeDaigou = 2;
         public static final int OrderTypeDaizulin = 3;
         public static final int OrderTypePigou = 1;
+        public static final int BuyTypePigou = 5;
+        public static final int BuyTypeDaigou = 3;
+        public static final int BuyTypeDaizulin = 4;
+
     }
 
     public static class Roles {

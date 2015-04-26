@@ -10,12 +10,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.examlpe.zf_android.util.ImageCacheUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.StockEntity;
 import com.posagent.activities.goods.GoodsDetail;
 import com.posagent.activities.stock.StockList;
 import com.posagent.utils.Constants;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -82,7 +82,8 @@ public class StockAdapter extends BaseAdapter{
 
         holder.iv_face = (ImageView) convertView.findViewById(R.id.iv_face);
 
-        Picasso.with(context).load(entity.getPicurl()).into(holder.iv_face);
+        ImageCacheUtil.IMAGE_CACHE.get(entity.getPicurl(), holder.iv_face);
+
 
         holder.btn_change_name = (Button) convertView.findViewById(R.id.btn_change_name);
         holder.btn_change_name.setOnClickListener(new View.OnClickListener() {

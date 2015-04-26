@@ -1,7 +1,5 @@
 package com.example.zf_android.activity;
 
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
@@ -22,15 +20,13 @@ import com.example.alipay.PayActivity;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.Goodlist;
 import com.example.zf_android.entity.OrderDetailEntity;
-import com.example.zf_android.trade.API;
-import com.example.zf_android.trade.common.HttpCallback;
-import com.example.zf_zandroid.adapter.OrderDetail_PosAdapter;
-import com.example.zf_zandroid.adapter.RecordAdapter;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.posagent.activities.order.OrderDetail;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
+
+import java.util.List;
+
 import de.greenrobot.event.EventBus;
 
 
@@ -98,9 +94,10 @@ public class PayFromCar extends PayActivity implements OnClickListener{
 
             @Override
             public void change() {
-                Intent intent = new Intent(PayFromCar.this,OrderDetail.class);
+                Intent intent = new Intent(PayFromCar.this, OrderDetail.class);
                 intent.putExtra("status",1);
                 intent.putExtra("id", orderId);
+                intent.putExtra("p", p);
                 startActivity(intent);
                 finish();
             }

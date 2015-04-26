@@ -125,19 +125,6 @@
                         android:textColor="@color/text292929"
                         android:textSize="11sp" />
                 </LinearLayout>
-
-                <Button
-
-                    android:layout_width="50dp"
-                    android:layout_height="24dp"
-                    android:id="@+id/btn_ishow"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-
-                    android:textSize="9sp"
-                    android:background="@drawable/send_bg_shape"
-                    android:textColor="@color/bgtitle"
-                    android:text="评论" />
             </RelativeLayout>
 
         </LinearLayout>

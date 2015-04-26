@@ -242,4 +242,8 @@ public class StringUtil {
         String strPrice = String.format("%.2f", d);
         return strPrice;
     }
+
+    public static String priceShow(String price) {
+        return priceShow(Integer.parseInt(price));
+    }
 }

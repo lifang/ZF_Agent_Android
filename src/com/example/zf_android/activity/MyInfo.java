@@ -4,6 +4,9 @@ package com.example.zf_android.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,9 +15,13 @@ import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
+import com.example.zf_android.trade.common.CommonUtil;
+import com.example.zf_android.trade.entity.City;
+import com.example.zf_android.trade.entity.Province;
 import com.example.zf_android.trade.entity.UserInfo;
 import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
+import com.posagent.activities.ImageViewer;
 import com.posagent.activities.home.LoginActivity;
 import com.posagent.activities.user.AddressList;
 import com.posagent.activities.user.ChangeEmail;
@@ -23,37 +30,59 @@ import com.posagent.events.Events;
 import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import de.greenrobot.event.EventBus;
 
 /***
-*
-* 我的信息
-*
-*/
+ *
+ * 我的信息
+ *
+ */
 public class MyInfo extends BaseActivity {
-	
-	private Button btn_exit;
-	private LinearLayout ll_change_password, ll_address_manage, ll_email, ll_phone;
-	private TextView tv_email, tv_phone;
+
+    private Button btn_exit;
+    private LinearLayout ll_change_password, ll_address_manage, ll_email, ll_phone;
+    private TextView tv_email, tv_phone;
 
     private TextView tvContent;
 
 
+    private List<City> mCities = new ArrayList<City>();
+    private List<String> mLetters = new ArrayList<String>();
+    private List<Object> mItems = new ArrayList<Object>();
+
+    private Handler handler;
+    private Thread overlayThread;
+
     private UserInfo entity;
 
     @Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.myinfo);
-		new TitleMenuUtil(MyInfo.this, "我的信息").show();
-		initView();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.myinfo);
+        new TitleMenuUtil(MyInfo.this, "我的信息").show();
+        initView();
 
-	}
-	 
 
-	private void initView() {
-		btn_exit=(Button) findViewById(R.id.btn_exit);
-		btn_exit.setOnClickListener(this);
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 1) {
+                    setText("tv_city_name", getCityName(entity.getCity_id()));
+                }
+            }
+        };
+
+    }
+
+
+    private void initView() {
+        btn_exit=(Button) findViewById(R.id.btn_exit);
+        btn_exit.setOnClickListener(this);
 
         ll_change_password = (LinearLayout)findViewById(R.id.ll_change_password);
         ll_address_manage = (LinearLayout)findViewById(R.id.ll_address_manage);
@@ -64,12 +93,17 @@ public class MyInfo extends BaseActivity {
         ll_email.setOnClickListener(this);
         ll_phone.setOnClickListener(this);
 
+        findViewById(R.id.iv_idcard_photo).setOnClickListener(this);
+        findViewById(R.id.iv_license_photo).setOnClickListener(this);
+        findViewById(R.id.iv_tax_photo).setOnClickListener(this);
+
+
         tv_email = (TextView)findViewById(R.id.tv_email);
         tv_phone = (TextView)findViewById(R.id.tv_phone);
 
         getData();
-		
-	}
+
+    }
 
 
     private void getData() {
@@ -85,6 +119,7 @@ public class MyInfo extends BaseActivity {
     public void onEventMainThread(Events.UserInfoCompleteEvent event) {
         if (event.success()) {
             entity = event.getEntity();
+            initCities();
             updateInfo();
         } else {
             toast(event.getMessage());
@@ -95,38 +130,47 @@ public class MyInfo extends BaseActivity {
         getData();
     }
 
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.btn_exit:
-			exit();
-			break;
-		case  R.id.ll_email:
-            tvContent = tv_email;
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_exit:
+                exit();
+                break;
+            case  R.id.ll_email:
+                tvContent = tv_email;
 
-            Intent i2 = new Intent(MyInfo.this, ChangeEmail.class);
-            i2.putExtra("email", tv_email.getText().toString());
-            startActivity(i2);
+                Intent i2 = new Intent(MyInfo.this, ChangeEmail.class);
+                i2.putExtra("email", tv_email.getText().toString());
+                startActivity(i2);
 
-            break;
-		case  R.id.ll_phone:
-            tvContent = tv_phone;
+                break;
+            case  R.id.iv_idcard_photo:
+                viewImage(entity.getCard_id_photo_path());
+                break;
+            case  R.id.iv_license_photo:
+                viewImage(entity.getLicense_no_pic_path());
+                break;
+            case  R.id.iv_tax_photo:
+                viewImage(entity.getTax_no_pic_path());
+                break;
+            case  R.id.ll_phone:
+                tvContent = tv_phone;
 
-            Intent i = new Intent(MyInfo.this, ChangePhone.class);
-            i.putExtra("phone", tv_phone.getText().toString());
-            startActivity(i);
+                Intent i = new Intent(MyInfo.this, ChangePhone.class);
+                i.putExtra("phone", tv_phone.getText().toString());
+                startActivity(i);
 
-            break;
-		case  R.id.ll_address_manage:
-			startActivity(new Intent(MyInfo.this, AddressList.class));
-			break;
-		case  R.id.ll_change_password:
-			startActivity(new Intent(MyInfo.this,ChangePassword.class));
-			break;
-		default:
-			break;
-		}
-	}
+                break;
+            case  R.id.ll_address_manage:
+                startActivity(new Intent(MyInfo.this, AddressList.class));
+                break;
+            case  R.id.ll_change_password:
+                startActivity(new Intent(MyInfo.this,ChangePassword.class));
+                break;
+            default:
+                break;
+        }
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -143,10 +187,10 @@ public class MyInfo extends BaseActivity {
         }
     }
 
-	private void exit() {
+    private void exit() {
         MyApplication.setCurrentUser(null);
-		startActivity(new Intent(MyInfo.this,LoginActivity.class));
-	}
+        startActivity(new Intent(MyInfo.this,LoginActivity.class));
+    }
 
     private void updateInfo() {
         String kind = "公司";
@@ -172,5 +216,62 @@ public class MyInfo extends BaseActivity {
 
     }
 
-	 
+
+    private void initCities() {
+        new Thread() {
+            @Override
+            public void run() {
+                List<Province> provinces = CommonUtil.readProvincesAndCities(context);
+                for (Province province : provinces) {
+                    List<City> cities = province.getCities();
+                    mCities.addAll(cities);
+                }
+
+                Collections.sort(mCities, new Comparator<City>() {
+                    @Override
+                    public int compare(City lhs, City rhs) {
+                        return lhs.getPinyin().compareTo(rhs.getPinyin());
+                    }
+                });
+
+                char letter = '0';
+                for (City city : mCities) {
+                    if (!TextUtils.isEmpty(city.getPinyin())) {
+                        char cur = city.getPinyin().charAt(0);
+                        if (letter != cur) {
+                            letter = cur;
+                            String item = String.valueOf(letter).toUpperCase();
+                            mLetters.add(item);
+                            mItems.add(item);
+                        }
+                        mItems.add(city);
+                    }
+                }
+                handler.sendEmptyMessage(1);
+            }
+        }.start();
+
+    }
+
+    private String getCityName(int cityId) {
+        String cityName = "未设置";
+
+        for (City city: mCities) {
+            if (city.getId() == cityId) {
+                cityName = city.getName();
+                break;
+            }
+        }
+
+        return cityName;
+    }
+
+    private void viewImage(String url) {
+        Intent i = new Intent(context, ImageViewer.class);
+        i.putExtra("url", url);
+        i.putExtra("justviewer", true);
+        startActivity(i);
+    }
+
+
 }

@@ -18,6 +18,8 @@ public class ApplyDetail {
 	@SerializedName("merchants")
 	private List<ApplyChooseItem> merchants;
 
+    private TerminalOpenInfo openingInfos;
+
 	@SerializedName("applyFor")
 	private List<ApplyCustomerDetail> customerDetails;
 
@@ -52,4 +54,12 @@ public class ApplyDetail {
 	public void setCustomerDetails(List<ApplyCustomerDetail> customerDetails) {
 		this.customerDetails = customerDetails;
 	}
+
+    public TerminalOpenInfo getOpeningInfos() {
+        return openingInfos;
+    }
+
+    public void setOpeningInfos(TerminalOpenInfo openingInfos) {
+        this.openingInfos = openingInfos;
+    }
 }

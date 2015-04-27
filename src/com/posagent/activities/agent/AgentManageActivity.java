@@ -38,7 +38,6 @@ public class AgentManageActivity extends BaseActivity implements XListView.IXLis
     private int page = 1;
     private int rows = Config.ROWS;
     private LinearLayout eva_nodata;
-
     private boolean onRefresh_number = true;
     private AgentAdapter myAdapter;
     List<SonAgent> myList = new ArrayList<SonAgent>();
@@ -70,6 +69,9 @@ public class AgentManageActivity extends BaseActivity implements XListView.IXLis
 
 		setContentView(R.layout.activity_agent_manage);
 		new TitleMenuUtil(AgentManageActivity.this, "管理下级代理商").show();
+
+
+        ((MyApplication)getApplication()).prepareChannelList();
 
         // 准备需要监听Click的数据
         HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{

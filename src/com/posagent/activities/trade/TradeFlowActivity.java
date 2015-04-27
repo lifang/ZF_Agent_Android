@@ -31,16 +31,13 @@ import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
-import static com.example.zf_android.trade.Constants.TradeType.CONSUME;
-import static com.example.zf_android.trade.Constants.TradeType.LIFE_PAY;
-import static com.example.zf_android.trade.Constants.TradeType.PHONE_PAY;
-import static com.example.zf_android.trade.Constants.TradeType.REPAYMENT;
 import static com.example.zf_android.trade.Constants.TradeType.TRANSFER;
 
 /**
  * Created by Leo on 2015/2/6.
  */
-public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnPageChangeListener, XListView.IXListViewListener {
+public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnPageChangeListener,
+        XListView.IXListViewListener, MyTabWidget.OnTabSelectedListener {
 
     private MyTabWidget mTabWidget;
     private MyViewPager mViewPager;
@@ -57,6 +54,7 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
     List<TradeRecord> moreList = new ArrayList<TradeRecord>();
 
     Map<String, Object> searchMap;
+    private int tradeTypeId = 1;
 
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
@@ -102,6 +100,8 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
         new TitleMenuUtil(this, getString(R.string.title_trade_flow)).show();
 
         mTabWidget = (MyTabWidget) findViewById(R.id.tab_widget);
+        mTabWidget.setOnTabSelectedListener(this);
+
         mViewPager = (MyViewPager) findViewById(R.id.view_pager);
         mFragments = new ArrayList<TradeFlowFragment>();
 
@@ -112,15 +112,15 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
         }
         // add fragments according to the order
         TradeFlowFragment transferFragment = TradeFlowFragment.newInstance(TRANSFER);
-        TradeFlowFragment consumeFragment = TradeFlowFragment.newInstance(CONSUME);
-        TradeFlowFragment repaymentFragment = TradeFlowFragment.newInstance(REPAYMENT);
-        TradeFlowFragment lifePayFragment = TradeFlowFragment.newInstance(LIFE_PAY);
-        TradeFlowFragment phonePayFragment = TradeFlowFragment.newInstance(PHONE_PAY);
+//        TradeFlowFragment consumeFragment = TradeFlowFragment.newInstance(CONSUME);
+//        TradeFlowFragment repaymentFragment = TradeFlowFragment.newInstance(REPAYMENT);
+//        TradeFlowFragment lifePayFragment = TradeFlowFragment.newInstance(LIFE_PAY);
+//        TradeFlowFragment phonePayFragment = TradeFlowFragment.newInstance(PHONE_PAY);
         mFragments.add(transferFragment);
-        mFragments.add(consumeFragment);
-        mFragments.add(repaymentFragment);
-        mFragments.add(lifePayFragment);
-        mFragments.add(phonePayFragment);
+//        mFragments.add(consumeFragment);
+//        mFragments.add(repaymentFragment);
+//        mFragments.add(lifePayFragment);
+//        mFragments.add(phonePayFragment);
 
         mTabWidget.setViewPager(mViewPager);
         mViewPager.setAdapter(new TradeFlowPagerAdapter(getSupportFragmentManager()));
@@ -172,7 +172,9 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
     }
 
     public void getData(Map<String, Object> map) {
-
+        if (null == map) {
+            return;
+        }
         searchMap = map;
 
 //        {
@@ -189,7 +191,7 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
         JsonParams params = new JsonParams();
 
         params.put("agentId", MyApplication.user().getAgentId());
-        params.put("tradeTypeId", map.get("tradeTypeId"));
+        params.put("tradeTypeId", tradeTypeId);
         params.put("terminalNumber", map.get("terminalNumber"));
         params.put("sonagentId", map.get("sonagentId"));
         params.put("startTime", map.get("startTime"));
@@ -221,6 +223,14 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
 
     @Override
     public void onPageScrollStateChanged(int i) {
+    }
+
+    @Override
+    public void onTabSelected(int position) {
+        Log.d("TradeFlow", "postion: " + position);
+        tradeTypeId = position + 1;
+        onRefresh();
+
     }
 
     public class TradeFlowPagerAdapter extends FragmentPagerAdapter {

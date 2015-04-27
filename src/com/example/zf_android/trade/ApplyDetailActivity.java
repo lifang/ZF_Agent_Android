@@ -34,6 +34,7 @@ import com.example.zf_android.trade.entity.ApplyTerminalDetail;
 import com.example.zf_android.trade.entity.City;
 import com.example.zf_android.trade.entity.Merchant;
 import com.example.zf_android.trade.entity.Province;
+import com.example.zf_android.trade.entity.TerminalOpenInfo;
 import com.example.zf_android.trade.widget.MyTabWidget;
 import com.posagent.activities.terminal.ChooseChannel;
 import com.posagent.activities.trade.TradeAgentActivity;
@@ -197,8 +198,6 @@ public class ApplyDetailActivity extends FragmentActivity {
 		mMaterialContainer.removeAllViews();
 		initMerchantDetailKeys();
 
-        CommonUtil.toastShort(this, "loading...");
-
         JsonParams params = new JsonParams();
         params.put("terminalsId", mTerminalId);
         params.put("status", mApplyType);
@@ -219,6 +218,7 @@ public class ApplyDetailActivity extends FragmentActivity {
 
         ApplyDetail data = event.getEntity();
         ApplyTerminalDetail terminalDetail = data.getTerminalDetail();
+        TerminalOpenInfo openInfo = data.getOpeningInfos();
         final List<ApplyChooseItem> merchants = data.getMerchants();
         List<ApplyMaterial> materials = data.getMaterials();
         List<ApplyCustomerDetail> customerDetails = data.getCustomerDetails();

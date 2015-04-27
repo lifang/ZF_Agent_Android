@@ -211,9 +211,6 @@ public class MyApplication extends Application {
         APIManager.getDefault();
         EventBus.getDefault().register(this);
 
-        // prepare channel list
-        prepareChannelList();
-
     }
 
 	public static MyApplication getInstance() {
@@ -222,7 +219,7 @@ public class MyApplication extends Application {
 
 
     //
-    private void prepareChannelList() {
+    public void prepareChannelList() {
         JsonParams params = new JsonParams();
         String strParams = params.toString();
         Events.CommonRequestEvent event = new Events.ChannelListEvent();

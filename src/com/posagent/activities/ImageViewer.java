@@ -44,7 +44,7 @@ public class ImageViewer extends BaseActivity {
 
 
         url = getIntent().getStringExtra("url");
-        url = "http://d.hiphotos.baidu.com/image/w%3D2048/sign=48fd3c26f01fbe091c5ec4145f580d33/64380cd7912397dd92729b545b82b2b7d0a28752.jpg";
+//        url = "http://d.hiphotos.baidu.com/image/w%3D2048/sign=48fd3c26f01fbe091c5ec4145f580d33/64380cd7912397dd92729b545b82b2b7d0a28752.jpg";
         initView();
     }
 

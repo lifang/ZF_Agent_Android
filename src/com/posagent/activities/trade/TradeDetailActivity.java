@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.entity.TradeDetail;
@@ -75,7 +76,7 @@ public class TradeDetailActivity extends BaseActivity {
         String[] tradeStatuses = resources.getStringArray(R.array.trade_status);
 
         setText("trade_detail_status", tradeStatuses[entity.getTradedStatus()]);
-        setText("trade_detail_amount", "" + entity.getAmount());
+        setText("trade_detail_amount", StringUtil.priceShow(entity.getAmount()));
         setText("trade_detail_poundage", "" + entity.getPoundage());
         setText("trade_detail_time", "" + entity.getTradedTimeStr());
 
@@ -130,8 +131,8 @@ public class TradeDetailActivity extends BaseActivity {
                     : i == 1 ? entity.getPayFromAccount()
                     : i == 2 ? entity.getPayIntoAccount()
                     : i == 3 ? entity.getPayChannelName()
-                    : i == 4 ? entity.getProfitPrice() + ""
-                    : i == 5 ? entity.getAmount() + ""
+                    : i == 4 ? StringUtil.priceShow(entity.getProfitPrice()) + ""
+                    : i == 5 ? StringUtil.priceShow(entity.getAmount()) + ""
                     : i == 6 ? entity.getTradedTimeStr()
                     : i == 7 ? tradeStatuses[entity.getTradedStatus()]
                     : i == 8 ? entity.getBatchNumber()

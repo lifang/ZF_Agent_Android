@@ -108,7 +108,7 @@ public class UserList extends BaseActivity implements IXListViewListener {
         } else {
             // delete icon show
             ImageView deleteIcon = (ImageView) findViewById(R.id.search);
-            deleteIcon.setVisibility(View.VISIBLE);
+//            deleteIcon.setVisibility(View.VISIBLE);
             deleteIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

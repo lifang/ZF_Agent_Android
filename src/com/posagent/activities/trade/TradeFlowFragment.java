@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,8 @@ import com.example.zf_android.Config;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.entity.TradeRecord;
 import com.posagent.MyApplication;
+import com.posagent.activities.CommonInputer;
+import com.posagent.utils.Constants;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,12 +40,12 @@ import java.util.Map;
 import de.greenrobot.event.EventBus;
 
 import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_ID;
+import static com.example.zf_android.trade.Constants.TradeIntent.SON_AGENT_ID;
 import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_NAME;
 import static com.example.zf_android.trade.Constants.TradeIntent.CLIENT_NUMBER;
 import static com.example.zf_android.trade.Constants.TradeIntent.END_DATE;
 import static com.example.zf_android.trade.Constants.TradeIntent.REQUEST_TRADE_AGENT;
 import static com.example.zf_android.trade.Constants.TradeIntent.REQUEST_TRADE_CLIENT;
-import static com.example.zf_android.trade.Constants.TradeIntent.SON_AGENT_ID;
 import static com.example.zf_android.trade.Constants.TradeIntent.START_DATE;
 import static com.example.zf_android.trade.Constants.TradeIntent.TRADE_RECORD_ID;
 import static com.example.zf_android.trade.Constants.TradeIntent.TRADE_TYPE;
@@ -78,6 +81,7 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
 
     private Button mTradeSearch;
     private Button mTradeStatistic;
+    private LinearLayout mTradeSearchContent;
 
     private String tradeClientName;
     private String tradeStartDate;
@@ -149,6 +153,7 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
             mTradeEndDate.setText(tradeEndDate);
         }
         if (hasSearched) {
+            mTradeSearchContent.setVisibility(View.VISIBLE);
             mAdapter.notifyDataSetChanged();
         }
         toggleButtons();
@@ -218,7 +223,7 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
         if (resultCode != Activity.RESULT_OK) return;
         switch (requestCode) {
             case REQUEST_TRADE_CLIENT:
-                String clientName = data.getStringExtra(CLIENT_NUMBER);
+                String clientName = data.getStringExtra(Constants.CommonInputerConstant.VALUE_KEY);
                 mTradeClientName.setText(clientName);
                 tradeClientName = clientName;
                 toggleButtons();
@@ -238,8 +243,8 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.trade_client:
-                Intent i = new Intent(getActivity(), TradeClientActivity.class);
-                i.putExtra(CLIENT_NUMBER, tradeClientName);
+                Intent i = new Intent(getActivity(), CommonInputer.class);
+                i.putExtra(Constants.CommonInputerConstant.PLACEHOLDER_KEY, mTradeClientName.getText().toString());
                 startActivityForResult(i, REQUEST_TRADE_CLIENT);
                 break;
             case R.id.trade_agent:

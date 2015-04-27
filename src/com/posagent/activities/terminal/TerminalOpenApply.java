@@ -54,6 +54,9 @@ public class TerminalOpenApply extends BaseActivity implements IXListViewListene
                     if (myList.size() == 0) {
                         Xlistview.setVisibility(View.GONE);
                         eva_nodata.setVisibility(View.VISIBLE);
+                    } else {
+                        Xlistview.setVisibility(View.VISIBLE);
+                        eva_nodata.setVisibility(View.GONE);
                     }
                     onRefresh_number = true;
                     myAdapter.notifyDataSetChanged();

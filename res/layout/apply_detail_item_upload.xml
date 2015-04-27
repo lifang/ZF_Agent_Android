@@ -12,6 +12,7 @@
 			style="@style/TextItem"
 			android:layout_gravity="left|center_vertical"/>
 
+
 		<TextView
 			android:id="@+id/apply_detail_value"
 			style="@style/TextItem"
@@ -20,6 +21,14 @@
 			android:textColor="@color/blank_button_selector"
 			android:clickable="true"
 			android:text="@string/apply_upload_photo"/>
+        <ImageButton
+            android:id="@+id/apply_detail_view"
+            style="@style/TextItem"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="right|center_vertical"
+            android:background="@android:color/transparent"
+            android:visibility="gone"
+            android:src="@drawable/icon_open"/>
 	</FrameLayout>
 
 	<View style="@style/Divider"/>

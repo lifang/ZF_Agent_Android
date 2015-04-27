@@ -123,6 +123,20 @@ public class BaseActivity extends Activity implements View.OnClickListener {
             return;
         }
 
+        if (v.getId() == R.id.tab_index2) {
+            if (checkRole(Constants.Roles.Message)) {
+                startActivity(new Intent(this, MessageList.class));
+            }
+            return;
+        }
+
+        if (v.getId() == R.id.tab_index3) {
+            if (checkRole(Constants.Roles.Mine)) {
+                startActivity(new Intent(this, MenuMine.class));
+            }
+            return;
+        }
+
         Class activity = this.matchedClass(v);
         if (activity != null) {
             startActivity(new Intent(this, activity));

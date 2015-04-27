@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,9 +14,7 @@ import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
-import com.example.zf_android.trade.common.CommonUtil;
 import com.example.zf_android.trade.entity.City;
-import com.example.zf_android.trade.entity.Province;
 import com.example.zf_android.trade.entity.UserInfo;
 import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
@@ -31,8 +28,6 @@ import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -72,7 +67,7 @@ public class MyInfo extends BaseActivity {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == 1) {
-                    setText("tv_city_name", getCityName(entity.getCity_id()));
+                    setText("tv_city_name", ((MyApplication)getApplication()).cityNameForId(entity.getCity_id()) );
                 }
             }
         };
@@ -119,7 +114,6 @@ public class MyInfo extends BaseActivity {
     public void onEventMainThread(Events.UserInfoCompleteEvent event) {
         if (event.success()) {
             entity = event.getEntity();
-            initCities();
             updateInfo();
         } else {
             toast(event.getMessage());
@@ -209,61 +203,11 @@ public class MyInfo extends BaseActivity {
         setText("tv_idCard", entity.getCard_id());
         setText("tv_phone", entity.getPhone());
         setText("tv_email", entity.getEmail());
-        setText("tv_city_name", "" + entity.getCity_id());
+        setText("tv_city_name", ((MyApplication)getApplication()).cityNameForId(entity.getCity_id()) );
         setText("tv_address", entity.getAddress());
         setText("tv_username", entity.getUsername());
 
 
-    }
-
-
-    private void initCities() {
-        new Thread() {
-            @Override
-            public void run() {
-                List<Province> provinces = CommonUtil.readProvincesAndCities(context);
-                for (Province province : provinces) {
-                    List<City> cities = province.getCities();
-                    mCities.addAll(cities);
-                }
-
-                Collections.sort(mCities, new Comparator<City>() {
-                    @Override
-                    public int compare(City lhs, City rhs) {
-                        return lhs.getPinyin().compareTo(rhs.getPinyin());
-                    }
-                });
-
-                char letter = '0';
-                for (City city : mCities) {
-                    if (!TextUtils.isEmpty(city.getPinyin())) {
-                        char cur = city.getPinyin().charAt(0);
-                        if (letter != cur) {
-                            letter = cur;
-                            String item = String.valueOf(letter).toUpperCase();
-                            mLetters.add(item);
-                            mItems.add(item);
-                        }
-                        mItems.add(city);
-                    }
-                }
-                handler.sendEmptyMessage(1);
-            }
-        }.start();
-
-    }
-
-    private String getCityName(int cityId) {
-        String cityName = "未设置";
-
-        for (City city: mCities) {
-            if (city.getId() == cityId) {
-                cityName = city.getName();
-                break;
-            }
-        }
-
-        return cityName;
     }
 
     private void viewImage(String url) {

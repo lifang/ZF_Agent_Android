@@ -243,6 +243,14 @@ public class StringUtil {
         return strPrice;
     }
 
+    public static int intSex(String sex) {
+        return sex.equals("男") ? 1 : 2;
+    }
+
+    public static String strSex(int sex) {
+        return sex == 1 ? "男" : "女";
+    }
+
     public static String priceShow(String price) {
         return priceShow(Integer.parseInt(price));
     }

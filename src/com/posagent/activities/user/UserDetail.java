@@ -134,7 +134,7 @@ public class UserDetail extends BaseActivity implements IXListViewListener {
 
     private void getData() {
         JsonParams params = new JsonParams();
-        params.put("customerId",  MyApplication.user().getId());
+        params.put("customerId",  entity.getCustomersId());
         params.put("page", page);
         params.put("rows", rows);
         String strParams = params.toString();
@@ -176,6 +176,7 @@ public class UserDetail extends BaseActivity implements IXListViewListener {
         } else {
             toast(event.getMessage());
         }
+
     }
 
     // helper

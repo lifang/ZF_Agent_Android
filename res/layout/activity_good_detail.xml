@@ -289,7 +289,6 @@
                     android:id="@+id/iv_factory_logo"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/pay_yh"
                     />
 
                 <TextView
@@ -299,7 +298,6 @@
                     android:layout_marginRight="5dp"
                     android:layout_marginLeft="5dp"
                     android:layout_gravity="center_vertical"
-                    android:text="http://www.kalal.com"
                     />
             </LinearLayout>
 

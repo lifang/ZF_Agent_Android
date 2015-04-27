@@ -171,8 +171,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
             UserInfoEntity userinfo = event.getEntity();
             //save user info
             MyApplication.setCurrentUser(userinfo);
-
-            finish();
+            startActivity(new Intent(LoginActivity.this, Main.class));
         } else {
             toast(event.getMessage());
         }

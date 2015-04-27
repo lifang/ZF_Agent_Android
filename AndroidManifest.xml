@@ -506,6 +506,10 @@
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
+            android:name="com.posagent.activities.terminal.MerchantList"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.posagent.activities.goods.GoodsDetail"
             android:screenOrientation="portrait" >
         </activity>

@@ -16,7 +16,6 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,12 +37,12 @@ import java.util.Map;
 import de.greenrobot.event.EventBus;
 
 import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_ID;
-import static com.example.zf_android.trade.Constants.TradeIntent.SON_AGENT_ID;
 import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_NAME;
 import static com.example.zf_android.trade.Constants.TradeIntent.CLIENT_NUMBER;
 import static com.example.zf_android.trade.Constants.TradeIntent.END_DATE;
 import static com.example.zf_android.trade.Constants.TradeIntent.REQUEST_TRADE_AGENT;
 import static com.example.zf_android.trade.Constants.TradeIntent.REQUEST_TRADE_CLIENT;
+import static com.example.zf_android.trade.Constants.TradeIntent.SON_AGENT_ID;
 import static com.example.zf_android.trade.Constants.TradeIntent.START_DATE;
 import static com.example.zf_android.trade.Constants.TradeIntent.TRADE_RECORD_ID;
 import static com.example.zf_android.trade.Constants.TradeIntent.TRADE_TYPE;
@@ -79,7 +78,6 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
 
     private Button mTradeSearch;
     private Button mTradeStatistic;
-    private LinearLayout mTradeSearchContent;
 
     private String tradeClientName;
     private String tradeStartDate;
@@ -151,7 +149,6 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
             mTradeEndDate.setText(tradeEndDate);
         }
         if (hasSearched) {
-            mTradeSearchContent.setVisibility(View.VISIBLE);
             mAdapter.notifyDataSetChanged();
         }
         toggleButtons();

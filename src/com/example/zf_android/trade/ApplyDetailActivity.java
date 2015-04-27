@@ -211,6 +211,12 @@ public class ApplyDetailActivity extends FragmentActivity {
 
     // events
     public void onEventMainThread(Events.ApplyDetailCompleteEvent event) {
+
+        if (!event.success()) {
+            CommonUtil.toastShort(ApplyDetailActivity.this, event.getMessage());
+            return;
+        }
+
         ApplyDetail data = event.getEntity();
         ApplyTerminalDetail terminalDetail = data.getTerminalDetail();
         final List<ApplyChooseItem> merchants = data.getMerchants();

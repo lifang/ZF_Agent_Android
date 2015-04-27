@@ -32,6 +32,7 @@ import de.greenrobot.event.EventBus;
 public class BaseActivity extends Activity implements View.OnClickListener {
 
     protected String TAG = getClass().toString();
+    protected BaseActivity context = this;
 
     protected Gson gson = new Gson();
 

@@ -153,7 +153,7 @@ public class StockDetail extends BaseActivity implements IXListViewListener {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(StockDetail.this, StockAgentDetail.class);
                 Gson gson = new Gson();
-                StockAgentEntity stockAgentEntity = myList.get(position);
+                StockAgentEntity stockAgentEntity = myList.get(position - 1);
                 String json = gson.toJson(stockAgentEntity);
                 i.putExtra("json", json);
 

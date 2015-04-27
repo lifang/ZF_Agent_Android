@@ -99,7 +99,7 @@ public class StockAdapter extends BaseAdapter{
             public void onClick(View v) {
                 Intent i = new Intent (context, GoodsDetail.class);
                 i.putExtra("id", entity.getGood_id());
-                i.putExtra("orderType", Constants.Goods.OrderTypePigou);
+                i.putExtra("buyType", Constants.Goods.OrderTypePigou);
                 context.startActivity(i);
             }
         });

@@ -27,6 +27,8 @@ public class ImageViewer extends BaseActivity {
     private String url;
     private String kind;
 
+    private boolean justviewer = false;
+
     private PhotoManager photoManager;
 
     @Override
@@ -38,6 +40,8 @@ public class ImageViewer extends BaseActivity {
         photoManager = new PhotoManager(this);
 
         kind = getIntent().getStringExtra("kind");
+        justviewer = getIntent().getBooleanExtra("justviewer", false);
+
 
         url = getIntent().getStringExtra("url");
         url = "http://d.hiphotos.baidu.com/image/w%3D2048/sign=48fd3c26f01fbe091c5ec4145f580d33/64380cd7912397dd92729b545b82b2b7d0a28752.jpg";
@@ -55,6 +59,10 @@ public class ImageViewer extends BaseActivity {
                 photoManager.prompt();
             }
         });
+
+        if (justviewer) {
+            hide("tv_reupload");
+        }
     }
 
     @Override

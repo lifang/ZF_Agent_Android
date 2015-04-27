@@ -12,6 +12,8 @@ public class TerminalApply {
 	@SerializedName("serial_num")
 	private String terminalNum;
 
+	private String channelName;
+
 	private String brandName;
 
 	@SerializedName("model_number")
@@ -109,4 +111,12 @@ public class TerminalApply {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+
+    public String getChannelName() {
+        return channelName;
+    }
+
+    public void setChannelName(String channelName) {
+        this.channelName = channelName;
+    }
 }

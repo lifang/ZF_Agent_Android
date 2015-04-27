@@ -23,7 +23,6 @@ public class Constants {
         public static final int BuyTypePigou = 5;
         public static final int BuyTypeDaigou = 3;
         public static final int BuyTypeDaizulin = 4;
-
     }
 
     public static class Roles {
@@ -65,6 +64,12 @@ public class Constants {
                 "已停用"
         };
 
+
+
+    }
+
+    public static class KeyValue {
+        public static final int Picture = 2;
     }
 
     public static class Trade {

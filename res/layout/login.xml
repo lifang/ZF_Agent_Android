@@ -64,7 +64,7 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/login_img_pass"
             android:textSize="17sp"
-            android:text="652959292@qq.com"
+            android:text="2833761825@qq.cm"
             android:maxWidth="20dp"
             />
         <LinearLayout

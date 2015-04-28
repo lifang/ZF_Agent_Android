@@ -91,7 +91,8 @@ public class API {
 	public static final String APPLY_CHANNEL_LIST = SCHEMA + HOST + "/ZFMerchant/api/apply/getChannels";
 
 	// upload image url
-	public static final String UPLOAD_IMAGE = APIManager.BaseUrl + "/agent/upload/register";
+//	public static final String UPLOAD_IMAGE = APIManager.BaseUrl + "/agent/upload/register";
+	public static final String UPLOAD_IMAGE = APIManager.BaseUrl + "/apply/upload/tempOpenImg/103";
 	// Apply Submit
 	public static final String APPLY_SUBMIT = SCHEMA + HOST + "/ZFMerchant/api/apply/addOpeningApply";
 

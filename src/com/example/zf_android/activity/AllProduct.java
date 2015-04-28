@@ -41,7 +41,7 @@ public class AllProduct extends BaseActivity implements OnClickListener {
                 if (!checkRole(Constants.Roles.Pigou)) {return;}
 
                 Intent i2 =new Intent(AllProduct.this, GoodsList.class);
-                i2.putExtra("orderType", Constants.Goods.OrderTypePigou);
+                i2.putExtra("buyType", Constants.Goods.OrderTypePigou);
                 startActivity(i2);
             }
         });
@@ -51,7 +51,7 @@ public class AllProduct extends BaseActivity implements OnClickListener {
                 if (!checkRole(Constants.Roles.Daigou)) {return;}
 
                 Intent i2 =new Intent(AllProduct.this, GoodsList.class);
-                i2.putExtra("orderType", Constants.Goods.OrderTypeDaigou);
+                i2.putExtra("buyType", Constants.Goods.OrderTypeDaigou);
                 startActivity(i2);
             }
         });

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_action_cancel"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:textColor="@color/bgtitle"
+            android:background="@drawable/bg_shape"
+            android:layout_margin="5dp"
+            android:visibility="gone"
+            android:text="取消订单" />
+
+        <Button
+            android:id="@+id/btn_action_pay"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:background="@drawable/bg_blue_shape"
+            android:textColor="@color/ffffff"
+            android:visibility="gone"
+            android:text="付款" />
+
+        <Button
+            android:id="@+id/btn_action_dingjin"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:background="@drawable/bg_blue_shape"
+            android:textColor="@color/ffffff"
+            android:visibility="gone"
+            android:text="支付定金" />
+
+        <Button
+            android:id="@+id/btn_action_pigou"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:background="@drawable/bg_blue_shape"
+            android:textColor="@color/ffffff"
+            android:visibility="gone"
+            android:text="再次批购" />
+
+        <Button
+            android:id="@+id/btn_action_daigou"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:background="@drawable/bg_blue_shape"
+            android:textColor="@color/ffffff"
+            android:visibility="gone"
+            android:text="再次代购" />
+    </LinearLayout>
+</LinearLayout>

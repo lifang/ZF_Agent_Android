@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/F3F3F3"
+    android:orientation="vertical" >
+
+    <include layout="@layout/title_back" />
+
+    <TableLayout
+        android:id="@+id/tl_tDates"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="0,1"
+        android:background="@color/Viewc2"
+        >
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:layout_marginLeft="1dp"
+                android:padding="5dp"
+                android:gravity="center_horizontal"
+                android:background="@color/white"
+                android:textSize="12sp"
+                android:text="结算时间"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:layout_marginLeft="1dp"
+                android:padding="5dp"
+                android:gravity="center_horizontal"
+                android:textSize="12sp"
+                android:background="@color/white"
+                android:text="资金服务费(/天)"
+
+                />
+
+        </TableRow>
+    </TableLayout>
+
+
+</LinearLayout>

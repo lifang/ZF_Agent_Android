@@ -82,7 +82,6 @@ public class MerchantList extends BaseActivity implements  IXListViewListener{
 	};
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
-			// TODO Auto-generated method stub
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.activity_adress_list);
 			initView();
@@ -96,7 +95,6 @@ public class MerchantList extends BaseActivity implements  IXListViewListener{
 			myAdapter=new MerchanAdapter(MerchantList.this, myList);
 			eva_nodata=(LinearLayout) findViewById(R.id.eva_nodata);
 			Xlistview=(XListView) findViewById(R.id.x_listview);
-			// refund_listview.getmFooterView().getmHintView().setText("�Ѿ�û�������");
 			Xlistview.setPullLoadEnable(true);
 			Xlistview.setXListViewListener(this);
 			Xlistview.setDivider(null);

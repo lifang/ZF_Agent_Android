@@ -54,16 +54,18 @@
                     >
 
                     <Button
+                        android:id="@+id/btn_apply_open"
                         android:layout_width="100dp"
                         android:layout_height="35dp"
                         android:textSize="15dp"
                         android:background="@drawable/buttong_light"
                         android:textColor="@color/bgtitle"
                         android:text="开通申请"
-                        android:id="@+id/btn_apply_open" />
+                        />
 
 
                     <Button
+                        android:id="@+id/btn_sync"
                         android:layout_width="100dp"
                         android:layout_height="35dp"
                         android:layout_marginTop="5dp"
@@ -71,7 +73,7 @@
                         android:background="@drawable/buttong_light"
                         android:textColor="@color/bgtitle"
                         android:text="同步"
-                        android:id="@+id/btn_sync" />
+                        />
 
                 </LinearLayout>
 
@@ -191,7 +193,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:text="12431284687"
+                            android:text=""
                             android:layout_marginTop="5dp"
                             android:textColor="@color/text5a5a5a"
                             android:textSize="13sp"
@@ -200,7 +202,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:text="泰山"
+                            android:text=""
                             android:layout_marginTop="5dp"
                             android:textColor="@color/text5a5a5a"
                             android:textSize="13sp"
@@ -209,7 +211,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:text="TS900"
+                            android:text=""
                             android:layout_marginTop="5dp"
                             android:textColor="@color/text5a5a5a"
                             android:textSize="13sp"
@@ -218,7 +220,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:text="支付宝"
+                            android:text=""
                             android:layout_marginTop="5dp"
                             android:textColor="@color/text5a5a5a"
                             android:textSize="13sp"
@@ -227,7 +229,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:text="某某某"
+                            android:text=""
                             android:layout_marginTop="5dp"
                             android:textColor="@color/text5a5a5a"
                             android:textSize="13sp"
@@ -236,7 +238,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:text="123765"
+                            android:text=""
                             android:layout_marginTop="5dp"
                             android:textColor="@color/text5a5a5a"
                             android:textSize="13sp"
@@ -245,7 +247,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:text="98034850923845"
+                            android:text=""
                             android:layout_marginTop="5dp"
                             android:textColor="@color/text5a5a5a"
                             android:textSize="13sp"
@@ -254,7 +256,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:text="2015-02-03 12:11:00"
+                            android:text=""
                             android:layout_marginTop="5dp"
                             android:textColor="@color/text5a5a5a"
                             android:textSize="13sp"
@@ -420,184 +422,17 @@
                     android:layout_height="0.5dp"
                     android:background="@color/bgtitle"
                     />
-
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:id="@+id/ll_opening_info"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:text="开通类型"
-                            android:layout_marginTop="5dp"
-                            android:textColor="@color/text5a5a5a"
-                            android:textSize="13sp" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:text="商户资料"
-                            android:layout_marginTop="5dp"
-                            android:textColor="@color/text5a5a5a"
-                            android:textSize="13sp" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:text="名称"
-                            android:layout_marginTop="5dp"
-                            android:textColor="@color/text5a5a5a"
-                            android:textSize="13sp" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:text="商户电话"
-                            android:layout_marginTop="5dp"
-                            android:textColor="@color/text5a5a5a"
-                            android:textSize="13sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:orientation="vertical"
-                        >
-
-                        <TextView
-                            android:id="@+id/tv_types"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:text="对公"
-                            android:layout_marginTop="5dp"
-                            android:textColor="@color/text5a5a5a"
-                            android:textSize="13sp" />
-                        <TextView
-                            android:id="@+id/tv_agent2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:text="动动数码"
-                            android:layout_marginTop="5dp"
-                            android:textColor="@color/text5a5a5a"
-                            android:textSize="13sp" />
-                        <TextView
-                            android:id="@+id/tv_name2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:text="131231241"
-                            android:layout_marginTop="5dp"
-                            android:textColor="@color/text5a5a5a"
-                            android:textSize="13sp" />
-                        <TextView
-                            android:id="@+id/tv_agent_tel2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:text="234213541235436154"
-                            android:layout_marginTop="5dp"
-                            android:textColor="@color/text5a5a5a"
-                            android:textSize="13sp" />
-                    </LinearLayout>
+                    android:orientation="vertical"
+                    >
 
 
                 </LinearLayout>
 
-                <TableLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:stretchColumns="0,1,2,3"
-                    >
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        >
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="营业执照" />
 
-                        <ImageView
-                            android:layout_marginLeft="5dp"
-                            android:src="@drawable/upload" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="法人身份证正面照" />
-
-                        <ImageView
-                            android:layout_marginLeft="5dp"
-                            android:src="@drawable/upload" />
-
-                    </TableRow>
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        >
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="营业执照" />
-
-                        <ImageView
-                            android:layout_marginLeft="5dp"
-                            android:src="@drawable/upload" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="法人身份证正面照" />
-
-                        <ImageView
-                            android:layout_marginLeft="5dp"
-                            android:src="@drawable/upload" />
-
-                    </TableRow>
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        >
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="营业执照" />
-
-                        <ImageView
-                            android:layout_marginLeft="5dp"
-                            android:src="@drawable/upload" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="法人身份证正面照" />
-
-                        <ImageView
-                            android:layout_marginLeft="5dp"
-                            android:src="@drawable/upload" />
-
-                    </TableRow>
-
-
-                </TableLayout>
 
 
                 <TextView
@@ -615,117 +450,6 @@
                     android:background="#f0f0f0"
                     android:orientation="vertical"
                     >
-
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginBottom="10dp"
-                        >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:text="哦哟，我不知道这里要写些什么，就酱紫吧~ 亲"
-                            android:textSize="12dp"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:text="某某某 2015-03-03 12:12:09"
-                            android:textSize="12dp"
-                            />
-                        <View
-                            android:layout_width="fill_parent"
-                            android:layout_height="0.5dp"
-                            android:background="#cccccc"
-                            />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginBottom="10dp"
-                        >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:text="哦哟，我不知道这里要写些什么，就酱紫吧~ 亲"
-                            android:textSize="12dp"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:text="某某某 2015-03-03 12:12:09"
-                            android:textSize="12dp"
-                            />
-                        <View
-                            android:layout_width="fill_parent"
-                            android:layout_height="0.5dp"
-                            android:background="#cccccc"
-                            />
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginBottom="10dp"
-                        >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:text="哦哟，我不知道这里要写些什么，就酱紫吧~ 亲"
-                            android:textSize="12dp"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:text="某某某 2015-03-03 12:12:09"
-                            android:textSize="12dp"
-                            />
-                        <View
-                            android:layout_width="fill_parent"
-                            android:layout_height="0.5dp"
-                            android:background="#cccccc"
-                            />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginBottom="10dp"
-                        >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:text="哦哟，我不知道这里要写些什么，就酱紫吧~ 亲"
-                            android:textSize="12dp"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:text="某某某 2015-03-03 12:12:09"
-                            android:textSize="12dp"
-                            />
-                        <View
-                            android:layout_width="fill_parent"
-                            android:layout_height="0.5dp"
-                            android:background="#cccccc"
-                            />
-                    </LinearLayout>
-
-
                 </LinearLayout>
 
             </LinearLayout>

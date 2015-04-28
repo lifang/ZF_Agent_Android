@@ -1,7 +1,5 @@
 package com.example.zf_android.activity;
 
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
@@ -26,6 +24,9 @@ import com.google.gson.Gson;
 import com.posagent.activities.order.OrderDetail;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
+
+import java.util.List;
+
 import de.greenrobot.event.EventBus;
 
 
@@ -93,9 +94,10 @@ public class PayFromCar extends PayActivity implements OnClickListener{
 
             @Override
             public void change() {
-                Intent intent = new Intent(PayFromCar.this,OrderDetail.class);
+                Intent intent = new Intent(PayFromCar.this, OrderDetail.class);
                 intent.putExtra("status",1);
                 intent.putExtra("id", orderId);
+                intent.putExtra("p", p);
                 startActivity(intent);
                 finish();
             }

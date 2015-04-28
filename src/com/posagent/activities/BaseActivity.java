@@ -32,6 +32,7 @@ import de.greenrobot.event.EventBus;
 public class BaseActivity extends Activity implements View.OnClickListener {
 
     protected String TAG = getClass().toString();
+    protected BaseActivity context = this;
 
     protected Gson gson = new Gson();
 
@@ -122,6 +123,20 @@ public class BaseActivity extends Activity implements View.OnClickListener {
             return;
         }
 
+        if (v.getId() == R.id.tab_index2) {
+            if (checkRole(Constants.Roles.Message)) {
+                startActivity(new Intent(this, MessageList.class));
+            }
+            return;
+        }
+
+        if (v.getId() == R.id.tab_index3) {
+            if (checkRole(Constants.Roles.Mine)) {
+                startActivity(new Intent(this, MenuMine.class));
+            }
+            return;
+        }
+
         Class activity = this.matchedClass(v);
         if (activity != null) {
             startActivity(new Intent(this, activity));
@@ -130,41 +145,41 @@ public class BaseActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    protected int resouceId(String name, String kind) {
+    public int resouceId(String name, String kind) {
         return this.getResources().getIdentifier(name, kind, this.getPackageName());
     }
 
-    protected void setText(String id, String value) {
+    public void setText(String id, String value) {
         TextView tv = (TextView)findViewById(resouceId(id, "id"));
         tv.setText(value);
     }
 
-    protected String getText(String id) {
+    public String getText(String id) {
         TextView tv = (TextView)findViewById(resouceId(id, "id"));
         return tv.getText().toString();
     }
 
-    protected String getValue(String id) {
+    public String getValue(String id) {
         EditText tv = (EditText)findViewById(resouceId(id, "id"));
         return tv.getText().toString();
     }
 
-    protected void enterText(String id, String value) {
+    public void enterText(String id, String value) {
         EditText tv = (EditText)findViewById(resouceId(id, "id"));
         tv.setText(value);
     }
 
-    protected void hide(String id) {
+    public void hide(String id) {
         View tv = findViewById(resouceId(id, "id"));
         tv.setVisibility(View.GONE);
     }
 
-    protected void show(String id) {
+    public void show(String id) {
         View tv = findViewById(resouceId(id, "id"));
         tv.setVisibility(View.VISIBLE);
     }
 
-    protected void hideByTag(String tag) {
+    public void hideByTag(String tag) {
         final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this
                 .findViewById(android.R.id.content)).getChildAt(0);
         ArrayList<View> views = (ArrayList<View>) ViewHelper.getViewsByTag(viewGroup, tag);
@@ -173,7 +188,7 @@ public class BaseActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    protected void showByTag(String tag) {
+    public void showByTag(String tag) {
         final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this
                 .findViewById(android.R.id.content)).getChildAt(0);
         ArrayList<View> views = (ArrayList<View>) ViewHelper.getViewsByTag(viewGroup, tag);

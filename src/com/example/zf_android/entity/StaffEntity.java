@@ -12,14 +12,6 @@ public class StaffEntity extends BaseEntity {
     private String createdAt;
     private String rolesStr;
 
-    public String getRolesStr() {
-        return rolesStr;
-    }
-
-    public void setRolesStr(String rolesStr) {
-        this.rolesStr = rolesStr;
-    }
-
     private int id;
 
     public String getUsername() {
@@ -52,5 +44,14 @@ public class StaffEntity extends BaseEntity {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+
+    public String getRolesStr() {
+        return rolesStr;
+    }
+
+    public void setRolesStr(String rolesStr) {
+        this.rolesStr = rolesStr;
     }
 }

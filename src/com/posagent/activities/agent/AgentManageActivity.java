@@ -35,7 +35,6 @@ import de.greenrobot.event.EventBus;
 public class AgentManageActivity extends BaseActivity implements XListView.IXListViewListener {
     private XListView Xlistview;
 
-
     private int page = 1;
     private int rows = Config.ROWS;
     private LinearLayout eva_nodata;
@@ -43,6 +42,7 @@ public class AgentManageActivity extends BaseActivity implements XListView.IXLis
     private AgentAdapter myAdapter;
     List<SonAgent> myList = new ArrayList<SonAgent>();
     List<SonAgent> moreList = new ArrayList<SonAgent>();
+
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -52,6 +52,9 @@ public class AgentManageActivity extends BaseActivity implements XListView.IXLis
                     if (myList.size() == 0) {
                         Xlistview.setVisibility(View.GONE);
                         eva_nodata.setVisibility(View.VISIBLE);
+                    } else {
+                        Xlistview.setVisibility(View.VISIBLE);
+                        eva_nodata.setVisibility(View.GONE);
                     }
                     onRefresh_number = true;
                     myAdapter.notifyDataSetChanged();
@@ -66,6 +69,9 @@ public class AgentManageActivity extends BaseActivity implements XListView.IXLis
 
 		setContentView(R.layout.activity_agent_manage);
 		new TitleMenuUtil(AgentManageActivity.this, "管理下级代理商").show();
+
+
+        ((MyApplication)getApplication()).prepareChannelList();
 
         // 准备需要监听Click的数据
         HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{
@@ -83,6 +89,9 @@ public class AgentManageActivity extends BaseActivity implements XListView.IXLis
                 startActivity(i2);
             }
         });
+
+        eva_nodata = (LinearLayout) findViewById(R.id.eva_nodata);
+
 
         initXListView();
 

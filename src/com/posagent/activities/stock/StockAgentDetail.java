@@ -59,7 +59,8 @@ public class StockAgentDetail extends BaseActivity implements IXListViewListener
 
                     if (myList.size() == 0) {
                         Xlistview.setVisibility(View.GONE);
-                        eva_nodata.setVisibility(View.VISIBLE);
+                    } else {
+                        Xlistview.setVisibility(View.VISIBLE);
                     }
                     onRefresh_number = true;
                     myAdapter.notifyDataSetChanged();

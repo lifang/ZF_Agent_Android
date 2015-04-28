@@ -1,8 +1,10 @@
 package com.posagent.activities.terminal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
+import com.example.zf_android.trade.ApplyDetailActivity;
 import com.example.zf_android.trade.entity.TerminalApply;
 import com.example.zf_android.trade.entity.TerminalComment;
 import com.example.zf_android.trade.entity.TerminalDetail;
@@ -18,6 +21,7 @@ import com.example.zf_android.trade.entity.TerminalOpen;
 import com.example.zf_android.trade.entity.TerminalOpenInfo;
 import com.example.zf_android.trade.entity.TerminalRate;
 import com.posagent.activities.BaseActivity;
+import com.posagent.activities.ImageViewer;
 import com.posagent.events.Events;
 import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
@@ -28,6 +32,9 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
+import static com.example.zf_android.trade.Constants.TerminalIntent.TERMINAL_ID;
+import static com.example.zf_android.trade.Constants.TerminalIntent.TERMINAL_STATUS;
+
 /***
  *
  * 终端详情
@@ -35,9 +42,10 @@ import de.greenrobot.event.EventBus;
  */
 public class TerminalDetailActivity extends BaseActivity {
 
+
     private Button btn_apply_open, btn_sync;
     private TableLayout tl_rate;
-    private LinearLayout ll_comments;
+    private LinearLayout ll_comments, ll_opening_info;
 
     private int terminalId;
 
@@ -61,6 +69,7 @@ public class TerminalDetailActivity extends BaseActivity {
     private void initView() {
         tl_rate = (TableLayout)findViewById(R.id.tl_rate);
         ll_comments = (LinearLayout)findViewById(R.id.ll_comments);
+        ll_opening_info = (LinearLayout)findViewById(R.id.ll_opening_info);
 
         btn_apply_open = (Button)findViewById(R.id.btn_apply_open);
         btn_apply_open.setOnClickListener(this);
@@ -87,6 +96,13 @@ public class TerminalDetailActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.btn_after_sale_apply:
 
+                break;
+            case R.id.btn_apply_open:
+                Intent i = new Intent(context, ApplyDetailActivity.class);
+                i.putExtra("id", item.getId());
+                i.putExtra(TERMINAL_ID, item.getId());
+                i.putExtra(TERMINAL_STATUS, item.getStatus());
+                context.startActivity(i);
                 break;
             default:
                 break;
@@ -120,29 +136,22 @@ public class TerminalDetailActivity extends BaseActivity {
             setText("tv_terminal_number", apply.getTerminalNum());
             setText("tv_brand", apply.getBrandName());
             setText("tv_model", apply.getModelNumber());
-            setText("tv_terminal_number", apply.getTerminalNum());
-            setText("tv_terminal_number", apply.getTerminalNum());
-            setText("tv_terminal_number", apply.getTerminalNum());
             setText("tv_order_number", apply.getOrderNumber());
+            setText("tv_channel", apply.getChannelName());
+            setText("tv_agent", apply.getFactorName());
+            setText("tv_create_time", apply.getCreatedAt());
 
         }
 
         if (null != info) {
             //status
             int status = info.getStatus();
-            state = Constants.TerminalConstant.STATUS[status];
+            state = statusName(status);
             setText("tv_status", state);
 
             //
-            setText("tv_channel", info.getChannelname());
             setText("tv_agent", info.getName());
-            setText("tv_agent2", info.getName());
-            setText("tv_name2", info.getName());
             setText("tv_agent_tel", info.getPhone());
-            setText("tv_agent_tel2", info.getPhone());
-            setText("tv_create_time", info.getCreated_at());
-            setText("tv_create_time", info.getCreated_at());
-
 
         }
 
@@ -152,6 +161,11 @@ public class TerminalDetailActivity extends BaseActivity {
         if (comments.size() > 0) {
             updateComments(comments);
         }
+        if (opens.size() > 0) {
+            updateOpeningInfos(opens);
+        }
+
+
 
 
 
@@ -180,6 +194,9 @@ public class TerminalDetailActivity extends BaseActivity {
             }
 
             TerminalRate rate = rates.get(i);
+            if (null == rate) {
+                continue;
+            }
             List<String> list = new ArrayList<String>();
             list.add(rate.getType());
             list.add(rate.getTerminalRate());
@@ -202,6 +219,9 @@ public class TerminalDetailActivity extends BaseActivity {
             }
 
             TerminalComment comment = comments.get(i);
+            if (null == comment) {
+                continue;
+            }
 
             LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -239,8 +259,100 @@ public class TerminalDetailActivity extends BaseActivity {
         }
     }
 
+    private void updateOpeningInfos(List<TerminalOpen> opens) {
+        ll_comments.removeAllViews();
+        int len = opens.size();
+        boolean isLast = false;
+
+        // 文本
+        for (int i = 0; i < len; i++) {
+            if (i == len - 1) {
+                isLast = true;
+            }
+
+            TerminalOpen open = opens.get(i);
+            if (null == open) {
+                continue;
+            }
+            if (Constants.KeyValue.Picture == open.getTypes()) {
+                continue;
+            }
+            updateOneOpenInfo(open);
+
+        }
+
+        // 图片
+        for (int i = 0; i < len; i++) {
+            if (i == len - 1) {
+                isLast = true;
+            }
+
+            TerminalOpen open = opens.get(i);
+            if (null == open) {
+                continue;
+            }
+            if (Constants.KeyValue.Picture != open.getTypes()) {
+                continue;
+            }
+            updateOneOpenInfo(open);
+
+        }
+    }
+
+    private void updateOneOpenInfo(final TerminalOpen open) {
+        LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        llp.setMargins(10, 10, 10, 10);
+        LinearLayout layout = new LinearLayout(this);
+        layout.setLayoutParams(llp);
+        layout.setOrientation(LinearLayout.HORIZONTAL);
+
+        TextView tv_key = new TextView(this);
+        LinearLayout.LayoutParams txtLlp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        tv_key.setLayoutParams(txtLlp);
+        tv_key.setText(open.getKey());
+        tv_key.setWidth(260);
+
+        layout.addView(tv_key);
+
+        LinearLayout.LayoutParams valueLlp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+//        valueLlp.setMargins(60, 0, 0, 0);
+        if (Constants.KeyValue.Picture == open.getTypes()) {
+            ImageView iv_value = new ImageView(this);
+            iv_value.setLayoutParams(valueLlp);
+            iv_value.setImageResource(R.drawable.upload);
+            iv_value.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(TerminalDetailActivity.this, ImageViewer.class);
+                    i.putExtra("url", open.getValue());
+                    i.putExtra("justviewer", true);
+                    startActivity(i);
+                }
+            });
+            layout.addView(iv_value);
+        } else {
+            TextView tv_value = new TextView(this);
+            tv_value.setLayoutParams(valueLlp);
+            tv_value.setText(open.getValue());
+
+            layout.addView(tv_value);
+        }
+
+        ll_opening_info.addView(layout);
+    }
+
     private String rateStatusName(int status) {
         return  Constants.TerminalConstant.STATUS[status];
+    }
+    private String statusName(int status) {
+        String[] arr = Constants.TerminalConstant.STATUS;
+        if (status == 7) {
+            return "已停用";
+        }
+        return  arr[status];
     }
 
 }

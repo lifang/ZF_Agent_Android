@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -81,6 +82,10 @@ public class FilterItemSelect extends BaseActivity {
             updateView();
         } else if (null != categories) {
             updateViewCategory();
+        }
+
+        if (selectIds.size() < 1) {
+            cb_all.setChecked(true);
         }
 
     }

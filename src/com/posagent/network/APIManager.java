@@ -62,6 +62,7 @@ public class APIManager {
     public static final String UrlTerminalApplyList = BaseUrl + "/apply/getApplyList";
     public static final String UrlApplyDetail = BaseUrl + "/apply/getApplyDetails";
     public static final String UrlAddOpeningApply = BaseUrl + "/apply/addOpeningApply";
+    public static final String UrlMerchantList = BaseUrl + "/terminal/getMerchants";
     public static final String UrlAgentDetail = BaseUrl + "/apply/getMerchant";
     public static final String UrlApplyChannelList = BaseUrl + "/apply/getChannels";
     public static final String UrlAfterSaleMaintainList = BaseUrl + "/cs/agents/search";
@@ -701,8 +702,13 @@ public class APIManager {
         CommonRequest(event, completeEvent, UrlApplyDetail);
     }
 
-    public void onEventBackgroundThread(Events.AgentDetailEvent event) {
-        Events.CommonCompleteEvent completeEvent = new Events.AgentDetailCompleteEvent();
+    public void onEventBackgroundThread(Events.MerchantListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.MerchantListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlMerchantList);
+    }
+
+    public void onEventBackgroundThread(Events.MerchantDetailEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.MerchantDetailCompleteEvent();
         CommonRequest(event, completeEvent, UrlAgentDetail);
     }
 

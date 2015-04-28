@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.examlpe.zf_android.util.ImageCacheUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.examlpe.zf_android.util.Tools;
 import com.examlpe.zf_android.util.XListView;
@@ -31,7 +32,6 @@ import com.posagent.activities.goods.GoodsDetail;
 import com.posagent.events.Events;
 import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -120,8 +120,7 @@ public class StockDetail extends BaseActivity implements IXListViewListener {
         tv_openCount.setText("已开通数量\n" + entity.getOpenCount());
         tv_historyCount.setText("历史进货数量\n" + entity.getHoitoryCount());
 
-
-        Picasso.with(this).load(entity.getPicurl()).into(iv_face);
+        ImageCacheUtil.IMAGE_CACHE.get(entity.getPicurl(), iv_face);
 
         btn_change_name.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,7 +153,7 @@ public class StockDetail extends BaseActivity implements IXListViewListener {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(StockDetail.this, StockAgentDetail.class);
                 Gson gson = new Gson();
-                StockAgentEntity stockAgentEntity = myList.get(position);
+                StockAgentEntity stockAgentEntity = myList.get(position - 1);
                 String json = gson.toJson(stockAgentEntity);
                 i.putExtra("json", json);
 

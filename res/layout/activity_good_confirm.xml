@@ -191,17 +191,15 @@
                                 android:background="@color/ffffff" />
 
                             <TextView
-                                android:id="@+id/editView"
+                                android:id="@+id/tv_origin_price"
                                 android:layout_width="wrap_content"
                                 android:layout_height="fill_parent"
                                 android:layout_marginLeft="14dp"
                                 android:layout_marginRight="@dimen/margin_right"
                                 android:ellipsize="end"
                                 android:gravity="center_vertical"
-                                android:visibility="invisible"
                                 android:maxLines="1"
-                                android:text="编辑"
-                                android:textColor="@color/bgtitle"
+                                android:text=""
                                 android:textSize="11sp" />
                         </LinearLayout>
 
@@ -225,7 +223,7 @@
                                 android:gravity="right"
                                 android:maxLines="1"
                                 android:text="$ 1999"
-                                android:textColor="@color/bgtitle"
+                                android:textColor="@color/rad"
                                 android:textSize="17sp" />
 
                             <TextView
@@ -331,7 +329,7 @@
 
 
                     <TextView
-
+                        android:id="@+id/tv_quantity_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="23dp"
@@ -351,7 +349,7 @@
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
                         android:orientation="horizontal"
-                        >
+                        android:focusable="true">
                         <ImageView
                             android:id="@+id/reduce"
                             android:layout_width="wrap_content"
@@ -366,6 +364,8 @@
                             android:numeric="integer"
                             android:background="@color/ffffff"
                             android:gravity="center"
+                            android:inputType="none"
+                            android:editable="false"
                             android:text="1" />
                         <ImageView
                             android:id="@+id/add"
@@ -380,6 +380,116 @@
                     android:layout_height="0.5dp"
                     android:background="@color/Viewc2" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_zulin_extra"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="30dp"
+                    android:background="@color/white"
+
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_left2"
+                        android:text="押金"
+                        android:textSize="13sp"
+                        />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_zulin_yajin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="7dp"
+                        android:text="￥29999"
+                        android:textColor="@color/rad"
+                        android:textSize="13sp" />
+                </LinearLayout>
+                <View android:layout_height="1dp"
+                    android:layout_width="fill_parent"
+                    android:background="@color/Viewc2"/>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="30dp"
+                    android:background="@color/white"
+
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_left2"
+                        android:text="最长租赁时间："
+                        android:textSize="10sp"
+                        />
+                    <TextView
+                        android:id="@+id/tv_max_month"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_left2"
+                        android:text="13个月"
+                        android:textSize="10sp"
+                        />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_zulin_heji"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="7dp"
+                        android:text="合计：￥29999"
+                        android:textSize="13sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="30dp"
+                    android:background="@color/white"
+
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_left2"
+                        android:text="最短租赁时间："
+                        android:textSize="10sp"
+                        />
+                    <TextView
+                        android:id="@+id/tv_min_month"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_left2"
+                        android:text="2个月"
+                        android:textSize="10sp"
+                        />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -424,60 +534,108 @@
                 android:layout_marginRight="7dp"
                 android:layout_height="wrap_content"
                 android:hint="留言"
+                android:textSize="12dp"
+                android:padding="5dp"
                 android:id="@+id/comment_et"
-                android:background="@drawable/edit_login"/>
+                android:background="@drawable/bg_gray_shape"
+                />
             <View android:layout_height="1dp"
                 android:layout_width="fill_parent"
                 android:layout_marginTop="10dp"
                 android:background="@color/Viewc2"/>
-            <LinearLayout  android:layout_height="42dp"
+            <LinearLayout
+                android:id="@+id/ll_zulin_xieyi"
+                android:layout_height="42dp"
                 android:layout_width="fill_parent"
                 android:orientation="horizontal"
                 android:background="@color/F3F2F2"
+                android:visibility="gone"
                 android:gravity="center_vertical">
 
                 <CheckBox
-                    android:id="@+id/item_cb"
+                    android:id="@+id/cb_zulin"
                     android:button="@drawable/checkbox_selector"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="14dp"
-                    android:checked="false" />
+                    android:checked="true" />
 
                 <TextView
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="7dp"
-
-                    android:text="我要花票"
+                    android:text="我同意"
                     android:textColor="@color/text6c6c6c6"
+                    android:textSize="11sp" />
+                <TextView
+                    android:id="@+id/tv_zulin_xieyi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:text="《租赁协议》"
+                    android:textColor="@color/bgtitle"
                     android:textSize="11sp" />
 
 
             </LinearLayout>
-            <View android:layout_height="1dp"
-                android:layout_width="fill_parent"
 
-                android:background="@color/Viewc2"/>
-            <LinearLayout android:layout_height="50dp"
+            <LinearLayout
+                android:id="@+id/ll_fapiao"
                 android:layout_width="fill_parent"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                >
-                <Spinner
-                    android:id="@+id/spinnerstate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp" />
-                <EditText android:layout_width="fill_parent"
-                    android:layout_marginLeft="7dp"
-                    android:layout_marginRight="7dp"
-                    android:layout_height="wrap_content"
-                    android:hint="请输入发票抬头"
-                    android:id="@+id/et_titel"
-                    android:background="@drawable/edit_login"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_height="42dp"
+                    android:layout_width="fill_parent"
+                    android:orientation="horizontal"
+                    android:background="@color/F3F2F2"
+                    android:gravity="center_vertical">
+
+                    <CheckBox
+                        android:id="@+id/item_cb"
+                        android:button="@drawable/checkbox_selector"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="14dp"
+                        android:checked="false" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="7dp"
+
+                        android:text="我要花票"
+                        android:textColor="@color/text6c6c6c6"
+                        android:textSize="11sp" />
+
+
+                </LinearLayout>
+                <View android:layout_height="1dp"
+                    android:layout_width="fill_parent"
+
+                    android:background="@color/Viewc2"/>
+                <LinearLayout android:layout_height="50dp"
+                    android:layout_width="fill_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    >
+                    <Spinner
+                        android:id="@+id/spinnerstate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp" />
+                    <EditText android:layout_width="fill_parent"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_height="wrap_content"
+                        android:hint="请输入发票抬头"
+                        android:id="@+id/et_titel"
+                        android:background="@drawable/edit_login"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 

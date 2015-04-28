@@ -49,7 +49,7 @@ public class Terminal extends BaseActivity implements IXListViewListener,
     List<TerminalItem> moreList = new ArrayList<TerminalItem>();
 
     private Spinner spinnerState;
-    private String[] state= {"选择终端状态","已开通","部分开通","未开通","已注销","已停止"};
+    private String[] state= {"选择终端状态","已开通","部分开通","未开通","已注销","已停用"};
     private int status;
 
     private Handler handler = new Handler() {

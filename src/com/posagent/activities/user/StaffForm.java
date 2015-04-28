@@ -35,6 +35,8 @@ public class StaffForm extends BaseActivity
     private String[] roles = {"pigou", "daigou", "terminal", "fenrun",
             "xiaji", "user", "staff", "address"};
 
+    private int id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,7 @@ public class StaffForm extends BaseActivity
             new TitleMenuUtil(StaffForm.this, "创建员工帐号").show();
         } else {
             new TitleMenuUtil(StaffForm.this, "修改员工帐号").show();
+            id = entity.getId();
         }
 
 
@@ -124,9 +127,6 @@ public class StaffForm extends BaseActivity
         if(check()) {
             JsonParams params = new JsonParams();
 
-            params.put("agentsId",  MyApplication.user().getAgentId());
-
-
             List<String> checkedRoles = new ArrayList<String>(roles.length);
 
             for (int i = 0; i < roles.length; i++) {
@@ -137,15 +137,17 @@ public class StaffForm extends BaseActivity
                     checkedRoles.add("" + i);
                 }
             }
-
-            params.put("loginId", et_username.getText().toString());
-            params.put("pwd", et_password.getText().toString());
-
             if (null == entity) {
+                params.put("agentsId",  MyApplication.user().getAgentId());
+                params.put("loginId", et_username.getText().toString());
                 params.put("userName", et_name.getText().toString());
                 params.put("pwd1", et_password_confirm.getText().toString());
-                params.put("roles", StringUtil.join(checkedRoles, ","));
+            } else {
+                params.put("customerId", id);
             }
+            params.put("pwd", et_password.getText().toString());
+            params.put("roles", StringUtil.join(checkedRoles, ","));
+
 
             String strParams = params.toString();
 
@@ -171,7 +173,7 @@ public class StaffForm extends BaseActivity
         toast(event.getMessage());
         if (event.success()) {
             EventBus.getDefault().post(new Events.StaffListReloadEvent());
-            finish();
+//            finish();
         }
     }
 

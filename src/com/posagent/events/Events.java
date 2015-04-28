@@ -1,7 +1,6 @@
 package com.posagent.events;
 
 import com.example.zf_android.entity.AdressEntity;
-import com.example.zf_android.entity.AgentEntity;
 import com.example.zf_android.entity.AgentTerminalEntity;
 import com.example.zf_android.entity.ChanelEntitiy;
 import com.example.zf_android.entity.ChannelEntity;
@@ -10,6 +9,7 @@ import com.example.zf_android.entity.ExchangeEntity;
 import com.example.zf_android.entity.GoodCommentEntity;
 import com.example.zf_android.entity.GoodsEntity;
 import com.example.zf_android.entity.GoodsSearchEntity;
+import com.example.zf_android.entity.MerchantEntity;
 import com.example.zf_android.entity.MessageEntity;
 import com.example.zf_android.entity.OrderEntity;
 import com.example.zf_android.entity.PayChannelInfoEntity;
@@ -456,6 +456,28 @@ public class Events {
         }
     }
 
+    public static class MerchantListEvent extends CommonRequestEvent {}
+    public static class MerchantListCompleteEvent extends CommonCompleteEvent {
+        private List<MerchantEntity> list = new ArrayList<MerchantEntity>();
+        public List<MerchantEntity> getList() {
+            if (list.size() < 1) {
+                String result = null;
+                try {
+                    result = getResult().getString("terminalList");
+                    list = (new Gson()).fromJson(result,
+                            new TypeToken<List<MerchantEntity>>() {}.getType());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            return list;
+        }
+        public void setList(List<MerchantEntity> list) {
+            this.list = list;
+        }
+    }
+
     public static class ApplyDetailEvent extends CommonRequestEvent {}
     public static class ApplyDetailCompleteEvent extends CommonCompleteEvent {
         private ApplyDetail entity;
@@ -472,18 +494,18 @@ public class Events {
         }
     }
 
-    public static class AgentDetailEvent extends CommonRequestEvent {}
-    public static class AgentDetailCompleteEvent extends CommonCompleteEvent {
-        private AgentEntity entity;
+    public static class MerchantDetailEvent extends CommonRequestEvent {}
+    public static class MerchantDetailCompleteEvent extends CommonCompleteEvent {
+        private MerchantEntity entity;
 
-        public AgentEntity getEntity() {
+        public MerchantEntity getEntity() {
             String result = null;
             result = getResult().toString();
-            entity = (new Gson()).fromJson(result, AgentEntity.class);
+            entity = (new Gson()).fromJson(result, MerchantEntity.class);
             return entity;
         }
 
-        public void setEntity(AgentEntity entity) {
+        public void setEntity(MerchantEntity entity) {
             this.entity = entity;
         }
     }

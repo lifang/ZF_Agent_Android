@@ -24,6 +24,7 @@ import com.example.zf_zandroid.adapter.OrderAdapter;
 import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
+import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
 
 import java.util.ArrayList;
@@ -50,13 +51,14 @@ public class OrderList extends BaseActivity implements IXListViewListener,
     private OrderAdapter myAdapter;
     List<OrderEntity> myList = new ArrayList<OrderEntity>();
     List<OrderEntity> moreList = new ArrayList<OrderEntity>();
-    Spinner spinnerState;
+    Spinner spinnerState, spinnerKinds;
 
     private String[] state= {"选择订单状态","全部","未付款","已付订金","已完成","已取消"};
+    private String[] kinds = {"选择订单类型","全部","代购买","代租赁"};
 
 
     //params data
-    private int p = 1;
+    private int p = 5;
     private int q = 0;
 
     private Handler handler = new Handler() {
@@ -112,7 +114,7 @@ public class OrderList extends BaseActivity implements IXListViewListener,
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 Intent i = new Intent(OrderList.this, OrderDetail.class);
-                OrderEntity orderEntity = myList.get(position - 1);
+                OrderEntity orderEntity = myList.get(position);
                 i.putExtra("status", orderEntity.getOrder_status());
                 i.putExtra("id", orderEntity.getOrder_id());
                 i.putExtra("p", p);
@@ -125,12 +127,27 @@ public class OrderList extends BaseActivity implements IXListViewListener,
         ArrayAdapter<String> adapter_state = new ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item, state);
         spinnerState.setAdapter(adapter_state);
         spinnerState.setOnItemSelectedListener(this);
+
+        spinnerKinds = (Spinner) findViewById(R.id.spinnerkind);
+        ArrayAdapter<String> adapter_kinds = new ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item, kinds);
+        spinnerKinds.setAdapter(adapter_kinds);
+        spinnerKinds.setOnItemSelectedListener(this);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        q = position - 1;
+        if (parent.getId() == R.id.spinnerstate) {
+            q = mapStatus(position);
+        } else {
+            if (position == 2) {
+                p = Constants.Goods.BuyTypeDaigou;
+            } else {
+                p = Constants.Goods.BuyTypeDaizulin;
+            }
+        }
+
         onRefresh();
+
     }
 
     @Override
@@ -141,7 +158,12 @@ public class OrderList extends BaseActivity implements IXListViewListener,
     @Override
     public void onTabSelected(int position) {
         Log.d(TAG, "tab select: " + position);
-        p = position + 1;
+        if(position == 0) {
+            p = 5;
+        } else {
+            p = 0;
+        }
+        updateSpinner();
         onRefresh();
     }
 
@@ -184,9 +206,11 @@ public class OrderList extends BaseActivity implements IXListViewListener,
     private void getData() {
         JsonParams params = new JsonParams();
         params.put("customerId", MyApplication.user().getId());
-        params.put("p", p);
+        if (p > 0) {
+            params.put("p", p);
+        }
         if (q > 0) {
-           params.put("q", q);
+            params.put("q", q);
         }
         params.put("page", page);
         params.put("rows", rows);
@@ -209,4 +233,35 @@ public class OrderList extends BaseActivity implements IXListViewListener,
         Xlistview.setPullLoadEnable(event.getList().size() >= rows);
         handler.sendEmptyMessage(0);
     }
+
+    public int buyType() {
+        return p;
+    }
+
+    public int mapStatus(int position) {
+        int q = position - 1;
+
+        if (q == 4) {
+            q = 5;
+        }
+
+        return q;
+
+    }
+
+    public void onEventMainThread(Events.CancelOrderCompleteEvent event) {
+        if (event.getSuccess()) {
+            onRefresh();
+        }
+
+    }
+
+    private void updateSpinner() {
+        if (q == Constants.Goods.BuyTypePigou) {
+            hide("ll_spinnerkind");
+        } else {
+            show("ll_spinnerkind");
+        }
+    }
+
 }

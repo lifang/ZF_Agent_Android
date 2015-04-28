@@ -27,14 +27,16 @@ public class RequireMaterial extends BaseActivity implements OnClickListener {
         setContentView(R.layout.activity_require_material);
 
         try {
-            pra = gson.fromJson("json_pra",
+            String json_pra = getIntent().getStringExtra("json_pra");
+            pra = gson.fromJson(json_pra,
                     new TypeToken<List<RequireMaterialEntity>>() {}.getType());
         } catch (RuntimeException ex) {
             Log.d(TAG, ex.getMessage());
         }
 
         try {
-            pub = gson.fromJson("json_pub",
+            String json_pub = getIntent().getStringExtra("json_pub");
+            pub = gson.fromJson(json_pub,
                     new TypeToken<List<RequireMaterialEntity>>() {}.getType());
         } catch (RuntimeException ex) {
             Log.d(TAG, ex.getMessage());
@@ -59,7 +61,7 @@ public class RequireMaterial extends BaseActivity implements OnClickListener {
             entity = pra.get(i);
             ll = (LinearLayout)inflater.inflate(R.layout.item_require_material, null);
             TextView tv = (TextView)ll.findViewById(R.id.tv_material);
-            tv.setText("" + i + ". " + entity.getName() + "("+ entity.getIntroduction() +")");
+            tv.setText("" + (i + 1) + ". " + entity.getName() + "("+ entity.getIntroduction() +")");
             ll_pra.addView(ll);
         }
 
@@ -69,7 +71,7 @@ public class RequireMaterial extends BaseActivity implements OnClickListener {
             entity = pub.get(i);
             ll = (LinearLayout)inflater.inflate(R.layout.item_require_material, null);
             TextView tv = (TextView)ll.findViewById(R.id.tv_material);
-            tv.setText("" + i + ". " + entity.getName() + "("+ entity.getIntroduction() +")");
+            tv.setText("" + (i + 1) + ". " + entity.getName() + "("+ entity.getIntroduction() +")");
             ll_pub.addView(ll);
         }
     }

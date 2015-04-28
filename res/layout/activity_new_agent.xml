@@ -479,19 +479,32 @@
                     android:textColor="@color/text292929"
                     android:textSize="17sp" />
 
+
+                <TextView
+                    android:id="@+id/tv_card_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:layout_marginRight="20dp"
+                    android:textColor="@color/bgtitle"
+                    android:text="上传照片"/>
+
                 <ImageView
+                    android:id="@+id/iv_card_photo"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/margin_left"
                     android:layout_marginRight="20dp"
+                    android:visibility="gone"
                     android:src="@drawable/upload" />
             </LinearLayout>
 
             <LinearLayout
-                android:tag="company_items"
-                android:layout_width="fill_parent"
+                android:id="@+id/company_content2"
                 android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
                 android:orientation="vertical">
 
                 <View
@@ -525,12 +538,24 @@
                         android:textColor="@color/text292929"
                         android:textSize="17sp" />
 
-                    <ImageView
+                    <TextView
+                        android:id="@+id/tv_license_photo"
                         android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/margin_left"
                         android:layout_marginRight="20dp"
+                        android:textColor="@color/bgtitle"
+                        android:text="上传照片"/>
+
+                    <ImageView
+                        android:id="@+id/iv_license_photo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/margin_left"
+                        android:layout_marginRight="20dp"
+                        android:visibility="gone"
                         android:src="@drawable/upload" />
                 </LinearLayout>
 
@@ -565,20 +590,32 @@
                         android:textColor="@color/text292929"
                         android:textSize="17sp" />
 
+
+                    <TextView
+                        android:id="@+id/tv_tax_photo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/margin_left"
+                        android:layout_marginRight="20dp"
+                        android:textColor="@color/bgtitle"
+                        android:text="上传照片"/>
+
                     <ImageView
+                        android:id="@+id/iv_tax_photo"
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/margin_left"
                         android:layout_marginRight="20dp"
+                        android:visibility="gone"
                         android:src="@drawable/upload" />
                 </LinearLayout>
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/Viewc" />
             </LinearLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/Viewc" />
 
 
             <View

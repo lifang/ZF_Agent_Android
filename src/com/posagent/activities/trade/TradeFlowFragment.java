@@ -25,6 +25,8 @@ import com.example.zf_android.Config;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.entity.TradeRecord;
 import com.posagent.MyApplication;
+import com.posagent.activities.CommonInputer;
+import com.posagent.utils.Constants;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -221,7 +223,7 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
         if (resultCode != Activity.RESULT_OK) return;
         switch (requestCode) {
             case REQUEST_TRADE_CLIENT:
-                String clientName = data.getStringExtra(CLIENT_NUMBER);
+                String clientName = data.getStringExtra(Constants.CommonInputerConstant.VALUE_KEY);
                 mTradeClientName.setText(clientName);
                 tradeClientName = clientName;
                 toggleButtons();
@@ -241,8 +243,8 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.trade_client:
-                Intent i = new Intent(getActivity(), TradeClientActivity.class);
-                i.putExtra(CLIENT_NUMBER, tradeClientName);
+                Intent i = new Intent(getActivity(), CommonInputer.class);
+                i.putExtra(Constants.CommonInputerConstant.PLACEHOLDER_KEY, mTradeClientName.getText().toString());
                 startActivityForResult(i, REQUEST_TRADE_CLIENT);
                 break;
             case R.id.trade_agent:

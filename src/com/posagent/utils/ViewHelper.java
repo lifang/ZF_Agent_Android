@@ -82,4 +82,50 @@ public class ViewHelper {
 
         return tr;
     }
+
+    public static void initOrderActions(View view, int status, int buyType) {
+        View v;
+        view.findViewById(R.id.ll_ishow).setVisibility(View.VISIBLE);
+
+        //hide first
+        view.findViewById(R.id.btn_action_cancel).setVisibility(View.GONE);
+        view.findViewById(R.id.btn_action_dingjin).setVisibility(View.GONE);
+        view.findViewById(R.id.btn_action_pay).setVisibility(View.GONE);
+        view.findViewById(R.id.btn_action_pigou).setVisibility(View.GONE);
+        view.findViewById(R.id.btn_action_daigou).setVisibility(View.GONE);
+
+        switch (status) {
+            case 1:
+                v = view.findViewById(R.id.btn_action_cancel);
+                v.setVisibility(View.VISIBLE);
+                v = view.findViewById(R.id.btn_action_dingjin);
+                if (buyType != Constants.Goods.BuyTypePigou) {
+                    v = view.findViewById(R.id.btn_action_pay);
+                }
+                v.setVisibility(View.VISIBLE);
+                break;
+            case 2:
+                v = view.findViewById(R.id.btn_action_cancel);
+                v.setVisibility(View.VISIBLE);
+
+                v = view.findViewById(R.id.btn_action_pay);
+                v.setVisibility(View.VISIBLE);
+                break;
+            case 3:
+                v = view.findViewById(R.id.btn_action_pigou);
+
+                if (buyType != Constants.Goods.BuyTypePigou) {
+                    v = view.findViewById(R.id.btn_action_daigou);
+                }
+                v.setVisibility(View.VISIBLE);
+                break;
+            case 5:
+                view.findViewById(R.id.ll_ishow).setVisibility(View.GONE);
+                break;
+            default:
+                view.findViewById(R.id.ll_ishow).setVisibility(View.GONE);
+        }
+
+
+    }
 }

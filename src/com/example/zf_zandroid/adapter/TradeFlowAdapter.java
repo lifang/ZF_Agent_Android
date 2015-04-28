@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.examlpe.zf_android.util.StringUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.entity.TradeRecord;
 import com.posagent.activities.trade.TradeDetailActivity;
@@ -69,7 +70,7 @@ public class TradeFlowAdapter extends BaseAdapter{
 
         String statusName = Constants.Trade.STATUS[entity.getTradedStatus()];
         holder.trade_status.setText(statusName);
-        holder.trade_amount.setText("￥" + entity.getAmount());
+        holder.trade_amount.setText("￥" + StringUtil.priceShow(entity.getAmount()));
 
         convertView.setOnClickListener(new OnClickListener() {
 

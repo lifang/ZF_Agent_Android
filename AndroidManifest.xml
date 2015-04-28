@@ -506,11 +506,30 @@
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
+            android:name="com.posagent.activities.terminal.MerchantList"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.posagent.activities.goods.GoodsDetail"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.posagent.activities.goods.GoodsConfirm"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.posagent.activities.goods.FactoryInfo"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.posagent.activities.goods.TDateList"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" >
+        </activity>
+        <activity
+            android:name="com.posagent.activities.goods.ZulinXieyi"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>

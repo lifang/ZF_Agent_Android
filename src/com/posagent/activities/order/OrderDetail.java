@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.examlpe.zf_android.util.ScrollViewWithListView;
+import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.activity.PayFromCar;
@@ -24,8 +25,11 @@ import com.example.zf_zandroid.adapter.OrderDetail_PosAdapter;
 import com.example.zf_zandroid.adapter.RecordAdapter;
 import com.google.gson.Gson;
 import com.posagent.activities.BaseActivity;
+import com.posagent.activities.goods.GoodsDetail;
 import com.posagent.events.Events;
+import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
+import com.posagent.utils.ViewHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,19 +42,24 @@ import de.greenrobot.event.EventBus;
  *
  */
 public class OrderDetail extends BaseActivity implements OnClickListener{
+
+    OrderDetail context = this;
+
     private  ScrollViewWithListView   pos_lv,his_lv;
     List<Goodlist>  goodlist = new ArrayList<Goodlist>();
     List<MarkEntity>  relist = new ArrayList<MarkEntity>();
     private OrderDetail_PosAdapter posAdapter;
     private RecordAdapter reAdapter;
     private LinearLayout ll_ishow;
-    private Button btn_ishow, btn_cancel, btn_pay, btn_comment;
+    private Button btn_view_terminals, btn_cancel, btn_pay, btn_comment;
     private OrderDetailEntity  orderDetailEntity;
     private TextView tv_status,tv_sjps,tv_psf,tv_reperson,tv_tel,
-            tv_adress,tv_ly,tv_fplx,fptt,
+            tv_adress,tv_ly,tv_fplx,fptt, tv_order_type,
             tv_ddbh,tv_pay,tv_time,tv_gj,tv_money,
             tv_dingjin, tv_real_pay, tv_yifahuo, tv_dingjin_payed,
             tv_left;
+
+    private TextView tv_status_daigou, tv_real_pay_daigou, tv_guishu;
     private int status, id, p;
 
     private Handler handler = new Handler() {
@@ -58,23 +67,67 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
             switch (msg.what) {
                 case 0:
                     OrderDetailEntity entity = orderDetailEntity;
-                    tv_real_pay.setText("实付金额 ：￥ " + entity.getOrder_totalPrice());
-                    tv_dingjin.setText("定金总金额 ：￥ "+entity.getTotal_dingjin());
-                    tv_dingjin_payed.setText("已支付定金 ：￥ "+entity.getZhifu_dingjin());
-                    tv_yifahuo.setText("已发货数量 ："+entity.getShipped_quantity());
-                    int left = Integer.parseInt(entity.getTotal_quantity()) - Integer.parseInt(entity.getShipped_quantity());
-                    tv_left.setText("剩余货品数量 ："+ left);
-                    tv_reperson.setText("收件人 ： "+entity.getOrder_receiver());
+
+                    tv_real_pay.setText("实付金额 ：￥ " + StringUtil.priceShow(entity.getOrder_totalPrice()));
+                    tv_real_pay_daigou.setText("实付金额 ：￥ " + StringUtil.priceShow(entity.getOrder_totalPrice()));
+                    tv_ddbh.setText("订单编号 ：" + entity.getOrder_number());
+                    tv_pay.setText("支付方式 ：" + entity.getOrder_payment_type());
+                    tv_money.setText("实付金额 ：￥" + StringUtil.priceShow(entity.getOrder_totalPrice()));
+                    tv_time.setText("订单日期 ：" + entity.getOrder_createTime());
+
+
+                    tv_reperson.setText("收件人 ： " + entity.getOrder_receiver());
                     tv_tel.setText(entity.getOrder_receiver_phone());
-                    tv_adress.setText("收货地址 ："+entity.getOrder_address());
-                    tv_ly.setText("留言 ："+entity.getOrder_comment());
-                    tv_fplx.setText(entity.getOrder_invoce_type().equals("1")?"发票类型 : 个人":"发票类型 : 公司");
-                    fptt.setText("发票抬头："+entity.getOrder_invoce_info());
-                    tv_ddbh.setText("订单编号 ："+entity.getOrder_number());
-                    tv_pay.setText("支付方式 ："+entity.getOrder_payment_type());
-                    tv_time.setText("实付金额 ：￥"+entity.getOrder_totalPrice());
-                    tv_money.setText("订单日期 ："+entity.getOrder_createTime());
-                    tv_gj.setText("共计 ："+entity.getTotal_quantity()+"件");
+                    tv_adress.setText("收货地址 ：" + entity.getOrder_address());
+                    tv_ly.setText("留言 ：" + entity.getOrder_comment());
+                    tv_fplx.setText(entity.getOrder_invoce_type().equals("1") ? "发票类型 : 个人" : "发票类型 : 公司");
+                    fptt.setText("发票抬头：" + entity.getOrder_invoce_info());
+
+                    if (p == Constants.Goods.BuyTypePigou) {
+                        //show hide elements
+                        hide("btn_view_terminals");
+                        hide("ll_header_daigou");
+                        show("ll_header_pigou");
+                        setText("tv_order_type", "订购类型：批购");
+
+                        tv_dingjin.setText("定金总金额 ：￥ " + StringUtil.priceShow(entity.getTotal_dingjin()));
+                        tv_gj.setText("共计 ：" + entity.getTotal_quantity() + "件");
+                        tv_dingjin_payed.setText("已支付定金 ：￥ " + StringUtil.priceShow(entity.getZhifu_dingjin()));
+                        tv_yifahuo.setText("已发货数量 ：" + entity.getShipped_quantity());
+                        int left = Integer.parseInt(entity.getTotal_quantity()) - Integer.parseInt(entity.getShipped_quantity());
+                        tv_left.setText("剩余货品数量 ：" + left);
+
+                    } else {
+                        //show hide
+                        show("btn_view_terminals");
+                        show("ll_header_daigou");
+                        hide("ll_header_pigou");
+                        setText("tv_order_type", "订购类型：代购");
+                        setText("tv_guishu", "归属用户：\n" );
+
+
+                        tv_gj.setText("共计 ：" + entity.getOrder_totalNum() + "件");
+
+
+                    }
+
+
+                    // 判断类别
+//                    if(p == Constants.Goods.BuyTypePigou) {
+//                        //pigou
+//                        findViewById(R.id.ll_daigou).setVisibility(View.GONE);
+//                        findViewById(R.id.ll_pigou).setVisibility(View.VISIBLE);
+//                        findViewById(R.id.ll_heji).setVisibility(View.VISIBLE);
+//                        findViewById(R.id.tv_origin_price).setVisibility(View.VISIBLE);
+//                    } else {
+//                        findViewById(R.id.ll_daigou).setVisibility(View.VISIBLE);
+//                        findViewById(R.id.ll_pigou).setVisibility(View.GONE);
+//                        findViewById(R.id.ll_heji).setVisibility(View.GONE);
+//                        findViewById(R.id.tv_origin_price).setVisibility(View.GONE);
+//                    }
+
+                    ViewHelper.initOrderActions(getWindow().getDecorView().findViewById(android.R.id.content), entity.getOrder_status(), p);
+
 
                     break;
             }
@@ -85,9 +138,13 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
         status=getIntent().getIntExtra("status", 0);
-        id=getIntent().getIntExtra("id", 1);
+        id=getIntent().getIntExtra("id", 0);
+        if (id == 0) { //容错
+            String strId = getIntent().getStringExtra("id");
+            id = Integer.parseInt(strId);
+        }
         p=getIntent().getIntExtra("p", 1);
-        if (p > 1) {
+        if (p != Constants.Goods.BuyTypePigou) {
             new TitleMenuUtil(OrderDetail.this, "代购订单详情").show();
         } else {
             new TitleMenuUtil(OrderDetail.this, "批购订单详情").show();
@@ -104,7 +161,7 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
         String strParams = params.toString();
 
         Events.CommonRequestEvent event;
-        if (p == 1) {
+        if (p == Constants.Goods.BuyTypePigou) {
             event = new Events.OrderDetailPigouEvent();
         } else {
             event = new Events.OrderDetailDaigouEvent();
@@ -123,7 +180,7 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
             goodlist = orderDetailEntity.getOrder_goodsList() ;
             relist = orderDetailEntity.getComments().getList() ;
 
-            posAdapter = new OrderDetail_PosAdapter(OrderDetail.this, goodlist,status);
+            posAdapter = new OrderDetail_PosAdapter(OrderDetail.this, goodlist, status);
             pos_lv.setAdapter(posAdapter);
             reAdapter=new RecordAdapter(OrderDetail.this, relist);
             his_lv.setAdapter(reAdapter);
@@ -143,6 +200,10 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
 
     private void initView() {
         tv_money=(TextView) findViewById(R.id.tv_money);
+        tv_status_daigou=(TextView) findViewById(R.id.tv_status_daigou);
+        tv_real_pay_daigou=(TextView) findViewById(R.id.tv_real_pay_daigou);
+        tv_guishu=(TextView) findViewById(R.id.tv_guishu);
+
 
         tv_gj=(TextView) findViewById(R.id.tv_gj);
         tv_real_pay=(TextView) findViewById(R.id.tv_real_pay);
@@ -150,15 +211,6 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
         tv_dingjin_payed=(TextView) findViewById(R.id.tv_dingjin_payed);
         tv_yifahuo=(TextView) findViewById(R.id.tv_yifahuo);
         tv_left=(TextView) findViewById(R.id.tv_left);
-
-        btn_ishow=(Button) findViewById(R.id.btn_ishow);
-        btn_cancel=(Button) findViewById(R.id.btn_cancel);
-        btn_pay=(Button) findViewById(R.id.btn_pay);
-        btn_comment=(Button) findViewById(R.id.btn_comment);
-        btn_ishow.setOnClickListener(this);
-        btn_cancel.setOnClickListener(this);
-        btn_cancel.setOnClickListener(this);
-        btn_comment.setOnClickListener(this);
 
         tv_ddbh=(TextView) findViewById(R.id.tv_ddbh);
         fptt=(TextView) findViewById(R.id.fptt);
@@ -169,7 +221,7 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
         tv_reperson=(TextView) findViewById(R.id.tv_reperson);
         tv_tel=(TextView) findViewById(R.id.tv_tel);
         tv_time=(TextView) findViewById(R.id.tv_time);
-        tv_psf=(TextView) findViewById(R.id.tv_psf);
+//        tv_psf=(TextView) findViewById(R.id.tv_psf);
         tv_status=(TextView) findViewById(R.id.tv_status);
         ll_ishow=(LinearLayout) findViewById(R.id.ll_ishow);
         ll_ishow.setVisibility(status==1 ? View.INVISIBLE
@@ -178,71 +230,104 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
 
         his_lv=(ScrollViewWithListView) findViewById(R.id.his_lv);
         setStatus();
+
+        // init actions click
+        findViewById(R.id.btn_action_cancel).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doCancel(orderDetailEntity);
+            }
+        });
+
+        findViewById(R.id.btn_action_pay).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, PayFromCar.class);
+                i.putExtra("p", p);
+                i.putExtra("orderId", "" + orderDetailEntity.getOrder_id());
+                context.startActivity(i);
+            }
+        });
+
+        findViewById(R.id.btn_action_dingjin).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, PayFromCar.class);
+                i.putExtra("p", p);
+                i.putExtra("orderId", "" + orderDetailEntity.getOrder_id());
+                context.startActivity(i);
+            }
+        });
+
+        int tmpGoodsId = 0;
+        try {
+            tmpGoodsId = Integer.parseInt(orderDetailEntity.getOrder_goodsList().get(0).getGood_id());
+        } catch (Exception ex) {
+//            Log.d("UncatchException", ex.getMessage());
+        }
+
+        final int goodsId = tmpGoodsId;
+
+        findViewById(R.id.btn_action_pigou).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent (context, GoodsDetail.class);
+                i.putExtra("id", goodsId);
+                i.putExtra("buyType", mapBuyType());
+                context.startActivity(i);
+            }
+        });
+
+        findViewById(R.id.btn_action_daigou).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent (context, GoodsDetail.class);
+                i.putExtra("id", goodsId);
+                i.putExtra("buyType", mapBuyType());
+                context.startActivity(i);
+            }
+        });
     }
 
     private void setStatus() {
         if (orderDetailEntity != null) {
             status = orderDetailEntity.getOrder_status();
         }
+        String statusShow = "";
         switch (status) {
             case 1:
-                tv_status.setText("未付款");
-                btn_ishow.setVisibility(View.GONE);
+                statusShow = "未付款";
                 break;
             case 2:
-                tv_status.setText("已付款");
-                btn_ishow.setVisibility(View.VISIBLE);
-                btn_cancel.setVisibility(View.GONE);
-                btn_pay.setVisibility(View.GONE);
+                statusShow = "已付款";
                 break;
             case 3:
-                tv_status.setText("已发货");
-                btn_ishow.setVisibility(View.VISIBLE);
-                btn_cancel.setVisibility(View.GONE);
-                btn_pay.setVisibility(View.GONE);
+                statusShow = "已发货";
                 break;
             case 4:
-                tv_status.setText("已评价");
-                btn_ishow.setVisibility(View.VISIBLE);
-                btn_cancel.setVisibility(View.GONE);
-                btn_pay.setVisibility(View.GONE);
+                statusShow = "已评价";
 
                 break;
             case 5:
-                tv_status.setText("已取消");
-                btn_ishow.setVisibility(View.GONE);
-                btn_cancel.setVisibility(View.GONE);
-                btn_pay.setVisibility(View.GONE);
+                statusShow = "已取消";
                 break;
             case 6:
-                tv_status.setText("交易关闭");
-                btn_ishow.setVisibility(View.GONE);
-                btn_cancel.setVisibility(View.GONE);
-                btn_pay.setVisibility(View.GONE);
+                statusShow = "交易关闭";
                 break;
 
             default:
                 break;
         }
+
+        tv_status.setText(statusShow);
+        tv_status_daigou.setText(statusShow);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_ishow:
-                Toast.makeText(getApplicationContext(), "请先付款···", Toast.LENGTH_LONG).show();
-                break;
-            case R.id.btn_pay:
-                Intent i = new Intent (OrderDetail.this, PayFromCar.class);
-                i.putExtra("p", p);
-                i.putExtra("orderId", id+"");
-                startActivity(i);
-                finish();
-                break;
-            case R.id.btn_comment:
-                break;
-            case R.id.btn_cancel:
-                doCancel();
+            case R.id.btn_view_terminals:
+//                Toast.makeText(getApplicationContext(), "请先付款···", Toast.LENGTH_LONG).show();
                 break;
             default:
                 break;
@@ -283,5 +368,57 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
         });
 
         builder.create().show();
+    }
+
+    //helper
+    private void doCancel(final OrderDetailEntity entity) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(OrderDetail.this);
+        builder.setMessage("确定取消订单吗？");
+        builder.setTitle("请确认");
+
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                JsonParams params = new JsonParams();
+                params.put("id", entity.getOrder_id());
+                String strParams = params.toString();
+
+                Events.CommonRequestEvent event;
+                if (p == Constants.Goods.BuyTypePigou) {
+                    event = new Events.CancelOrderPigouEvent();
+                } else {
+                    event = new Events.CancelOrderDaigouEvent();
+                }
+                event.setParams(strParams);
+                EventBus.getDefault().post(event);
+
+                Toast.makeText(OrderDetail.this, "正在取消...", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.create().show();
+    }
+
+    private int mapBuyType() {
+        int orderType = 0;
+        int buyType = p;
+
+        switch (buyType) {
+            case Constants.Goods.BuyTypePigou:
+                orderType = Constants.Goods.OrderTypePigou;
+                break;
+            case Constants.Goods.BuyTypeDaigou:
+                orderType = Constants.Goods.OrderTypeDaigou;
+                break;
+            case Constants.Goods.BuyTypeDaizulin:
+                orderType = Constants.Goods.OrderTypeDaizulin;
+                break;
+        }
+        return orderType;
     }
 }

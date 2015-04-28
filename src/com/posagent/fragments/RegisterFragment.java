@@ -54,7 +54,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
     private String photoPath;
     private String currentKind;
-
     private PhotoManager photoManager;
 
 

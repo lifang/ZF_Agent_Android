@@ -3,6 +3,7 @@ package com.posagent;
 
 import android.app.Activity;
 import android.app.Application;
+import android.support.v4.util.ArrayMap;
 
 import com.example.zf_android.entity.ApplyneedEntity;
 import com.example.zf_android.entity.ChannelEntity;
@@ -11,6 +12,9 @@ import com.example.zf_android.entity.GoodinfoEntity;
 import com.example.zf_android.entity.PosSelectEntity;
 import com.example.zf_android.entity.UserInfoEntity;
 import com.example.zf_android.entity.UserRole;
+import com.example.zf_android.trade.common.CommonUtil;
+import com.example.zf_android.trade.entity.City;
+import com.example.zf_android.trade.entity.Province;
 import com.loopj.android.http.AsyncHttpClient;
 import com.posagent.events.Events;
 import com.posagent.network.APIManager;
@@ -112,6 +116,8 @@ public class MyApplication extends Application {
         }
     }
 
+    public static Map<Integer, String> mapCity;
+
     public static Map<String, String> roles;
 
     public static Map<String, String> getRoles() {
@@ -138,11 +144,11 @@ public class MyApplication extends Application {
             return true;
 
         } else {
-            switch (intRoleId) {
-                case Constants.Roles.AllProduct:
-                case Constants.Roles.Order:
-                    return true;
-            }
+//            switch (intRoleId) {
+//                case Constants.Roles.AllProduct:
+//                case Constants.Roles.Order:
+//                    return true;
+//            }
             return roles.get(roleId) != null;
         }
 
@@ -211,8 +217,7 @@ public class MyApplication extends Application {
         APIManager.getDefault();
         EventBus.getDefault().register(this);
 
-        // prepare channel list
-        prepareChannelList();
+        initMapCity();
 
     }
 
@@ -222,7 +227,7 @@ public class MyApplication extends Application {
 
 
     //
-    private void prepareChannelList() {
+    public void prepareChannelList() {
         JsonParams params = new JsonParams();
         String strParams = params.toString();
         Events.CommonRequestEvent event = new Events.ChannelListEvent();
@@ -273,6 +278,28 @@ public class MyApplication extends Application {
         }
 
         return null;
+    }
+
+    private void initMapCity() {
+        new Thread() {
+            @Override
+            public void run() {
+                List<Province> provinces = CommonUtil.readProvincesAndCities(getApplicationContext());
+                mapCity = new ArrayMap<Integer, String>();
+                for (Province province: provinces) {
+                    for (City city: province.getCities()) {
+                        mapCity.put(city.getId(), city.getName());
+                    }
+                }
+            }
+        }.start();
+    }
+
+    public String cityNameForId(int cityId) {
+        if (null == mapCity) {
+            return "未知";
+        }
+        return mapCity.get(cityId);
     }
 
 

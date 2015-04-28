@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/F3F2F2">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/F3F2F2">
 
     <include layout="@layout/title_back"/>
 
@@ -128,7 +128,7 @@
                     android:layout_marginTop="24dp"
                     android:layout_marginBottom="24dp"
                     android:text="@string/button_submit"
-                    android:enabled="false"/>
+                    android:enabled="true"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

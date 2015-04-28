@@ -17,9 +17,12 @@ public class Constants {
 
 
     public static class Goods {
-        public static final int OrderTypeDaigou = 3;
-        public static final int OrderTypeDaizulin = 4;
-        public static final int OrderTypePigou = 5;
+        public static final int OrderTypeDaigou = 2;
+        public static final int OrderTypeDaizulin = 3;
+        public static final int OrderTypePigou = 1;
+        public static final int BuyTypePigou = 5;
+        public static final int BuyTypeDaigou = 3;
+        public static final int BuyTypeDaizulin = 4;
     }
 
     public static class Roles {
@@ -34,6 +37,8 @@ public class Constants {
         public static final int Stock = 9;
         public static final int Order = 100;
         public static final int AllProduct = 101;
+        public static final int Message = 102;
+        public static final int Mine = 103;
     }
 
 
@@ -61,6 +66,12 @@ public class Constants {
                 "已停用"
         };
 
+
+
+    }
+
+    public static class KeyValue {
+        public static final int Picture = 2;
     }
 
     public static class Trade {

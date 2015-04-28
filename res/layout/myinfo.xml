@@ -513,6 +513,7 @@
                     android:textSize="17sp" />
 
                 <ImageView
+                    android:id="@+id/iv_idcard_photo"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:layout_gravity="center_vertical"
@@ -559,6 +560,7 @@
                         android:textSize="17sp" />
 
                     <ImageView
+                        android:id="@+id/iv_license_photo"
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
                         android:layout_gravity="center_vertical"
@@ -599,6 +601,7 @@
                         android:textSize="17sp" />
 
                     <ImageView
+                        android:id="@+id/iv_tax_photo"
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
                         android:layout_gravity="center_vertical"

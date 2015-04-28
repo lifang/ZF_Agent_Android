@@ -5,8 +5,11 @@ import android.util.Log;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -244,7 +247,7 @@ public class StringUtil {
     }
 
     public static int intSex(String sex) {
-        return sex.equals("男") ? 1 : 2;
+        return sex.equals("男") ? 1 : 0;
     }
 
     public static String strSex(int sex) {
@@ -253,5 +256,38 @@ public class StringUtil {
 
     public static String priceShow(String price) {
         return priceShow(Integer.parseInt(price));
+    }
+
+    public static String getTime(String user_time) {
+        String re_time = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date d;
+        try {
+
+
+            d = sdf.parse(user_time);
+            long l = d.getTime();
+            String str = String.valueOf(l);
+            re_time = str.substring(0, 10);
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return re_time;
+    }
+
+
+    // 将时间戳转为字符串
+    public static String getStrTime(String cc_time) {
+        String re_StrTime = null;
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        long lcc_time = Long.valueOf(cc_time);
+        re_StrTime = sdf.format(new Date(lcc_time * 1000L));
+
+        return re_StrTime;
+
+
     }
 }

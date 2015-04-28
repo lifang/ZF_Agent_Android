@@ -581,7 +581,6 @@ public class ApplyDetailActivity extends FragmentActivity {
                         LinearLayout item = (LinearLayout) mContainer.findViewWithTag(imageName);
                         mMaterialContainer.removeView(item);
 
-
                         mMaterialContainer.addView(getDetailItem(ITEM_VIEW, imageName, imageUrl));
                     }
                     break;

@@ -4,25 +4,33 @@ package com.posagent.activities.agent;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.CitySelectActivity;
+import com.example.zf_android.trade.common.CommonUtil;
 import com.example.zf_android.trade.widget.MyTabWidget;
 import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
+import com.posagent.activities.ImageViewer;
 import com.posagent.events.Events;
 import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
-
-import java.util.HashMap;
+import com.posagent.utils.PhotoManager;
 
 import de.greenrobot.event.EventBus;
+
+import static com.example.zf_android.trade.Constants.ApplyIntent.REQUEST_TAKE_PHOTO;
+import static com.example.zf_android.trade.Constants.ApplyIntent.REQUEST_UPLOAD_IMAGE;
 
 /***
 *
@@ -45,6 +53,10 @@ public class AgentNewActivity extends BaseActivity {
     private String licensePhotoPath = "licensePhotoPath";
     private String taxPhotoPath = "taxPhotoPath";
 
+    private String photoPath;
+    private String currentKind;
+    private PhotoManager photoManager;
+
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,14 +65,8 @@ public class AgentNewActivity extends BaseActivity {
 		setContentView(R.layout.activity_new_agent);
 		new TitleMenuUtil(AgentNewActivity.this, "创建下级代理商").show();
 
-        // 准备需要监听Click的数据
-        HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{
-//            put("ll_glxjdls", AdressList.class);
-//            put("ll_glph", AdressList.class);
-//            put("ll_gltp", UserList.class);
-        }};
-        this.setClickableMap(clickableMap);
-        this.bindClickListener();
+        photoManager = new PhotoManager(this);
+
 
         cb_is_profit = (CheckBox) findViewById(R.id.cb_is_profit);
         ll_choose_city = (LinearLayout) findViewById(R.id.ll_choose_city);
@@ -87,6 +93,68 @@ public class AgentNewActivity extends BaseActivity {
         });
 
         tabWidget.updateTabs(0);
+
+
+
+        //photo
+        TextView tv_card_photo = (TextView) findViewById(R.id.tv_card_photo);
+        tv_card_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentKind = "card";
+                photoManager.prompt();
+            }
+        });
+
+        TextView tv_license_photo = (TextView) findViewById(R.id.tv_license_photo);
+        tv_license_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentKind = "license";
+                photoManager.prompt();
+            }
+        });
+        TextView tv_tax_photo = (TextView) findViewById(R.id.tv_tax_photo);
+        tv_tax_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentKind = "tax";
+                photoManager.prompt();
+            }
+        });
+
+        ImageView iv_card_photo = (ImageView) findViewById(R.id.iv_card_photo);
+        iv_card_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentKind = "card";
+                Intent i = new Intent(context, ImageViewer.class);
+                i.putExtra("url", cardPhotoPath);
+                startActivityForResult(i, Constants.REQUEST_CODE);
+            }
+        });
+
+        ImageView iv_license_photo = (ImageView) findViewById(R.id.iv_license_photo);
+        iv_license_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentKind = "license";
+                Intent i = new Intent(context, ImageViewer.class);
+                i.putExtra("url", licensePhotoPath);
+                startActivityForResult(i, Constants.REQUEST_CODE);
+            }
+        });
+
+        ImageView iv_tax_photo = (ImageView) findViewById(R.id.iv_tax_photo);
+        iv_tax_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentKind = "tax";
+                Intent i = new Intent(context, ImageViewer.class);
+                i.putExtra("url", taxPhotoPath);
+                startActivityForResult(i, Constants.REQUEST_CODE);
+            }
+        });
 
 
 	}
@@ -124,6 +192,27 @@ public class AgentNewActivity extends BaseActivity {
                 cityId = bundle.getInt(com.example.zf_android.trade.Constants.CityIntent.CITY_ID);
                 setText("tv_city_name", cityName);
                 break;
+            case Constants.REQUEST_CODE:
+                String url = data.getStringExtra("url");
+                updatePhotoUrl(url);
+                break;
+            case REQUEST_UPLOAD_IMAGE:
+            case REQUEST_TAKE_PHOTO: {
+                final Handler handler = new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        if (msg.what == 1) {
+                            String url = (String) msg.obj;
+                            updatePhotoUrl(url);
+                        } else {
+                            CommonUtil.toastShort(context, getString(R.string.toast_upload_failed));
+                        }
+
+                    }
+                };
+                photoManager.onActivityResult(requestCode, resultCode, data, handler);
+                break;
+            }
         }
     }
 
@@ -164,6 +253,23 @@ public class AgentNewActivity extends BaseActivity {
         if (event.success()) {
             EventBus.getDefault().post(new Events.SonAgentListReloadEvent());
             finish();
+        }
+    }
+
+    private void updatePhotoUrl(String url) {
+        Log.d(TAG, url);
+        if (currentKind.equals("card")) {
+            cardPhotoPath = url;
+            findViewById(R.id.iv_card_photo).setVisibility(View.VISIBLE);
+            findViewById(R.id.tv_card_photo).setVisibility(View.GONE);
+        } else if (currentKind.equals("license")) {
+            licensePhotoPath = url;
+            findViewById(R.id.iv_license_photo).setVisibility(View.VISIBLE);
+            findViewById(R.id.tv_license_photo).setVisibility(View.GONE);
+        } else if (currentKind.equals("tax")) {
+            taxPhotoPath = url;
+            findViewById(R.id.iv_tax_photo).setVisibility(View.VISIBLE);
+            findViewById(R.id.tv_tax_photo).setVisibility(View.GONE);
         }
     }
 

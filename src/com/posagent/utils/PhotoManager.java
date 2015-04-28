@@ -12,6 +12,7 @@ import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.example.zf_android.R;
 import com.example.zf_android.trade.common.CommonUtil;
@@ -117,6 +118,7 @@ public class PhotoManager {
                         try {
                             JSONObject jo = new JSONObject(result);
                             String url = jo.getString("result");
+                            Log.d("PhotoManager", url);
                             Message msg = new Message();
                             msg.what = 1;
                             msg.obj = url;

@@ -1,0 +1,107 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:id="@+id/top_ly"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_actions"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_above="@+id/bottom"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        >
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:id="@+id/tv_register"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:background="@drawable/bg_blue_shape"
+                android:textColor="@color/white"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:text="申请成为代理商"
+                />
+            <TextView
+                android:id="@+id/tv_use"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:background="@drawable/bg_blue_shape"
+                android:textColor="@color/white"
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:text="马上使用"
+                />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="6dp"
+        android:layout_alignParentBottom="true"
+        android:layout_height="30dp">
+        <LinearLayout
+            android:id="@+id/ll_dot_container"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:tag="dot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/dot"
+                android:padding="10dp"
+                />
+            <ImageView
+                android:tag="dot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/dot"
+                android:padding="10dp"
+                />
+            <ImageView
+                android:tag="dot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/dot"
+                android:padding="10dp"
+                />
+            <ImageView
+                android:tag="dot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/dot"
+                android:padding="10dp"
+                />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

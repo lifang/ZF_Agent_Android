@@ -69,6 +69,11 @@
             android:screenOrientation="portrait" >
         </activity>
 
+        <activity
+            android:name="com.posagent.activities.home.GuideActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+
         <!-- ====================================================== -->
         <!-- 全部商品 Activities -->
         <!-- ====================================================== -->

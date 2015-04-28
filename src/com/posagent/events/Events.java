@@ -2,6 +2,7 @@ package com.posagent.events;
 
 import com.example.zf_android.entity.AdressEntity;
 import com.example.zf_android.entity.AgentTerminalEntity;
+import com.example.zf_android.entity.BankEntity;
 import com.example.zf_android.entity.ChanelEntitiy;
 import com.example.zf_android.entity.ChannelEntity;
 import com.example.zf_android.entity.ChannelTradeEntity;
@@ -474,6 +475,28 @@ public class Events {
             return list;
         }
         public void setList(List<MerchantEntity> list) {
+            this.list = list;
+        }
+    }
+
+    public static class BankListEvent extends CommonRequestEvent {}
+    public static class BankListCompleteEvent extends CommonCompleteEvent {
+        private List<BankEntity> list = new ArrayList<BankEntity>();
+        public List<BankEntity> getList() {
+            if (list.size() < 1) {
+                String result = null;
+                try {
+                    result = getResult().getString("content");
+                    list = (new Gson()).fromJson(result,
+                            new TypeToken<List<BankEntity>>() {}.getType());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            return list;
+        }
+        public void setList(List<BankEntity> list) {
             this.list = list;
         }
     }

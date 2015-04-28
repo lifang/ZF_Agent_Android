@@ -111,6 +111,7 @@ public class Constants {
 		public static final int REQUEST_CHOOSE_CHANNEL = 0x1003;
 		public static final int REQUEST_UPLOAD_IMAGE = 0x1004;
 		public static final int REQUEST_TAKE_PHOTO = 0x1005;
+        public static final int REQUEST_CHOOSE_BANK = 0x1006;
 
 		public static final String CHOOSE_TITLE = "choose_title";
 		public static final String CHOOSE_ITEMS = "choose_items";

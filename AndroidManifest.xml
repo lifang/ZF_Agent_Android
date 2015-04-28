@@ -510,6 +510,10 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.posagent.activities.terminal.BankList"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.posagent.activities.goods.GoodsDetail"
             android:screenOrientation="portrait" >
         </activity>

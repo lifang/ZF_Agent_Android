@@ -39,6 +39,7 @@ import com.example.zf_android.trade.entity.TerminalOpenInfo;
 import com.example.zf_android.trade.widget.MyTabWidget;
 import com.posagent.MyApplication;
 import com.posagent.activities.ImageViewer;
+import com.posagent.activities.terminal.BankList;
 import com.posagent.activities.terminal.ChooseChannel;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
@@ -56,6 +57,7 @@ import de.greenrobot.event.EventBus;
 
 import static com.example.zf_android.trade.Constants.ApplyIntent.CHOOSE_ITEMS;
 import static com.example.zf_android.trade.Constants.ApplyIntent.CHOOSE_TITLE;
+import static com.example.zf_android.trade.Constants.ApplyIntent.REQUEST_CHOOSE_BANK;
 import static com.example.zf_android.trade.Constants.ApplyIntent.REQUEST_CHOOSE_CHANNEL;
 import static com.example.zf_android.trade.Constants.ApplyIntent.REQUEST_CHOOSE_CITY;
 import static com.example.zf_android.trade.Constants.ApplyIntent.REQUEST_CHOOSE_MERCHANT;
@@ -124,6 +126,10 @@ public class ApplyDetailActivity extends FragmentActivity {
 	private City mMerchantCity;
 	private int mChannelId;
 	private int mBillingId;
+    private String mBankName;
+    private String mBankNo;
+
+    private Object customTag;
 
 	private String photoPath;
 	private TextView uploadingTextView;
@@ -132,8 +138,8 @@ public class ApplyDetailActivity extends FragmentActivity {
 
 	private List<String> mImageUrls = new ArrayList<String>();
 	private List<String> mImageNames = new ArrayList<String>();
-	private Map<String, ApplyCustomerDetail> mapCustomerDetails = new HashMap<String, ApplyCustomerDetail>();
-	private Map<String, ApplyMaterial> mapMaterials = new HashMap<String, ApplyMaterial>();
+	private Map<Integer, ApplyCustomerDetail> mapCustomerDetails = new HashMap<Integer, ApplyCustomerDetail>();
+	private Map<Integer, ApplyMaterial> mapMaterials = new HashMap<Integer, ApplyMaterial>();
 
 
 	@Override
@@ -251,7 +257,7 @@ public class ApplyDetailActivity extends FragmentActivity {
         if (null != materials) {
             //update map
             for (ApplyMaterial item: materials) {
-                mapMaterials.put(item.getName(), item);
+                mapMaterials.put(item.getId(), item);
             }
 
             prepareMaterials(materials);
@@ -262,7 +268,7 @@ public class ApplyDetailActivity extends FragmentActivity {
         if (null != customerDetails) {
             //update map
             for (ApplyCustomerDetail item: customerDetails) {
-                mapCustomerDetails.put(item.getKey(), item);
+                mapCustomerDetails.put(item.getTarget_id(), item);
             }
             setCustomerDetail(customerDetails);
         }
@@ -273,6 +279,25 @@ public class ApplyDetailActivity extends FragmentActivity {
         if (null != openInfo) {
             updateOpenInfo(openInfo);
         }
+
+
+        // setup material choose item
+        for (final ApplyMaterial item: materials) {
+            if (TYPE_BANK == item.getInfo_type()) {
+                LinearLayout ll = (LinearLayout) mContainer.findViewWithTag(item.getId());
+                ll.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        customTag = item.getId();
+                        Intent intent = new Intent(ApplyDetailActivity.this, BankList.class);
+                        intent.putExtra(AGENT_NAME, mBankName);
+                        intent.putExtra("terminalId", mTerminalId);
+                        startActivityForResult(intent, REQUEST_CHOOSE_BANK);
+                    }
+                });
+            }
+        }
+
     }
 
 
@@ -292,16 +317,26 @@ public class ApplyDetailActivity extends FragmentActivity {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode != RESULT_OK) return;
 		switch (requestCode) {
-			case REQUEST_CHOOSE_MERCHANT: {
+            case REQUEST_CHOOSE_MERCHANT: {
 
-				mAgentId = mMerchantId = data.getIntExtra(AGENT_ID, 0);
+                mAgentId = mMerchantId = data.getIntExtra(AGENT_ID, 0);
                 mAgentName = data.getStringExtra(AGENT_NAME);
-				setItemValue(mMerchantKeys[0], mAgentName);
+                setItemValue(mMerchantKeys[0], mAgentName);
 
                 getAgentInfo();
 
-				break;
-			}
+                break;
+            }
+            case REQUEST_CHOOSE_BANK: {
+
+                mBankName = data.getStringExtra("bank_name");
+                mBankNo = data.getStringExtra("bank_no");
+                setItemValue(customTag, mBankName);
+                setItemValue(mBankKeys[0], mBankName);
+                setItemValue(mBankKeys[1], mBankNo);
+
+                break;
+            }
 			case REQUEST_CHOOSE_CITY: {
                 mMerchantProvince = (Province) data.getSerializableExtra(SELECTED_PROVINCE);
                 mMerchantCity = (City) data.getSerializableExtra(SELECTED_CITY);
@@ -329,7 +364,7 @@ public class ApplyDetailActivity extends FragmentActivity {
                                 final String url = (String) msg.obj;
                                 LinearLayout item = (LinearLayout)uploadingTextView.getParent().getParent();
 
-                                updateCustomerDetails(item.getTag().toString(), url);
+                                updateCustomerDetails(item.getTag(), url);
                                 uploadingTextView.setVisibility(View.GONE);
 
 
@@ -420,23 +455,29 @@ public class ApplyDetailActivity extends FragmentActivity {
 	 * @param key
 	 * @param value
 	 */
-	private void setItemValue(String key, String value) {
-		LinearLayout item = (LinearLayout) mContainer.findViewWithTag(key);
-		TextView tvValue = (TextView) item.findViewById(R.id.apply_detail_value);
-		tvValue.setText(value);
-	}
+    private void setItemValue(String key, String value) {
+        LinearLayout item = (LinearLayout) mContainer.findViewWithTag(key);
+        TextView tvValue = (TextView) item.findViewById(R.id.apply_detail_value);
+        tvValue.setText(value);
+    }
 
-	/**
+    private void setItemValue(Object key, String value) {
+        LinearLayout item = (LinearLayout) mContainer.findViewWithTag(key);
+        TextView tvValue = (TextView) item.findViewById(R.id.apply_detail_value);
+        tvValue.setText(value);
+    }
+
+    /**
 	 * get the item value by key
 	 *
 	 * @param key
 	 * @return
 	 */
-	private String getItemValue(String key) {
-		LinearLayout item = (LinearLayout) mContainer.findViewWithTag(key);
-		TextView tvValue = (TextView) item.findViewById(R.id.apply_detail_value);
-		return tvValue.getText().toString();
-	}
+    private String getItemValue(Object key) {
+        LinearLayout item = (LinearLayout) mContainer.findViewWithTag(key);
+        TextView tvValue = (TextView) item.findViewById(R.id.apply_detail_value);
+        return tvValue.getText().toString();
+    }
 
 	/**
 	 * firstly init the merchant category with item keys,
@@ -567,9 +608,14 @@ public class ApplyDetailActivity extends FragmentActivity {
 	 */
     private void setCustomerDetail(List<ApplyCustomerDetail> customerDetails) {
         for (ApplyCustomerDetail customerDetail : customerDetails) {
+            ApplyMaterial material = mapMaterials.get(customerDetail.getTarget_id());
+            if(null == material) {
+                continue;
+            }
+            Integer tag = material.getId();
             switch (customerDetail.getTypes()) {
                 case TYPE_TEXT:
-                    setItemValue(customerDetail.getKey(), customerDetail.getValue());
+                    setItemValue(material.getId(), customerDetail.getValue());
                     break;
                 case TYPE_IMAGE:
                     String imageName = customerDetail.getKey();
@@ -578,14 +624,14 @@ public class ApplyDetailActivity extends FragmentActivity {
                         mImageNames.add(customerDetail.getKey());
                         mImageUrls.add(customerDetail.getValue());
 
-                        LinearLayout item = (LinearLayout) mContainer.findViewWithTag(imageName);
+                        LinearLayout item = (LinearLayout) mContainer.findViewWithTag(tag);
                         mMaterialContainer.removeView(item);
 
-                        mMaterialContainer.addView(getDetailItem(ITEM_VIEW, imageName, imageUrl));
+                        mMaterialContainer.addView(getDetailItem(ITEM_VIEW, imageName, imageUrl, tag));
                     }
                     break;
                 case TYPE_BANK:
-
+                    setItemValue(material.getId(), customerDetail.getValue());
                     break;
             }
         }
@@ -596,15 +642,15 @@ public class ApplyDetailActivity extends FragmentActivity {
         for (ApplyMaterial material : materials) {
             switch (material.getInfo_type()) {
                 case TYPE_TEXT:
-                    mMaterialContainer.addView(getDetailItem(ITEM_EDIT, material.getName(), null));
+                    mMaterialContainer.addView(getDetailItem(ITEM_EDIT, material.getName(), null, material.getId()));
                     break;
                 case TYPE_IMAGE:
                     String imageName = material.getName();
                     String imageUrl = "";
-                    mMaterialContainer.addView(getDetailItem(ITEM_UPLOAD, imageName, imageUrl));
+                    mMaterialContainer.addView(getDetailItem(ITEM_UPLOAD, imageName, imageUrl, material.getId()));
                     break;
                 case TYPE_BANK:
-
+                    mMaterialContainer.addView(getDetailItem(ITEM_CHOOSE, material.getName(), null, material.getId()));
                     break;
             }
         }
@@ -616,28 +662,32 @@ public class ApplyDetailActivity extends FragmentActivity {
 		setupItem(item, itemType, key, value);
 	}
 
-	private LinearLayout getDetailItem(int itemType, String key, String value) {
-		LinearLayout item;
-		switch (itemType) {
-			case ITEM_EDIT:
-				item = (LinearLayout) mInflater.inflate(R.layout.apply_detail_item_edit, null);
-				break;
-			case ITEM_CHOOSE:
-				item = (LinearLayout) mInflater.inflate(R.layout.apply_detail_item_choose, null);
-				break;
-			case ITEM_UPLOAD:
-				item = (LinearLayout) mInflater.inflate(R.layout.apply_detail_item_upload, null);
-				break;
-			case ITEM_VIEW:
-				item = (LinearLayout) mInflater.inflate(R.layout.apply_detail_item_view, null);
-				break;
-			default:
-				item = (LinearLayout) mInflater.inflate(R.layout.apply_detail_item_edit, null);
-		}
-		item.setTag(key);
-		setupItem(item, itemType, key, value);
-		return item;
-	}
+    private LinearLayout getDetailItem(int itemType, String key, String value) {
+        return getDetailItem(itemType, key, value, key);
+    }
+
+    private LinearLayout getDetailItem(int itemType, String key, String value, Object tag) {
+        LinearLayout item;
+        switch (itemType) {
+            case ITEM_EDIT:
+                item = (LinearLayout) mInflater.inflate(R.layout.apply_detail_item_edit, null);
+                break;
+            case ITEM_CHOOSE:
+                item = (LinearLayout) mInflater.inflate(R.layout.apply_detail_item_choose, null);
+                break;
+            case ITEM_UPLOAD:
+                item = (LinearLayout) mInflater.inflate(R.layout.apply_detail_item_upload, null);
+                break;
+            case ITEM_VIEW:
+                item = (LinearLayout) mInflater.inflate(R.layout.apply_detail_item_view, null);
+                break;
+            default:
+                item = (LinearLayout) mInflater.inflate(R.layout.apply_detail_item_edit, null);
+        }
+        item.setTag(tag);
+        setupItem(item, itemType, key, value);
+        return item;
+    }
 
 	private void setupItem(LinearLayout item, int itemType, final String key, final String value) {
 		switch (itemType) {
@@ -770,17 +820,26 @@ public class ApplyDetailActivity extends FragmentActivity {
 
         list.add(params);
 
-        ApplyMaterial material;
-        for (ApplyCustomerDetail detail: mapCustomerDetails.values()) {
-            material = mapMaterials.get(detail.getKey());
+        ApplyCustomerDetail detail;
+        for (ApplyMaterial material: mapMaterials.values()) {
+            String value = "";
+
+            if (TYPE_IMAGE == material.getInfo_type()) {
+                detail = mapCustomerDetails.get(material.getId());
+                if (null != detail) {
+                    value = detail.getValue();
+                }
+            } else {
+                value = getItemValue(material.getId());
+            }
+
 
             Map<String, Object> map = new HashMap<String, Object>();
-
-            map.put("key", detail.getKey());
-            map.put("value", detail.getValue());
+            map.put("key", material.getName());
+            map.put("value", value);
             map.put("types", material.getInfo_type());
             map.put("openingRequirementId", material.getOpening_requirements_id());
-            map.put("targetId", mApplyType);
+            map.put("targetId", material.getId());
 
             list.add(map);
         }
@@ -825,13 +884,16 @@ public class ApplyDetailActivity extends FragmentActivity {
     }
 
 
-    private void updateCustomerDetails(String key, String value) {
-        ApplyCustomerDetail item = mapCustomerDetails.get(key);
+    private void updateCustomerDetails(Object key, String value) {
+        Integer realKey = (Integer) key;
+        ApplyCustomerDetail item = mapCustomerDetails.get(realKey);
+        ApplyMaterial material = mapMaterials.get(realKey);
         if (null == item) {
             item = new ApplyCustomerDetail();
-            mapCustomerDetails.put(key, item);
+            mapCustomerDetails.put(realKey, item);
         }
-        item.setKey(key);
+        item.setKey(material.getName());
+        item.setTarget_id(material.getId());
         item.setValue(value);
 
     }

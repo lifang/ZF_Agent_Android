@@ -81,6 +81,9 @@ public class OrderAdapter extends BaseAdapter{
             holder.tv_price = (TextView) convertView.findViewById(R.id.tv_price);
             holder.tv_origin_price = (TextView) convertView.findViewById(R.id.tv_origin_price);
             holder.tv_goodnum = (TextView) convertView.findViewById(R.id.tv_goodnum);
+            holder.tv_guishu = (TextView) convertView.findViewById(R.id.tv_guishu);
+            holder.tv_peisongfei = (TextView) convertView.findViewById(R.id.tv_peisongfei);
+            holder.tv_shifu = (TextView) convertView.findViewById(R.id.tv_shifu);
 
             holder.tv_heji = (TextView) convertView.findViewById(R.id.tv_heji);
             holder.tv_dingjin_payed = (TextView) convertView.findViewById(R.id.tv_dingjin_payed);
@@ -112,9 +115,12 @@ public class OrderAdapter extends BaseAdapter{
         holder.tv_time.setText(entity.getOrder_createTime()	);
 
         holder.tv_heji.setText("合计：￥" + StringUtil.priceShow(entity.getActual_price()));
+        holder.tv_shifu.setText("实付：￥" + StringUtil.priceShow(entity.getOrder_totalPrice()));
         holder.tv_dingjin_payed.setText("已付定金：￥" + StringUtil.priceShow(entity.getZhifu_dingjin()));
         holder.tv_yifahuo.setText("已发货数量：" + entity.getShipped_quantity());
         holder.tv_left.setText("剩余金额：￥" + StringUtil.priceShow(entity.getShengyu_price()));
+        holder.tv_guishu.setText("归属用户：" + entity.getGuishu_user());
+        holder.tv_peisongfei.setText("配送费：" + entity.getOrder_psf());
 
         switch (entity.getOrder_status()) {
             case 1:
@@ -227,7 +233,8 @@ public class OrderAdapter extends BaseAdapter{
 
     public final class ViewHolder {
         public TextView tv_goodnum,tv_price,content,content2,tv_ddbh,tv_time,tv_status,
-                tv_heji,tv_dingjin_payed,tv_yifahuo,tv_left, tv_gtd, content_pp,tv_origin_price;
+                tv_heji,tv_dingjin_payed,tv_yifahuo,tv_left, tv_gtd,
+                content_pp,tv_origin_price, tv_guishu, tv_peisongfei, tv_shifu;
         private LinearLayout ll_ishow;
         public ImageView iv_face;
     }

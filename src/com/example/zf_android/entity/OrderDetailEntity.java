@@ -6,6 +6,9 @@ public class OrderDetailEntity {
 
     private String total_dingjin;
     private String zhifu_dingjin;
+    private String guishu_user;
+
+
 
     public int getOrder_id() {
         return order_id;
@@ -349,5 +352,13 @@ public class OrderDetailEntity {
             this.total = total;
         }
 
+    }
+
+    public String getGuishu_user() {
+        return guishu_user;
+    }
+
+    public void setGuishu_user(String guishu_user) {
+        this.guishu_user = guishu_user;
     }
 }

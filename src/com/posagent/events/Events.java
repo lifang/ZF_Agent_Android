@@ -14,10 +14,12 @@ import com.example.zf_android.entity.MerchantEntity;
 import com.example.zf_android.entity.MessageEntity;
 import com.example.zf_android.entity.OrderEntity;
 import com.example.zf_android.entity.PayChannelInfoEntity;
+import com.example.zf_android.entity.PayOrderInfo;
 import com.example.zf_android.entity.PicEntity;
 import com.example.zf_android.entity.PosEntity;
 import com.example.zf_android.entity.PrepareEntity;
 import com.example.zf_android.entity.ProfitEntity;
+import com.example.zf_android.entity.ShopPayOrderInfo;
 import com.example.zf_android.entity.SonAgent;
 import com.example.zf_android.entity.SonAgentInfo;
 import com.example.zf_android.entity.StaffEntity;
@@ -357,6 +359,40 @@ public class Events {
     public static class CancelOrderPigouEvent extends CommonRequestEvent {}
     public static class CancelOrderDaigouEvent extends CommonRequestEvent {}
     public static class CancelOrderCompleteEvent extends CommonCompleteEvent {}
+
+    public static class PayOrderInfoEvent extends CommonRequestEvent {}
+    public static class PayOrderInfoCompleteEvent extends CommonCompleteEvent {
+        private PayOrderInfo entity;
+
+        public PayOrderInfo getEntity() {
+            String result = null;
+            result = getResult().toString();
+            entity = (new Gson()).fromJson(result, PayOrderInfo.class);
+            return entity;
+        }
+
+        public void setEntity(PayOrderInfo entity) {
+            this.entity = entity;
+        }
+
+    }
+
+    public static class ShopPayOrderInfoEvent extends CommonRequestEvent {}
+    public static class ShopPayOrderInfoCompleteEvent extends CommonCompleteEvent {
+        private ShopPayOrderInfo entity;
+
+        public ShopPayOrderInfo getEntity() {
+            String result = null;
+            result = getResult().toString();
+            entity = (new Gson()).fromJson(result, ShopPayOrderInfo.class);
+            return entity;
+        }
+
+        public void setEntity(ShopPayOrderInfo entity) {
+            this.entity = entity;
+        }
+
+    }
 
 
     //stock

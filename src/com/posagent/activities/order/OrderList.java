@@ -257,7 +257,7 @@ public class OrderList extends BaseActivity implements IXListViewListener,
     }
 
     private void updateSpinner() {
-        if (q == Constants.Goods.BuyTypePigou) {
+        if (p == Constants.Goods.BuyTypePigou) {
             hide("ll_spinnerkind");
         } else {
             show("ll_spinnerkind");

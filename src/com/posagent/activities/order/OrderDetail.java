@@ -103,7 +103,7 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
                         show("ll_header_daigou");
                         hide("ll_header_pigou");
                         setText("tv_order_type", "订购类型：代购");
-                        setText("tv_guishu", "归属用户：\n" );
+                        setText("tv_guishu", "归属用户：\n" + entity.getGuishu_user());
 
 
                         tv_gj.setText("共计 ：" + entity.getOrder_totalNum() + "件");

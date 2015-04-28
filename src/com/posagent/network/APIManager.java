@@ -51,6 +51,8 @@ public class APIManager {
     public static final String UrlCreateAddress = BaseUrl + "/agents/insertAddress";
     public static final String UrlDeleteAddress = BaseUrl + "/agents/deleteAddress";
     public static final String UrlOrderList = BaseUrl + "/order/orderSearch";
+    public static final String UrlPayOrderInfo = BaseUrl + "/order/payOrder";
+    public static final String UrlShopPayOrderInfo = BaseUrl + "/shop/payOrder";
     public static final String UrlOrderDetailPigou = BaseUrl + "/order/getWholesaleById";
     public static final String UrlOrderDetailDaigou = BaseUrl + "/order/getProxyById";
     public static final String UrlOrderCancelPigou = BaseUrl + "/order/cancelWholesale";
@@ -363,6 +365,18 @@ public class APIManager {
         Events.CommonCompleteEvent completeEvent = new Events.OrderListCompleteEvent();
         CommonRequest(event, completeEvent, UrlOrderList);
     }
+
+    public void onEventBackgroundThread(Events.PayOrderInfoEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.PayOrderInfoCompleteEvent();
+        CommonRequest(event, completeEvent, UrlPayOrderInfo);
+    }
+
+    public void onEventBackgroundThread(Events.ShopPayOrderInfoEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.ShopPayOrderInfoCompleteEvent();
+        CommonRequest(event, completeEvent, UrlShopPayOrderInfo);
+    }
+
+
 
     public void onEventBackgroundThread(Events.OrderDetailPigouEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.OrderDetailCompleteEvent();

@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
@@ -63,6 +64,7 @@ public class TerminalChooseAdd extends BaseActivity {
         //do submit
         JsonParams params = new JsonParams();
 
+        params.put("agentId", MyApplication.user().getAgentId());
         params.put("serialNum", terminals.split("\n"));
         String strParams = params.toString();
         Events.BatchTerminalNumberEvent event = new Events.BatchTerminalNumberEvent();
@@ -72,9 +74,14 @@ public class TerminalChooseAdd extends BaseActivity {
 
     // events
     public void onEventMainThread(Events.BatchTerminalNumberCompleteEvent event) {
-        Intent i = new Intent(TerminalChooseAdd.this, TerminalChooseList.class);
-        i.putExtra("json", gson.toJson(event.getList()));
-        startActivity(i);
+        if (event.success()) {
+            Intent i = new Intent(TerminalChooseAdd.this, TerminalChooseList.class);
+            i.putExtra("json", gson.toJson(event.getList()));
+            startActivity(i);
+        } else {
+            toast(event.getMessage());
+        }
+
     }
 
     public void onEventMainThread(Events.TerminalChooseFinishEvent event) {

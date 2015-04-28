@@ -164,7 +164,20 @@ public class AfterSaleApply extends BaseActivity {
         }
     }
 
+    private boolean check() {
+        if (null == selectedList || selectedList.size() < 1) {
+            toast("请先选择终端");
+            return false;
+        }
+
+        return true;
+    }
+
     private void doSubmit() {
+
+        if (!check()) {
+            return;
+        }
 
         JsonParams params = new JsonParams();
         params.put("customerId", MyApplication.user().getId());

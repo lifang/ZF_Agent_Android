@@ -21,7 +21,7 @@ import java.util.List;
 import de.greenrobot.event.EventBus;
 
 /***
- * 输入终端
+ * 选择终端
  *
  */
 public class TerminalChooseList extends BaseActivity {

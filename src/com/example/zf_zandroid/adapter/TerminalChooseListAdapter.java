@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.examlpe.zf_android.util.StringUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.entity.TerminalItem;
 import com.posagent.activities.terminal.TerminalChooseList;
@@ -60,7 +61,7 @@ public class TerminalChooseListAdapter extends BaseAdapter{
 
         //fill data
         holder.tv_terminal_number.setText(entity.getTerminalNumber());
-        holder.tv_price.setText("￥" + entity.getRetail_price());
+        holder.tv_price.setText("￥" + StringUtil.priceShow(entity.getRetail_price()));
         holder.cb_item.setChecked(entity.isSelected());
 
         holder.cb_item.setOnClickListener(new OnClickListener() {

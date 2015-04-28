@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.posagent.MyApplication;
@@ -86,14 +87,27 @@ public class TerminalChoosePos extends BaseActivity {
         super.onClick(v);
     }
 
-    private void doSubmit() {
-        JsonParams params = new JsonParams();
+    private boolean check() {
+        String str = StringUtil.replaceBlank(et_min_price.getText().toString());
+        if(str.length() == 0){
+            toast("请输入最低价格");
+            return false;
+        }
+        str = StringUtil.replaceBlank(et_max_price.getText().toString());
+        if(str.length() == 0){
+            toast("请输入最高价格");
+            return false;
+        }
+        return true;
+    }
 
-//        ": "泰山Pos旗舰版1",
-//        "": 222,
-//                "": 12435,
-//                "": 1,
-//                "":1
+
+    private void doSubmit() {
+        if (!check()) {
+            return;
+        }
+
+        JsonParams params = new JsonParams();
         params.put("agentId", MyApplication.user().getAgentId());
         params.put("title", posName);
         params.put("channelsId", channelId);
@@ -126,9 +140,13 @@ public class TerminalChoosePos extends BaseActivity {
 
     // events
     public void onEventMainThread(Events.BatchTerminalNumberPosCompleteEvent event) {
-        Intent i = new Intent(TerminalChoosePos.this, TerminalChooseList.class);
-        i.putExtra("json", gson.toJson(event.getList()));
-        startActivity(i);
+        if (event.success()) {
+            Intent i = new Intent(TerminalChoosePos.this, TerminalChooseList.class);
+            i.putExtra("json", gson.toJson(event.getList()));
+            startActivity(i);
+        } else {
+            toast(event.getMessage());
+        }
     }
 
     public void onEventMainThread(Events.TerminalChooseFinishEvent event) {

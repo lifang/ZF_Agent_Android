@@ -68,7 +68,9 @@ public class ChangePassword extends BaseActivity {
 
 
     private boolean check() {
-        if (!et_password.getText().toString().equals(et_new_password.getText().toString())) {
+        String pwd1 = et_new_password.getText().toString();
+        String pwd2 = et_new_password_confirm.getText().toString();
+        if (!pwd1.equals(pwd2)) {
             toast("两次密码不一致");
             return false;
         }

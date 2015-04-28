@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.examlpe.zf_android.util.DialogUtil;
 import com.examlpe.zf_android.util.DialogUtil.CallBackChange;
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.alipay.PayActivity;
+import com.example.zf_android.alipay.PayActivity;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.Goodlist;
 import com.example.zf_android.entity.OrderDetailEntity;

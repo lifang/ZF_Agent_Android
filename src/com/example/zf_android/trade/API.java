@@ -2,6 +2,7 @@ package com.example.zf_android.trade;
 
 import android.content.Context;
 
+import com.example.zf_android.Config;
 import com.example.zf_android.trade.common.HttpCallback;
 import com.example.zf_android.trade.common.HttpRequest;
 import com.posagent.network.APIManager;
@@ -395,4 +396,13 @@ public class API {
 		params.put("phone", phone);
 		new HttpRequest(context, callback).post(APPLY_PROGRESS, params);
 	}
+
+
+    public static void noticeVideo(
+            Context context,
+            int terminalId) {
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("terminalId", terminalId);
+        new HttpRequest(context, null).post(Config.URL_NOTICE_VIDEO, params);
+    }
 }

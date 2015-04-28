@@ -228,6 +228,9 @@ public class MyApplication extends Application {
 
     //
     public void prepareChannelList() {
+        if (getChannels().size() > 0) {
+            return;
+        }
         JsonParams params = new JsonParams();
         String strParams = params.toString();
         Events.CommonRequestEvent event = new Events.ChannelListEvent();
@@ -273,6 +276,16 @@ public class MyApplication extends Application {
     public ChannelEntity getChannelEntityWithId(int id) {
         for (ChannelEntity channel: getChannels()) {
             if (channel.getId() == id) {
+                return channel;
+            }
+        }
+
+        return null;
+    }
+
+    public ChannelEntity getChannelEntityWithName(String name) {
+        for (ChannelEntity channel: getChannels()) {
+            if (channel.getName().equals(name)) {
                 return channel;
             }
         }

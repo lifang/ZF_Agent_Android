@@ -87,6 +87,15 @@ public class Events {
         private JSONObject result;
         private JSONArray arrResult;
         private int intResult;
+        private String strResult;
+
+        public String getStrResult() {
+            return strResult;
+        }
+
+        public void setStrResult(String strResult) {
+            this.strResult = strResult;
+        }
 
         public JSONArray getArrResult() {
             return arrResult;
@@ -1004,7 +1013,7 @@ public class Events {
         private String defautProfit;
 
         public String getDefautProfit() {
-            String result = getResult().toString();
+            String result = "" + getIntResult();
             return result;
         }
 

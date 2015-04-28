@@ -78,7 +78,7 @@ public class AgentDefaultProfit extends BaseActivity
         if(check()) {
             JsonParams params = new JsonParams();
 
-            params.put("agentsId", MyApplication.user().getId());
+            params.put("agentsId", MyApplication.user().getAgentId());
 
             params.put("defaultProfit", et_profit.getText().toString());
 

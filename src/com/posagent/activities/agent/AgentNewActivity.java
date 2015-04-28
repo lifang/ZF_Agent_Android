@@ -218,7 +218,7 @@ public class AgentNewActivity extends BaseActivity {
 
     private void doSubmit() {
         JsonParams params = new JsonParams();
-        params.put("agentsId", MyApplication.user().getId());
+        params.put("agentsId", MyApplication.user().getAgentId());
         params.put("agentType", types);
         params.put("cityId", cityId);
 

@@ -142,7 +142,7 @@ public class AgentManageActivity extends BaseActivity implements XListView.IXLis
 
     private void getData() {
         JsonParams params = new JsonParams();
-        params.put("agentsId", MyApplication.user().getId());
+        params.put("agentsId", MyApplication.user().getAgentId());
         params.put("page", page);
         params.put("rows", rows);
         String strParams = params.toString();
@@ -153,7 +153,7 @@ public class AgentManageActivity extends BaseActivity implements XListView.IXLis
 
     private void getDefaultProfit() {
         JsonParams params = new JsonParams();
-        params.put("agentsId", MyApplication.user().getId());
+        params.put("agentsId", MyApplication.user().getAgentId());
         String strParams = params.toString();
         Events.CommonRequestEvent event = new Events.GetDefaultProfitEvent();
         event.setParams(strParams);

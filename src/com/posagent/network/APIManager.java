@@ -192,7 +192,12 @@ public class APIManager {
                                 try {
                                     completeEvent.setIntResult(json.getInt("result"));
                                 } catch (Exception e3) {
-                                    Log.d("UnCatchException3", ex.getMessage());
+                                    Log.d("UnCatchException3", e3.getMessage());
+                                    try {
+                                        completeEvent.setStrResult(json.getString("result"));
+                                    } catch (Exception e4) {
+                                        Log.d("UnCatchException3", e4.getMessage());
+                                    }
                                 }
                             }
                         }

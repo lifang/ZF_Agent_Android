@@ -181,9 +181,20 @@ public class AgentProfitList extends BaseActivity implements IXListViewListener 
 
     // events
     public void onEventMainThread(Events.ProfitListCompleteEvent event) {
+
+        for (ProfitEntity item: event.getList()) {
+            item.setChannel(((MyApplication)getApplication()).getChannelEntityWithName(item.getChannelName()));
+        }
+
         myList.addAll(event.getList());
         Xlistview.setPullLoadEnable(event.getList().size() >= rows);
         handler.sendEmptyMessage(0);
+    }
+
+
+    public void onEventMainThread(Events.SetProfitCompleteEvent event) {
+
+        toast(event.getMessage());
     }
 
     @Override
@@ -198,7 +209,7 @@ public class AgentProfitList extends BaseActivity implements IXListViewListener 
                 Log.d(TAG, "id " + selectChannelId);
                 ProfitEntity entity = new ProfitEntity();
                 entity.setChannel(((MyApplication)getApplication()).getChannelEntityWithId(selectChannelId));
-                myList.add(entity);
+                myList.add(0, entity);
                 handler.sendEmptyMessage(0);
                 break;
 
@@ -266,10 +277,9 @@ public class AgentProfitList extends BaseActivity implements IXListViewListener 
 
         //do save
         JsonParams params = new JsonParams();
-        params.put("agentsId", MyApplication.user().getId());
-
+        params.put("agentsId", MyApplication.user().getAgentId());
         params.put("sonAgentsId", sonAgentId);
-        params.put("channelId", profitEntity.getChannel().getId());
+        params.put("payChannelId", profitEntity.getChannel().getId());
         params.put("profitPercent", profitPercent);
         params.put("sign", sign);
         String strParams = params.toString();
@@ -286,7 +296,7 @@ public class AgentProfitList extends BaseActivity implements IXListViewListener 
 
         if (profit.getId() != null) {
             JsonParams params = new JsonParams();
-            params.put("agentsId", MyApplication.user().getId());
+            params.put("agentsId", MyApplication.user().getAgentId());
             params.put("sonAgentsId", sonAgentId);
             params.put("payChannelId", profit.getChannel().getId());
 

@@ -8,8 +8,8 @@ package com.example.zf_android.entity;
  */
 public class SonAgentInfo extends BaseEntity {
     private int cityId;
-    private int soldNum;
-    private int openNum;
+    private int soldnum;
+    private int opennum;
     private int allQty;
     private String created_at;
     private int types;
@@ -27,6 +27,50 @@ public class SonAgentInfo extends BaseEntity {
     private String email;
     private String address;
     private String name;
+    private String licensepath;
+    private String taxpath;
+    private String cardpath;
+
+
+    public int getSoldnum() {
+        return soldnum;
+    }
+
+    public void setSoldnum(int soldnum) {
+        this.soldnum = soldnum;
+    }
+
+    public int getOpennum() {
+        return opennum;
+    }
+
+    public void setOpennum(int opennum) {
+        this.opennum = opennum;
+    }
+
+    public String getLicensepath() {
+        return licensepath;
+    }
+
+    public void setLicensepath(String licensepath) {
+        this.licensepath = licensepath;
+    }
+
+    public String getTaxpath() {
+        return taxpath;
+    }
+
+    public void setTaxpath(String taxpath) {
+        this.taxpath = taxpath;
+    }
+
+    public String getCardpath() {
+        return cardpath;
+    }
+
+    public void setCardpath(String cardpath) {
+        this.cardpath = cardpath;
+    }
 
     public int getCityId() {
         return cityId;
@@ -36,21 +80,6 @@ public class SonAgentInfo extends BaseEntity {
         this.cityId = cityId;
     }
 
-    public int getSoldNum() {
-        return soldNum;
-    }
-
-    public void setSoldNum(int soldNum) {
-        this.soldNum = soldNum;
-    }
-
-    public int getOpenNum() {
-        return openNum;
-    }
-
-    public void setOpenNum(int openNum) {
-        this.openNum = openNum;
-    }
 
     public int getAllQty() {
         return allQty;

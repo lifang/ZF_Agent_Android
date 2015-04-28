@@ -11,6 +11,7 @@ import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.SonAgentInfo;
 import com.posagent.activities.BaseActivity;
+import com.posagent.activities.ImageViewer;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
 
@@ -114,12 +115,44 @@ public class AgentDetailActivity extends BaseActivity {
 
 
         setText("tv_create_time", "" + entity.getCreated_at());
-        setText("tv_sold_count", "" + entity.getSoldNum());
-        setText("tv_open_count", "" + entity.getOpenNum());
-        setText("tv_left_count", "" + (entity.getOpenNum() - entity.getSoldNum()));
+        setText("tv_sold_count", "" + entity.getSoldnum());
+        setText("tv_open_count", "" + entity.getOpennum());
+        setText("tv_left_count", "" + (entity.getOpennum() - entity.getSoldnum()));
 
         CheckBox cb_is_profit = (CheckBox) findViewById(R.id.cb_is_profit);
         cb_is_profit.setChecked(entity.getIs_have_profit().equals("2"));
+
+        final SonAgentInfo info = entity;
+        //photo
+        findViewById(R.id.iv_idcard_photo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, ImageViewer.class);
+                i.putExtra("url", info.getCardpath());
+                i.putExtra("justviewer", true);
+                startActivity(i);
+            }
+        });
+
+        findViewById(R.id.iv_license_photo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, ImageViewer.class);
+                i.putExtra("url", info.getLicensepath());
+                i.putExtra("justviewer", true);
+                startActivity(i);
+            }
+        });
+
+        findViewById(R.id.iv_tax_photo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, ImageViewer.class);
+                i.putExtra("url", info.getTaxpath());
+                i.putExtra("justviewer", true);
+                startActivity(i);
+            }
+        });
 
     }
 	 

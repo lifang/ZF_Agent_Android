@@ -25,6 +25,7 @@ import com.bairuitech.anychat.AnyChatCoreSDK;
 import com.bairuitech.anychat.AnyChatDefine;
 import com.example.zf_android.Config;
 import com.example.zf_android.R;
+import com.example.zf_android.trade.API;
 import com.example.zf_android.trade.Constants.TerminalIntent;
 import com.example.zf_android.video.config.ConfigEntity;
 import com.example.zf_android.video.config.ConfigService;
@@ -477,8 +478,11 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent {
 	@Override
 	public void OnAnyChatEnterRoomMessage(int dwRoomId, int dwErrorCode) {
 		Log.i(TAG, "OnAnyChatEnterRoomMessage:" + "dwRoomId-" + dwRoomId + " dwErrorCode-"+dwErrorCode);
-		videoOther();
-		anychatSDK.UserCameraControl(-1, 1);// -1表示对本地视频进行控制，打开本地视频
+        int userId = videoOther();
+        if(userId == 0){
+            API.noticeVideo(VideoActivity.this, dwRoomId);
+        }
+        anychatSDK.UserCameraControl(-1, 1);// -1表示对本地视频进行控制，打开本地视频
 		anychatSDK.UserSpeakControl(-1, 1);// -1表示对本地音频进行控制，打开本地音频
 	}
 
@@ -521,13 +525,9 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent {
 		}
 
 		finish();
-//		destroyCurActivity();
-//		Intent mIntent = new Intent("VideoActivity");
-		// 发送广播
-//		sendBroadcast(mIntent);
 	}
 	
-	private void videoOther(){
+	private int videoOther(){
 		int[] ids = anychatSDK.GetOnlineUser();
 		userID = 0;
 		for (int id : ids) {
@@ -539,5 +539,6 @@ public class VideoActivity extends Activity implements AnyChatBaseEvent {
 
 		anychatSDK.UserCameraControl(userID, 1);
 		anychatSDK.UserSpeakControl(userID, 1);
+        return userID;
 	}
 }

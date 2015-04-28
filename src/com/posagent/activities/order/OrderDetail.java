@@ -112,22 +112,9 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
                     }
 
 
-                    // 判断类别
-//                    if(p == Constants.Goods.BuyTypePigou) {
-//                        //pigou
-//                        findViewById(R.id.ll_daigou).setVisibility(View.GONE);
-//                        findViewById(R.id.ll_pigou).setVisibility(View.VISIBLE);
-//                        findViewById(R.id.ll_heji).setVisibility(View.VISIBLE);
-//                        findViewById(R.id.tv_origin_price).setVisibility(View.VISIBLE);
-//                    } else {
-//                        findViewById(R.id.ll_daigou).setVisibility(View.VISIBLE);
-//                        findViewById(R.id.ll_pigou).setVisibility(View.GONE);
-//                        findViewById(R.id.ll_heji).setVisibility(View.GONE);
-//                        findViewById(R.id.tv_origin_price).setVisibility(View.GONE);
-//                    }
-
                     ViewHelper.initOrderActions(getWindow().getDecorView().findViewById(android.R.id.content), entity.getOrder_status(), p);
 
+                    updateView();
 
                     break;
             }
@@ -152,6 +139,38 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
 
         initView();
         getData();
+    }
+
+    private void initView() {
+        tv_money=(TextView) findViewById(R.id.tv_money);
+        tv_status_daigou=(TextView) findViewById(R.id.tv_status_daigou);
+        tv_real_pay_daigou=(TextView) findViewById(R.id.tv_real_pay_daigou);
+        tv_guishu=(TextView) findViewById(R.id.tv_guishu);
+
+
+        tv_gj=(TextView) findViewById(R.id.tv_gj);
+        tv_real_pay=(TextView) findViewById(R.id.tv_real_pay);
+        tv_dingjin=(TextView) findViewById(R.id.tv_dingjin);
+        tv_dingjin_payed=(TextView) findViewById(R.id.tv_dingjin_payed);
+        tv_yifahuo=(TextView) findViewById(R.id.tv_yifahuo);
+        tv_left=(TextView) findViewById(R.id.tv_left);
+
+        tv_ddbh=(TextView) findViewById(R.id.tv_ddbh);
+        fptt=(TextView) findViewById(R.id.fptt);
+        tv_pay=(TextView) findViewById(R.id.tv_pay);
+        tv_fplx=(TextView) findViewById(R.id.tv_fplx);
+        tv_ly=(TextView) findViewById(R.id.tv_ly);
+        tv_adress=(TextView) findViewById(R.id.tv_adress);
+        tv_reperson=(TextView) findViewById(R.id.tv_reperson);
+        tv_tel=(TextView) findViewById(R.id.tv_tel);
+        tv_time=(TextView) findViewById(R.id.tv_time);
+//        tv_psf=(TextView) findViewById(R.id.tv_psf);
+        tv_status=(TextView) findViewById(R.id.tv_status);
+        ll_ishow=(LinearLayout) findViewById(R.id.ll_ishow);
+        pos_lv=(ScrollViewWithListView) findViewById(R.id.pos_lv1);
+
+        his_lv=(ScrollViewWithListView) findViewById(R.id.his_lv);
+
     }
 
     private void getData() {
@@ -186,7 +205,7 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
             his_lv.setAdapter(reAdapter);
             handler.sendEmptyMessage(0);
 
-            setStatus();
+            updateView();
         }
 
     }
@@ -198,38 +217,10 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
 
     }
 
-    private void initView() {
-        tv_money=(TextView) findViewById(R.id.tv_money);
-        tv_status_daigou=(TextView) findViewById(R.id.tv_status_daigou);
-        tv_real_pay_daigou=(TextView) findViewById(R.id.tv_real_pay_daigou);
-        tv_guishu=(TextView) findViewById(R.id.tv_guishu);
-
-
-        tv_gj=(TextView) findViewById(R.id.tv_gj);
-        tv_real_pay=(TextView) findViewById(R.id.tv_real_pay);
-        tv_dingjin=(TextView) findViewById(R.id.tv_dingjin);
-        tv_dingjin_payed=(TextView) findViewById(R.id.tv_dingjin_payed);
-        tv_yifahuo=(TextView) findViewById(R.id.tv_yifahuo);
-        tv_left=(TextView) findViewById(R.id.tv_left);
-
-        tv_ddbh=(TextView) findViewById(R.id.tv_ddbh);
-        fptt=(TextView) findViewById(R.id.fptt);
-        tv_pay=(TextView) findViewById(R.id.tv_pay);
-        tv_fplx=(TextView) findViewById(R.id.tv_fplx);
-        tv_ly=(TextView) findViewById(R.id.tv_ly);
-        tv_adress=(TextView) findViewById(R.id.tv_adress);
-        tv_reperson=(TextView) findViewById(R.id.tv_reperson);
-        tv_tel=(TextView) findViewById(R.id.tv_tel);
-        tv_time=(TextView) findViewById(R.id.tv_time);
-//        tv_psf=(TextView) findViewById(R.id.tv_psf);
-        tv_status=(TextView) findViewById(R.id.tv_status);
-        ll_ishow=(LinearLayout) findViewById(R.id.ll_ishow);
-        ll_ishow.setVisibility(status==1 ? View.INVISIBLE
-                : View.VISIBLE); // 只有状态是1 才有下面的按钮
-        pos_lv=(ScrollViewWithListView) findViewById(R.id.pos_lv1);
-
-        his_lv=(ScrollViewWithListView) findViewById(R.id.his_lv);
-        setStatus();
+    private void updateView() {
+        if (status != Constants.Order.StatusUnpay) {
+            hide("ll_ishow");
+        }
 
         // init actions click
         findViewById(R.id.btn_action_cancel).setOnClickListener(new OnClickListener() {
@@ -287,6 +278,8 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
                 context.startActivity(i);
             }
         });
+
+        setStatus();
     }
 
     private void setStatus() {
@@ -295,23 +288,23 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
         }
         String statusShow = "";
         switch (status) {
-            case 1:
+            case Constants.Order.StatusUnpay:
                 statusShow = "未付款";
                 break;
-            case 2:
+            case Constants.Order.StatusPayed:
                 statusShow = "已付款";
                 break;
-            case 3:
+            case Constants.Order.StatusSent:
                 statusShow = "已发货";
                 break;
-            case 4:
+            case Constants.Order.StatusComment:
                 statusShow = "已评价";
 
                 break;
-            case 5:
+            case Constants.Order.StatusCanceled:
                 statusShow = "已取消";
                 break;
-            case 6:
+            case Constants.Order.StatusClosed:
                 statusShow = "交易关闭";
                 break;
 

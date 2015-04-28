@@ -1,24 +1,6 @@
-terminalId
-applyCustomerId
-publicPrivateStatus
-merchantId
-merchantName
-sex
-birthday
-cardId
-phone
-name
-email
-cityId
-channel
-billingId
-bankNum
-bankName
-bankCode
-organizationNo
-registeredNo
-Key
-Value
-types
-targetId
-openingRequirementId
+1	未付款
+2	已付款
+3	已发货
+4	已评价
+5	已取消
+6	交易关闭

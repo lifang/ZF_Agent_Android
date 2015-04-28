@@ -25,6 +25,15 @@ public class Constants {
         public static final int BuyTypeDaizulin = 4;
     }
 
+    public static class Order {
+        public static final int StatusUnpay = 1;
+        public static final int StatusPayed = 2;
+        public static final int StatusSent = 3;
+        public static final int StatusComment = 4;
+        public static final int StatusCanceled = 5;
+        public static final int StatusClosed = 6;
+    }
+
     public static class Roles {
         public static final int Pigou = 1;
         public static final int Daigou = 2;

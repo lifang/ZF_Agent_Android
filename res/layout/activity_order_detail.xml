@@ -9,7 +9,7 @@
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1" >
 
         <LinearLayout
@@ -456,10 +456,10 @@
 
     </ScrollView>
     <LinearLayout
+        android:id="@+id/ll_ishow"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:orientation="vertical"
-        android:id="@+id/ll_ishow">
+        android:orientation="vertical">
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"

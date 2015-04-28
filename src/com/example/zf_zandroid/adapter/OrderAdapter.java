@@ -123,17 +123,27 @@ public class OrderAdapter extends BaseAdapter{
         holder.tv_peisongfei.setText("配送费：" + entity.getOrder_psf());
 
         switch (entity.getOrder_status()) {
-            case 1:
+            case Constants.Order.StatusUnpay:
                 holder.tv_status.setText("未付款");
                 break;
-            case 2:
-                holder.tv_status.setText("已付定金");
+            case Constants.Order.StatusPayed:
+                if (buyType() == Constants.Goods.BuyTypePigou) {
+                    holder.tv_status.setText("已付定金");
+                } else {
+                    holder.tv_status.setText("已付款");
+                }
                 break;
-            case 3:
+            case Constants.Order.StatusSent:
                 holder.tv_status.setText("已完成");
                 break;
-            case 5:
+            case Constants.Order.StatusComment:
+                holder.tv_status.setText("已评价");
+                break;
+            case Constants.Order.StatusCanceled:
                 holder.tv_status.setText("已取消");
+                break;
+            case Constants.Order.StatusClosed:
+                holder.tv_status.setText("交易关闭");
                 break;
             default:
                 holder.tv_status.setText("已取消" + entity.getOrder_status());

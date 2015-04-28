@@ -125,10 +125,11 @@ public class PayFromCar extends PayActivity implements OnClickListener{
         if (event.getSuccess()) {
 
             entity = event.getEntity();
+            outTradeNo = entity.getOrder_number();
 
-            price = "" + entity.getShengyu_price();
+            price = "" + StringUtil.priceShow(entity.getShengyu_price());
 
-            setText("tv_pay", "￥" + StringUtil.priceShow(price));
+            setText("tv_pay", "￥" + price);
 
 
         }
@@ -139,10 +140,11 @@ public class PayFromCar extends PayActivity implements OnClickListener{
         if (event.getSuccess()) {
 
             shopEntity = event.getEntity();
+            outTradeNo = shopEntity.getOrder_number();
 
-            price = "" + shopEntity.getTotal_price();
+            price = "" + StringUtil.priceShow(shopEntity.getTotal_price());
 
-            setText("tv_pay", "￥" + StringUtil.priceShow(price));
+            setText("tv_pay", "￥" + price);
 
 
         }

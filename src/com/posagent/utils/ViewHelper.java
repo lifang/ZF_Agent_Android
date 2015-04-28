@@ -95,7 +95,7 @@ public class ViewHelper {
         view.findViewById(R.id.btn_action_daigou).setVisibility(View.GONE);
 
         switch (status) {
-            case 1:
+            case Constants.Order.StatusUnpay:
                 v = view.findViewById(R.id.btn_action_cancel);
                 v.setVisibility(View.VISIBLE);
                 v = view.findViewById(R.id.btn_action_dingjin);
@@ -104,14 +104,9 @@ public class ViewHelper {
                 }
                 v.setVisibility(View.VISIBLE);
                 break;
-            case 2:
-                v = view.findViewById(R.id.btn_action_cancel);
-                v.setVisibility(View.VISIBLE);
-
-                v = view.findViewById(R.id.btn_action_pay);
-                v.setVisibility(View.VISIBLE);
-                break;
-            case 3:
+            case Constants.Order.StatusPayed:
+            case Constants.Order.StatusSent:
+            case Constants.Order.StatusComment:
                 v = view.findViewById(R.id.btn_action_pigou);
 
                 if (buyType != Constants.Goods.BuyTypePigou) {
@@ -119,7 +114,8 @@ public class ViewHelper {
                 }
                 v.setVisibility(View.VISIBLE);
                 break;
-            case 5:
+            case Constants.Order.StatusClosed:
+            case Constants.Order.StatusCanceled:
                 view.findViewById(R.id.ll_ishow).setVisibility(View.GONE);
                 break;
             default:

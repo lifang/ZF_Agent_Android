@@ -4,15 +4,7 @@ public class AdressEntity {
 //"id":16,"customerId":80,"receiver":"123","isDefault":2,"address":"123",
 	private int id;
 	private String customerId;
-    private String is_default;
-
-    public String getIs_default() {
-        return is_default;
-    }
-
-    public void setIs_default(String is_default) {
-        this.is_default = is_default;
-    }
+    private String isDefault;
 
     private String receiver;
 	private Boolean Ischeck;
@@ -82,5 +74,12 @@ public class AdressEntity {
 	public void setTelphone(String telphone) {
 		this.telphone = telphone;
 	}
-	
+
+    public String getIsDefault() {
+        return isDefault;
+    }
+
+    public void setIsDefault(String isDefault) {
+        this.isDefault = isDefault;
+    }
 }

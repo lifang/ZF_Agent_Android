@@ -95,6 +95,10 @@ public class AddressAdapter extends BaseAdapter {
         });
 
         convertView.setOnTouchListener(new OnSwipeTouchListener(context) {
+            public void singleTapUp() {
+                ((AddressList)context).showDetail(entity);
+            }
+
             public void onSwipeTop() {
                 holder.tv_delete.setVisibility(View.VISIBLE);
 

@@ -17,9 +17,11 @@ import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.AdressEntity;
 import com.example.zf_zandroid.adapter.AddressAdapter;
+import com.google.gson.Gson;
 import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
+import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
 
 import java.util.ArrayList;
@@ -148,6 +150,15 @@ public class AddressList extends BaseActivity  {
     public void onEventMainThread(Events.DeleteAddressCompleteEvent event) {
         myList.clear();
         getData();
+    }
+
+    // callback
+    public void showDetail(AdressEntity entity) {
+        Intent i = new Intent(context, AdressEdit.class);
+        Gson gson = new Gson();
+        String json = gson.toJson(entity);
+        i.putExtra("json", json);
+        startActivityForResult(i, Constants.REQUEST_CODE);
     }
 
 

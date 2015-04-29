@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
+import com.example.zf_android.entity.AdressEntity;
 import com.example.zf_android.trade.CitySelectActivity;
 import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
@@ -44,13 +45,22 @@ public class AdressEdit extends BaseActivity {
 
     private String cityName;
     private int cityId;
-	
+
+    private AdressEntity entity;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.adress_edit);
 
-        new TitleMenuUtil(AdressEdit.this, "新增地址").show();
+        String json = getIntent().getStringExtra("json");
+        if (null != json) {
+            entity = gson.fromJson(json, AdressEntity.class);
+            new TitleMenuUtil(AdressEdit.this, "修改地址").show();
+        } else {
+            new TitleMenuUtil(AdressEdit.this, "新增地址").show();
+        }
+
 
         initView();
 
@@ -66,6 +76,24 @@ public class AdressEdit extends BaseActivity {
         findViewById(R.id.btn_save).setOnClickListener(this);
 
         tvCityName = (TextView) findViewById(R.id.tv_city_name);
+
+        if (null != entity) {
+
+            cityId = entity.getCityId();
+            setText("tv_city_name", ((MyApplication)getApplication()).cityNameForId(cityId));
+            setText("tv_receiver", entity.getReceiver());
+            setText("tv_moblephone", entity.getMoblephone());
+            setText("tv_zipCode", entity.getZipCode());
+            setText("tv_address", entity.getAddress());
+            CheckBox cb_isDefault = (CheckBox)findViewById(R.id.cb_isDefault);
+            boolean isDefault = false;
+            if (null != entity.getIsDefault() && entity.getIsDefault().equals("1")) {
+                isDefault = true;
+            }
+            cb_isDefault.setChecked(isDefault);
+
+        }
+
     }
 
     @Override
@@ -142,7 +170,10 @@ public class AdressEdit extends BaseActivity {
         String strParams = this.data();
 
         // submit
-        Events.CreateAddressEvent event = new Events.CreateAddressEvent();
+        Events.CommonRequestEvent event = new Events.CreateAddressEvent();
+        if (null != entity) {
+            event = new Events.UpdateAddressEvent();
+        }
         event.setParams(strParams);
         EventBus.getDefault().post(event);
         Toast.makeText(this.getApplicationContext(), "正在提交", Toast.LENGTH_SHORT).show();
@@ -151,6 +182,9 @@ public class AdressEdit extends BaseActivity {
 
     private String data() {
         JsonParams data = new JsonParams();
+        if (null != entity) {
+            data.put("id", entity.getId());
+        }
         data.put("cityId", cityId);
         data.put("customerId", MyApplication.user().getId());
 

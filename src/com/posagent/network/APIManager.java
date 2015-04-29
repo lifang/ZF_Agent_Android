@@ -49,6 +49,7 @@ public class APIManager {
     public static final String UrlCreateOrder = BaseUrl + "/order/agent";
     public static final String UrlAddressList = BaseUrl + "/agents/getAddressList";
     public static final String UrlCreateAddress = BaseUrl + "/agents/insertAddress";
+    public static final String UrlUpdateAddress = BaseUrl + "/agents/updateAddress";
     public static final String UrlDeleteAddress = BaseUrl + "/agents/deleteAddress";
     public static final String UrlOrderList = BaseUrl + "/order/orderSearch";
     public static final String UrlPayOrderInfo = BaseUrl + "/order/payOrder";
@@ -358,6 +359,11 @@ public class APIManager {
     public void onEventBackgroundThread(Events.CreateAddressEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.CreateAddressCompleteEvent();
         CommonRequest(event, completeEvent, UrlCreateAddress);
+    }
+
+    public void onEventBackgroundThread(Events.UpdateAddressEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.CreateAddressCompleteEvent();
+        CommonRequest(event, completeEvent, UrlUpdateAddress);
     }
 
     public void onEventBackgroundThread(Events.DeleteAddressEvent event) {

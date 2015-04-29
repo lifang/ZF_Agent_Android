@@ -327,6 +327,7 @@ public class Events {
     }
 
     public static class CreateAddressEvent extends CommonRequestEvent {}
+    public static class UpdateAddressEvent extends CommonRequestEvent {}
     public static class CreateAddressCompleteEvent extends CommonCompleteEvent {}
 
     public static class DeleteAddressEvent extends CommonRequestEvent {}

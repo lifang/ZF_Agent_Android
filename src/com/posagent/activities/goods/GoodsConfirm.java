@@ -251,7 +251,7 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
                     addressEntity = entity;
                 }
 
-                if (entity.getIs_default() == "1") {
+                if (entity.getIsDefault() == "1") {
                     addressEntity = entity;
                     break;
                 }

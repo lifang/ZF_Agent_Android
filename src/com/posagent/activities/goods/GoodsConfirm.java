@@ -361,7 +361,10 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
         params.put("orderType", mapBuyType());
         params.put("goodId", goodId);
         params.put("paychannelId", paychannelId);
-        params.put("addressId", addressEntity.getId());
+        if (null != addressEntity) {
+            params.put("addressId", addressEntity.getId());
+
+        }
         params.put("quantity", quantity);
         params.put("comment", comment);
         params.put("isNeedInvoice", is_need_invoice);

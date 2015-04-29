@@ -99,7 +99,7 @@ public class AfterSaleDetailActivity extends Activity {
 		mStatus = (TextView) findViewById(R.id.after_sale_detail_status);
 		mTime = (TextView) findViewById(R.id.after_sale_detail_time);
 		mButton1 = (Button) findViewById(R.id.after_sale_detail_button_1);
-		mButton2 = (Button) findViewById(R.id.after_sale_detail_button_2);
+//		mButton2 = (Button) findViewById(R.id.after_sale_detail_button_2);
 		mCategoryContainer = (LinearLayout) findViewById(R.id.after_sale_detail_category_container);
 		mCommentContainer = (LinearLayout) findViewById(R.id.after_sale_comment_container);
 	}

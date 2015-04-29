@@ -12,10 +12,17 @@ public class MessageEntity extends BaseEntity {
 	private String title;
 	private String create_at;
 	private Boolean ischeck;
-	
-	
-	
-	public Boolean getIscheck() {
+	private Boolean status;
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public Boolean getIscheck() {
 		return ischeck;
 	}
 	public void setIscheck(Boolean ischeck) {

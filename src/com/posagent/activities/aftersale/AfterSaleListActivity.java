@@ -24,6 +24,7 @@ import com.example.zf_android.trade.widget.XListView;
 import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
+import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
 
 import java.util.ArrayList;
@@ -67,6 +68,8 @@ public class AfterSaleListActivity extends BaseActivity implements XListView.IXL
 
 	private LayoutInflater mInflater;
 
+    private LinearLayout eva_nodata;
+
 	// cancel apply button listener
 	private View.OnClickListener mCancelApplyListener;
 	// submit mark button listener
@@ -83,8 +86,10 @@ public class AfterSaleListActivity extends BaseActivity implements XListView.IXL
 
                     if (mEntities.size() == 0) {
                         mListView.setVisibility(View.GONE);
+                        eva_nodata.setVisibility(View.VISIBLE);
                     } else {
                         mListView.setVisibility(View.VISIBLE);
+                        eva_nodata.setVisibility(View.GONE);
                     }
                     mAdapter.notifyDataSetChanged();
                     break;
@@ -106,21 +111,14 @@ public class AfterSaleListActivity extends BaseActivity implements XListView.IXL
 		String[] titles = getResources().getStringArray(R.array.title_after_sale_list);
 		new TitleMenuUtil(this, titles[mRecordType]).show();
 
-        status = getResources().getStringArray(
-                mRecordType == MAINTAIN ? R.array.maintain_status
-                        : mRecordType == RETURN ? R.array.return_status
-                        : mRecordType == CANCEL ? R.array.cancel_status
-                        : mRecordType == CHANGE ? R.array.change_status
-                        : mRecordType == UPDATE ? R.array.update_status
-                        : R.array.lease_status
-        );
+        status = Constants.AfterSale.STATUS;
 
         mapStatus = new LinkedHashMap<String, Integer>();
         mapStatus.put("请选择状态", 0);
 
         for (int i = 0; i < status.length; i++) {
             String state = status[i];
-            if (!state.equals("")) {
+            if (!state.equals("") && !state.equals("未知")) {
                 mapStatus.put(state, i);
             }
         }
@@ -134,6 +132,7 @@ public class AfterSaleListActivity extends BaseActivity implements XListView.IXL
 
 		mInflater = LayoutInflater.from(this);
 		mEntities = new ArrayList<AfterSaleRecord>();
+        eva_nodata = (LinearLayout) findViewById(R.id.eva_nodata);
 		mListView = (XListView) findViewById(R.id.after_sale_list);
 		mAdapter = new RecordListAdapter();
 
@@ -163,6 +162,7 @@ public class AfterSaleListActivity extends BaseActivity implements XListView.IXL
     public void onRefresh() {
         page = 1;
         mEntities.clear();
+        handler.sendEmptyMessage(0);
         loadData();
     }
 
@@ -344,33 +344,21 @@ public class AfterSaleListActivity extends BaseActivity implements XListView.IXL
 			holder.tvNumber.setText(data.getApplyNum());
 			holder.tvTime.setText(data.getCreateTime());
 			holder.tvTerminal.setText(data.getTerminalNum());
-			holder.tvStatus.setText(status[data.getStatus()]);
+			holder.tvStatus.setText(Constants.AfterSale.STATUS[data.getStatus()]);
 
 			switch (mRecordType) {
 				case MAINTAIN:
 					if (data.getStatus() == 1) {
 						holder.llButtonContainer.setVisibility(View.VISIBLE);
-						holder.btnLeft.setVisibility(View.VISIBLE);
-						holder.btnRight.setVisibility(View.VISIBLE);
-						holder.btnCenter.setVisibility(View.GONE);
-						holder.btnCenterBlank.setVisibility(View.GONE);
-
-						holder.btnLeft.setText(getString(R.string.button_cancel_apply));
-						holder.btnLeft.setTag(data);
-						holder.btnLeft.setOnClickListener(mCancelApplyListener);
-
-						holder.btnRight.setText(getString(R.string.button_pay));
-						holder.btnRight.setOnClickListener(mPayMaintainListener);
-					} else if (data.getStatus() == 2) {
-						holder.llButtonContainer.setVisibility(View.VISIBLE);
 						holder.btnLeft.setVisibility(View.GONE);
 						holder.btnRight.setVisibility(View.GONE);
-						holder.btnCenter.setVisibility(View.VISIBLE);
-						holder.btnCenterBlank.setVisibility(View.GONE);
+						holder.btnCenter.setVisibility(View.GONE);
+						holder.btnCenterBlank.setVisibility(View.VISIBLE);
 
-						holder.btnCenter.setText(getString(R.string.button_submit_flow));
-						holder.btnCenter.setTag(data);
-						holder.btnCenter.setOnClickListener(mSubmitMarkListener);
+						holder.btnCenterBlank.setText(getString(R.string.button_cancel_apply));
+						holder.btnCenterBlank.setTag(data);
+						holder.btnCenterBlank.setOnClickListener(mCancelApplyListener);
+
 					} else {
 						holder.llButtonContainer.setVisibility(View.GONE);
 					}
@@ -428,16 +416,6 @@ public class AfterSaleListActivity extends BaseActivity implements XListView.IXL
 						holder.btnCenterBlank.setText(R.string.button_cancel_apply);
 						holder.btnCenterBlank.setTag(data);
 						holder.btnCenterBlank.setOnClickListener(mCancelApplyListener);
-					} else if (data.getStatus() == 2) {
-						holder.llButtonContainer.setVisibility(View.VISIBLE);
-						holder.btnLeft.setVisibility(View.GONE);
-						holder.btnRight.setVisibility(View.GONE);
-						holder.btnCenter.setVisibility(View.VISIBLE);
-						holder.btnCenterBlank.setVisibility(View.GONE);
-
-						holder.btnCenter.setText(R.string.button_submit_flow);
-						holder.btnCenter.setTag(data);
-						holder.btnCenter.setOnClickListener(mSubmitMarkListener);
 					} else {
 						holder.llButtonContainer.setVisibility(View.GONE);
 					}
@@ -447,7 +425,7 @@ public class AfterSaleListActivity extends BaseActivity implements XListView.IXL
 			convertView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					Intent intent = new Intent(AfterSaleListActivity.this, AfterSaleDetailActivity.class);
+					Intent intent = new Intent(AfterSaleListActivity.this, AfterSaleDetail.class);
 					intent.putExtra(RECORD_TYPE, mRecordType);
 					intent.putExtra(RECORD_ID, data.getId());
 					startActivityForResult(intent, REQUEST_DETAIL);

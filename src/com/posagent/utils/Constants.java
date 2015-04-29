@@ -50,6 +50,21 @@ public class Constants {
         public static final int Mine = 103;
     }
 
+    public static class AfterSale {
+        public static final String[] STATUS = {"未知",
+                "待处理",
+                "处理中",
+                "处理完成",
+                "已取消",
+                "已取消",
+                "已取消",
+                "",
+                "",
+                "",
+
+        };
+    }
+
 
 
     public static class CommonInputerConstant {

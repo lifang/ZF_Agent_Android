@@ -1,6 +1,9 @@
 package com.posagent.events;
 
 import com.example.zf_android.entity.AdressEntity;
+import com.example.zf_android.entity.AfterSaleCancel;
+import com.example.zf_android.entity.AfterSaleMaintain;
+import com.example.zf_android.entity.AfterSaleUpdate;
 import com.example.zf_android.entity.AgentTerminalEntity;
 import com.example.zf_android.entity.BankEntity;
 import com.example.zf_android.entity.ChanelEntitiy;
@@ -613,6 +616,53 @@ public class Events {
 
     public static class AfterSaleCancelResubmitEvent extends CommonRequestEvent {}
     public static class AfterSaleResubmitCompleteEvent extends CommonCompleteEvent {}
+
+    public static class AfterSaleDetailMaintainEvent extends CommonRequestEvent {}
+    public static class AfterSaleDetailMaintainCompleteEvent extends CommonCompleteEvent {
+        private AfterSaleMaintain entity;
+
+        public AfterSaleMaintain getEntity() {
+            String result = null;
+            result = getResult().toString();
+            entity = (new Gson()).fromJson(result, AfterSaleMaintain.class);
+            return entity;
+        }
+
+        public void setEntity(AfterSaleMaintain entity) {
+            this.entity = entity;
+        }
+    }
+
+    public static class AfterSaleDetailUpdateEvent extends CommonRequestEvent {}
+    public static class AfterSaleDetailUpdateCompleteEvent extends CommonCompleteEvent {
+        private AfterSaleUpdate entity;
+
+        public AfterSaleUpdate getEntity() {
+            String result = null;
+            result = getResult().toString();
+            entity = (new Gson()).fromJson(result, AfterSaleUpdate.class);
+            return entity;
+        }
+
+        public void setEntity(AfterSaleUpdate entity) {
+            this.entity = entity;
+        }
+    }
+    public static class AfterSaleDetailCancelEvent extends CommonRequestEvent {}
+    public static class AfterSaleDetailCancelCompleteEvent extends CommonCompleteEvent {
+        private AfterSaleCancel entity;
+
+        public AfterSaleCancel getEntity() {
+            String result = null;
+            result = getResult().toString();
+            entity = (new Gson()).fromJson(result, AfterSaleCancel.class);
+            return entity;
+        }
+
+        public void setEntity(AfterSaleCancel entity) {
+            this.entity = entity;
+        }
+    }
 
     //users
     public static class UserListEvent extends CommonRequestEvent {}

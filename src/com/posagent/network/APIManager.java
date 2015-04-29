@@ -72,8 +72,11 @@ public class APIManager {
     public static final String UrlAfterSaleCancelList = BaseUrl + "/cs/cancels/search";
     public static final String UrlAfterSaleUpdateList = BaseUrl + "/update/info/search";
     public static final String UrlAfterSaleMaintainCancel = BaseUrl + "/cs/agents/cancelApply";
+    public static final String UrlAfterSaleMaintainDetail = BaseUrl + "/cs/agents/getById";
+    public static final String UrlAfterSaleUpdateDetail = BaseUrl + "/update/info/getInfoById";
     public static final String UrlAfterSaleCancelCancel = BaseUrl + "/cs/cancels/cancelApply";
     public static final String UrlAfterSaleUpdateCancel = BaseUrl + "/update/info/cancelApply";
+    public static final String UrlAfterSaleCancelDetail = BaseUrl + "/cs/cancels/getCanCelById";
     public static final String UrlAfterSaleCancelResubmit = BaseUrl + "/cs/cancels/resubmitCancel";
     public static final String UrlUserList = BaseUrl + "/user/getUser";
     public static final String UrlUserDelete = BaseUrl + "/user/delectAgentUser";
@@ -156,6 +159,7 @@ public class APIManager {
 
         String params = event.getParams();
         RequestBody body = RequestBody.create(JSON, params);
+        Log.d(TAG, url);
         Log.d(TAG, params);
 
         Request request = this.request()
@@ -428,6 +432,21 @@ public class APIManager {
         CommonRequest(event, completeEvent, UrlAfterSaleMaintainList);
     }
 
+    public void onEventBackgroundThread(Events.AfterSaleDetailMaintainEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.AfterSaleDetailMaintainCompleteEvent();
+        CommonRequest(event, completeEvent, UrlAfterSaleMaintainDetail);
+    }
+    public void onEventBackgroundThread(Events.AfterSaleDetailUpdateEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.AfterSaleDetailUpdateCompleteEvent();
+        CommonRequest(event, completeEvent, UrlAfterSaleUpdateDetail);
+    }
+
+    public void onEventBackgroundThread(Events.AfterSaleDetailCancelEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.AfterSaleDetailCancelCompleteEvent();
+        CommonRequest(event, completeEvent, UrlAfterSaleCancelDetail);
+    }
+
+
     public void onEventBackgroundThread(Events.AfterSaleCancelListEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.AfterSaleListCompleteEvent();
         CommonRequest(event, completeEvent, UrlAfterSaleCancelList);
@@ -440,12 +459,12 @@ public class APIManager {
 
     public void onEventBackgroundThread(Events.AfterSaleMaintainCancelEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.AfterSaleCancelCompleteEvent();
-        CommonRequest(event, completeEvent, UrlAfterSaleUpdateCancel);
+        CommonRequest(event, completeEvent, UrlAfterSaleMaintainCancel);
     }
 
     public void onEventBackgroundThread(Events.AfterSaleUpdateCancelEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.AfterSaleCancelCompleteEvent();
-        CommonRequest(event, completeEvent, UrlAfterSaleMaintainCancel);
+        CommonRequest(event, completeEvent, UrlAfterSaleUpdateCancel);
     }
 
     public void onEventBackgroundThread(Events.AfterSaleCancelCancelEvent event) {

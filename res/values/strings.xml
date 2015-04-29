@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<string name="app_name">ZF_Android</string>
+	<string name="app_name">华尔街代理商</string>
 	<string name="hello_world">Hello world!</string>
 	<string name="action_settings">Settings</string>
 	<string name="no_internet">网络异常</string>
@@ -105,7 +105,7 @@
 	<string name="title_after_sale_pay">支付维修费用</string>
 
 	<string-array name="title_after_sale_list">
-		<item>维修记录</item>
+		<item>售后记录</item>
 		<item>退货记录</item>
 		<item>注销记录</item>
 		<item>换货记录</item>
@@ -113,7 +113,7 @@
 		<item>租赁退还记录</item>
 	</string-array>
 	<string-array name="title_after_sale_detail">
-		<item>维修详情</item>
+		<item>售后详情</item>
 		<item>退货详情</item>
 		<item>注销详情</item>
 		<item>换货详情</item>
@@ -121,7 +121,7 @@
 		<item>租赁退还详情</item>
 	</string-array>
 
-	<string name="after_sale_maintain">维修记录</string>
+	<string name="after_sale_maintain">售后记录</string>
 	<string name="after_sale_return">退货记录</string>
 	<string name="after_sale_cancel">注销记录</string>
 	<string name="after_sale_change">换货记录</string>

@@ -53,7 +53,7 @@ public class NewMessageAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.list_item_message, null);
 
             holder.line_for_first_item = convertView.findViewById(R.id.line_for_first_item);
-            holder.text_user_name = (TextView) convertView.findViewById(R.id.text_user_name);
+            holder.tv_title = (TextView) convertView.findViewById(R.id.tv_title);
             holder.tv_delete = (TextView) convertView.findViewById(R.id.tv_delete);
             holder.tv_time = (TextView) convertView.findViewById(R.id.tv_time);
             holder.cb_edit = (CheckBox) convertView.findViewById(R.id.cb_edit);
@@ -64,7 +64,13 @@ public class NewMessageAdapter extends BaseAdapter {
         }
 
         //fill data
-        holder.text_user_name.setText(entity.getTitle());
+        holder.tv_title.setText(entity.getTitle());
+        if(entity.getStatus()) {
+            holder.tv_title.setTextColor(context.getResources().getColor(R.color.text6c6c6c6));
+        } else {
+            holder.tv_title.setTextColor(context.getResources().getColor(R.color.text292929));
+        }
+
         holder.tv_time.setText(entity.getCreate_at());
 
         // update editing item
@@ -122,7 +128,7 @@ public class NewMessageAdapter extends BaseAdapter {
     }
 
     public final class ViewHolder {
-        private TextView text_user_name, tv_delete, cb_edit, tv_time;
+        private TextView tv_title, tv_delete, cb_edit, tv_time;
         private View line_for_first_item;
     }
 }

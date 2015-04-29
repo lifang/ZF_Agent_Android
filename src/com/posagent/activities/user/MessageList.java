@@ -233,6 +233,7 @@ public class MessageList extends BaseActivity implements IXListViewListener {
 
     public void onEventMainThread(Events.MessageMarkReadCompleteEvent event) {
         if (event.success()) {
+            cancelBatchDelete();
             myAdapter.notifyDataSetChanged();
         }
         toast(event.getMessage());
@@ -344,6 +345,7 @@ public class MessageList extends BaseActivity implements IXListViewListener {
                 for (int i = myList.size() - 1; i >= 0; i--) {
                     MessageEntity entity = myList.get(i);
                     if (entity.isSelected()) {
+                        entity.setStatus(true);
                         deleteIds.add(entity.getId());
                     }
 

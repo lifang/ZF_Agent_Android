@@ -141,11 +141,11 @@ public class StaffForm extends BaseActivity
                 params.put("agentsId",  MyApplication.user().getAgentId());
                 params.put("loginId", et_username.getText().toString());
                 params.put("userName", et_name.getText().toString());
-                params.put("pwd1", et_password_confirm.getText().toString());
+                params.put("pwd1", StringUtil.Md5(et_password_confirm.getText().toString()));
             } else {
                 params.put("customerId", id);
             }
-            params.put("pwd", et_password.getText().toString());
+            params.put("pwd", StringUtil.Md5(et_password.getText().toString()));
             params.put("roles", StringUtil.join(checkedRoles, ","));
 
 

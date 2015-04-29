@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.CitySelectActivity;
@@ -230,8 +231,8 @@ public class AgentNewActivity extends BaseActivity {
         params.put("phoneNum", getValue("et_phone"));
         params.put("emailStr", getValue("et_email"));
         params.put("addressStr", getValue("et_address"));
-        params.put("pwd", getValue("et_password"));
-        params.put("pwd1", getValue("et_password_confirm"));
+        params.put("pwd", StringUtil.Md5(getValue("et_password")));
+        params.put("pwd1", StringUtil.Md5(getValue("et_password_confirm")));
         params.put("isProfit", cb_is_profit.isChecked() ? 2 : 1);
         params.put("taxNumStr", getValue("et_tax_license"));
         params.put("loginId", getValue("et_username"));

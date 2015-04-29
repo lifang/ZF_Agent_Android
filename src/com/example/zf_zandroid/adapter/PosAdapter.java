@@ -10,9 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.examlpe.zf_android.util.ImageCacheUtil;
+import com.examlpe.zf_android.util.StringUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.PosEntity;
 import com.posagent.activities.goods.GoodsList;
+import com.posagent.utils.Constants;
 
 import java.util.List;
 
@@ -66,7 +68,13 @@ public class PosAdapter extends BaseAdapter {
         ImageCacheUtil.IMAGE_CACHE.get(entity.getUrl_path(), holder.img_face);
 
         holder.title.setText(entity.getTitle());
-        holder.tv_price.setText("￥"+entity.getRetail_price()/100+"");
+
+        if (buyType() == Constants.Goods.OrderTypePigou) {
+            holder.tv_price.setText("￥"+ StringUtil.priceShow(entity.getPurchase_price()));
+        } else {
+            holder.tv_price.setText("￥"+ StringUtil.priceShow(entity.getRetail_price()));
+        }
+
         if (null != holder.tv_quantity) {
             holder.tv_quantity.setText("" + entity.getFloor_purchase_quantity());
         }
@@ -92,10 +100,13 @@ public class PosAdapter extends BaseAdapter {
 		public TextView title, ys, tv_price, content1, tv_td, tv_quantity;
 		public CheckBox item_cb;
 		public ImageView img_type, img_face;
-
 	}
 
     private int pos_item_layout() {
         return ((GoodsList)context).pos_item_layout();
+    }
+
+    private int buyType() {
+        return ((GoodsList)context).getBuyType();
     }
 }

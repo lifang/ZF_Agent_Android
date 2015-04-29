@@ -114,7 +114,7 @@ public class OrderAdapter extends BaseAdapter{
         holder.tv_ddbh.setText("订单编号: "+entity.getOrder_number()	);
         holder.tv_time.setText(entity.getOrder_createTime()	);
 
-        holder.tv_heji.setText("合计：￥" + StringUtil.priceShow(entity.getActual_price()));
+        holder.tv_heji.setText("合计：￥" + StringUtil.priceShow(entity.getOrder_totalPrice()));
         holder.tv_shifu.setText("实付：￥" + StringUtil.priceShow(entity.getOrder_totalPrice()));
         holder.tv_dingjin_payed.setText("已付定金：￥" + StringUtil.priceShow(entity.getZhifu_dingjin()));
         holder.tv_yifahuo.setText("已发货数量：" + entity.getShipped_quantity());

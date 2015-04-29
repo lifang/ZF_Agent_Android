@@ -249,6 +249,7 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
         params.put("cityId", MyApplication.user().getAgentCityId());
         params.put("agentId", MyApplication.user().getAgentId());
         params.put("orderType", orderType);
+        params.put("type", buyType);
 
         if (keys != null) {
             params.put("keys", keys);
@@ -340,6 +341,10 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
             return R.layout.pos_item;
         }
         return R.layout.pos_item_daigou;
+    }
+
+    public int getBuyType() {
+        return buyType;
     }
 
 

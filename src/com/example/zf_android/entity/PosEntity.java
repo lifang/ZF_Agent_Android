@@ -3,30 +3,32 @@ package com.example.zf_android.entity;
 public class PosEntity {
 
 	private Boolean has_lease;
-	
-	public Boolean getHas_lease() {
-		return has_lease;
-	}
-	public void setHas_lease(Boolean has_lease) {
-		this.has_lease = has_lease;
-	}
 	private int volume_number;
 	private int id;
+	private int lease_deposit;
+	private int purchase_number;
+	private int purchase_price;
+	private int floor_price;
 	private String good_brand;
     private String url_path;
+    private int total_score;
+
+
+    private int floor_purchase_quantity;
+    private int retail_price;
+    private String pay_channe;
+    private String Title;
+    private String second_title;
+    private String Model_number;
+
 
     public String getUrl_path() {
-//       if (null != url_path && url_path.indexOf("121.40.84.2:8888") > 0) {
-//           url_path = url_path.replace("http://121.40.84.2:8888/", "");
-//       }
         return url_path;
     }
 
     public void setUrl_path(String url_path) {
         this.url_path = url_path;
     }
-
-    private int total_score;
 
     public int getFloor_purchase_quantity() {
         return floor_purchase_quantity;
@@ -35,12 +37,6 @@ public class PosEntity {
     public void setFloor_purchase_quantity(int floor_purchase_quantity) {
         this.floor_purchase_quantity = floor_purchase_quantity;
     }
-
-    private int floor_purchase_quantity;
-	private int retail_price;
-	private String pay_channe;
-	private String Title;
-	private String Model_number;
 	public int getVolume_number() {
 		return volume_number;
 	}
@@ -89,9 +85,52 @@ public class PosEntity {
 	public void setModel_number(String model_number) {
 		Model_number = model_number;
 	}
-	
-	
-	
-	
-	
+
+
+    public Boolean getHas_lease() {
+        return has_lease;
+    }
+    public void setHas_lease(Boolean has_lease) {
+        this.has_lease = has_lease;
+    }
+
+    public int getLease_deposit() {
+        return lease_deposit;
+    }
+
+    public void setLease_deposit(int lease_deposit) {
+        this.lease_deposit = lease_deposit;
+    }
+
+    public int getPurchase_number() {
+        return purchase_number;
+    }
+
+    public void setPurchase_number(int purchase_number) {
+        this.purchase_number = purchase_number;
+    }
+
+    public int getPurchase_price() {
+        return purchase_price;
+    }
+
+    public void setPurchase_price(int purchase_price) {
+        this.purchase_price = purchase_price;
+    }
+
+    public int getFloor_price() {
+        return floor_price;
+    }
+
+    public void setFloor_price(int floor_price) {
+        this.floor_price = floor_price;
+    }
+
+    public String getSecond_title() {
+        return second_title;
+    }
+
+    public void setSecond_title(String second_title) {
+        this.second_title = second_title;
+    }
 }

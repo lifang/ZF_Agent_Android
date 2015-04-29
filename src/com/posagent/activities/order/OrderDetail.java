@@ -218,9 +218,6 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
     }
 
     private void updateView() {
-        if (status != Constants.Order.StatusUnpay) {
-            hide("ll_ishow");
-        }
 
         // init actions click
         findViewById(R.id.btn_action_cancel).setOnClickListener(new OnClickListener() {

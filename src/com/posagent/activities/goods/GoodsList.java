@@ -212,6 +212,7 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
     public void onRefresh() {
         page = 1;
         myList.clear();
+        handler.sendEmptyMessage(0);
         getData();
     }
 
@@ -241,6 +242,7 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
     public void buttonClick() {
         page = 1;
         myList.clear();
+        handler.sendEmptyMessage(0);
         getData();
     }
 

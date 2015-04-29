@@ -111,6 +111,8 @@ public class TerminalChoosePos extends BaseActivity {
         params.put("agentId", MyApplication.user().getAgentId());
         params.put("title", posName);
         params.put("channelsId", channelId);
+        params.put("page", 1);
+        params.put("rows", 100);
         params.put("minPrice", Integer.parseInt(et_min_price.getText().toString()));
         params.put("maxPrice", Integer.parseInt(et_max_price.getText().toString()));
         String strParams = params.toString();

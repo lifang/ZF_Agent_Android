@@ -22,10 +22,10 @@ import java.util.Set;
 import de.greenrobot.event.EventBus;
 
 /***
-*
-* 搜索表单
-*
-*/
+ *
+ * 搜索表单
+ *
+ */
 public class SearchFormActivity extends BaseListActivity {
 
     private static String TAG = "SearchFormActivity";
@@ -37,10 +37,10 @@ public class SearchFormActivity extends BaseListActivity {
 
 
     @Override
-	protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.activity_search_form);
+        setContentView(R.layout.activity_search_form);
 
         sharedPreferences = getSharedPreferences("SearchKeyHistroy", MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -77,7 +77,7 @@ public class SearchFormActivity extends BaseListActivity {
         });
 
 
-	}
+    }
 
 
     @Override
@@ -90,11 +90,12 @@ public class SearchFormActivity extends BaseListActivity {
     }
 
     private void searchKey(String keys) {
+        finish();
+
         Events.GoodsDoSearchCompleteEvent event1 = new Events.GoodsDoSearchCompleteEvent();
         event1.setKeys(keys);
         saveKey(keys);
         EventBus.getDefault().post(event1);
-        finish();
     }
 
 
@@ -128,5 +129,5 @@ public class SearchFormActivity extends BaseListActivity {
         initList();
     }
 
-	 
+
 }

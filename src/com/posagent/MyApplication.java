@@ -144,11 +144,11 @@ public class MyApplication extends Application {
             return true;
 
         } else {
-//            switch (intRoleId) {
-//                case Constants.Roles.AllProduct:
-//                case Constants.Roles.Order:
-//                    return true;
-//            }
+            switch (intRoleId) {
+                case Constants.Roles.AllProduct:
+                    return roles.get("" + Constants.Roles.Daigou) != null ||
+                            roles.get("" + Constants.Roles.Pigou) != null;
+            }
             return roles.get(roleId) != null;
         }
 

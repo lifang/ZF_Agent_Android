@@ -34,12 +34,18 @@ public class HttpRequest {
 		this.responseHandler = new TextHttpResponseHandler() {
 			@Override
 			public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                if(callback == null){
+                    return;
+                }
 				callback.onFailure(context.getString(R.string.load_data_failed));
 			}
 
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, String responseString) {
 				Log.e("", responseString);
+                if(callback == null){
+                    return;
+                }
 				Response data = null == callback.getTypeToken() ?
 						JsonParser.fromJson(responseString) :
 						JsonParser.fromJson(responseString, callback.getTypeToken());
@@ -52,11 +58,17 @@ public class HttpRequest {
 
 			@Override
 			public void onFinish() {
+                if(callback == null){
+                    return;
+                }
 				callback.postLoad();
 			}
 
 			@Override
 			public void onStart() {
+                if(callback == null){
+                    return;
+                }
 				callback.preLoad();
 			}
 		};
@@ -64,6 +76,9 @@ public class HttpRequest {
 
 	public void get(String url) {
 		if (!NetworkUtil.isNetworkAvailable(context)) {
+            if(callback == null){
+                return;
+            }
 			callback.onFailure(context.getString(R.string.network_info));
 			return;
 		}
@@ -72,6 +87,9 @@ public class HttpRequest {
 
 	public void post(String url, RequestParams requestParams) {
 		if (!NetworkUtil.isNetworkAvailable(context)) {
+            if(callback == null){
+                return;
+            }
 			callback.onFailure(context.getString(R.string.network_info));
 			return;
 		}
@@ -80,6 +98,9 @@ public class HttpRequest {
 
 	public void post(String url, HttpEntity entity) {
 		if (!NetworkUtil.isNetworkAvailable(context)) {
+            if(callback == null){
+                return;
+            }
 			callback.onFailure(context.getString(R.string.network_info));
 			return;
 		}
@@ -92,6 +113,9 @@ public class HttpRequest {
 		try {
 			entity = new StringEntity(jsonParams.toString(), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
+            if(callback == null){
+                return;
+            }
 			callback.onFailure(context.getString(R.string.load_data_failed));
 			return;
 		}

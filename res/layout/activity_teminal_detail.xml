@@ -70,9 +70,23 @@
                         android:layout_height="35dp"
                         android:layout_marginTop="5dp"
                         android:textSize="15dp"
+                        android:visibility="gone"
                         android:background="@drawable/buttong_light"
                         android:textColor="@color/bgtitle"
                         android:text="同步"
+                        />
+
+
+                    <Button
+                        android:id="@+id/btn_video"
+                        android:layout_width="100dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="5dp"
+                        android:textSize="15dp"
+                        android:visibility="gone"
+                        android:background="@drawable/buttong_light"
+                        android:textColor="@color/bgtitle"
+                        android:text="视频认证"
                         />
 
                 </LinearLayout>

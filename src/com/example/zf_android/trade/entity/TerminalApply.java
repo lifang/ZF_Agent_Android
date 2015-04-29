@@ -14,6 +14,8 @@ public class TerminalApply {
 
 	private String channelName;
 
+	private boolean needPreliminaryVerify;
+
 	private String brandName;
 
 	@SerializedName("model_number")
@@ -118,5 +120,13 @@ public class TerminalApply {
 
     public void setChannelName(String channelName) {
         this.channelName = channelName;
+    }
+
+    public boolean isNeedPreliminaryVerify() {
+        return needPreliminaryVerify;
+    }
+
+    public void setNeedPreliminaryVerify(boolean needPreliminaryVerify) {
+        this.needPreliminaryVerify = needPreliminaryVerify;
     }
 }

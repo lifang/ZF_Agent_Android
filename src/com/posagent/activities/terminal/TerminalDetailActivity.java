@@ -2,6 +2,7 @@ package com.posagent.activities.terminal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -76,6 +77,8 @@ public class TerminalDetailActivity extends BaseActivity {
         btn_sync = (Button)findViewById(R.id.btn_sync);
         btn_sync.setOnClickListener(this);
 
+        findViewById(R.id.btn_video).setOnClickListener(this);
+
         getData();
     }
 
@@ -96,6 +99,9 @@ public class TerminalDetailActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.btn_after_sale_apply:
 
+                break;
+            case R.id.btn_video:
+                video_check();
                 break;
             case R.id.btn_apply_open:
                 Intent i = new Intent(context, ApplyDetailActivity.class);
@@ -140,6 +146,12 @@ public class TerminalDetailActivity extends BaseActivity {
             setText("tv_channel", apply.getChannelName());
             setText("tv_agent", apply.getFactorName());
             setText("tv_create_time", apply.getCreatedAt());
+
+            if (apply.isNeedPreliminaryVerify()) {
+                show("btn_video");
+            } else {
+                hide("btn_video");
+            }
 
         }
 
@@ -353,6 +365,13 @@ public class TerminalDetailActivity extends BaseActivity {
             return "已停用";
         }
         return  arr[status];
+    }
+
+    private void video_check() {
+        //TODO goto video_check
+        // terminalId: terminalId
+        // applyID: entity.getApplyDetails().getId()
+        Log.d(TAG, "Video check");
     }
 
 }

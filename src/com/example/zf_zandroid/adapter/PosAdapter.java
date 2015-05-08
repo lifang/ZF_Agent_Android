@@ -51,9 +51,10 @@ public class PosAdapter extends BaseAdapter {
 			holder = new ViewHolder();
 			convertView = inflater.inflate(pos_item_layout(), null);
             holder.title = (TextView) convertView.findViewById(R.id.title);
-            holder.img_type = (ImageView) convertView.findViewById(R.id.img_type);
+//            holder.img_type = (ImageView) convertView.findViewById(R.id.img_type);
             holder.img_face = (ImageView) convertView.findViewById(R.id.img_face);
             holder.tv_price = (TextView) convertView.findViewById(R.id.tv_price);
+            holder.tv_origin_price = (TextView) convertView.findViewById(R.id.tv_origin_price);
             holder.tv_quantity = (TextView) convertView.findViewById(R.id.tv_quantity);
 			holder.ys = (TextView) convertView.findViewById(R.id.ys);
 			holder.content1 = (TextView) convertView.findViewById(R.id.content1);
@@ -70,13 +71,14 @@ public class PosAdapter extends BaseAdapter {
         holder.title.setText(entity.getTitle());
 
         if (buyType() == Constants.Goods.OrderTypePigou) {
+            holder.tv_origin_price.setText("￥"+ StringUtil.priceShow(entity.getRetail_price()));
             holder.tv_price.setText("￥"+ StringUtil.priceShow(entity.getPurchase_price()));
         } else {
             holder.tv_price.setText("￥"+ StringUtil.priceShow(entity.getRetail_price()));
         }
 
         if (null != holder.tv_quantity) {
-            holder.tv_quantity.setText("" + entity.getFloor_purchase_quantity());
+            holder.tv_quantity.setText("" + entity.getFloor_purchase_quantity() + "件");
         }
         if (null != holder.content1) {
             holder.content1.setText(entity.getModel_number());
@@ -84,20 +86,12 @@ public class PosAdapter extends BaseAdapter {
 		holder.tv_td.setText(entity.getPay_channe());
 		holder.ys.setText("已售"+entity.getVolume_number());
 
-        if (null != holder.img_type) {
-            if(entity.getHas_lease()==null||entity.getHas_lease()){
-                holder.img_type.setVisibility(View.VISIBLE);
-            }else{
-                holder.img_type.setVisibility(View.INVISIBLE);
-            }
 
-        }
-	 
 		return convertView;
 	}
 
 	public final class ViewHolder {
-		public TextView title, ys, tv_price, content1, tv_td, tv_quantity;
+		public TextView title, ys, tv_origin_price, tv_price, content1, tv_td, tv_quantity;
 		public CheckBox item_cb;
 		public ImageView img_type, img_face;
 	}

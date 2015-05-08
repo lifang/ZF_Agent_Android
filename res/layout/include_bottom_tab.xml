@@ -7,29 +7,29 @@
     <LinearLayout
         android:id="@+id/bottom_tab_line"
         android:layout_width="fill_parent"
-        android:layout_height="1dp"
+        android:layout_height="4px"
         android:background="#909090"
         android:orientation="horizontal" >
 
         <View
             android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <View
             android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             />
 
         <View
             android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <View
             android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_height="match_parent"
             android:layout_weight="1" />
     </LinearLayout>
     <LinearLayout

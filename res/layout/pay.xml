@@ -89,17 +89,13 @@
         android:layout_height="1dp"
         android:background="@color/Viewc2" />
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="6dp"
-        android:background="@color/Viewc2" />
 
     <LinearLayout
         android:id="@+id/ll_request"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:layout_gravity="center_vertical"
+        android:visibility="gone"
         android:background="@drawable/bg_item" >
 
         <ImageView
@@ -129,10 +125,5 @@
             android:layout_marginRight="7dp"
             android:src="@drawable/post_right" />
     </LinearLayout>
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/Viewc2" />
 
 </LinearLayout>

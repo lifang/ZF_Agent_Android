@@ -54,15 +54,16 @@ public class OrderDetail_PosAdapter extends BaseAdapter{
             holder.content = (TextView) convertView.findViewById(R.id.content_pp);
             holder.evevt_img = (ImageView) convertView.findViewById(R.id.evevt_img);
             holder.tv_price = (TextView) convertView.findViewById(R.id.tv_price);
+            holder.tv_origin_price = (TextView) convertView.findViewById(R.id.tv_origin_price);
             holder.tv_x = (TextView) convertView.findViewById(R.id.tv_x);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder)convertView.getTag();
         }
 
-        holder.content.setText(list.get(position).getGood_name());
-        holder.tv_price .setText("￥ "+entity.getGood_actualprice());
-//        holder.tv_x .setText(list.get(position).getGood_actualprice());
+        holder.content.setText(entity.getGood_name());
+        holder.tv_price.setText("￥ "+entity.getGood_batch_price());
+        holder.tv_origin_price.setText("￥ "+entity.getGood_actualprice());
         ImageCacheUtil.IMAGE_CACHE.get(entity.getGood_logo(), holder.evevt_img);
 
 
@@ -70,7 +71,7 @@ public class OrderDetail_PosAdapter extends BaseAdapter{
     }
 
     public final class ViewHolder {
-        public TextView content,tv_price,tv_x;
+        public TextView content,tv_price, tv_origin_price,tv_x;
         public ImageView evevt_img;
         public Button btn_ishow;
     }

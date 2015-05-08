@@ -37,6 +37,18 @@
                 android:maxLines="1"
                 android:text="泰山POS机旗舰版"
                 android:textColor="@color/text292929"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_origin_price"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="right"
+                android:maxLines="1"
+                android:text="$ 9999"
+                android:textColor="@color/text6c6c6c6"
                 android:textSize="11sp" />
 
             <TextView
@@ -48,7 +60,7 @@
                 android:gravity="right"
                 android:maxLines="1"
                 android:text="$ 9999"
-                android:textColor="@color/bgtitle"
+                android:textColor="@color/de4747"
                 android:textSize="11sp" />
 
             <TextView

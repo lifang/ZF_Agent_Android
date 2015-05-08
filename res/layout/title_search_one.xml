@@ -40,7 +40,7 @@
             android:layout_weight="1"
             android:hint="搜索商品"
             android:gravity="center"
-            android:textColorHint="#aaa"
+            android:textColorHint="@color/white"
             android:textCursorDrawable="@null"
             android:textColor="@color/white"
             android:background="@drawable/search_box_border"

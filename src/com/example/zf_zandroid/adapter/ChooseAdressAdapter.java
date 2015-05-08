@@ -55,7 +55,7 @@ public class ChooseAdressAdapter extends BaseAdapter {
         }
         holder.tv_tel.setText(list.get(position).getMoblephone());
         holder.tv_title.setText("收件人: " + list.get(position).getReceiver());
-        if(list.get(position).getIsDefault()=="1"){
+        if(list.get(position).getIsDefault().equals("1")){
             holder.ll_isshow.setVisibility(View.VISIBLE);
         }else{
             holder.ll_isshow.setVisibility(View.INVISIBLE);

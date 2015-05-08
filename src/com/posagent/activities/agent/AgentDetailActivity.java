@@ -53,7 +53,6 @@ public class AgentDetailActivity extends BaseActivity {
         //配置 设置分润 按钮
         viewSetRate = (TextView)findViewById(R.id.next_sure);
         viewSetRate.setText("设置分润");
-        viewSetRate.setVisibility(View.VISIBLE);
         viewSetRate.setOnClickListener(this);
 
         getData();
@@ -120,8 +119,11 @@ public class AgentDetailActivity extends BaseActivity {
         setText("tv_left_count", "" + (entity.getOpennum() - entity.getSoldnum()));
 
         CheckBox cb_is_profit = (CheckBox) findViewById(R.id.cb_is_profit);
-        cb_is_profit.setChecked(entity.getIs_have_profit().equals("2"));
-
+        boolean is_profit = entity.getIs_have_profit().equals("2");
+        cb_is_profit.setChecked(is_profit);
+        if (is_profit) {
+            viewSetRate.setVisibility(View.VISIBLE);
+        }
         final SonAgentInfo info = entity;
         //photo
         findViewById(R.id.iv_idcard_photo).setOnClickListener(new View.OnClickListener() {

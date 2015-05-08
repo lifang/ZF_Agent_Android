@@ -140,7 +140,7 @@
                 android:layout_marginLeft="7dp"
                 android:gravity="center_vertical"
                 android:singleLine="true"
-                android:text="下线代理商管理"
+                android:text="下级代理商管理"
                 android:textColor="@color/text292929"
                 android:textSize="17sp" />
 
@@ -264,18 +264,6 @@
     </LinearLayout>
 
     <!--列表结束-->
-
-    <Button
-        android:id="@+id/btn_exit"
-        android:layout_height="42dp"
-        android:layout_width="184dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="20dp"
-        android:text="退出登录"
-        android:background="@drawable/bg_red_dra"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@color/ffffff"
-        android:textSize="20sp"/>
 
 
     <include layout="@layout/include_bottom_tab" />

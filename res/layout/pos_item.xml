@@ -38,7 +38,41 @@
                 android:textColor="#292929"
                 android:maxLines="2"
                 android:text="2015最新POS机器旗舰版  1.0"
-                android:textSize="13sp" />
+                android:textSize="15sp" />
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:gravity="bottom"
+                        android:text="原价："
+                        android:layout_gravity="center_vertical"
+                        android:textSize="11sp" />
+                    <TextView
+                        android:id="@+id/tv_origin_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:gravity="bottom"
+                        android:textColor="@color/bgtitle"
+                        android:text="$999.00"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -70,13 +104,6 @@
                         android:text="$999.00"
                         android:layout_gravity="center_vertical"
                         android:textSize="15sp" />
-                    <ImageView
-                        android:id="@+id/img_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_gravity="center_vertical"
-                        android:background="@drawable/test_zl" />
                 </LinearLayout>
             </LinearLayout>
 

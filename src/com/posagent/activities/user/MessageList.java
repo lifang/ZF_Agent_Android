@@ -282,11 +282,13 @@ public class MessageList extends BaseActivity implements IXListViewListener {
 
     private void updateListView() {
         if (isDeleting) {
+            hide("bottom_tab_container");
             // update list
             for (MessageEntity entity : myList) {
                 entity.setBatchEditing(true);
             }
         } else {
+            show("bottom_tab_container");
             for (MessageEntity entity : myList) {
                 entity.setBatchEditing(false);
             }

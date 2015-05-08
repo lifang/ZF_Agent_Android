@@ -322,12 +322,12 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
                 tv.setLayoutParams(lp);
 
                 if (channel.getId() == payChannelId) {
-                    tv.setBackgroundResource(R.drawable.bg_shape);
+                    tv.setBackgroundResource(R.drawable.bg_shape_channel);
                 } else {
-                    tv.setBackgroundResource(R.drawable.bg_gray_shape);
+                    tv.setBackgroundResource(R.drawable.bg_gray_shape_channel);
                 }
 
-                tv.setPadding(5, 5, 5, 5);
+                tv.setPadding(10, 8, 10, 8);
                 tv.setTextSize(10);
                 ll_pay_channel.addView(tv);
 

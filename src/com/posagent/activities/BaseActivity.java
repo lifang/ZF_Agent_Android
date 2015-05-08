@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -251,10 +252,12 @@ public class BaseActivity extends Activity implements View.OnClickListener {
 
     //helper
     protected void toast(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+      Toast toast = Toast.makeText(this, msg, Toast.LENGTH_LONG);
+      toast.setGravity(Gravity.CENTER, 0, 0);
+      toast.show();
     }
     protected void noRightToast() {
-        Toast.makeText(this, "您没有管理当前模块的权限", Toast.LENGTH_LONG).show();
+        toast("您没有管理当前模块的权限");
     }
     protected boolean checkRole(int roleId) {
         if (!MyApplication.hasRole("" + roleId)) {

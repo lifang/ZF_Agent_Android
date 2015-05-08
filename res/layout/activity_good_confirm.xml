@@ -366,6 +366,7 @@
                             android:gravity="center"
                             android:inputType="none"
                             android:editable="false"
+                            android:textSize="12sp"
                             android:text="1" />
                         <ImageView
                             android:id="@+id/add"
@@ -613,15 +614,24 @@
 
 
                 </LinearLayout>
-                <View android:layout_height="1dp"
-                    android:layout_width="fill_parent"
 
+
+
+                <View
+                    android:id="@+id/ll_fapiao_info_line"
+                    android:layout_height="1px"
+                    android:layout_width="fill_parent"
                     android:background="@color/Viewc2"/>
-                <LinearLayout android:layout_height="50dp"
+
+                <LinearLayout
+                    android:id="@+id/ll_fapiao_info"
+                    android:layout_height="50dp"
                     android:layout_width="fill_parent"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
+                    android:visibility="gone"
                     >
+
                     <Spinner
                         android:id="@+id/spinnerstate"
                         android:layout_width="wrap_content"

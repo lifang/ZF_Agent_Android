@@ -135,8 +135,12 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
             public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
                 if(arg1){
                     is_need_invoice=1;
+                    show("ll_fapiao_info");
+                    show("ll_fapiao_info_line");
                 }else{
                     is_need_invoice=0;
+                    hide("ll_fapiao_info");
+                    hide("ll_fapiao_info_line");
                 }
             }
         });
@@ -144,7 +148,7 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
 
             @Override
             public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-                showCountText.setText(arg0.toString());
+                showCountText.setText("X  " + arg0.toString());
                 tv_count.setText("共计:   "+arg0+"件");
                 if( buyCountEdit.getText().toString().equals("")){
                     quantity=0;
@@ -263,7 +267,9 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+        if (null == data) {
+            return;
+        }
         Bundle bundle = data.getExtras();
         switch (requestCode) {
             case Constants.REQUEST_CODE:

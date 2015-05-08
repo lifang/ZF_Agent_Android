@@ -125,6 +125,7 @@ public class MyApplication extends Application {
     }
 
     public static boolean hasRole(String roleId) {
+
         int intRoleId = Integer.parseInt(roleId);
 
         if (null == roles) {

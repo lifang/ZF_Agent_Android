@@ -125,7 +125,6 @@
         </activity>
         <activity
             android:name="com.posagent.activities.user.MenuMine"
-            android:launchMode="singleTask"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -427,12 +426,19 @@
         </activity>
         <activity
             android:name=".activity.AllProduct"
-            android:launchMode="singleTask"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.posagent.activities.goods.GoodsList"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.posagent.activities.goods.FilterForm"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.posagent.activities.goods.FilterItemSelect"
             android:screenOrientation="portrait" >
         </activity>
         <activity

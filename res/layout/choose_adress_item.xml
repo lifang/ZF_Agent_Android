@@ -87,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="22dp"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="5dp"
                 android:gravity="center_vertical"
                 android:singleLine="true"
                 android:text="收件地址: 上海市XXX路YY号11#101"

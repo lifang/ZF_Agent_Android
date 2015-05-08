@@ -145,10 +145,10 @@
                 </RelativeLayout>
 
                 <View
-                    android:layout_width="2dp"
+                    android:layout_width="1px"
                     android:layout_height="fill_parent"
                     android:layout_marginTop="7dp"
-                    android:background="@color/Viewc" />
+                    android:background="@color/grayBorder" />
 
                 <RelativeLayout
                     android:id="@+id/main_order_manage"
@@ -186,7 +186,7 @@
 
             <View
                 android:layout_width="fill_parent"
-                android:layout_height="2dp"
+                android:layout_height="1px"
                 android:layout_marginLeft="7dp"
                 android:layout_marginRight="7dp"
                 android:background="@color/Viewc" />
@@ -233,7 +233,7 @@
                 </RelativeLayout>
 
                 <View
-                    android:layout_width="2dp"
+                    android:layout_width="1px"
                     android:layout_height="fill_parent"
                     android:background="@color/Viewc" />
 
@@ -271,7 +271,7 @@
                 </RelativeLayout>
 
                 <View
-                    android:layout_width="2dp"
+                    android:layout_width="1px"
                     android:layout_height="fill_parent"
                     android:background="@color/Viewc" />
 
@@ -311,7 +311,7 @@
 
             <View
                 android:layout_width="fill_parent"
-                android:layout_height="2dp"
+                android:layout_height="1px"
                 android:layout_marginLeft="7dp"
                 android:layout_marginRight="7dp"
                 android:background="@color/Viewc" />
@@ -358,7 +358,7 @@
                 </RelativeLayout>
 
                 <View
-                    android:layout_width="2dp"
+                    android:layout_width="1px"
                     android:layout_height="fill_parent"
                     android:layout_marginBottom="7dp"
                     android:background="@color/Viewc" />
@@ -397,7 +397,7 @@
                 </RelativeLayout>
 
                 <View
-                    android:layout_width="2dp"
+                    android:layout_width="1px"
                     android:layout_height="fill_parent"
                     android:layout_marginBottom="7dp"
                     android:background="@color/Viewc" />

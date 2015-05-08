@@ -89,7 +89,7 @@ public class HMSlideFragment extends Fragment {
         mainContainer.setLayoutParams(layoutParams);
 
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, 50);
+                LinearLayout.LayoutParams.MATCH_PARENT, 100);
         indicatorContainer = new LinearLayout(context);
         indicatorContainer.setGravity(Gravity.CENTER);
         indicatorContainer.setBackgroundColor(0x33000000);
@@ -131,7 +131,7 @@ public class HMSlideFragment extends Fragment {
         for (int i = 0; i < this.myList.size(); i++) {
             imgView = new ImageView(context);
 
-            LinearLayout.LayoutParams params_linear = new LinearLayout.LayoutParams(10, 10);
+            LinearLayout.LayoutParams params_linear = new LinearLayout.LayoutParams(20, 20);
             params_linear.setMargins(7, 20, 7, 20);
             imgView.setLayoutParams(params_linear);
 
@@ -150,8 +150,8 @@ public class HMSlideFragment extends Fragment {
 
     private LayerDrawable dotWithColor(int color) {
         ShapeDrawable smallerCircle= new ShapeDrawable( new OvalShape());
-        smallerCircle.setIntrinsicHeight( 10 );
-        smallerCircle.setIntrinsicWidth( 10);
+        smallerCircle.setIntrinsicHeight( 20 );
+        smallerCircle.setIntrinsicWidth( 20);
         smallerCircle.getPaint().setColor(color);
         Drawable[] d = {smallerCircle};
 

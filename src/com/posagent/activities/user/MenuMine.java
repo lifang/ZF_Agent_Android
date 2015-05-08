@@ -15,10 +15,8 @@ import com.example.zf_android.activity.MineSet;
 import com.example.zf_android.activity.MyInfo;
 import com.example.zf_android.activity.SystemMessage;
 import com.example.zf_android.trade.ApplyOpenProgressActivity;
-import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.activities.agent.AgentManageMainActivity;
-import com.posagent.activities.home.LoginActivity;
 import com.posagent.activities.home.Main;
 import com.posagent.utils.Constants;
 
@@ -49,15 +47,6 @@ public class MenuMine extends BaseActivity {
         ll_yg.setOnClickListener(this);
 
         findViewById(R.id.ll_400).setOnClickListener(this);
-
-        findViewById(R.id.btn_exit).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MyApplication.setCurrentUser(null);
-                startActivity(new Intent(context, LoginActivity.class));
-            }
-        });
-
 
     }
 

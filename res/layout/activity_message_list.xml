@@ -35,8 +35,9 @@
         android:id="@+id/rl_button_toolbar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bg"
+        android:background="@color/Viewc"
         >
+        <View style="@style/Divider" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -49,7 +50,6 @@
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:background="@drawable/bg_shape"
                 android:layout_gravity="center"
                 android:gravity="center"
 
@@ -67,14 +67,14 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:background="@drawable/bg_shape"
                 android:layout_gravity="center"
-                android:gravity="center"
+                android:gravity="right"
                 android:text="删除"
                 />
             </LinearLayout>
     </RelativeLayout>
 
-    <include layout="@layout/include_bottom_tab" />
+    <include layout="@layout/include_bottom_tab"
+        />
 
 </LinearLayout>

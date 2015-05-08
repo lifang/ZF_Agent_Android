@@ -83,6 +83,9 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
                     onRefresh_number = true;
                     myAdapter.notifyDataSetChanged();
                     break;
+                case 10:
+                    myAdapter.notifyDataSetChanged();
+                    break;
             }
         }
     };
@@ -212,7 +215,7 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
     public void onRefresh() {
         page = 1;
         myList.clear();
-        handler.sendEmptyMessage(0);
+        handler.sendEmptyMessage(10);
         getData();
     }
 

@@ -15,7 +15,7 @@
         android:layout_height="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-
+        android:layout_marginBottom="40dp"
         android:gravity="center_vertical"
         android:visibility="invisible"
         android:orientation="horizontal" >
@@ -43,7 +43,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:paddingRight="2dp"
-        android:background="@drawable/edit_login"
+        android:background="@drawable/edit_login_blue"
         >
         <ImageView
             android:id="@+id/login_img_pass"
@@ -52,7 +52,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/login_name"/>
+            android:src="@drawable/login_email"/>
         <EditText
             android:id="@+id/login_edit_name"
             android:layout_width="match_parent"
@@ -64,7 +64,7 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/login_img_pass"
             android:textSize="17sp"
-            android:text="2833761825@qq.cm"
+            android:text="2833761825@qq.com"
             android:maxWidth="20dp"
             />
         <LinearLayout
@@ -90,7 +90,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="5dp"
         android:paddingRight="3dp"
-        android:background="@drawable/edit_login"
+        android:background="@drawable/edit_login_blue"
         android:layout_marginRight="30dp"
         >
         <ImageView
@@ -100,7 +100,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/login_pass"/>
+            android:src="@drawable/login_password"/>
         <EditText
             android:id="@+id/login_edit_pass"
             android:layout_width="match_parent"
@@ -133,39 +133,33 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/login_linear_login"
         android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/bg_blue_shape"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="40dp"
         android:gravity="center"
-
-        android:orientation="horizontal"
         >
+        <LinearLayout
+            android:id="@+id/login_linear_login"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_blue_shape"
+            android:gravity="center"
+            android:orientation="horizontal"
+            >
 
-        <TextView
+            <TextView
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-            android:text="登"
-            android:textSize="16sp"
-            android:textColor="@color/fffefe"
-            />
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="7dp"
-            android:text="录"
-            android:textSize="16sp"
-            android:textColor="@color/fffefe"
-            />
+                android:text="登  录"
+                android:textSize="18sp"
+                android:textColor="@color/fffefe"
+                />
+        </LinearLayout>
     </LinearLayout>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -173,10 +167,12 @@
         android:layout_marginRight="35dp"
         android:orientation="horizontal"
         android:layout_gravity="center_vertical"
+        android:paddingTop="40dp"
         >
         <LinearLayout android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
+            android:layout_alignParentBottom="true"
             >
             <TextView
                 android:id="@+id/login_text_forget"
@@ -195,10 +191,11 @@
         <LinearLayout
             android:id="@+id/zhuche_ll"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="right"
+            android:layout_alignParentBottom="true"
             android:orientation="horizontal"
             >
 
@@ -213,6 +210,6 @@
 
                 android:textSize="@dimen/s_13sp" />
         </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

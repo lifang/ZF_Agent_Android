@@ -513,7 +513,7 @@ public class Events {
             if (list.size() < 1) {
                 String result = null;
                 try {
-                    result = getResult().getString("terminalList");
+                    result = getResult().getString("merchaneList");
                     list = (new Gson()).fromJson(result,
                             new TypeToken<List<MerchantEntity>>() {}.getType());
                 } catch (JSONException e) {

@@ -45,6 +45,7 @@
             android:textColor="@color/white"
             android:background="@drawable/search_box_border"
             android:singleLine="true"
+            android:focusable="false"
             android:drawableLeft="@drawable/search_bg" />
 
     </LinearLayout>

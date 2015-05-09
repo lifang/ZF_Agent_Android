@@ -109,6 +109,10 @@ public class UserAdapter extends BaseAdapter{
             }
         });
 
+        if (((UserList)context).isForSelect()) {
+            convertView.findViewById(R.id.iv_right_arrow).setVisibility(View.GONE);
+        }
+
         holder.cb_edit.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

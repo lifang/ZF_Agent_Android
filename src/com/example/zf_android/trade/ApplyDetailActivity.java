@@ -38,9 +38,9 @@ import com.example.zf_android.trade.entity.Province;
 import com.example.zf_android.trade.entity.TerminalOpenInfo;
 import com.example.zf_android.trade.widget.MyTabWidget;
 import com.posagent.MyApplication;
+import com.posagent.activities.ChannelSelecter;
 import com.posagent.activities.ImageViewer;
 import com.posagent.activities.terminal.BankList;
-import com.posagent.activities.terminal.ChooseChannel;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
 
@@ -345,11 +345,12 @@ public class ApplyDetailActivity extends FragmentActivity {
                 break;
 			}
 			case REQUEST_CHOOSE_CHANNEL: {
-				mChannelId = data.getIntExtra("channel_id", 0);
-				mBillingId = data.getIntExtra("billing_id", 0);
-				String channelName = data.getStringExtra("channel_name");
+				mChannelId = data.getIntExtra("channelId", 0);
+				mBillingId = data.getIntExtra("billId", 0);
+                String channelName = data.getStringExtra("channelName");
+                String billName = data.getStringExtra("billName");
 
-				setItemValue(getString(R.string.apply_detail_channel), channelName);
+				setItemValue(getString(R.string.apply_detail_channel), channelName + " " + billName);
 				break;
 			}
 			case REQUEST_UPLOAD_IMAGE:
@@ -552,7 +553,7 @@ public class ApplyDetailActivity extends FragmentActivity {
 			@Override
 			public void onClick(View v) {
 
-                Intent intent = new Intent(ApplyDetailActivity.this, ChooseChannel.class);
+                Intent intent = new Intent(ApplyDetailActivity.this, ChannelSelecter.class);
                 startActivityForResult(intent, REQUEST_CHOOSE_CHANNEL);
 
 			}

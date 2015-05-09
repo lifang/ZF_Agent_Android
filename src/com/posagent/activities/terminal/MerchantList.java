@@ -8,9 +8,11 @@ import android.widget.ListView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
+import com.example.zf_android.activity.SearchFormCommon;
 import com.example.zf_android.entity.MerchantEntity;
 import com.posagent.activities.BaseListActivity;
 import com.posagent.events.Events;
+import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
 
 import java.util.HashMap;
@@ -29,6 +31,7 @@ public class MerchantList extends BaseListActivity {
     private String title = "";
     private int terminalId;
     private List<MerchantEntity> myList;
+    private String keys;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,19 @@ public class MerchantList extends BaseListActivity {
 
         selectMerchantName = getIntent().getStringExtra(AGENT_NAME);
         terminalId = getIntent().getIntExtra("terminalId", 0);
+
+        //icons
+        findViewById(R.id.iv_search_icon_terminal).setVisibility(View.VISIBLE);
+        findViewById(R.id.iv_search_icon_terminal).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MerchantList.this, SearchFormCommon.class);
+                i.putExtra("save_key", "MerchantListHistory");
+                i.putExtra("hint_text", "输入商家名称");
+                i.putExtra("keys", keys);
+                startActivityForResult(i, Constants.REQUEST_CODE);
+            }
+        });
 
         getData();
 
@@ -59,13 +75,22 @@ public class MerchantList extends BaseListActivity {
     private void getData() {
         JsonParams params = new JsonParams();
         params.put("terminalId", terminalId);
-        params.put("title", title);
+        if (null != keys) {
+            params.put("title", keys);
+        }
         params.put("page", page);
         params.put("rows", rows);
         String strParams = params.toString();
         Events.CommonRequestEvent event = new Events.MerchantListEvent();
         event.setParams(strParams);
         EventBus.getDefault().post(event);
+    }
+
+    private void onRefresh() {
+        page = 1;
+        myList.clear();
+        adapter.notifyDataSetChanged();
+        getData();
     }
 
 
@@ -81,6 +106,11 @@ public class MerchantList extends BaseListActivity {
             items.add(item);
         }
         adapter.notifyDataSetChanged();
+    }
+
+    public void onEventMainThread(Events.GoodsDoSearchCompleteEvent event) {
+        keys = event.getKeys();
+        getData();
     }
 
 }

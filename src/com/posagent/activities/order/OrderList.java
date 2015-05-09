@@ -148,6 +148,7 @@ public class OrderList extends BaseActivity implements IXListViewListener,
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (parent.getId() == R.id.spinnerstate) {
             q = mapStatus(position);
+            keys = null;
         } else {
             if (position == 2) {
                 p = Constants.Goods.BuyTypeDaigou;

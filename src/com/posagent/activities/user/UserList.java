@@ -85,7 +85,13 @@ public class UserList extends BaseActivity implements IXListViewListener {
     }
 
     private void initView() {
-        new TitleMenuUtil(UserList.this, "用户管理").show();
+        if (forSelect) {
+            new TitleMenuUtil(UserList.this, "选择用户").show();
+
+        } else {
+            new TitleMenuUtil(UserList.this, "用户管理").show();
+
+        }
         rl_button_toolbar = (RelativeLayout) findViewById(R.id.rl_button_toolbar);
         if (!isDeleting) {
             rl_button_toolbar.setVisibility(View.GONE);
@@ -306,6 +312,10 @@ public class UserList extends BaseActivity implements IXListViewListener {
             i.putExtra("json", json);
             startActivity(i);
         }
+    }
+
+    public boolean isForSelect() {
+        return forSelect;
     }
 
 }

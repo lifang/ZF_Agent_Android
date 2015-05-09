@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,12 +31,14 @@ public class SearchFormCommon extends BaseListActivity {
 
 
     private EditText search_edit;
+    private Button btn_clear_history;
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
     private String mSaveKey = "OrderSearchKeyHistroy";
     private String mHintText = "请输入订单号";
+    private String keys = "";
 
 
     @Override
@@ -44,6 +47,16 @@ public class SearchFormCommon extends BaseListActivity {
 
         setContentView(R.layout.activity_search_form);
 
+        btn_clear_history = (Button)findViewById(R.id.btn_clear_history);
+        btn_clear_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearHistory();
+            }
+        });
+        btn_clear_history.setVisibility(View.GONE);
+
+        keys = getIntent().getStringExtra("keys");
         String tmpSaveKey = getIntent().getStringExtra("save_key");
         if (null != tmpSaveKey) {
             mSaveKey = tmpSaveKey;
@@ -60,18 +73,15 @@ public class SearchFormCommon extends BaseListActivity {
 
         EditText et_serch_edit = (EditText) findViewById(R.id.serch_edit);
         et_serch_edit.setHint(mHintText);
+        if (null != keys) {
+            et_serch_edit.setText(keys);
+
+        }
 
         findViewById(R.id.tv_cancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
-            }
-        });
-
-        findViewById(R.id.btn_clear_history).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clearHistory();
             }
         });
 
@@ -133,6 +143,11 @@ public class SearchFormCommon extends BaseListActivity {
             items.add(item);
         }
         adapter.notifyDataSetChanged();
+        if(items.size() > 0) {
+            btn_clear_history.setVisibility(View.VISIBLE);
+        } else {
+            btn_clear_history.setVisibility(View.GONE);
+        }
     }
 
     private void clearHistory() {

@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.examlpe.zf_android.util.Tools;
 import com.example.zf_android.R;
+import com.example.zf_android.activity.SearchFormCommon;
 import com.example.zf_android.trade.common.CommonUtil;
 import com.example.zf_android.trade.entity.AfterSaleRecord;
 import com.example.zf_android.trade.widget.XListView;
@@ -63,6 +64,8 @@ public class AfterSaleListActivity extends BaseActivity implements XListView.IXL
 	private int page = 1;
 	private int total = 0;
 	private final int rows = 10;
+
+    private String keys;
 
     private int q = 0;
 
@@ -136,6 +139,19 @@ public class AfterSaleListActivity extends BaseActivity implements XListView.IXL
 		mListView = (XListView) findViewById(R.id.after_sale_list);
 		mAdapter = new RecordListAdapter();
 
+        //icons
+        show("iv_search_icon_terminal");
+        findViewById(R.id.iv_search_icon_terminal).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, SearchFormCommon.class);
+                i.putExtra("save_key", "AfterSaleHistory");
+                i.putExtra("hint_text", "输入售后记录编号");
+                i.putExtra("keys", keys);
+                startActivityForResult(i, Constants.REQUEST_CODE);
+            }
+        });
+
 		// init the XListView
 		mListView.initHeaderAndFooter();
 		mListView.setXListViewListener(this);
@@ -150,6 +166,7 @@ public class AfterSaleListActivity extends BaseActivity implements XListView.IXL
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String key = spinnerStatus[position];
         q = mapStatus.get(key);
+        keys = null;
         onRefresh();
     }
 
@@ -162,7 +179,7 @@ public class AfterSaleListActivity extends BaseActivity implements XListView.IXL
     public void onRefresh() {
         page = 1;
         mEntities.clear();
-        handler.sendEmptyMessage(0);
+        mAdapter.notifyDataSetChanged();
         loadData();
     }
 
@@ -171,6 +188,9 @@ public class AfterSaleListActivity extends BaseActivity implements XListView.IXL
         params.put("customerId", MyApplication.user().getId());
         if (q > 0) {
             params.put("q", q);
+        }
+        if (null != keys) {
+            params.put("search", keys);
         }
         params.put("page", page);
         params.put("rows", rows);
@@ -242,6 +262,11 @@ public class AfterSaleListActivity extends BaseActivity implements XListView.IXL
 
     public void onEventMainThread(Events.AfterSaleResubmitCompleteEvent event) {
         mAdapter.notifyDataSetChanged();
+    }
+
+    public void onEventMainThread(Events.GoodsDoSearchCompleteEvent event) {
+        keys = event.getKeys();
+        onRefresh();
     }
 
 	private void initButtonListeners() {

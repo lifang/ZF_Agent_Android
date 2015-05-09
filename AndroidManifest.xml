@@ -270,6 +270,10 @@
             android:name="com.posagent.activities.agent.AgentCargoExchangeCreateActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="com.posagent.activities.ChannelSelecter"
+            android:screenOrientation="portrait" >
+        </activity>
 
         <activity
             android:name=".activity.MineSet"

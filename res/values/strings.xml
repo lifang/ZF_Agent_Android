@@ -11,7 +11,7 @@
 	<string name="xlistview_header_last_time">最后刷新时间：</string>
 	<string name="xlistview_footer_hint_normal">加载更多</string>
 	<string name="xlistview_footer_hint_ready">加载更多</string>
-	<string name="hintname">请输入手机/邮箱</string>
+	<string name="hintname">使用ID登录</string>
 	<string name="hintpass">请输入密码</string>
 	<string name="forgetpass">找回密码</string>
 	<string name="refresh_toomuch">刷新频繁，请稍后再试</string>

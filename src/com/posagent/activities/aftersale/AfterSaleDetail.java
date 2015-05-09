@@ -184,6 +184,9 @@ public class AfterSaleDetail extends BaseActivity {
     }
 
     private void updateViewUpdate() {
+
+        hide("ll_comments");
+
         setText("after_sale_detail_status", statusName(entityUpdate.getStatus()));
         setText("after_sale_detail_time", entityUpdate.getApply_time());
 
@@ -233,6 +236,9 @@ public class AfterSaleDetail extends BaseActivity {
     }
 
     private void updateViewCancel() {
+        
+        hide("ll_comments");
+
         setText("after_sale_detail_status", statusName(entityCancel.getStatus()));
         setText("after_sale_detail_time", entityCancel.getApply_time());
 

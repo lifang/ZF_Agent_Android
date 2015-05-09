@@ -75,10 +75,10 @@ public class StockAdapter extends BaseAdapter{
         holder.tv_brand.setText(entity.getGood_brand());
         holder.tv_goods_name.setText(entity.getGoodname());
         holder.tv_paychannel.setText(entity.getPaychannel());
-        holder.tv_totalCount.setText("总库存\n" + entity.getTotalCount());
-        holder.tv_agentCount.setText("代理商库存\n" + entity.getAgentCount());
-        holder.tv_openCount.setText("已开通数量\n" + entity.getOpenCount());
-        holder.tv_historyCount.setText("历史进货数量\n" + entity.getHoitoryCount());
+        holder.tv_totalCount.setText("总库存\n" + entity.getTotalCount() + "件");
+        holder.tv_agentCount.setText("代理商库存\n" + entity.getAgentCount() + "件");
+        holder.tv_openCount.setText("已开通数量\n" + entity.getOpenCount() + "件");
+        holder.tv_historyCount.setText("历史进货数量\n" + entity.getHoitoryCount() + "件");
 
         holder.iv_face = (ImageView) convertView.findViewById(R.id.iv_face);
 

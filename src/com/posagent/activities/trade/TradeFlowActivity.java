@@ -112,15 +112,7 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
         }
         // add fragments according to the order
         TradeFlowFragment transferFragment = TradeFlowFragment.newInstance(TRANSFER);
-//        TradeFlowFragment consumeFragment = TradeFlowFragment.newInstance(CONSUME);
-//        TradeFlowFragment repaymentFragment = TradeFlowFragment.newInstance(REPAYMENT);
-//        TradeFlowFragment lifePayFragment = TradeFlowFragment.newInstance(LIFE_PAY);
-//        TradeFlowFragment phonePayFragment = TradeFlowFragment.newInstance(PHONE_PAY);
         mFragments.add(transferFragment);
-//        mFragments.add(consumeFragment);
-//        mFragments.add(repaymentFragment);
-//        mFragments.add(lifePayFragment);
-//        mFragments.add(phonePayFragment);
 
         mTabWidget.setViewPager(mViewPager);
         mViewPager.setAdapter(new TradeFlowPagerAdapter(getSupportFragmentManager()));
@@ -176,18 +168,6 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
             return;
         }
         searchMap = map;
-
-//        {
-//            "startTime": "2015-03-01",
-//                "page": 1,
-//                "agentId": 80,
-//                "endTime": "2015-04-16",
-//                "terminalNumber": "501000012002",
-//                "sonagentId": 81,
-//                "tradeTypeId": 5,
-//                "rows": 10
-//        }
-
         JsonParams params = new JsonParams();
 
         params.put("agentId", MyApplication.user().getAgentId());

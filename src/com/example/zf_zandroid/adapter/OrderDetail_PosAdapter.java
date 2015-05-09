@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.examlpe.zf_android.util.ImageCacheUtil;
+import com.examlpe.zf_android.util.StringUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.Goodlist;
 
@@ -62,8 +63,8 @@ public class OrderDetail_PosAdapter extends BaseAdapter{
         }
 
         holder.content.setText(entity.getGood_name());
-        holder.tv_price.setText("￥ "+entity.getGood_batch_price());
-        holder.tv_origin_price.setText("￥ "+entity.getGood_actualprice());
+        holder.tv_price.setText("￥ "+ StringUtil.priceShow(entity.getGood_batch_price()));
+        holder.tv_origin_price.setText("￥ "+ StringUtil.priceShow(entity.getGood_price()));
         ImageCacheUtil.IMAGE_CACHE.get(entity.getGood_logo(), holder.evevt_img);
 
 

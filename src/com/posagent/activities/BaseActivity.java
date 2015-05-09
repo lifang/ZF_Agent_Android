@@ -251,7 +251,7 @@ public class BaseActivity extends Activity implements View.OnClickListener {
 
 
     //helper
-    protected void toast(String msg) {
+    public void toast(String msg) {
       Toast toast = Toast.makeText(this, msg, Toast.LENGTH_LONG);
       toast.setGravity(Gravity.CENTER, 0, 0);
       toast.show();

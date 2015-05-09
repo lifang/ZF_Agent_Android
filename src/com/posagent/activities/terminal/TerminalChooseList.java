@@ -7,13 +7,14 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
+import com.example.zf_android.activity.SearchFormCommon;
 import com.example.zf_android.trade.entity.TerminalItem;
 import com.example.zf_zandroid.adapter.TerminalChooseListAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
+import com.posagent.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,10 @@ public class TerminalChooseList extends BaseActivity {
     private CheckBox cb_checkall;
 
     private List<TerminalItem> list;
+    private List<TerminalItem> originList;
     private TerminalChooseListAdapter adapter;
+
+    private String keys;
 
 
     @Override
@@ -43,13 +47,27 @@ public class TerminalChooseList extends BaseActivity {
 
         list = gson.fromJson(i.getStringExtra("json"), new TypeToken<List<TerminalItem>>() {}.getType());
 
-        new TitleMenuUtil(TerminalChooseList.this, "选择终端").show();
+        originList = new ArrayList<TerminalItem>(list);
 
         initView();
 
     }
 
     private void initView() {
+
+        findViewById(R.id.titleback_linear_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        findViewById(R.id.serch_edit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doSearch();
+            }
+        });
 
         tv_filtered_number = (TextView) findViewById(R.id.tv_filtered_number);
         tv_filtered_number.setText("" + list.size());
@@ -117,6 +135,34 @@ public class TerminalChooseList extends BaseActivity {
             item.setSelected(cb_checkall.isChecked());
         }
         adapter.notifyDataSetChanged();
+        updateSelectStatus();
+    }
+
+    public void onEventMainThread(Events.GoodsDoSearchCompleteEvent event) {
+        keys = event.getKeys();
+        list = new ArrayList<TerminalItem>(originList);
+        for (int i = list.size() - 1; i >= 0; i--) {
+            TerminalItem entity = list.get(i);
+            if (entity.getTerminalNumber().indexOf(keys) == -1) {
+                list.remove(entity);
+            }
+        }
+        adapter = new TerminalChooseListAdapter(TerminalChooseList.this, list);
+        lv_terminal_list.setAdapter(adapter);
+
+        updateView();
+    }
+
+    private void doSearch() {
+        Intent i3 = new Intent(context, SearchFormCommon.class);
+        i3.putExtra("keys", keys);
+        i3.putExtra("save_key", "TerminalKeyHistory");
+        i3.putExtra("hint_text", "输入终端号");
+        startActivityForResult(i3, Constants.REQUEST_CODE);
+    }
+
+    private void updateView() {
+        tv_filtered_number.setText("" + list.size());
         updateSelectStatus();
     }
 }

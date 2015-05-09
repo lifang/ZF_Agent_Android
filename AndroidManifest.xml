@@ -277,7 +277,7 @@
         </activity>
         <activity
             android:name=".activity.MyMessage"
-            android:launchMode="singleTask"
+           
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -421,7 +421,7 @@
         </activity>
         <activity
             android:name=".activity.ShopCar"
-            android:launchMode="singleTask"
+           
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -430,7 +430,6 @@
         </activity>
         <activity
             android:name="com.posagent.activities.goods.GoodsList"
-            android:launchMode="singleTask"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -443,17 +442,21 @@
         </activity>
         <activity
             android:name="com.posagent.activities.goods.RequireMaterial"
-            android:launchMode="singleTask"
+           
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.posagent.activities.ImageViewer"
-            android:launchMode="singleTask"
+           
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activity.SearchFormActivity"
-            android:launchMode="singleTask"
+           
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.SearchFormCommon"
             android:screenOrientation="portrait" >
         </activity>
 

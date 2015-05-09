@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.zf_android.Config;
 import com.example.zf_android.R;
+import com.example.zf_android.trade.common.CommonUtil;
 import com.example.zf_android.trade.entity.TradeRecord;
 import com.posagent.MyApplication;
 import com.posagent.activities.CommonInputer;
@@ -40,12 +41,12 @@ import java.util.Map;
 import de.greenrobot.event.EventBus;
 
 import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_ID;
-import static com.example.zf_android.trade.Constants.TradeIntent.SON_AGENT_ID;
 import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_NAME;
 import static com.example.zf_android.trade.Constants.TradeIntent.CLIENT_NUMBER;
 import static com.example.zf_android.trade.Constants.TradeIntent.END_DATE;
 import static com.example.zf_android.trade.Constants.TradeIntent.REQUEST_TRADE_AGENT;
 import static com.example.zf_android.trade.Constants.TradeIntent.REQUEST_TRADE_CLIENT;
+import static com.example.zf_android.trade.Constants.TradeIntent.SON_AGENT_ID;
 import static com.example.zf_android.trade.Constants.TradeIntent.START_DATE;
 import static com.example.zf_android.trade.Constants.TradeIntent.TRADE_RECORD_ID;
 import static com.example.zf_android.trade.Constants.TradeIntent.TRADE_TYPE;
@@ -189,7 +190,7 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
             mRecords = new ArrayList<TradeRecord>();
         }
 
-        // Despared
+        // Deseprate
         mRecordList = (ListView) view.findViewById(R.id.trade_record_list);
         mAdapter = new TradeRecordListAdapter();
         mRecordList.addHeaderView(header);
@@ -263,20 +264,17 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
                 getData();
                 break;
             case R.id.trade_statistic:
-                Intent intent = new Intent(getActivity(), TradeStatisticActivity.class);
-                intent.putExtra(AGENT_ID, MyApplication.user().getAgentId());
-                intent.putExtra(SON_AGENT_ID, MyApplication.user().getAgentUserId());
-                intent.putExtra(TRADE_TYPE, mTradeType);
-                intent.putExtra(TRADE_TYPE, mTradeType);
-                intent.putExtra(CLIENT_NUMBER, tradeClientName);
-                intent.putExtra(START_DATE, tradeStartDate);
-                intent.putExtra(END_DATE, tradeEndDate);
-                startActivity(intent);
+
+                getStatistic();
                 break;
         }
     }
 
     public void getData() {
+
+        if(!check()) {
+            return;
+        }
 
         Map<String, Object> params = new HashMap<String, Object>();
 
@@ -290,6 +288,39 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
         activity.getData(params);
     }
 
+    public void getStatistic() {
+
+        if(!check()) {
+            return;
+        }
+
+        Intent intent = new Intent(getActivity(), TradeStatisticActivity.class);
+        intent.putExtra(AGENT_ID, MyApplication.user().getAgentId());
+        intent.putExtra(SON_AGENT_ID, MyApplication.user().getAgentUserId());
+        intent.putExtra(TRADE_TYPE, mTradeType);
+        intent.putExtra(TRADE_TYPE, mTradeType);
+        intent.putExtra(CLIENT_NUMBER, tradeClientName);
+        intent.putExtra(START_DATE, tradeStartDate);
+        intent.putExtra(END_DATE, tradeEndDate);
+        startActivity(intent);
+    }
+
+    private boolean check() {
+        if (TextUtils.isEmpty(tradeClientName)) {
+            CommonUtil.toastShort(getActivity(), "请选择终端号");
+            return false;
+        }
+        if (TextUtils.isEmpty(tradeStartDate)) {
+            CommonUtil.toastShort(getActivity(), "请选择开始时间");
+            return false;
+        }
+        if (TextUtils.isEmpty(tradeStartDate)) {
+            CommonUtil.toastShort(getActivity(), "请选择结束时间");
+            return false;
+        }
+        return true;
+    }
+
     /**
      * enable or disable the buttons
      *
@@ -297,9 +328,7 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
      * @return
      */
     private void toggleButtons() {
-        boolean shouldEnable = !TextUtils.isEmpty(tradeClientName)
-                && !TextUtils.isEmpty(tradeStartDate)
-                && !TextUtils.isEmpty(tradeEndDate);
+        boolean shouldEnable = true;
         mTradeSearch.setEnabled(shouldEnable);
         mTradeStatistic.setEnabled(shouldEnable);
     }

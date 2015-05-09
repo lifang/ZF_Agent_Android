@@ -44,6 +44,42 @@
         android:textColor="@color/white"
         android:textSize="17sp" />
 
+    <!-- terminal list  -->
+    <ImageView
+        android:id="@+id/iv_search_icon_terminal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="11dp"
+        android:visibility="gone"
+        android:src="@drawable/search_bg"
+        />
+
+    <!-- order list  -->
+    <ImageView
+        android:id="@+id/iv_search_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="48dp"
+        android:visibility="gone"
+        android:src="@drawable/search_bg"
+        />
+    <ImageView
+        android:id="@+id/iv_shopcart_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="11dp"
+        android:layout_marginBottom="4dp"
+        android:visibility="gone"
+        android:src="@drawable/shopcart"
+        />
+
+
     <ImageView
         android:id="@+id/search"
         android:layout_width="wrap_content"

@@ -17,12 +17,14 @@ import com.examlpe.zf_android.util.XListView;
 import com.examlpe.zf_android.util.XListView.IXListViewListener;
 import com.example.zf_android.Config;
 import com.example.zf_android.R;
+import com.example.zf_android.activity.SearchFormCommon;
 import com.example.zf_android.trade.entity.TerminalItem;
 import com.example.zf_android.trade.widget.MyTabWidget;
 import com.example.zf_zandroid.adapter.TerminalAdapter;
 import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
+import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
 
 import java.util.ArrayList;
@@ -47,6 +49,8 @@ public class Terminal extends BaseActivity implements IXListViewListener,
     private TerminalAdapter myAdapter;
     List<TerminalItem> myList = new ArrayList<TerminalItem>();
     List<TerminalItem> moreList = new ArrayList<TerminalItem>();
+
+    private String keys;
 
     private Spinner spinnerState;
     private String[] state= {"选择终端状态","已开通","部分开通","未开通","已注销","已停用"};
@@ -85,6 +89,9 @@ public class Terminal extends BaseActivity implements IXListViewListener,
         btn_bind_terminal = (Button) findViewById(R.id.btn_bind_terminal);
         btn_bind_terminal.setOnClickListener(this);
 
+        show("iv_search_icon_terminal");
+        findViewById(R.id.iv_search_icon_terminal).setOnClickListener(this);
+
         new TitleMenuUtil(Terminal.this, "终端管理").show();
         myAdapter = new TerminalAdapter(Terminal.this, myList);
         eva_nodata = (LinearLayout) findViewById(R.id.eva_nodata);
@@ -117,6 +124,7 @@ public class Terminal extends BaseActivity implements IXListViewListener,
     public void onRefresh() {
         page = 1;
         myList.clear();
+        myAdapter.notifyDataSetChanged();
         getData();
     }
 
@@ -155,6 +163,9 @@ public class Terminal extends BaseActivity implements IXListViewListener,
         if (status != 0) {
             params.put("status", status);
         }
+        if (null != keys) {
+            params.put("serialNum", keys);
+        }
         params.put("page", page);
         params.put("rows", rows);
         String strParams = params.toString();
@@ -176,6 +187,13 @@ public class Terminal extends BaseActivity implements IXListViewListener,
                 startActivity(i2);
 
                 break;
+            case R.id.iv_search_icon_terminal:
+                Intent i3 = new Intent(context, SearchFormCommon.class);
+                i3.putExtra("keys", keys);
+                i3.putExtra("save_key", "TerminalKeyHistory");
+                i3.putExtra("hint_text", "输入终端号");
+                startActivityForResult(i3, Constants.REQUEST_CODE);
+                break;
             default:
                 break;
         }
@@ -190,6 +208,11 @@ public class Terminal extends BaseActivity implements IXListViewListener,
         myList.addAll(event.getList());
         Xlistview.setPullLoadEnable(event.getList().size() >= rows);
         handler.sendEmptyMessage(0);
+    }
+
+    public void onEventMainThread(Events.GoodsDoSearchCompleteEvent event) {
+        keys = event.getKeys();
+        onRefresh();
     }
 
 }

@@ -17,7 +17,6 @@ import com.examlpe.zf_android.util.Tools;
 import com.examlpe.zf_android.util.XListView;
 import com.example.zf_android.Config;
 import com.example.zf_android.R;
-import com.example.zf_android.activity.AllProduct;
 import com.example.zf_android.activity.SearchFormActivity;
 import com.example.zf_android.entity.PosEntity;
 import com.example.zf_zandroid.adapter.PosAdapter;
@@ -100,7 +99,6 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
 
         // 准备需要监听Click的数据
         HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{
-            put("titleback_linear_back", AllProduct.class);
         }};
         this.setClickableMap(clickableMap);
         this.bindClickListener();
@@ -110,6 +108,13 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
 	}
 
     private void initView() {
+
+        findViewById(R.id.titleback_linear_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         findViewById(R.id.serch_edit).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -12,17 +12,20 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.examlpe.zf_android.util.Tools;
 import com.examlpe.zf_android.util.XListView;
 import com.examlpe.zf_android.util.XListView.IXListViewListener;
 import com.example.zf_android.Config;
 import com.example.zf_android.R;
+import com.example.zf_android.activity.SearchFormCommon;
 import com.example.zf_android.entity.OrderEntity;
 import com.example.zf_android.trade.widget.MyTabWidget;
 import com.example.zf_zandroid.adapter.OrderAdapter;
 import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
+import com.posagent.activities.goods.GoodsList;
 import com.posagent.events.Events;
 import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
@@ -41,6 +44,7 @@ public class OrderList extends BaseActivity implements IXListViewListener,
 {
 
     static final String TAG = "OrderList";
+    private String keys;
 
     private XListView Xlistview;
     private MyTabWidget mTabWidget;
@@ -90,6 +94,12 @@ public class OrderList extends BaseActivity implements IXListViewListener,
     }
 
     private void initView() {
+
+        //icons
+        show("iv_shopcart_icon");
+        show("iv_search_icon");
+        findViewById(R.id.iv_search_icon).setOnClickListener(this);
+        findViewById(R.id.iv_shopcart_icon).setOnClickListener(this);
 
         mTabWidget = (MyTabWidget) findViewById(R.id.tab_widget);
         mTabWidget.setOnTabSelectedListener(this);
@@ -171,6 +181,7 @@ public class OrderList extends BaseActivity implements IXListViewListener,
     public void onRefresh() {
         page = 1;
         myList.clear();
+        myAdapter.notifyDataSetChanged();
         getData();
     }
 
@@ -212,6 +223,9 @@ public class OrderList extends BaseActivity implements IXListViewListener,
         if (q > 0) {
             params.put("q", q);
         }
+        if (!StringUtil.replaceBlank(keys).equals("")) {
+            params.put("search", keys);
+        }
         params.put("page", page);
         params.put("rows", rows);
         String strParams = params.toString();
@@ -222,8 +236,27 @@ public class OrderList extends BaseActivity implements IXListViewListener,
 
     @Override
     public void onClick(View v) {
-        // 特殊 onclick 处理，如有特殊处理，
-        // 则直接 return，不再调用 super 处理
+
+        switch (v.getId()) {
+            case R.id.iv_search_icon:
+                Intent i = new Intent(context, SearchFormCommon.class);
+                i.putExtra("keys", keys);
+                startActivityForResult(i, Constants.REQUEST_CODE);
+                break;
+            case R.id.iv_shopcart_icon:
+                Intent i2 =new Intent(context, GoodsList.class);
+
+                if (p == Constants.Goods.BuyTypePigou) {
+                    i2.putExtra("buyType", Constants.Goods.OrderTypePigou);
+                } else {
+                    i2.putExtra("buyType", Constants.Goods.OrderTypeDaigou);
+                }
+
+                startActivity(i2);
+                break;
+
+        }
+
         super.onClick(v);
     }
 
@@ -254,6 +287,11 @@ public class OrderList extends BaseActivity implements IXListViewListener,
             onRefresh();
         }
 
+    }
+
+    public void onEventMainThread(Events.GoodsDoSearchCompleteEvent event) {
+        keys = event.getKeys();
+        onRefresh();
     }
 
     private void updateSpinner() {

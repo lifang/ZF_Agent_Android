@@ -3,13 +3,13 @@ package com.posagent.activities.terminal;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.posagent.MyApplication;
@@ -88,17 +88,20 @@ public class TerminalChoosePos extends BaseActivity {
     }
 
     private boolean check() {
-        String str = StringUtil.replaceBlank(et_min_price.getText().toString());
-        if(str.length() == 0){
-            toast("请输入最低价格");
-            return false;
+
+        if (
+                !TextUtils.isEmpty(et_min_price.getText().toString()) ||
+                !TextUtils.isEmpty(et_max_price.getText().toString()) ||
+                !TextUtils.isEmpty(posName) ||
+                channelId > 0
+            )
+        {
+            return true;
         }
-        str = StringUtil.replaceBlank(et_max_price.getText().toString());
-        if(str.length() == 0){
-            toast("请输入最高价格");
-            return false;
-        }
-        return true;
+
+        toast("至少选择一项");
+
+        return false;
     }
 
 
@@ -110,11 +113,21 @@ public class TerminalChoosePos extends BaseActivity {
         JsonParams params = new JsonParams();
         params.put("agentId", MyApplication.user().getAgentId());
         params.put("title", posName);
-        params.put("channelsId", channelId);
+
+        if (channelId > 0) {
+            params.put("channelsId", channelId);
+        }
         params.put("page", 1);
         params.put("rows", 100);
-        params.put("minPrice", Integer.parseInt(et_min_price.getText().toString()));
-        params.put("maxPrice", Integer.parseInt(et_max_price.getText().toString()));
+
+        if (!TextUtils.isEmpty(et_min_price.getText().toString())) {
+            params.put("minPrice", Integer.parseInt(et_min_price.getText().toString()));
+        }
+
+        if (!TextUtils.isEmpty(et_max_price.getText().toString())) {
+            params.put("maxPrice", Integer.parseInt(et_max_price.getText().toString()));
+        }
+
         String strParams = params.toString();
         Events.BatchTerminalNumberPosEvent event = new Events.BatchTerminalNumberPosEvent();
         event.setParams(strParams);

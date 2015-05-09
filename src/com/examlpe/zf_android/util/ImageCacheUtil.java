@@ -1,11 +1,5 @@
 package com.examlpe.zf_android.util;
 
-import java.io.File;
-
-import com.example.zf_android.R;
-
- 
-
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Environment;
@@ -13,8 +7,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
-import android.widget.LinearLayout.LayoutParams;
+
+import com.example.zf_android.R;
+
+import java.io.File;
 
 import cn.trinea.android.common.entity.FailedReason;
 import cn.trinea.android.common.service.impl.ImageCache;
@@ -105,8 +101,7 @@ public class ImageCacheUtil {
 			@Override
 			public void onGetNotInCache(String imageUrl, View view) {
 				if (view != null && view instanceof ImageView) {
-					//((ImageView) view).setImageResource(R.drawable.moren);
-					((ImageView) view).setBackgroundResource(R.drawable.moren);
+					((ImageView) view).setBackgroundResource(R.drawable.logo_agent);
 				}
 			}
 		};

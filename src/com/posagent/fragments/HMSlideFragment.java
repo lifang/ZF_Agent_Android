@@ -28,6 +28,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by holin on 4/1/15.
@@ -52,7 +55,7 @@ public class HMSlideFragment extends Fragment {
 
 
     Timer timer;
-    int page = 1;
+    int page = 0;
 
 
 
@@ -122,7 +125,17 @@ public class HMSlideFragment extends Fragment {
         myList= list;
         handler.sendEmptyMessage(0);
 
-        pageSwitcher(2);
+        ScheduledExecutorService worker =
+                Executors.newSingleThreadScheduledExecutor();
+
+        Runnable task = new Runnable() {
+            public void run() {
+                pageSwitcher(2);
+            }
+        };
+        worker.schedule(task, 1, TimeUnit.SECONDS);
+
+
     }
 
     private void initIndicator(){

@@ -131,7 +131,7 @@ public class HMSlideFragment extends Fragment {
         for (int i = 0; i < this.myList.size(); i++) {
             imgView = new ImageView(context);
 
-            LinearLayout.LayoutParams params_linear = new LinearLayout.LayoutParams(20, 20);
+            LinearLayout.LayoutParams params_linear = new LinearLayout.LayoutParams(15, 15);
             params_linear.setMargins(7, 20, 7, 20);
             imgView.setLayoutParams(params_linear);
 

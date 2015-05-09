@@ -204,10 +204,7 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Intent i = new Intent (GoodsList.this, GoodsDetail.class);
-                i.putExtra("id", myList.get(position - 1).getId());
-                i.putExtra("buyType", buyType);
-                startActivity(i);
+           goDetail(myList.get(position - 1).getId());
             }
         });
 
@@ -388,5 +385,11 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
         onRefresh();
     }
 
+    private void goDetail(int id) {
+        Intent i = new Intent (GoodsList.this, GoodsDetail.class);
+        i.putExtra("id", id);
+        i.putExtra("buyType", buyType);
+        startActivity(i);
+    }
 	 
 }

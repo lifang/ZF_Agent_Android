@@ -48,6 +48,7 @@
     <!-- 主题色 -->
     <color name="ff9900">#ff9900</color>
     <color name="f26e26">#f26e26</color>
+    <color name="price">#f26e26</color>
     <color name="de4747">#de4747</color>
     <color name="t04b900">#04b900</color>
     <color name="t0094d4">#0094d4</color>

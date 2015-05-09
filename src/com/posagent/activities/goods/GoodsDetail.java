@@ -1,8 +1,10 @@
 package com.posagent.activities.goods;
 
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -24,6 +26,7 @@ import com.example.zf_android.entity.OtherRateEntity;
 import com.example.zf_android.entity.PayChannelEntity;
 import com.example.zf_android.entity.PayChannelInfoEntity;
 import com.example.zf_android.entity.PicEntity;
+import com.example.zf_android.entity.RelativeShopEntity;
 import com.example.zf_android.entity.StandardRateEntity;
 import com.example.zf_android.entity.TDateEntity;
 import com.posagent.MyApplication;
@@ -52,7 +55,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
 
     ImageView iv_factory_logo, iv_factory_info;
 
-    LinearLayout ll_pay_channel, ll_support_areas, ll_buyType;
+    LinearLayout ll_pay_channel, ll_support_areas, ll_buyType, ll_relative_list_container;
 
     TableLayout tl_standard_rates, tl_tDates, tl_other_rate;
 
@@ -117,6 +120,8 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         tv_opening_requirement = (TextView) findViewById(R.id.tv_opening_requirement);
         tv_support_cancel = (TextView) findViewById(R.id.tv_support_cancel);
         btn_confirm_order = (Button) findViewById(R.id.btn_confirm_order);
+
+        ll_relative_list_container = (LinearLayout) findViewById(R.id.ll_relative_list_container);
 
         ll_buyType = (LinearLayout) findViewById(R.id.ll_buyType);
         if (buyType != Constants.Goods.OrderTypePigou) {
@@ -234,6 +239,9 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
     }
 
     private void updateInfo() {
+        // relative shop list
+        updateRelativeShopList();
+
         // slider
         ArrayList<PicEntity> list = new ArrayList<PicEntity>();
         int len = entity.getGoodPics().size();
@@ -304,7 +312,15 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         if (payChannelList != null) {
             ll_pay_channel.removeAllViews();
 
+            int idx = 0;
+
             for (final PayChannelEntity channel: payChannelList) {
+
+                idx++;
+
+                if (idx > 3) {
+                    return;
+                }
 
                 final PayChannelEntity mychannel = channel;
 
@@ -502,6 +518,75 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
 
     }
 
+    private void updateRelativeShopList() {
+        int len = entity.getRelativeShopList().size();
+        if (len < 1) {
+            return;
+        }
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
+        width = width / 2 - 40;
+
+
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, 360);
+        lp.topMargin = 30;
+
+        LinearLayout.LayoutParams itemLp = new LinearLayout.LayoutParams(width,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        itemLp.leftMargin = 25;
+
+        LinearLayout ll = new LinearLayout(this);
+        ll.setLayoutParams(lp);
+        View item = null;
+        for (int i = 0; i < len; i++) {
+
+            if ( i > 0 && i % 2 == 0 ) {
+                ll_relative_list_container.addView(ll);
+                ll = new LinearLayout(this);
+                ll.setLayoutParams(lp);
+            }
+
+            final RelativeShopEntity shopEntity = entity.getRelativeShopList().get(i);
+            item = getLayoutInflater().inflate(R.layout.relative_item, null);
+
+            item.setLayoutParams(itemLp);
+
+            TextView tv = (TextView)item.findViewById(R.id.tv_title);
+            tv.setText(shopEntity.getTitle());
+
+            tv = (TextView)item.findViewById(R.id.tv_price);
+            tv.setText("￥" + StringUtil.priceShow(shopEntity.getRetail_price()));
+
+            tv = (TextView)item.findViewById(R.id.tv_amount);
+            tv.setText("已售" + shopEntity.getVolume_number());
+
+            ImageView iv_face = (ImageView)item.findViewById(R.id.iv_face);
+
+            ImageCacheUtil.IMAGE_CACHE.get(shopEntity.getUrl_path(), iv_face);
+
+            item.findViewById(R.id.ll_item).setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    goDetail(shopEntity.getId());
+                }
+            });
+
+
+            ll.addView(item);
+
+        }
+
+        if ( len % 2 != 0 ) {
+            ll_relative_list_container.addView(ll);
+        }
+    }
+
 
     private void initSlider(ArrayList<PicEntity> list) {
         HMSlideFragment slideFragment = (HMSlideFragment) getFragmentManager().findFragmentById(R.id.headlines_fragment);
@@ -534,5 +619,14 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         finalPrice = price;
         setText("tv_price", "￥" + StringUtil.priceShow(price));
         setText("tv_origin_price", "原价￥" + StringUtil.priceShow(originPrice));
+    }
+
+
+
+    private void goDetail(int id) {
+        Intent i = new Intent (context, GoodsDetail.class);
+        i.putExtra("id", id);
+        i.putExtra("buyType", buyType);
+        startActivity(i);
     }
 }

@@ -63,7 +63,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
         editor = mySharedPreferences.edit();
 
         login_text_forget = (TextView) findViewById(R.id.login_text_forget);
-        //login_text_forget.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
         login_text_forget.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -76,8 +75,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
         msg = (LinearLayout) findViewById(R.id.msg);
         login_info = (TextView) findViewById(R.id.login_info);
 
-        zhuche_ll= (LinearLayout) findViewById(R.id.zhuche_ll);
-        zhuche_ll.setOnClickListener(this);
+        findViewById(R.id.zhuche_ll).setOnClickListener(this);
 
         login_edit_name = (EditText) findViewById(R.id.login_edit_name);
         login_edit_pass = (EditText) findViewById(R.id.login_edit_pass);

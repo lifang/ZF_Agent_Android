@@ -62,6 +62,6 @@
             android:background="@drawable/bg_blue_shape"
             android:textColor="@color/ffffff"
             android:visibility="gone"
-            android:text="再次代购" />
+            android:text="再次采购" />
     </LinearLayout>
 </LinearLayout>

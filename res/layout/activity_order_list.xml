@@ -11,6 +11,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:visibility="gone"
         android:background="@color/F3F2F2">
 
         <com.example.zf_android.trade.widget.MyTabWidget
@@ -23,15 +24,14 @@
             android:layout_marginBottom="12dp"/>
     </FrameLayout>
 
+    <View style="@style/Divider"
+        android:layout_marginTop="10dp"
+        />
     <LinearLayout
         android:id="@+id/ll_spinnerkind"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:orientation="vertical">
-        <View android:layout_width="fill_parent"
-            android:background="@color/Viewc2"
-            android:layout_height="1dp"/>
         <LinearLayout android:layout_height="34dp"
             android:layout_width="fill_parent"
             android:orientation="horizontal"
@@ -53,11 +53,11 @@
     </LinearLayout>
 
 
-    <View android:layout_width="fill_parent"
-        android:background="@color/Viewc2"
+    <View style="@style/Divider"
         android:layout_marginTop="10dp"
-        android:layout_height="1dp"/>
-    <LinearLayout android:layout_height="34dp"
+        />
+    <LinearLayout
+        android:layout_height="34dp"
         android:layout_width="fill_parent"
         android:orientation="horizontal"
         android:background="@color/white"

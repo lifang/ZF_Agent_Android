@@ -57,12 +57,12 @@ public class OrderList extends BaseActivity implements IXListViewListener,
     List<OrderEntity> moreList = new ArrayList<OrderEntity>();
     Spinner spinnerState, spinnerKinds;
 
-    private String[] state= {"选择订单状态","全部","未付款","已付订金","已完成","已取消"};
-    private String[] kinds = {"选择订单类型","全部","代购买","代租赁"};
+    private String[] state= {"选择订单状态","全部","未付款","已付款","已发货","已取消"};
+    private String[] kinds = {"选择订单类型","全部","采购买","代租赁"};
 
 
     //params data
-    private int p = 5;
+    private int p = 0; //批购 5 采购 0
     private int q = 0;
 
     private Handler handler = new Handler() {
@@ -142,6 +142,8 @@ public class OrderList extends BaseActivity implements IXListViewListener,
         ArrayAdapter<String> adapter_kinds = new ArrayAdapter<String>(this,  android.R.layout.simple_spinner_item, kinds);
         spinnerKinds.setAdapter(adapter_kinds);
         spinnerKinds.setOnItemSelectedListener(this);
+
+        updateSpinner();
     }
 
     @Override
@@ -152,8 +154,10 @@ public class OrderList extends BaseActivity implements IXListViewListener,
         } else {
             if (position == 2) {
                 p = Constants.Goods.BuyTypeDaigou;
-            } else {
+            } else if (position == 3) {
                 p = Constants.Goods.BuyTypeDaizulin;
+            } else {
+                p = 0;
             }
         }
 

@@ -302,7 +302,7 @@
                         android:layout_marginLeft="10dp"
                         android:singleLine="true"
                         android:text=""
-                        android:hint="代购"
+                        android:hint="采购"
                         android:textColor="@color/text292929"
                         android:background="@color/white"
                         android:gravity="center_vertical"

@@ -76,22 +76,22 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
                     tv_time.setText("订单日期 ：" + entity.getOrder_createTime());
 
 
-                    tv_reperson.setText("收件人 ： " + entity.getOrder_receiver());
+                    tv_reperson.setText("收 件 人 ： " + entity.getOrder_receiver());
                     tv_tel.setText(entity.getOrder_receiver_phone());
                     tv_adress.setText("收货地址 ：" + entity.getOrder_address());
                     tv_ly.setText("留言 ：" + entity.getOrder_comment());
-                    tv_fplx.setText(entity.getOrder_invoce_type().equals("1") ? "发票类型 : 个人" : "发票类型 : 公司");
-                    fptt.setText("发票抬头：" + entity.getOrder_invoce_info());
+                    tv_fplx.setText(entity.getOrder_invoce_type().equals("1") ? "发票类型 ：个人" : "发票类型 ：公司");
+                    fptt.setText("发票抬头 ：" + entity.getOrder_invoce_info());
 
                     if (p == Constants.Goods.BuyTypePigou) {
                         //show hide elements
                         hide("btn_view_terminals");
                         hide("ll_header_daigou");
                         show("ll_header_pigou");
-                        setText("tv_order_type", "订购类型：批购");
+                        setText("tv_order_type", "订购类型 ：批购");
 
                         tv_dingjin.setText("定金总金额 ：￥ " + StringUtil.priceShow(entity.getTotal_dingjin()));
-                        tv_gj.setText("共计 ：" + entity.getTotal_quantity() + "件");
+                        tv_gj.setText("共计" + entity.getTotal_quantity() + "件商品");
                         tv_dingjin_payed.setText("已支付定金 ：￥ " + StringUtil.priceShow(entity.getZhifu_dingjin()));
                         tv_yifahuo.setText("已发货数量 ：" + entity.getShipped_quantity());
                         int left = Integer.parseInt(entity.getTotal_quantity()) - Integer.parseInt(entity.getShipped_quantity());
@@ -99,15 +99,13 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
 
                     } else {
                         //show hide
-                        show("btn_view_terminals");
+                        hide("btn_view_terminals");
                         show("ll_header_daigou");
                         hide("ll_header_pigou");
-                        setText("tv_order_type", "订购类型：代购");
-                        setText("tv_guishu", "归属用户：\n" + entity.getGuishu_user());
+                        setText("tv_order_type", "订购类型 ：采购");
+                        setText("tv_guishu", "归属用户：" + entity.getGuishu_user());
 
-
-                        tv_gj.setText("共计 ：" + entity.getOrder_totalNum() + "件");
-
+                        tv_gj.setText("共计" + entity.getOrder_totalNum() + "件商品");
 
                     }
 
@@ -132,7 +130,7 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
         }
         p=getIntent().getIntExtra("p", 1);
         if (p != Constants.Goods.BuyTypePigou) {
-            new TitleMenuUtil(OrderDetail.this, "代购订单详情").show();
+            new TitleMenuUtil(OrderDetail.this, "采购订单详情").show();
         } else {
             new TitleMenuUtil(OrderDetail.this, "批购订单详情").show();
         }

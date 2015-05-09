@@ -45,7 +45,7 @@
 
     <string-array name="order_kind_tabs">
         <item>批购订单</item>
-        <item>代购订单</item>
+        <item>采购订单</item>
     </string-array>
 
 	<string name="trade_client">请选择终端号</string>

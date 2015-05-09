@@ -115,10 +115,10 @@ public class StockDetail extends BaseActivity implements IXListViewListener {
         tv_brand.setText(entity.getGood_brand());
         tv_goods_name.setText(entity.getGoodname());
         tv_paychannel.setText(entity.getPaychannel());
-        tv_totalCount.setText("总库存\n" + entity.getTotalCount());
-        tv_agentCount.setText("代理商库存\n" + entity.getAgentCount());
-        tv_openCount.setText("已开通数量\n" + entity.getOpenCount());
-        tv_historyCount.setText("历史进货数量\n" + entity.getHoitoryCount());
+        tv_totalCount.setText("总库存\n" + entity.getTotalCount() + "件");
+        tv_agentCount.setText("代理商库存\n" + entity.getAgentCount() + "件");
+        tv_openCount.setText("已开通数量\n" + entity.getOpenCount() + "件");
+        tv_historyCount.setText("历史进货数量\n" + entity.getHoitoryCount() + "件");
 
         ImageCacheUtil.IMAGE_CACHE.get(entity.getPicurl(), iv_face);
 

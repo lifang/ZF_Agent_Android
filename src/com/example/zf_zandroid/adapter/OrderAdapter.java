@@ -134,7 +134,7 @@ public class OrderAdapter extends BaseAdapter{
                 }
                 break;
             case Constants.Order.StatusSent:
-                holder.tv_status.setText("已完成");
+                holder.tv_status.setText("已发货");
                 break;
             case Constants.Order.StatusComment:
                 holder.tv_status.setText("已评价");
@@ -159,6 +159,9 @@ public class OrderAdapter extends BaseAdapter{
             convertView.findViewById(R.id.ll_heji).setVisibility(View.VISIBLE);
             convertView.findViewById(R.id.tv_origin_price).setVisibility(View.VISIBLE);
         } else {
+
+            holder.tv_price.setText("￥"+ StringUtil.priceShow(entity.getOrder_goodsList().get(0).getGood_price()));
+
             convertView.findViewById(R.id.ll_daigou).setVisibility(View.VISIBLE);
             convertView.findViewById(R.id.ll_pigou).setVisibility(View.GONE);
             convertView.findViewById(R.id.ll_heji).setVisibility(View.GONE);

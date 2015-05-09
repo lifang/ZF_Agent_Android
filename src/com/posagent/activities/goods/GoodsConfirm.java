@@ -1,6 +1,7 @@
 package com.posagent.activities.goods;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -125,6 +126,10 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
         comment_et=(EditText) findViewById(R.id.comment_et);
 
         setText("tv_origin_price", "原价 ￥" + StringUtil.priceShow(originPrice));
+        TextView tv = (TextView) findViewById(R.id.tv_origin_price);
+        tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
+
         setText("retail_price", "￥" + StringUtil.priceShow(price));
 
 
@@ -192,7 +197,7 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
             hide("tv_origin_price");
             ll_choose_users.setVisibility(View.VISIBLE);
             if (buyType == Constants.Goods.OrderTypeDaigou) {
-                setText("titleback_text_title", "代购买订单确认");
+                setText("titleback_text_title", "采购买订单确认");
             } else if (buyType == Constants.Goods.OrderTypeDaizulin) {
                 setText("tv_quantity_name", "租赁数量（件）");
                 setText("titleback_text_title", "代租赁订单确认");

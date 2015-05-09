@@ -63,6 +63,8 @@ public class OrderDetail_PosAdapter extends BaseAdapter{
         }
 
         holder.content.setText(entity.getGood_name());
+
+        holder.tv_x.setText("X " + entity.getGood_num());
         holder.tv_price.setText("￥ "+ StringUtil.priceShow(entity.getGood_batch_price()));
         holder.tv_origin_price.setText("￥ "+ StringUtil.priceShow(entity.getGood_price()));
         ImageCacheUtil.IMAGE_CACHE.get(entity.getGood_logo(), holder.evevt_img);

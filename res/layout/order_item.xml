@@ -91,7 +91,7 @@
                 android:maxLines="1"
                 android:text="品牌型号"
                 android:textColor="@color/text292929"
-                android:textSize="11sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/tv_origin_price"

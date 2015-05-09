@@ -126,7 +126,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         ll_buyType = (LinearLayout) findViewById(R.id.ll_buyType);
         if (buyType != Constants.Goods.OrderTypePigou) {
             ll_buyType.setVisibility(View.VISIBLE);
-            btn_confirm_order.setText("立即代购");
+            btn_confirm_order.setText("立即采购");
             setText("tv_price_name", "价格");
             hide("tv_origin_price");
             hide("tv_quantity_name");

@@ -71,7 +71,17 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
                     tv_real_pay.setText("实付金额 ：￥ " + StringUtil.priceShow(entity.getOrder_totalPrice()));
                     tv_real_pay_daigou.setText("实付金额 ：￥ " + StringUtil.priceShow(entity.getOrder_totalPrice()));
                     tv_ddbh.setText("订单编号 ：" + entity.getOrder_number());
-                    tv_pay.setText("支付方式 ：" + entity.getOrder_payment_type());
+
+                    String kind = "其他";
+                    if (entity.getOrder_payment_type().equals("1")) {
+                        kind = "支付宝";
+                    } else if (entity.getOrder_payment_type().equals("2")) {
+                        kind = "银联";
+                    } else if (entity.getOrder_payment_type().equals("3")) {
+                        kind = "现金";
+                    }
+
+                    tv_pay.setText("支付方式 ：" + kind);
                     tv_money.setText("实付金额 ：￥" + StringUtil.priceShow(entity.getOrder_totalPrice()));
                     tv_time.setText("订单日期 ：" + entity.getOrder_createTime());
 
@@ -99,15 +109,25 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
 
                     } else {
                         //show hide
-                        hide("btn_view_terminals");
+                        switch (status) {
+                            case Constants.Order.StatusPayed:
+                            case Constants.Order.StatusSent:
+                            case Constants.Order.StatusComment:
+                                show("btn_view_terminals");
+                                break;
+                            default:
+                                hide("btn_view_terminals");
+                        }
                         show("ll_header_daigou");
                         hide("ll_header_pigou");
                         setText("tv_order_type", "订购类型 ：采购");
-                        setText("tv_guishu", "归属用户：" + entity.getGuishu_user());
+                        setText("tv_guishu", "归属用户：\n" + entity.getGuishu_user());
 
                         tv_gj.setText("共计" + entity.getOrder_totalNum() + "件商品");
 
                     }
+
+
 
 
                     ViewHelper.initOrderActions(getWindow().getDecorView().findViewById(android.R.id.content), entity.getOrder_status(), p);
@@ -140,6 +160,9 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
     }
 
     private void initView() {
+
+        findViewById(R.id.btn_view_terminals).setOnClickListener(this);
+
         tv_money=(TextView) findViewById(R.id.tv_money);
         tv_status_daigou=(TextView) findViewById(R.id.tv_status_daigou);
         tv_real_pay_daigou=(TextView) findViewById(R.id.tv_real_pay_daigou);
@@ -315,7 +338,13 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_view_terminals:
-//                Toast.makeText(getApplicationContext(), "请先付款···", Toast.LENGTH_LONG).show();
+                if (status == Constants.Order.StatusSent) {
+                    Intent i = new Intent(context, TerminalList.class);
+                    i.putExtra("terminals", orderDetailEntity.getTerminals());
+                    startActivity(i);
+                } else {
+                    toast("没有终端");
+                }
                 break;
             default:
                 break;

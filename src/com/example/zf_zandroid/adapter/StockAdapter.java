@@ -72,7 +72,7 @@ public class StockAdapter extends BaseAdapter{
             holder = (ViewHolder)convertView.getTag();
         }
 
-        holder.tv_brand.setText(entity.getGood_brand());
+        holder.tv_brand.setText(entity.getGood_brand() + " " + entity.getModel_number());
         holder.tv_goods_name.setText(entity.getGoodname());
         holder.tv_paychannel.setText(entity.getPaychannel());
         holder.tv_totalCount.setText("总库存\n" + entity.getTotalCount() + "件");

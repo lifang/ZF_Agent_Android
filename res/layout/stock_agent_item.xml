@@ -70,7 +70,7 @@
                         android:layout_width="wrap_content"
                         android:gravity="center_horizontal"
                         android:textSize="10dp"
-                        android:textColor="#cccccc"
+                        android:textColor="@color/tmc"
                         />
 
                     <TextView
@@ -79,7 +79,7 @@
                         android:layout_width="wrap_content"
                         android:gravity="center_horizontal"
                         android:textSize="10dp"
-                        android:textColor="#cccccc"
+                        android:textColor="@color/tmc"
                         />
 
 

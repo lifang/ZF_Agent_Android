@@ -60,6 +60,10 @@
             android:name="com.posagent.activities.CommonInputer"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="com.posagent.activities.Webview"
+            android:screenOrientation="portrait" >
+        </activity>
 
         <!-- ====================================================== -->
         <!-- 首页 Activities -->
@@ -105,6 +109,10 @@
         </activity>
         <activity
             android:name="com.posagent.activities.home.LoginActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.posagent.activities.order.TerminalList"
             android:screenOrientation="portrait" >
         </activity>
         <activity

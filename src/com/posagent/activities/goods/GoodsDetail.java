@@ -31,6 +31,7 @@ import com.example.zf_android.entity.StandardRateEntity;
 import com.example.zf_android.entity.TDateEntity;
 import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
+import com.posagent.activities.Webview;
 import com.posagent.events.Events;
 import com.posagent.fragments.HMSlideFragment;
 import com.posagent.utils.Constants;
@@ -115,6 +116,16 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         tv_encrypt_card_way = (TextView) findViewById(R.id.tv_encrypt_card_way);
         iv_factory_logo = (ImageView) findViewById(R.id.iv_factory_logo);
         tv_factory_url = (TextView) findViewById(R.id.tv_factory_url);
+        tv_factory_url.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, Webview.class);
+                i.putExtra("url", tv_factory_url.getText());
+                startActivity(i);
+            }
+        });
+
+
         tv_factory_desc = (TextView) findViewById(R.id.tv_factory_desc);
         tv_goods_desc = (TextView) findViewById(R.id.tv_goods_desc);
         tv_opening_requirement = (TextView) findViewById(R.id.tv_opening_requirement);
@@ -178,7 +189,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
 
         if (v.getId() == R.id.iv_factory_info) {
             Intent i = new Intent(GoodsDetail.this, FactoryInfo.class);
-            i.putExtra("json", gson.toJson(entity.getFactory()));
+            i.putExtra("json", gson.toJson(factory));
             startActivity(i);
         }
 
@@ -190,7 +201,9 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
 
         if (v.getId() == R.id.tv_daigoumai) {
             tv_daigoumai.setBackgroundResource(R.drawable.bg_shape);
+            tv_daigoumai.setTextColor(getResources().getColor(R.color.bgtitle));
             tv_daizulin.setBackgroundResource(R.drawable.bg_gray_shape);
+            tv_daizulin.setTextColor(getResources().getColor(R.color.text535252));
             buyType = Constants.Goods.OrderTypeDaigou;
             updatePrice();
             return;
@@ -198,7 +211,9 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
 
         if (v.getId() == R.id.tv_daizulin) {
             tv_daizulin.setBackgroundResource(R.drawable.bg_shape);
+            tv_daizulin.setTextColor(getResources().getColor(R.color.bgtitle));
             tv_daigoumai.setBackgroundResource(R.drawable.bg_gray_shape);
+            tv_daigoumai.setTextColor(getResources().getColor(R.color.text535252));
             buyType = Constants.Goods.OrderTypeDaizulin;
             updatePrice();
             return;
@@ -259,6 +274,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         goodinfo = entity.getGoodinfo();
         //goodinfo
         tvTitle.setText(goodinfo.getTitle());
+        tv_terminal_kind.setText(goodinfo.getCategory());
         tvSubtitle.setText(goodinfo.getSecond_title());
         tvQuantity.setText("" + goodinfo.getQuantity() + "件");
         tvBrand.setText(goodinfo.getGood_brand());
@@ -281,7 +297,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         payChannelId = paychannelinfo.getId();
         factory = entity.getFactory();
 
-        updateFactory();
+//        updateFactory();
         updateChannelList();
         //pay channel info
         updateChannelInfo();
@@ -339,6 +355,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
 
                 if (channel.getId() == payChannelId) {
                     tv.setBackgroundResource(R.drawable.bg_shape_channel);
+                    tv.setTextColor(getResources().getColor(R.color.bgtitle));
                 } else {
                     tv.setBackgroundResource(R.drawable.bg_gray_shape_channel);
                 }
@@ -431,7 +448,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
                 StandardRateEntity rate = standard_rates.get(i);
                 List<String> list = new ArrayList<String>();
                 list.add(rate.getName());
-                list.add("" + rate.getStandard_rate() + "‰");
+                list.add("" + StringUtil.rateShow(rate.getStandard_rate()) + "‰");
                 list.add(rate.getDescription());
                 TableRow tr = ViewHelper.tableRow(this, list, R.color.tmc, 12, isLast);
                 tl_standard_rates.addView(tr,
@@ -465,7 +482,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
                 TDateEntity rate = tDates.get(i);
                 List<String> list = new ArrayList<String>();
                 list.add(rate.getName());
-                list.add("" + rate.getService_rate() + "‰");
+                list.add("" + StringUtil.rateShow(rate.getService_rate()) + "‰");
                 list.add(rate.getDescription());
                 TableRow tr = ViewHelper.tableRow(this, list, R.color.tmc, 12, isLast);
                 tl_tDates.addView(tr,
@@ -500,7 +517,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
                 OtherRateEntity rate = other_rate.get(i);
                 List<String> list = new ArrayList<String>();
                 list.add(rate.getTrade_value());
-                list.add("" + rate.getTerminal_rate() + "‰");
+                list.add("" +  StringUtil.rateShow(rate.getTerminal_rate()) + "‰");
                 list.add(rate.getDescription());
                 TableRow tr = ViewHelper.tableRow(this, list, R.color.tmc, 12, isLast);
                 tl_other_rate.addView(tr,
@@ -510,7 +527,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         }
 
         if (null != paychannelinfo.getPcfactory()) {
-//            factory = paychannelinfo.getPcfactory();
+            factory = paychannelinfo.getPcfactory();
             updateFactory();
         }
 
@@ -614,7 +631,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         } else if (buyType == Constants.Goods.OrderTypeDaigou) {
             price = goodinfo.getRetail_price() + paychannelinfo.getOpening_cost();
         } else {
-            price = goodinfo.getLease_price() + goodinfo.getLease_deposit() + paychannelinfo.getOpening_cost();
+            price = goodinfo.getLease_deposit() + paychannelinfo.getOpening_cost();
         }
         finalPrice = price;
         setText("tv_price", "￥" + StringUtil.priceShow(price));

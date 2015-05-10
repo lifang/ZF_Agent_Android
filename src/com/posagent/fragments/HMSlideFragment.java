@@ -2,6 +2,7 @@ package com.posagent.fragments;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -23,6 +24,7 @@ import android.widget.RelativeLayout;
 import com.examlpe.zf_android.util.ImageCacheUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.PicEntity;
+import com.posagent.activities.Webview;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -226,6 +228,21 @@ public class HMSlideFragment extends Fragment {
             View view = mList.get(position);
             image = ((ImageView) view.findViewById(R.id.image));
             ImageCacheUtil.IMAGE_CACHE.get(ma.get(position), image);
+
+            if (position < myList.size()) {
+                final PicEntity entity = myList.get(position);
+
+                image.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(context, Webview.class);
+                        i.putExtra("url", entity.getWebsite_url());
+                        startActivity(i);
+                    }
+                });
+            }
+
+
 
             container.removeView(mList.get(position));
             container.addView(mList.get(position));

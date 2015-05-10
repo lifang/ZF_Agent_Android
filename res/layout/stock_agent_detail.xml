@@ -71,14 +71,14 @@
 
             <TextView
                 android:text="终端号"
-                android:layout_width="wrap_content"
+                android:layout_width="160dp"
                 android:gravity="center_horizontal"
 
                 />
 
             <TextView
                 android:text="机型"
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:gravity="center_horizontal"
                 />
 

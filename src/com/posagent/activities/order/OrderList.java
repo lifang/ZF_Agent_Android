@@ -57,8 +57,8 @@ public class OrderList extends BaseActivity implements IXListViewListener,
     List<OrderEntity> moreList = new ArrayList<OrderEntity>();
     Spinner spinnerState, spinnerKinds;
 
-    private String[] state= {"选择订单状态","全部","未付款","已付款","已发货","已取消"};
-    private String[] kinds = {"选择订单类型","全部","采购买","代租赁"};
+    private String[] state= {"选择订单状态","全部","未付款","已付款","已发货","已取消","交易关闭"};
+    private String[] kinds = {"选择订单类型","全部","代采购","代租赁"};
 
 
     //params data
@@ -281,6 +281,8 @@ public class OrderList extends BaseActivity implements IXListViewListener,
 
         if (q == 4) {
             q = 5;
+        } else if (q == 5) {
+            q = 6;
         }
 
         return q;

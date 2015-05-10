@@ -270,6 +270,7 @@
                                     android:textSize="11sp" />
 
                                 <TextView
+                                    android:id="@+id/tv_channel"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="7dp"
@@ -301,7 +302,7 @@
                                     android:textSize="11sp" />
 
                                 <TextView
-                                    android:id="@+id/content2"
+                                    android:id="@+id/tv_model"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="7dp"
@@ -608,7 +609,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="7dp"
 
-                        android:text="我要花票"
+                        android:text="我要发票"
                         android:textColor="@color/text6c6c6c6"
                         android:textSize="11sp" />
 

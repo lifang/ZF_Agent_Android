@@ -64,7 +64,7 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/login_img_pass"
             android:textSize="17sp"
-            android:text="2833761825@qq.com"
+            android:text="betty"
             android:maxWidth="20dp"
             />
         <LinearLayout
@@ -112,7 +112,7 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/login_img_pass1"
             android:textSize="17sp"
-            android:text="123456"
+            android:text="111111"
             android:inputType="textPassword"
             />
         <LinearLayout

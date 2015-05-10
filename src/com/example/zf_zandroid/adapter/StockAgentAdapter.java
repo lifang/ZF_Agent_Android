@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.examlpe.zf_android.util.StringUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.StockAgentEntity;
 
@@ -63,7 +64,7 @@ public class StockAgentAdapter extends BaseAdapter{
         holder.tv_historyCount.setText(String.valueOf(entity.getHoitoryCount()));
         holder.tv_openCount.setText(String.valueOf(entity.getOpenCount()));
         holder.tv_lastPrepareTime.setText("上次配送日期：" + String.valueOf(entity.getLastPrepareTime()));
-        holder.tv_lastOpenTime.setText("上次开通日期：" + String.valueOf(entity.getLastOpenTime()));
+        holder.tv_lastOpenTime.setText("上次开通日期：" + StringUtil.clean(entity.getLastOpenTime()));
 
 
         return convertView;

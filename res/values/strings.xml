@@ -48,6 +48,13 @@
         <item>采购订单</item>
     </string-array>
 
+    <string-array name="order_pay_kind">
+        <item></item>
+        <item>支付宝</item>
+        <item>银联</item>
+        <item>现金</item>
+    </string-array>
+
 	<string name="trade_client">请选择终端号</string>
 	<string name="trade_start_date">请选择开始时间</string>
 	<string name="trade_end_date">请选择结束时间</string>

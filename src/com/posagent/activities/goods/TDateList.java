@@ -6,6 +6,7 @@ import android.view.View.OnClickListener;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
+import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.TDateEntity;
@@ -68,7 +69,7 @@ public class TDateList extends BaseActivity implements OnClickListener {
                 TDateEntity rate = tDates.get(i);
                 List<String> list = new ArrayList<String>();
                 list.add(rate.getName());
-                list.add("" + rate.getService_rate() + "‰");
+                list.add("" + StringUtil.rateShow(rate.getService_rate()) + "‰");
                 TableRow tr = ViewHelper.tableRow(this, list, R.color.tmc, 12, isLast);
                 tl_tDates.addView(tr,
                         new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -122,6 +121,9 @@ public class FilterItemSelect extends BaseActivity {
     }
 
     private void updateViewCategory() {
+
+        ll_container.removeAllViews();
+
         View v;
         TextView tv;
         CheckBox cb;
@@ -211,6 +213,7 @@ public class FilterItemSelect extends BaseActivity {
                 removeId(item.getId());
             }
         } else if (null != categories) {
+            selectIds.clear();
             GoodsCategoryEntity item = categories.get(idx);
             item.setSelected(checked);
             if (checked) {
@@ -218,11 +221,13 @@ public class FilterItemSelect extends BaseActivity {
             } else {
                 removeId(item.getId());
             }
+            updateViewCategory();
         }
 
     }
 
     private void checkSonAtIndex(int sonIdx, int idx, boolean checked) {
+        selectIds.clear();
         GoodsCategoryEntity item = categories.get(idx);
         List<IdValueEntity> sons = item.getSon();
         IdValueEntity son = sons.get(sonIdx);
@@ -232,6 +237,8 @@ public class FilterItemSelect extends BaseActivity {
         } else {
             removeId(son.getId());
         }
+        updateViewCategory();
+
     }
 
     private void doSubmit() {

@@ -67,7 +67,7 @@
                             android:textSize="11sp" />
 
                         <TextView
-                            android:id="@+id/content2"
+                            android:id="@+id/tv_model"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="7dp"
@@ -97,6 +97,7 @@
                             android:textSize="11sp" />
 
                         <TextView
+                            android:id="@+id/tv_channel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="7dp"

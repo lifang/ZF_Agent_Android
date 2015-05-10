@@ -245,6 +245,18 @@ public class StringUtil {
         String strPrice = String.format("%.2f", d);
         return strPrice;
     }
+    public static String priceShow(String price) {
+        return priceShow(Integer.parseInt(price));
+    }
+
+    public static String rateShow(int rate) {
+        double d = rate / 10.0;
+        String strPrice = String.format("%.1f", d);
+        return strPrice;
+    }
+    public static String rateShow(String rate) {
+        return rateShow(Integer.parseInt(rate));
+    }
 
     public static int intSex(String sex) {
         return sex.equals("男") ? 1 : 0;
@@ -254,9 +266,6 @@ public class StringUtil {
         return sex == 1 ? "男" : "女";
     }
 
-    public static String priceShow(String price) {
-        return priceShow(Integer.parseInt(price));
-    }
 
     public static String getTime(String user_time) {
         String re_time = null;
@@ -289,5 +298,11 @@ public class StringUtil {
         return re_StrTime;
 
 
+    }
+
+    public static String clean(String str) {
+        str = String.valueOf(str);
+        String tmpStr = str.replace("null", "");
+        return tmpStr;
     }
 }

@@ -135,6 +135,7 @@ public class UserForm extends BaseActivity implements View.OnClickListener
             params.put("codeNumber", et_mobile.getText().toString());
             params.put("name", et_username.getText().toString());
             params.put("password", et_password.getText().toString());
+            params.put("code", et_verify_code.getText().toString());
             params.put("cityId", cityId);
 
             String strParams = params.toString();

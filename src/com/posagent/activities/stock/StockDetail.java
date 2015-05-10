@@ -112,7 +112,7 @@ public class StockDetail extends BaseActivity implements IXListViewListener {
         btn_go_pigou = (Button) findViewById(R.id.btn_go_pigou);
 
         //init data
-        tv_brand.setText(entity.getGood_brand());
+        tv_brand.setText(entity.getGood_brand() + " " + entity.getModel_number());
         tv_goods_name.setText(entity.getGoodname());
         tv_paychannel.setText(entity.getPaychannel());
         tv_totalCount.setText("总库存\n" + entity.getTotalCount() + "件");

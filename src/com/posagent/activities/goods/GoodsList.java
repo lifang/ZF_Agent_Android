@@ -265,7 +265,7 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
             params.put("brandsId", StringUtil.integerList(selectedBrandsIds));
         }
         if (selectedCategoryIds != null && selectedCategoryIds.size() > 0) {
-            params.put("category", StringUtil.integerList(selectedCategoryIds));
+            params.put("category", selectedCategoryIds.get(0));
         }
         if (selectedPayChannelsIds != null && selectedPayChannelsIds.size() > 0) {
             params.put("payChannelId", StringUtil.integerList(selectedPayChannelsIds));

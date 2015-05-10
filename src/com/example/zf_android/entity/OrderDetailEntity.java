@@ -7,6 +7,7 @@ public class OrderDetailEntity {
     private String total_dingjin;
     private String zhifu_dingjin;
     private String guishu_user;
+    private String terminals;
 
 
 
@@ -352,6 +353,14 @@ public class OrderDetailEntity {
             this.total = total;
         }
 
+    }
+
+    public String getTerminals() {
+        return terminals;
+    }
+
+    public void setTerminals(String terminals) {
+        this.terminals = terminals;
     }
 
     public String getGuishu_user() {

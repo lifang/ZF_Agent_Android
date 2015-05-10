@@ -51,6 +51,7 @@ public class ChangeAdress extends BaseActivity {
     }
 
     private void initView() {
+        hide("adresslist");
         lv = (ScrollViewWithListView) findViewById(R.id.lv);
         myAdapter = new ChooseAdressAdapter(ChangeAdress.this, myList);
         lv.setAdapter(myAdapter);

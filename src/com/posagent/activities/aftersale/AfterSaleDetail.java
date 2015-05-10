@@ -236,7 +236,7 @@ public class AfterSaleDetail extends BaseActivity {
     }
 
     private void updateViewCancel() {
-        
+
         hide("ll_comments");
 
         setText("after_sale_detail_status", statusName(entityCancel.getStatus()));

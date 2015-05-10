@@ -131,6 +131,8 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
 
 
         setText("retail_price", "￥" + StringUtil.priceShow(price));
+        setText("tv_model", goodinfo.getGood_brand() + " " + goodinfo.getModel_number());
+        setText("tv_channel", paychannelinfo.getName());
 
 
         item_cb=(CheckBox) findViewById(R.id.item_cb);
@@ -197,7 +199,7 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
             hide("tv_origin_price");
             ll_choose_users.setVisibility(View.VISIBLE);
             if (buyType == Constants.Goods.OrderTypeDaigou) {
-                setText("titleback_text_title", "采购买订单确认");
+                setText("titleback_text_title", "采购订单确认");
             } else if (buyType == Constants.Goods.OrderTypeDaizulin) {
                 setText("tv_quantity_name", "租赁数量（件）");
                 setText("titleback_text_title", "代租赁订单确认");
@@ -291,6 +293,15 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
                 String username = bundle.getString("username");
                 tv_username.setText(username);
                 userId = bundle.getInt("userId", 0);
+
+                for (AdressEntity addr: listAddress) {
+                    if (addr.getCustomerId().equals("" + userId)) {
+                        addressEntity = addr;
+                    }
+                }
+
+                updateAddress();
+
                 break;
         }
     } //onActivityResult
@@ -377,10 +388,10 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
 
         }
         params.put("quantity", quantity);
-        params.put("comment", comment);
+        params.put("comment", comment.trim());
         params.put("isNeedInvoice", is_need_invoice);
         params.put("invoiceType", invoice_type);
-        params.put("invoiceInfo", et_titel.getText().toString());
+        params.put("invoiceInfo", et_titel.getText().toString().trim());
 
         String strParams = params.toString();
         Events.CreateOrderEvent event = new Events.CreateOrderEvent();

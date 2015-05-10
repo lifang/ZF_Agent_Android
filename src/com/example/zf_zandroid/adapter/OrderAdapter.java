@@ -18,6 +18,7 @@ import com.examlpe.zf_android.util.ImageCacheUtil;
 import com.examlpe.zf_android.util.StringUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.activity.PayFromCar;
+import com.example.zf_android.entity.Goodlist;
 import com.example.zf_android.entity.OrderEntity;
 import com.posagent.activities.BaseActivity;
 import com.posagent.activities.goods.GoodsDetail;
@@ -105,7 +106,10 @@ public class OrderAdapter extends BaseAdapter{
 
         holder.tv_origin_price.setText("原价：￥"+ StringUtil.priceShow(entity.getOrder_goodsList().get(0).getGood_price()));
         holder.tv_price.setText("￥"+ StringUtil.priceShow(entity.getOrder_goodsList().get(0).getGood_batch_price()));
-        holder.content2.setText(entity.getOrder_goodsList().get(0).getGood_brand());
+
+        Goodlist goodlist = entity.getOrder_goodsList().get(0);
+
+        holder.content2.setText(goodlist.getGood_brand());
         holder.tv_gtd.setText(entity.getOrder_goodsList().get(0).getGood_channel());
         holder.content_pp.setText(entity.getOrder_goodsList().get(0).getGood_name());
 

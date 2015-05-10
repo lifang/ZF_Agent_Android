@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.examlpe.zf_android.util.Tools;
 import com.examlpe.zf_android.util.XListView;
@@ -101,7 +102,7 @@ public class StockAgentDetail extends BaseActivity implements IXListViewListener
         tv_historyCount.setText("配货总量：" + String.valueOf(entity.getHoitoryCount()));
         tv_openCount.setText("已开通量：" + String.valueOf(entity.getOpenCount()));
         tv_lastPrepareTime.setText("上次配送日期：" + String.valueOf(entity.getLastPrepareTime()));
-        tv_lastOpenTime.setText("上次开通日期：" + String.valueOf(entity.getLastOpenTime()));
+        tv_lastOpenTime.setText("上次开通日期：" + StringUtil.clean(entity.getLastOpenTime()));
 
 
 

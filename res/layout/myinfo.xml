@@ -731,7 +731,7 @@
                     android:layout_marginLeft="7dp"
                     android:gravity="center_vertical"
                     android:singleLine="true"
-                    android:text="收获地址管理"
+                    android:text="收货地址管理"
                     android:textColor="@color/text292929"
                     android:textSize="17sp" />
                 <View

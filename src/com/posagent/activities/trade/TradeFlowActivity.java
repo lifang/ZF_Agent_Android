@@ -1,5 +1,6 @@
 package com.posagent.activities.trade;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -31,6 +32,12 @@ import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
+import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_ID;
+import static com.example.zf_android.trade.Constants.TradeIntent.CLIENT_NUMBER;
+import static com.example.zf_android.trade.Constants.TradeIntent.END_DATE;
+import static com.example.zf_android.trade.Constants.TradeIntent.SON_AGENT_ID;
+import static com.example.zf_android.trade.Constants.TradeIntent.START_DATE;
+import static com.example.zf_android.trade.Constants.TradeIntent.TRADE_TYPE;
 import static com.example.zf_android.trade.Constants.TradeType.TRANSFER;
 
 /**
@@ -137,6 +144,7 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
     public void onRefresh() {
         page = 1;
         myList.clear();
+        myAdapter.notifyDataSetChanged();
         getData(searchMap);
     }
 
@@ -163,6 +171,11 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
         Xlistview.setRefreshTime(Tools.getHourAndMin());
     }
 
+    public void reGetData(Map<String, Object> map) {
+        searchMap = map;
+        onRefresh();
+    }
+
     public void getData(Map<String, Object> map) {
         if (null == map) {
             return;
@@ -182,6 +195,20 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
         Events.TradeListEvent event = new Events.TradeListEvent();
         event.setParams(strParams);
         EventBus.getDefault().post(event);
+    }
+
+    public void getStatistic(Map<String, Object> map) {
+        if (null == map) {
+            return;
+        }
+        Intent intent = new Intent(TradeFlowActivity.this, TradeStatisticActivity.class);
+        intent.putExtra(AGENT_ID, MyApplication.user().getAgentId());
+        intent.putExtra(SON_AGENT_ID, MyApplication.user().getAgentUserId());
+        intent.putExtra(TRADE_TYPE, tradeTypeId);
+        intent.putExtra(CLIENT_NUMBER, map.get("terminalNumber").toString());
+        intent.putExtra(START_DATE, map.get("startTime").toString());
+        intent.putExtra(END_DATE, map.get("endTime").toString());
+        startActivity(intent);
     }
 
 

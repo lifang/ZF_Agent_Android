@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.entity.TradeStatistic;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
+
+import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
@@ -36,6 +39,7 @@ public class TradeStatisticActivity extends BaseActivity {
     private TextView statisticChannel;
 
     private TradeStatistic entity;
+    private List<TradeStatistic> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +63,6 @@ public class TradeStatisticActivity extends BaseActivity {
         statisticAmount = (TextView) findViewById(R.id.trade_statistic_amount);
         statisticCount = (TextView) findViewById(R.id.trade_statistic_count);
         statisticTime = (TextView) findViewById(R.id.trade_statistic_time);
-        statisticClient = (TextView) findViewById(R.id.trade_statistic_client);
-        statisticChannel = (TextView) findViewById(R.id.trade_statistic_channel);
 
         getData();
     }
@@ -68,7 +70,7 @@ public class TradeStatisticActivity extends BaseActivity {
     private void getData() {
         JsonParams params = new JsonParams();
         params.put("agentId", mAgentId);
-        params.put("sonagentId", mSonAgentId);
+//        params.put("sonagentId", mSonAgentId);
 
         params.put("tradeTypeId", mTradeType);
         params.put("terminalNumber", mClientNumber);
@@ -85,7 +87,7 @@ public class TradeStatisticActivity extends BaseActivity {
     // events
     public void onEventMainThread(Events.TradeStatisticCompleteEvent event) {
         if (event.success()) {
-            entity = event.getEntity();
+            list = event.getList();
             updateView();
         } else {
             toast(event.getMessage());
@@ -93,17 +95,23 @@ public class TradeStatisticActivity extends BaseActivity {
     }
 
     private void updateView() {
-        statisticAmount = (TextView) findViewById(R.id.trade_statistic_amount);
-        statisticCount = (TextView) findViewById(R.id.trade_statistic_count);
-        statisticTime = (TextView) findViewById(R.id.trade_statistic_time);
-        statisticClient = (TextView) findViewById(R.id.trade_statistic_client);
-        statisticChannel = (TextView) findViewById(R.id.trade_statistic_channel);
 
-        statisticAmount.setText(entity.getAmountTotal());
-        statisticCount.setText(entity.getTradeTotal());
+        int totalAmout = 0;
+        int total = 0;
+
+        for (TradeStatistic item: list) {
+            total += item.getTotal();
+            totalAmout += item.getAmountTotal();
+        }
+
+        statisticAmount.setText("￥" + StringUtil.priceShow(totalAmout));
+        statisticCount.setText("" + total);
+
         statisticTime.setText( mStartDate + " - " + mEndDate);
-        statisticClient.setText(entity.getTerminalNumber());
-        statisticChannel.setText(entity.getPayChannelName());
+
+        String[] tradeTypes = getResources().getStringArray(R.array.trade_flow_tabs);
+        setText("tv_trade_type", tradeTypes[mTradeType - 1]);
+
 
     }
 }

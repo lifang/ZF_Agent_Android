@@ -113,6 +113,7 @@ public class AfterSaleApply extends BaseActivity {
     public void onEventMainThread(Events.CreateAfterSaleCompleteEvent event) {
         if (event.success()) {
             toast("提交完成");
+            finish();
         } else {
             toast(event.getMessage());
         }

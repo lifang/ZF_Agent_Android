@@ -17,6 +17,12 @@ public class ApplyTerminalDetail {
 
 	private String channelName;
 
+    private boolean needPreliminaryVerify;
+
+    private  int appId;
+    private  int supportRequirementType;
+    private  int channelId;
+
 	public String getBrandName() {
 		return brandName;
 	}
@@ -48,4 +54,36 @@ public class ApplyTerminalDetail {
 	public void setChannelName(String channelName) {
 		this.channelName = channelName;
 	}
+
+    public boolean isNeedPreliminaryVerify() {
+        return needPreliminaryVerify;
+    }
+
+    public void setNeedPreliminaryVerify(boolean needPreliminaryVerify) {
+        this.needPreliminaryVerify = needPreliminaryVerify;
+    }
+
+    public int getAppId() {
+        return appId;
+    }
+
+    public void setAppId(int appId) {
+        this.appId = appId;
+    }
+
+    public int getSupportRequirementType() {
+        return supportRequirementType;
+    }
+
+    public void setSupportRequirementType(int supportRequirementType) {
+        this.supportRequirementType = supportRequirementType;
+    }
+
+    public int getChannelId() {
+        return channelId;
+    }
+
+    public void setChannelId(int channelId) {
+        this.channelId = channelId;
+    }
 }

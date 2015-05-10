@@ -49,45 +49,72 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:gravity="right"
                     >
 
-                    <Button
-                        android:id="@+id/btn_apply_open"
-                        android:layout_width="100dp"
-                        android:layout_height="35dp"
-                        android:textSize="15dp"
-                        android:background="@drawable/buttong_light"
-                        android:textColor="@color/bgtitle"
-                        android:text="开通申请"
-                        />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="right"
+                        >
+
+                        <Button
+                            android:id="@+id/btn_3"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:textSize="15dp"
+                            android:background="@drawable/buttong_light"
+                            android:textColor="@color/bgtitle"
+                            android:text="开通申请"
+                            />
+
+                        <Button
+                            android:id="@+id/btn_4"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:textSize="15dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/buttong_light"
+                            android:textColor="@color/bgtitle"
+                            android:text="视频认证"
+                            />
+
+                    </LinearLayout>
 
 
-                    <Button
-                        android:id="@+id/btn_sync"
-                        android:layout_width="100dp"
-                        android:layout_height="35dp"
-                        android:layout_marginTop="5dp"
-                        android:textSize="15dp"
-                        android:visibility="gone"
-                        android:background="@drawable/buttong_light"
-                        android:textColor="@color/bgtitle"
-                        android:text="同步"
-                        />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="right"
+                        >
+
+                        <Button
+                            android:id="@+id/btn_1"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:textSize="15dp"
+                            android:background="@drawable/buttong_light"
+                            android:textColor="@color/bgtitle"
+                            android:text="同步"
+                            />
 
 
-                    <Button
-                        android:id="@+id/btn_video"
-                        android:layout_width="100dp"
-                        android:layout_height="35dp"
-                        android:layout_marginTop="5dp"
-                        android:textSize="15dp"
-                        android:visibility="gone"
-                        android:background="@drawable/buttong_light"
-                        android:textColor="@color/bgtitle"
-                        android:text="视频认证"
-                        />
+                        <Button
+                            android:id="@+id/btn_2"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="5dp"
+                            android:textSize="15dp"
+                            android:background="@drawable/buttong_light"
+                            android:textColor="@color/bgtitle"
+                            android:text="找回POS密码"
+                            />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -111,7 +138,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="账户信息"
+                    android:text="终端信息"
                     android:textSize="17sp" />
                 <View
                     android:layout_width="fill_parent"
@@ -133,7 +160,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:text="终端机型号"
+                            android:text="终端号"
                             android:layout_marginTop="5dp"
                             android:textColor="@color/text5a5a5a"
                             android:textSize="13sp" />
@@ -454,6 +481,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="追踪记录:"
+                    android:visibility="gone"
                     android:textSize="10dp"
                     />
                 <LinearLayout
@@ -463,6 +491,7 @@
                     android:padding="10dp"
                     android:background="#f0f0f0"
                     android:orientation="vertical"
+                    android:visibility="gone"
                     >
                 </LinearLayout>
 

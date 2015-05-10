@@ -2,7 +2,6 @@ package com.posagent.activities.terminal;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,6 +10,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.ApplyDetailActivity;
@@ -21,6 +21,7 @@ import com.example.zf_android.trade.entity.TerminalItem;
 import com.example.zf_android.trade.entity.TerminalOpen;
 import com.example.zf_android.trade.entity.TerminalOpenInfo;
 import com.example.zf_android.trade.entity.TerminalRate;
+import com.example.zf_android.video.VideoActivity;
 import com.posagent.activities.BaseActivity;
 import com.posagent.activities.ImageViewer;
 import com.posagent.events.Events;
@@ -33,6 +34,7 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
+import static com.example.zf_android.trade.Constants.TerminalIntent.APPLY_STATUS;
 import static com.example.zf_android.trade.Constants.TerminalIntent.TERMINAL_ID;
 import static com.example.zf_android.trade.Constants.TerminalIntent.TERMINAL_STATUS;
 
@@ -49,6 +51,8 @@ public class TerminalDetailActivity extends BaseActivity {
     private LinearLayout ll_comments, ll_opening_info;
 
     private int terminalId;
+    private int status;
+    private int applyStatus;
 
     private TerminalDetail entity;
     private TerminalItem item;
@@ -72,13 +76,6 @@ public class TerminalDetailActivity extends BaseActivity {
         ll_comments = (LinearLayout)findViewById(R.id.ll_comments);
         ll_opening_info = (LinearLayout)findViewById(R.id.ll_opening_info);
 
-        btn_apply_open = (Button)findViewById(R.id.btn_apply_open);
-        btn_apply_open.setOnClickListener(this);
-        btn_sync = (Button)findViewById(R.id.btn_sync);
-        btn_sync.setOnClickListener(this);
-
-        findViewById(R.id.btn_video).setOnClickListener(this);
-
         getData();
     }
 
@@ -99,9 +96,6 @@ public class TerminalDetailActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.btn_after_sale_apply:
 
-                break;
-            case R.id.btn_video:
-                video_check();
                 break;
             case R.id.btn_apply_open:
                 Intent i = new Intent(context, ApplyDetailActivity.class);
@@ -128,6 +122,15 @@ public class TerminalDetailActivity extends BaseActivity {
         }
     }
 
+    public void onEventMainThread(Events.FindPosPasswordCompleteEvent event) {
+        toast(event.getStrResult());
+    }
+
+    public void onEventMainThread(Events.TerminalSyncCompleteEvent event) {
+        toast(event.getStrResult());
+        getData();
+    }
+
     private void updateView() {
         String state = "未知";
         TerminalApply apply = entity.getApplyDetails();
@@ -144,26 +147,118 @@ public class TerminalDetailActivity extends BaseActivity {
             setText("tv_model", apply.getModelNumber());
             setText("tv_order_number", apply.getOrderNumber());
             setText("tv_channel", apply.getChannelName());
-            setText("tv_agent", apply.getFactorName());
+            setText("tv_agent", apply.getTitle());
             setText("tv_create_time", apply.getCreatedAt());
+            setText("tv_agent_tel", apply.getPhone());
 
-            if (apply.isNeedPreliminaryVerify()) {
-                show("btn_video");
-            } else {
-                hide("btn_video");
+            applyStatus = apply.getApplieStatus();
+
+            //status
+            status = apply.getStatus();
+            state = statusName(status);
+            setText("tv_status", state);
+
+
+            hide("btn_1");
+            hide("btn_2");
+            hide("btn_3");
+            hide("btn_4");
+
+            Button btn;
+            if (status == 1) {
+                show("btn_1");
+                show("btn_2");
+                btn = (Button)findViewById(R.id.btn_1);
+                btn.setText("找回POS密码");
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        findPosPassword();
+                    }
+                });
+
+                if (apply.isNeedPreliminaryVerify()) {
+                    show("btn_2");
+                    btn = (Button)findViewById(R.id.btn_2);
+                    btn.setText("视频认证");
+                    btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            video_check();
+                        }
+                    });
+                }
+
+
+            } else if (status == 2) {
+                show("btn_1");
+                show("btn_2");
+                show("btn_3");
+                show("btn_4");
+                btn = (Button)findViewById(R.id.btn_1);
+                btn.setText("找回POS密码");
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        findPosPassword();
+                    }
+                });
+
+                btn = (Button)findViewById(R.id.btn_2);
+                btn.setText("视频认证");
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        video_check();
+                    }
+                });
+
+                btn = (Button)findViewById(R.id.btn_3);
+                btn.setText("同步");
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        terminalSync();
+                    }
+                });
+
+                btn = (Button)findViewById(R.id.btn_4);
+                btn.setText("重新申请开通");
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        reopen();
+                    }
+                });
+
+            } else if (status == 3) {
+                show("btn_1");
+                show("btn_2");
+                btn = (Button)findViewById(R.id.btn_1);
+                btn.setText("开通申请");
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        open();
+                    }
+                });
+
+                if (apply.isNeedPreliminaryVerify()) {
+                    show("btn_2");
+                    btn = (Button)findViewById(R.id.btn_2);
+                    btn.setText("视频认证");
+                    btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            video_check();
+                        }
+                    });
+                }
             }
 
         }
 
         if (null != info) {
-            //status
-            int status = info.getStatus();
-            state = statusName(status);
-            setText("tv_status", state);
-
-            //
-            setText("tv_agent", info.getName());
-            setText("tv_agent_tel", info.getPhone());
 
         }
 
@@ -176,11 +271,6 @@ public class TerminalDetailActivity extends BaseActivity {
         if (opens.size() > 0) {
             updateOpeningInfos(opens);
         }
-
-
-
-
-
 
     }
 
@@ -211,7 +301,13 @@ public class TerminalDetailActivity extends BaseActivity {
             }
             List<String> list = new ArrayList<String>();
             list.add(rate.getType());
-            list.add(rate.getTerminalRate());
+
+            int intRate = rate.getServiceRate();
+            if (null != rate.getTerminalRate()) {
+                intRate += Integer.parseInt(rate.getTerminalRate());
+            }
+
+            list.add(StringUtil.rateShow(intRate) + "‰");
             list.add(rateStatusName(rate.getStatus()));
             TableRow tr = ViewHelper.tableRow(this, list, R.color.tmc, 12, isLast);
             tl_rate.addView(tr,
@@ -272,7 +368,7 @@ public class TerminalDetailActivity extends BaseActivity {
     }
 
     private void updateOpeningInfos(List<TerminalOpen> opens) {
-        ll_comments.removeAllViews();
+        ll_opening_info.removeAllViews();
         int len = opens.size();
         boolean isLast = false;
 
@@ -324,7 +420,7 @@ public class TerminalDetailActivity extends BaseActivity {
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         tv_key.setLayoutParams(txtLlp);
         tv_key.setText(open.getKey());
-        tv_key.setWidth(260);
+        tv_key.setWidth(240);
 
         layout.addView(tv_key);
 
@@ -367,11 +463,43 @@ public class TerminalDetailActivity extends BaseActivity {
         return  arr[status];
     }
 
+    private void findPosPassword() {
+        JsonParams params = new JsonParams();
+        params.put("terminalsId", terminalId);
+
+        String strParams = params.toString();
+        Events.CommonRequestEvent event = new Events.FindPosPasswordEvent();
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
+    }
+
+    private void terminalSync() {
+        JsonParams params = new JsonParams();
+        params.put("terminalsId", terminalId);
+
+        String strParams = params.toString();
+        Events.CommonRequestEvent event = new Events.TerminalSyncEvent();
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
+    }
+
+    private void open() {
+        Intent i = new Intent(context, ApplyDetailActivity.class);
+        i.putExtra("id", terminalId);
+        i.putExtra(TERMINAL_ID, terminalId);
+        i.putExtra(TERMINAL_STATUS, status);
+        i.putExtra(APPLY_STATUS, applyStatus);
+        context.startActivity(i);
+    }
+
+    private void reopen() {
+        open();
+    }
+
     private void video_check() {
-        //TODO goto video_check
-        // terminalId: terminalId
-        // applyID: entity.getApplyDetails().getId()
-        Log.d(TAG, "Video check");
+        Intent i = new Intent(context, VideoActivity.class);
+        i.putExtra(com.example.zf_android.trade.Constants.TerminalIntent.TERMINAL_ID, terminalId);
+        context.startActivity(i);
     }
 
 }

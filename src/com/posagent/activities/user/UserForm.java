@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.CitySelectActivity;
@@ -134,7 +135,7 @@ public class UserForm extends BaseActivity implements View.OnClickListener
             params.put("agentId",  MyApplication.user().getAgentId());
             params.put("codeNumber", et_mobile.getText().toString());
             params.put("name", et_username.getText().toString());
-            params.put("password", et_password.getText().toString());
+            params.put("password", StringUtil.Md5(et_password.getText().toString()));
             params.put("code", et_verify_code.getText().toString());
             params.put("cityId", cityId);
 

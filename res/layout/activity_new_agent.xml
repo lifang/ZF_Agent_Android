@@ -514,6 +514,7 @@
 
                 <LinearLayout
                     android:id="@+id/mi_yyzzzp"
+                    android:tag="company_items"
                     android:layout_width="fill_parent"
                     android:layout_height="50dp"
                     android:layout_gravity="center_vertical"
@@ -566,6 +567,7 @@
 
                 <LinearLayout
                     android:id="@+id/mi_swdjzzp"
+                    android:tag="company_items"
                     android:layout_width="fill_parent"
                     android:layout_height="50dp"
                     android:layout_gravity="center_vertical"

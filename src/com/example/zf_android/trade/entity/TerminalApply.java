@@ -33,6 +33,7 @@ public class TerminalApply {
 	private String createdAt;
 
 	private int status;
+	private int applieStatus;
 
 	public int getId() {
 		return id;
@@ -128,5 +129,13 @@ public class TerminalApply {
 
     public void setNeedPreliminaryVerify(boolean needPreliminaryVerify) {
         this.needPreliminaryVerify = needPreliminaryVerify;
+    }
+
+    public int getApplieStatus() {
+        return applieStatus;
+    }
+
+    public void setApplieStatus(int applieStatus) {
+        this.applieStatus = applieStatus;
     }
 }

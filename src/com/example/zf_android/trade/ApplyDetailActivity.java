@@ -100,6 +100,8 @@ public class ApplyDetailActivity extends FragmentActivity {
     private String mCityName;
     private int mCityId;
 
+    private boolean tabInitialized = false;
+
 
     private LayoutInflater mInflater;
 
@@ -107,6 +109,7 @@ public class ApplyDetailActivity extends FragmentActivity {
 	private TextView mPosModel;
 	private TextView mSerialNum;
 	private TextView mPayChannel;
+	private TextView tv_support_type_name;
 
 	private String[] mMerchantKeys;
 	private String[] mBankKeys;
@@ -170,18 +173,9 @@ public class ApplyDetailActivity extends FragmentActivity {
 		mInflater = LayoutInflater.from(this);
 
 		mTab = (MyTabWidget) findViewById(R.id.apply_detail_tab);
-		mTab.addTab(getString(R.string.apply_public), 17);
-		mTab.addTab(getString(R.string.apply_private), 17);
-		mTab.setOnTabSelectedListener(new MyTabWidget.OnTabSelectedListener() {
-			@Override
-			public void onTabSelected(int position) {
-				mApplyType = position + 1;
-				loadData(mApplyType);
-			}
-		});
-		mTab.updateTabs(0);
-		mApplyType = APPLY_PUBLIC;
 
+
+        tv_support_type_name = (TextView) findViewById(R.id.tv_support_type_name);
 		mPosBrand = (TextView) findViewById(R.id.apply_detail_brand);
 		mPosModel = (TextView) findViewById(R.id.apply_detail_model);
 		mSerialNum = (TextView) findViewById(R.id.apply_detail_serial);
@@ -237,7 +231,10 @@ public class ApplyDetailActivity extends FragmentActivity {
             mPosModel.setText(terminalDetail.getModelNumber());
             mSerialNum.setText(terminalDetail.getSerialNumber());
             mPayChannel.setText(terminalDetail.getChannelName());
+
+            initTab(terminalDetail);
         }
+
         // set the choosing merchant listener
         View merchantChoose = mMerchantContainer.findViewWithTag(mMerchantKeys[0]);
         merchantChoose.setOnClickListener(new View.OnClickListener() {
@@ -297,6 +294,8 @@ public class ApplyDetailActivity extends FragmentActivity {
                 });
             }
         }
+
+        showHideSomeFields();
 
     }
 
@@ -449,6 +448,17 @@ public class ApplyDetailActivity extends FragmentActivity {
 			return contentUri.getPath();
 		}
 	}
+
+
+    private void hideItem(String key) {
+        LinearLayout item = (LinearLayout) mContainer.findViewWithTag(key);
+        item.setVisibility(View.GONE);
+    }
+
+    private void showItem(String key) {
+        LinearLayout item = (LinearLayout) mContainer.findViewWithTag(key);
+        item.setVisibility(View.VISIBLE);
+    }
 
 	/**
 	 * set the item value by key
@@ -897,6 +907,50 @@ public class ApplyDetailActivity extends FragmentActivity {
         item.setTarget_id(material.getId());
         item.setValue(value);
 
+    }
+
+    private void initTab(ApplyTerminalDetail terminalDetail) {
+        if (tabInitialized) {
+            return;
+        }
+        tabInitialized = true;
+        switch (terminalDetail.getSupportRequirementType()) {
+            case 1:
+                tv_support_type_name.setVisibility(View.VISIBLE);
+                mApplyType = APPLY_PUBLIC;
+                break;
+            case 2:
+                tv_support_type_name.setVisibility(View.VISIBLE);
+                tv_support_type_name.setText("对私");
+                mApplyType = APPLY_PRIVATE;
+                break;
+            default:
+                mTab.setVisibility(View.VISIBLE);
+                mTab.addTab("对公", 17);
+                mTab.addTab("对私", 17);
+                mTab.setOnTabSelectedListener(new MyTabWidget.OnTabSelectedListener() {
+                    @Override
+                    public void onTabSelected(int position) {
+                        mApplyType = position + 1;
+                        loadData(mApplyType);
+                    }
+                });
+
+                mApplyType = APPLY_PUBLIC;
+                mTab.updateTabs(0);
+
+        }
+
+    }
+
+    private void showHideSomeFields() {
+        if (mApplyType == APPLY_PRIVATE) {
+            hideItem(mBankKeys[3]);
+            hideItem(mBankKeys[4]);
+        } else if (mApplyType == APPLY_PUBLIC) {
+            showItem(mBankKeys[3]);
+            showItem(mBankKeys[4]);
+        }
     }
 
 }

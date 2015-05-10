@@ -232,7 +232,7 @@
                 android:layout_marginLeft="7dp"
                 android:gravity="center_vertical"
                 android:singleLine="true"
-                android:text="呼叫掌富400-090-8076"
+                android:text="呼叫掌富400-009-0876"
                 android:textColor="@color/text292929"
                 android:textSize="17sp" />
 

@@ -25,7 +25,6 @@ import com.example.zf_android.Config;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.common.CommonUtil;
 import com.example.zf_android.trade.entity.TradeRecord;
-import com.posagent.MyApplication;
 import com.posagent.activities.CommonInputer;
 import com.posagent.utils.Constants;
 
@@ -42,12 +41,8 @@ import de.greenrobot.event.EventBus;
 
 import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_ID;
 import static com.example.zf_android.trade.Constants.TradeIntent.AGENT_NAME;
-import static com.example.zf_android.trade.Constants.TradeIntent.CLIENT_NUMBER;
-import static com.example.zf_android.trade.Constants.TradeIntent.END_DATE;
 import static com.example.zf_android.trade.Constants.TradeIntent.REQUEST_TRADE_AGENT;
 import static com.example.zf_android.trade.Constants.TradeIntent.REQUEST_TRADE_CLIENT;
-import static com.example.zf_android.trade.Constants.TradeIntent.SON_AGENT_ID;
-import static com.example.zf_android.trade.Constants.TradeIntent.START_DATE;
 import static com.example.zf_android.trade.Constants.TradeIntent.TRADE_RECORD_ID;
 import static com.example.zf_android.trade.Constants.TradeIntent.TRADE_TYPE;
 import static com.example.zf_android.trade.Constants.TradeType.CONSUME;
@@ -278,14 +273,13 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
 
         Map<String, Object> params = new HashMap<String, Object>();
 
-        params.put("tradeTypeId", mTradeType);
         params.put("terminalNumber", tradeClientName);
         params.put("sonagentId", tradeAgentId);
         params.put("startTime", tradeStartDate);
         params.put("endTime", tradeEndDate);
 
         TradeFlowActivity activity = (TradeFlowActivity) getActivity();
-        activity.getData(params);
+        activity.reGetData(params);
     }
 
     public void getStatistic() {
@@ -294,15 +288,15 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
             return;
         }
 
-        Intent intent = new Intent(getActivity(), TradeStatisticActivity.class);
-        intent.putExtra(AGENT_ID, MyApplication.user().getAgentId());
-        intent.putExtra(SON_AGENT_ID, MyApplication.user().getAgentUserId());
-        intent.putExtra(TRADE_TYPE, mTradeType);
-        intent.putExtra(TRADE_TYPE, mTradeType);
-        intent.putExtra(CLIENT_NUMBER, tradeClientName);
-        intent.putExtra(START_DATE, tradeStartDate);
-        intent.putExtra(END_DATE, tradeEndDate);
-        startActivity(intent);
+        Map<String, Object> params = new HashMap<String, Object>();
+
+        params.put("terminalNumber", tradeClientName);
+        params.put("sonagentId", tradeAgentId);
+        params.put("startTime", tradeStartDate);
+        params.put("endTime", tradeEndDate);
+
+        TradeFlowActivity activity = (TradeFlowActivity) getActivity();
+        activity.getStatistic(params);
     }
 
     private boolean check() {

@@ -159,7 +159,7 @@ public class AfterSaleListActivity extends BaseActivity implements XListView.IXL
 
 		mListView.setAdapter(mAdapter);
 		initButtonListeners();
-		loadData();
+//		loadData();
 	}
 
     @Override

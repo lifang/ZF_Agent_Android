@@ -6,20 +6,23 @@ package com.example.zf_android.trade.entity;
 public class TradeDetail {
 
     private String tradedTimeStr;
-    private int agentId;
+    private int agent_id;
     private String terminalNumber;
+    private int types;
     private int amount;
-    private int payChannelId;
+    private int pay_channel_id;
     private String tradeNumber;
     private int profitPrice;
     private int poundage;
     private String batchNumber;
     private String payIntoAccount;
-    private String merchantNumber;
+    private String merchant_number;
     private int tradedStatus;
-    private String merchantName;
+    private String merchant_name;
+    private String agentName;
     private String payFromAccount;
-    private String payChannelName;
+    private String paychannel;
+
 
     public String getTradedTimeStr() {
         return tradedTimeStr;
@@ -27,14 +30,6 @@ public class TradeDetail {
 
     public void setTradedTimeStr(String tradedTimeStr) {
         this.tradedTimeStr = tradedTimeStr;
-    }
-
-    public int getAgentId() {
-        return agentId;
-    }
-
-    public void setAgentId(int agentId) {
-        this.agentId = agentId;
     }
 
     public String getTerminalNumber() {
@@ -51,14 +46,6 @@ public class TradeDetail {
 
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-
-    public int getPayChannelId() {
-        return payChannelId;
-    }
-
-    public void setPayChannelId(int payChannelId) {
-        this.payChannelId = payChannelId;
     }
 
     public String getTradeNumber() {
@@ -101,28 +88,12 @@ public class TradeDetail {
         this.payIntoAccount = payIntoAccount;
     }
 
-    public String getMerchantNumber() {
-        return merchantNumber;
-    }
-
-    public void setMerchantNumber(String merchantNumber) {
-        this.merchantNumber = merchantNumber;
-    }
-
     public int getTradedStatus() {
         return tradedStatus;
     }
 
     public void setTradedStatus(int tradedStatus) {
         this.tradedStatus = tradedStatus;
-    }
-
-    public String getMerchantName() {
-        return merchantName;
-    }
-
-    public void setMerchantName(String merchantName) {
-        this.merchantName = merchantName;
     }
 
     public String getPayFromAccount() {
@@ -133,11 +104,59 @@ public class TradeDetail {
         this.payFromAccount = payFromAccount;
     }
 
-    public String getPayChannelName() {
-        return payChannelName;
+    public int getAgent_id() {
+        return agent_id;
     }
 
-    public void setPayChannelName(String payChannelName) {
-        this.payChannelName = payChannelName;
+    public void setAgent_id(int agent_id) {
+        this.agent_id = agent_id;
+    }
+
+    public int getTypes() {
+        return types;
+    }
+
+    public void setTypes(int types) {
+        this.types = types;
+    }
+
+    public int getPay_channel_id() {
+        return pay_channel_id;
+    }
+
+    public void setPay_channel_id(int pay_channel_id) {
+        this.pay_channel_id = pay_channel_id;
+    }
+
+    public String getMerchant_number() {
+        return merchant_number;
+    }
+
+    public void setMerchant_number(String merchant_number) {
+        this.merchant_number = merchant_number;
+    }
+
+    public String getMerchant_name() {
+        return merchant_name;
+    }
+
+    public void setMerchant_name(String merchant_name) {
+        this.merchant_name = merchant_name;
+    }
+
+    public String getAgentName() {
+        return agentName;
+    }
+
+    public void setAgentName(String agentName) {
+        this.agentName = agentName;
+    }
+
+    public String getPaychannel() {
+        return paychannel;
+    }
+
+    public void setPaychannel(String paychannel) {
+        this.paychannel = paychannel;
     }
 }

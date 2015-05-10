@@ -73,11 +73,19 @@ public class TradeDetailActivity extends BaseActivity {
     private void updateView() {
 
         Resources resources = getResources();
-        String[] tradeStatuses = resources.getStringArray(R.array.trade_status);
+        String statusName = "未知";
 
-        setText("trade_detail_status", tradeStatuses[entity.getTradedStatus()]);
+        if (entity.getTradedStatus() == 1) {
+            statusName = "交易成功";
+        } else if (entity.getTradedStatus() == 2) {
+            statusName = "交易失败";
+        } else if (entity.getTradedStatus() == 3) {
+            statusName = "交易结果待确认";
+        }
+
+        setText("trade_detail_status", statusName);
         setText("trade_detail_amount", StringUtil.priceShow(entity.getAmount()));
-        setText("trade_detail_poundage", "" + entity.getPoundage());
+        setText("trade_detail_poundage",  StringUtil.priceShow(entity.getPoundage()));
         setText("trade_detail_time", "" + entity.getTradedTimeStr());
 
         LinearLayout mCommercialValueContainer = (LinearLayout) findViewById(R.id.trade_commercial_value_container);
@@ -114,9 +122,9 @@ public class TradeDetailActivity extends BaseActivity {
             value.setPadding(0, 5, 0, 5);
             value.setTextColor(getResources().getColor(R.color.text6c6c6c6));
             value.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
-            value.setText(i == 0 ? entity.getMerchantNumber()
-                    : i == 1 ? entity.getAgentId() + ""
-                    : i == 2 ? entity.getMerchantName()
+            value.setText(i == 0 ? entity.getMerchant_number()
+                    : i == 1 ? entity.getAgent_id() + ""
+                    : i == 2 ? entity.getMerchant_name()
                     : "");
             mCommercialValueContainer.addView(value);
         }
@@ -130,11 +138,11 @@ public class TradeDetailActivity extends BaseActivity {
             value.setText(i == 0 ? entity.getTerminalNumber()
                     : i == 1 ? entity.getPayFromAccount()
                     : i == 2 ? entity.getPayIntoAccount()
-                    : i == 3 ? entity.getPayChannelName()
+                    : i == 3 ? entity.getPaychannel()
                     : i == 4 ? StringUtil.priceShow(entity.getProfitPrice()) + ""
                     : i == 5 ? StringUtil.priceShow(entity.getAmount()) + ""
                     : i == 6 ? entity.getTradedTimeStr()
-                    : i == 7 ? tradeStatuses[entity.getTradedStatus()]
+                    : i == 7 ? statusName
                     : i == 8 ? entity.getBatchNumber()
                     : i == 9 ? entity.getTradeNumber()
                     : "");

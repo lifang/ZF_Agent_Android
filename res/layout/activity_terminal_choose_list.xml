@@ -83,8 +83,7 @@
             <TextView
                 android:id="@+id/tv_submit"
                 android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
+                android:layout_height="50dp"
                 android:background="@drawable/bg_blue_shape"
                 android:layout_gravity="center"
                 android:gravity="center"

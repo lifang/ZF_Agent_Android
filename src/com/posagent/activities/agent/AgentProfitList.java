@@ -193,7 +193,9 @@ public class AgentProfitList extends BaseActivity implements IXListViewListener 
 
 
     public void onEventMainThread(Events.SetProfitCompleteEvent event) {
-
+        if (null == profitEntity.getId()) {
+            profitEntity.setId("fake");
+        }
         toast(event.getMessage());
     }
 

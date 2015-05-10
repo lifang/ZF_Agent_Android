@@ -93,6 +93,8 @@ public class APIManager {
     public static final String UrlTradeStatistic = BaseUrl + "/trade/getTradeStatistics";
     public static final String UrlTerminalList = BaseUrl + "/terminal/getTerminalList";
     public static final String UrlTerminalBind = BaseUrl + "/terminal/bindingTerminals";
+    public static final String UrlFindPosPassword = BaseUrl + "/terminal/encryption";
+    public static final String UrlTerminalSync = BaseUrl + "/terminal/synchronous";
     public static final String UrlVerifyCode = BaseUrl + "/terminal/sendPhoneVerificationCodeReg";
     public static final String UrlCreateUser = BaseUrl + "/terminal/addCustomer";
     public static final String UrlBatchTerminalNumber = BaseUrl + "/terminal/batchTerminalNum";
@@ -544,9 +546,15 @@ public class APIManager {
         CommonRequest(event, completeEvent, UrlTerminalList);
     }
 
-    public void onEventBackgroundThread(Events.TerminalBindEvent event) {
-        Events.CommonCompleteEvent completeEvent = new Events.TerminalBindCompleteEvent();
-        CommonRequest(event, completeEvent, UrlTerminalBind);
+    public void onEventBackgroundThread(Events.FindPosPasswordEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.FindPosPasswordCompleteEvent();
+        CommonRequest(event, completeEvent, UrlFindPosPassword);
+    }
+
+    // terminal actions
+    public void onEventBackgroundThread(Events.TerminalSyncEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.TerminalSyncCompleteEvent();
+        CommonRequest(event, completeEvent, UrlTerminalSync);
     }
 
     public void onEventBackgroundThread(Events.VerifyCodeEvent event) {

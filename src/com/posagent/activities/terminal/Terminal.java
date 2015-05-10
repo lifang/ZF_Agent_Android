@@ -215,4 +215,8 @@ public class Terminal extends BaseActivity implements IXListViewListener,
         onRefresh();
     }
 
+    public void onEventMainThread(Events.CreateAfterSaleCompleteEvent event) {
+        onRefresh();
+    }
+
 }

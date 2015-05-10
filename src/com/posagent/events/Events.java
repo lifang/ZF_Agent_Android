@@ -811,17 +811,18 @@ public class Events {
 
     public static class TradeStatisticEvent extends CommonRequestEvent {}
     public static class TradeStatisticCompleteEvent extends CommonCompleteEvent {
-        private TradeStatistic entity;
+        private List<TradeStatistic> list = new ArrayList<TradeStatistic>();
+        public List<TradeStatistic> getList() {
+            if (list.size() < 1) {
+                String result = getArrResult().toString();
+                list = (new Gson()).fromJson(result,
+                        new TypeToken<List<TradeStatistic>>() {}.getType());
 
-        public TradeStatistic getEntity() {
-            String result = null;
-            result = getResult().toString();
-            entity = (new Gson()).fromJson(result, TradeStatistic.class);
-            return entity;
+            }
+            return list;
         }
-
-        public void setEntity(TradeStatistic entity) {
-            this.entity = entity;
+        public void setList(List<TradeStatistic> list) {
+            this.list = list;
         }
     }
 
@@ -853,6 +854,13 @@ public class Events {
 
     public static class TerminalBindEvent extends CommonRequestEvent {}
     public static class TerminalBindCompleteEvent extends CommonCompleteEvent{}
+
+    // terminal actions
+    public static class FindPosPasswordEvent extends CommonRequestEvent {}
+    public static class FindPosPasswordCompleteEvent extends CommonCompleteEvent{}
+
+    public static class TerminalSyncEvent extends CommonRequestEvent {}
+    public static class TerminalSyncCompleteEvent extends CommonCompleteEvent{}
 
     public static class VerifyCodeEvent extends CommonRequestEvent {}
     public static class VerifyCodeCompleteEvent extends CommonCompleteEvent{}

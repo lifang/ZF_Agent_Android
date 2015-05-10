@@ -5,19 +5,17 @@ package com.example.zf_android.trade.entity;
  */
 public class TradeStatistic {
 
-    private int tradeTypeId;
+    private int total;
     private int amountTotal;
-    private int payChannelId;
-    private String payChannelName;
-    private String terminalNumber;
-    private int tradeTotal;
+    private int agent_id;
+    private String agent;
 
-    public int getTradeTypeId() {
-        return tradeTypeId;
+    public int getTotal() {
+        return total;
     }
 
-    public void setTradeTypeId(int tradeTypeId) {
-        this.tradeTypeId = tradeTypeId;
+    public void setTotal(int total) {
+        this.total = total;
     }
 
     public int getAmountTotal() {
@@ -28,35 +26,19 @@ public class TradeStatistic {
         this.amountTotal = amountTotal;
     }
 
-    public int getPayChannelId() {
-        return payChannelId;
+    public int getAgent_id() {
+        return agent_id;
     }
 
-    public void setPayChannelId(int payChannelId) {
-        this.payChannelId = payChannelId;
+    public void setAgent_id(int agent_id) {
+        this.agent_id = agent_id;
     }
 
-    public String getPayChannelName() {
-        return payChannelName;
+    public String getAgent() {
+        return agent;
     }
 
-    public void setPayChannelName(String payChannelName) {
-        this.payChannelName = payChannelName;
-    }
-
-    public String getTerminalNumber() {
-        return terminalNumber;
-    }
-
-    public void setTerminalNumber(String terminalNumber) {
-        this.terminalNumber = terminalNumber;
-    }
-
-    public int getTradeTotal() {
-        return tradeTotal;
-    }
-
-    public void setTradeTotal(int tradeTotal) {
-        this.tradeTotal = tradeTotal;
+    public void setAgent(String agent) {
+        this.agent = agent;
     }
 }

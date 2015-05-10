@@ -98,6 +98,7 @@ public class Constants {
 
 		public static final String TERMINAL_ID = "terminal_id";
 		public static final String TERMINAL_STATUS = "terminal_status";
+		public static final String APPLY_STATUS = "apply_status";
 		public static final String CHANNEL_ID = "channel_id";
 		public static final String CHANNEL_NAME = "channel_name";
 	}

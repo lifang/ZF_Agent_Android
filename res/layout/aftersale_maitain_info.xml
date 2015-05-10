@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:textSize="15dp"
-            android:text="收获地址"
+            android:text="收货地址"
             />
         <View
             android:layout_marginTop="3dp"

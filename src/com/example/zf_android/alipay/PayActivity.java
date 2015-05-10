@@ -4,6 +4,7 @@ package com.example.zf_android.alipay;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -141,6 +142,8 @@ public abstract class PayActivity extends BaseActivity {
 	 * 
 	 */
 	private String getOrderInfo(String outTradeNo, String subject, String body, String price) {
+        Log.d(TAG, APIManager.BaseUrl + Config.NOTIFT_URL);
+
 		// 签约合作者身份ID
 		String orderInfo = "partner=" + "\"" + Config.PARTNER + "\"";
 

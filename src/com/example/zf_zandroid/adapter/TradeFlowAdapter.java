@@ -13,7 +13,6 @@ import com.examlpe.zf_android.util.StringUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.entity.TradeRecord;
 import com.posagent.activities.trade.TradeDetailActivity;
-import com.posagent.utils.Constants;
 
 import java.util.List;
 
@@ -68,7 +67,16 @@ public class TradeFlowAdapter extends BaseAdapter{
         holder.trade_receive_account.setText(entity.getPayIntoAccount());
         holder.trade_client_number.setText(entity.getTerminalNumber());
 
-        String statusName = Constants.Trade.STATUS[entity.getTradedStatus()];
+        String statusName = "未知";
+
+        if (entity.getTradedStatus() == 1) {
+            statusName = "交易成功";
+        } else if (entity.getTradedStatus() == 2) {
+            statusName = "交易失败";
+        } else if (entity.getTradedStatus() == 3) {
+            statusName = "交易结果待确认";
+        }
+
         holder.trade_status.setText(statusName);
         holder.trade_amount.setText("￥" + StringUtil.priceShow(entity.getAmount()));
 

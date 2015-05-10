@@ -332,7 +332,9 @@ public class ApplyDetailActivity extends FragmentActivity {
                 mBankNo = data.getStringExtra("bank_no");
                 setItemValue(customTag, mBankName);
                 setItemValue(mBankKeys[0], mBankName);
-                setItemValue(mBankKeys[1], mBankNo);
+
+                //FIXME no 怎么存
+//                setItemValue(mBankKeys[1], mBankNo);
 
                 break;
             }
@@ -552,7 +554,19 @@ public class ApplyDetailActivity extends FragmentActivity {
 		// the second category
 		mBankKeys = getResources().getStringArray(R.array.apply_detail_bank_keys);
 
-		mCustomerContainer.addView(getDetailItem(ITEM_EDIT, mBankKeys[0], null));
+		mCustomerContainer.addView(getDetailItem(ITEM_CHOOSE, mBankKeys[0], null));
+        LinearLayout ll = (LinearLayout) mContainer.findViewWithTag(mBankKeys[0]);
+        ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                customTag = mBankKeys[0];
+                Intent intent = new Intent(ApplyDetailActivity.this, BankList.class);
+                intent.putExtra(AGENT_NAME, mBankName);
+                intent.putExtra("terminalId", mTerminalId);
+                startActivityForResult(intent, REQUEST_CHOOSE_BANK);
+            }
+        });
+
 		mCustomerContainer.addView(getDetailItem(ITEM_EDIT, mBankKeys[1], null));
 		mCustomerContainer.addView(getDetailItem(ITEM_EDIT, mBankKeys[2], null));
 		mCustomerContainer.addView(getDetailItem(ITEM_EDIT, mBankKeys[3], null));
@@ -825,7 +839,11 @@ public class ApplyDetailActivity extends FragmentActivity {
 
         params.put("bankNum", getItemValue(mBankKeys[2]));
         params.put("bankName", getItemValue(mBankKeys[0]));
-        params.put("bankCode", getItemValue(mBankKeys[1]));
+
+//        params.put("bankCode", getItemValue(mBankKeys[1]));
+        //FIXME 只有一个银行条目吗？
+        params.put("bankCode", mBankNo);
+
         params.put("registeredNo", getItemValue(mBankKeys[3]));
         params.put("organizationNo", getItemValue(mBankKeys[4]));
 
@@ -884,8 +902,8 @@ public class ApplyDetailActivity extends FragmentActivity {
         setItemValue(mMerchantKeys[7], openInfo.getEmail());
         setItemValue(mMerchantKeys[8], ((MyApplication)getApplication()).cityNameForId(openInfo.getCity_id()));
 
-        setItemValue(mBankKeys[0], openInfo.getAccount_bank_name());
-        setItemValue(mBankKeys[1], openInfo.getAccount_bank_code());
+        setItemValue(mBankKeys[0], openInfo.getAccount_bank_code());
+        setItemValue(mBankKeys[1], openInfo.getAccount_bank_name());
         setItemValue(mBankKeys[2], openInfo.getAccount_bank_num());
         setItemValue(mBankKeys[3], openInfo.getTax_registered_no());
         setItemValue(mBankKeys[4], openInfo.getOrganization_code_no());

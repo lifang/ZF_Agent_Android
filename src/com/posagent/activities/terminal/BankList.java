@@ -41,7 +41,7 @@ public class BankList extends BaseListActivity {
         selectMerchantName = getIntent().getStringExtra(AGENT_NAME);
         terminalId = getIntent().getIntExtra("terminalId", 0);
 
-        findViewById(R.id.iv_search_icon).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.iv_search_bank).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getData();
@@ -71,8 +71,8 @@ public class BankList extends BaseListActivity {
 
         JsonParams params = new JsonParams();
         //Fixme
-        params.put("terminalId", 6);
-//        params.put("terminalId", terminalId);
+//        params.put("terminalId", 6);
+        params.put("terminalId", terminalId);
 
         String keyword = ((EditText)findViewById(R.id.et_keyword)).getText().toString();
         params.put("keyword", keyword);

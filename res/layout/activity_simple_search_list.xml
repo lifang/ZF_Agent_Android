@@ -34,7 +34,7 @@
                 android:hint="请输入银行名称"
                 />
             <ImageView
-                android:id="@+id/iv_search_icon"
+                android:id="@+id/iv_search_bank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"

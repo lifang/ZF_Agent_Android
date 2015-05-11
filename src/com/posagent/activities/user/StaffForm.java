@@ -27,13 +27,13 @@ public class StaffForm extends BaseActivity
 {
 
     private EditText et_name, et_username, et_password, et_password_confirm;
-    private CheckBox cb_role_pigou, cb_role_daigou, cb_role_terminal,
+    private CheckBox cb_role_pigou, cb_role_daigou, cb_role_terminal, cb_role_stock,
             cb_role_fenrun, cb_role_xiaji, cb_role_user, cb_role_staff, cb_role_address;
     private Button btn_submit;
 
     private StaffEntity entity;
     private String[] roles = {"pigou", "daigou", "terminal", "fenrun",
-            "xiaji", "user", "staff", "address"};
+            "xiaji", "user", "staff", "address", "stock"};
 
     private int id;
 
@@ -72,6 +72,7 @@ public class StaffForm extends BaseActivity
         cb_role_user = (CheckBox) findViewById(R.id.cb_role_user);
         cb_role_staff = (CheckBox) findViewById(R.id.cb_role_staff);
         cb_role_address = (CheckBox) findViewById(R.id.cb_role_address);
+        cb_role_stock = (CheckBox) findViewById(R.id.cb_role_stock);
 
         if (null != entity) {
             et_name.setText(entity.getName());
@@ -173,7 +174,7 @@ public class StaffForm extends BaseActivity
         toast(event.getMessage());
         if (event.success()) {
             EventBus.getDefault().post(new Events.StaffListReloadEvent());
-//            finish();
+            finish();
         }
     }
 

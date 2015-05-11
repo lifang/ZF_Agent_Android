@@ -6,6 +6,7 @@ public class ChanelEntitiy {
 //    "description": "说明pcbc",
 //    "name": "T+1"e 
 	private String trade_value;
+	private String paychannel;
 	private int terminal_rate;
 	
 	
@@ -49,8 +50,12 @@ public class ChanelEntitiy {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
-	
-	
+
+    public String getPaychannel() {
+        return paychannel;
+    }
+
+    public void setPaychannel(String paychannel) {
+        this.paychannel = paychannel;
+    }
 }

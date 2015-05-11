@@ -46,7 +46,7 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
 
     private int page = 1;
     private int rows = Config.ROWS;
-    int buyType = Constants.Goods.OrderTypePigou;
+    int buyType = Constants.Goods.OrderTypeDaigou;
     int orderType;
 
     private String keys;
@@ -95,7 +95,7 @@ public class GoodsList extends BaseActivity implements XListView.IXListViewListe
 
 		setContentView(R.layout.activity_goods_list);
 
-        buyType = getIntent().getIntExtra("buyType", Constants.Goods.OrderTypePigou);
+        buyType = getIntent().getIntExtra("buyType", Constants.Goods.OrderTypeDaigou);
 
         // 准备需要监听Click的数据
         HashMap<String, Class> clickableMap = new HashMap<String, Class>(){{

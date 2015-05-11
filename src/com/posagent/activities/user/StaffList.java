@@ -151,6 +151,7 @@ public class StaffList extends BaseActivity implements IXListViewListener {
     public void onRefresh() {
         page = 1;
         myList.clear();
+        myAdapter.notifyDataSetChanged();
         getData();
     }
 

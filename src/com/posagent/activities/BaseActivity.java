@@ -17,6 +17,7 @@ import com.example.zf_android.R;
 import com.example.zf_android.activity.AllProduct;
 import com.google.gson.Gson;
 import com.posagent.MyApplication;
+import com.posagent.activities.goods.GoodsList;
 import com.posagent.activities.home.Main;
 import com.posagent.activities.user.MenuMine;
 import com.posagent.activities.user.MessageList;
@@ -119,7 +120,7 @@ public class BaseActivity extends Activity implements View.OnClickListener {
 
         if (v.getId() == R.id.tab_index1) {
             if (checkRole(Constants.Roles.AllProduct)) {
-                startActivity(new Intent(this, AllProduct.class));
+                startActivity(new Intent(this, GoodsList.class));
             }
             return;
         }

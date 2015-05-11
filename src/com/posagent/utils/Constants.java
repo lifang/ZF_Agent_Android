@@ -76,8 +76,8 @@ public class Constants {
     }
 
     public static class UserConstant {
-        public static final int USER_KIND_PESONAL = 1;
-        public static final int USER_KIND_AGENT = 2;
+        public static final int USER_KIND_PESONAL = 2;
+        public static final int USER_KIND_AGENT = 1;
 
     }
 

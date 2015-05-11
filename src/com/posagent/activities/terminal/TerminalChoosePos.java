@@ -34,6 +34,7 @@ public class TerminalChoosePos extends BaseActivity {
 
     private String posName, channelName;
     private int channelId;
+    private int agentId;
 
 
 
@@ -42,6 +43,8 @@ public class TerminalChoosePos extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_terminal_choose_pos);
         new TitleMenuUtil(TerminalChoosePos.this, "筛选").show();
+
+        agentId = getIntent().getIntExtra("agentId", 0);
 
         initView();
 
@@ -79,6 +82,9 @@ public class TerminalChoosePos extends BaseActivity {
                 break;
             case R.id.ll_choose_channel:
                 Intent i2 = new Intent(TerminalChoosePos.this, TerminalChooseChannelList.class);
+                if (agentId > 0) {
+                    i2.putExtra("agentId", agentId);
+                }
                 i2.putExtra(Constants.DefaultSelectedNameKey, channelName);
                 startActivityForResult(i2, Constants.REQUEST_CODE2);
                 break;

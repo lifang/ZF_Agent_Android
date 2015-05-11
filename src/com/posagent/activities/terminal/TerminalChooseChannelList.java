@@ -26,11 +26,14 @@ public class TerminalChooseChannelList extends BaseListActivity {
 
     private List<ChanelEntitiy> myList;
 
+    private int agentId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_simple_list);
         new TitleMenuUtil(this, "选择支付通道").show();
+        agentId = getIntent().getIntExtra("agentId", 0);
 
         getData();
 
@@ -43,7 +46,13 @@ public class TerminalChooseChannelList extends BaseListActivity {
         ChanelEntitiy item = myList.get(position);
 
         Intent intent = getIntent();
-        intent.putExtra(Constants.DefaultSelectedNameKey, item.getName());
+
+        String name = item.getName();
+        if (null == name) {
+            name = item.getPaychannel();
+        }
+
+        intent.putExtra(Constants.DefaultSelectedNameKey, name);
         intent.putExtra(Constants.DefaultSelectedIdKey, item.getId());
         setResult(RESULT_OK, intent);
         finish();
@@ -51,11 +60,17 @@ public class TerminalChooseChannelList extends BaseListActivity {
 
     private void getData() {
         JsonParams params = new JsonParams();
-        params.put("customerId", MyApplication.user().getId());
-//        params.put("page", page);
-//        params.put("rows", rows);
+        Events.CommonRequestEvent event = new Events.TerminalChooseChannelListEvent();
+
+        if (agentId > 0) {
+            params.put("agentId", agentId);
+            event = new Events.PrepareGoodsChannelListEvent();
+        } else {
+            params.put("customerId", MyApplication.user().getId());
+        }
+
         String strParams = params.toString();
-        Events.TerminalChooseChannelListEvent event = new Events.TerminalChooseChannelListEvent();
+
         event.setParams(strParams);
         EventBus.getDefault().post(event);
     }
@@ -67,6 +82,19 @@ public class TerminalChooseChannelList extends BaseListActivity {
         for (ChanelEntitiy client : myList) {
             Map<String, Object> item = new HashMap<String, Object>();
             String _selectedName = client.getName();
+            item.put("name", _selectedName);
+            item.put("selected", TextUtils.isEmpty(_selectedName)
+                    || !_selectedName.equals(selectedName) ? null : R.drawable.checkbox);
+            items.add(item);
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    public void onEventMainThread(Events.PrepareGoodsChannelListCompleteEvent event) {
+        myList = event.getList();
+        for (ChanelEntitiy client : myList) {
+            Map<String, Object> item = new HashMap<String, Object>();
+            String _selectedName = client.getPaychannel();
             item.put("name", _selectedName);
             item.put("selected", TextUtils.isEmpty(_selectedName)
                     || !_selectedName.equals(selectedName) ? null : R.drawable.checkbox);

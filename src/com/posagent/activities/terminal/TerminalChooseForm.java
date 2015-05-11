@@ -17,12 +17,14 @@ import com.posagent.events.Events;
 public class TerminalChooseForm extends BaseActivity {
 
     private LinearLayout ll_enter_terminal, ll_filter_pos;
+    private int agentId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_terminal_choose_form);
         new TitleMenuUtil(TerminalChooseForm.this, "选择终端").show();
+        agentId = getIntent().getIntExtra("agentId", 0);
 
         initView();
 
@@ -46,6 +48,9 @@ public class TerminalChooseForm extends BaseActivity {
                 break;
             case R.id.ll_filter_pos:
                 Intent i2 = new Intent(TerminalChooseForm.this, TerminalChoosePos.class);
+                if (agentId > 0) {
+                    i2.putExtra("agentId", agentId);
+                }
                 startActivity(i2);
                 break;
 

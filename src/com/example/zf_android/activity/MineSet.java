@@ -3,6 +3,7 @@ package com.example.zf_android.activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -10,9 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
 import com.example.zf_android.R;
+import com.posagent.activities.BaseActivity;
+import com.posagent.utils.DataCleanManager;
 
 public class MineSet extends BaseActivity implements OnClickListener{
 	private ImageView img_on_off;
@@ -23,7 +25,6 @@ public class MineSet extends BaseActivity implements OnClickListener{
 	private TextView tv_clean;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mine_set);
 		new TitleMenuUtil(MineSet.this, "设置").show();
@@ -42,19 +43,25 @@ public class MineSet extends BaseActivity implements OnClickListener{
 		ll_clean.setOnClickListener(this);
 		
 		tv_clean=(TextView) findViewById(R.id.tv_clean);
+
+        String strSize = "0.0M";
+        try {
+            strSize = DataCleanManager.getTotalCacheSize(context);
+        } catch (Exception ex) {
+            Log.d(TAG, ex.getLocalizedMessage());
+        }
+
+        tv_clean.setText(strSize);
 	}
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 			switch (v.getId()) {
 			case R.id.ll_new:
-				
 
 				break;
-			case R.id.tv_clean:
-				
+			case R.id.ll_clean:
+                DataCleanManager.clearAllCache(context);
 				tv_clean.setText("");
-				
 				break;
 			case R.id.img_on_off:
 				
@@ -64,6 +71,7 @@ public class MineSet extends BaseActivity implements OnClickListener{
 					img_on_off.setBackgroundResource(R.drawable.pos_off);
 					editor.putBoolean("isOpen_mineset",false);
  					editor.commit();
+                    toast("您已成功关闭推送消息，在应用进入后台时您将不会收到推送消息");
 					
 				}else{
 					isOpen_mineset=true;

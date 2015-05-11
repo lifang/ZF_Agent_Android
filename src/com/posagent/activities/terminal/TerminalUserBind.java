@@ -52,9 +52,6 @@ public class TerminalUserBind extends BaseActivity implements View.OnClickListen
         btn_bind_terminal = (Button) findViewById(R.id.btn_bind_terminal);
         btn_bind_terminal.setOnClickListener(this);
 
-
-
-
     }
 
 

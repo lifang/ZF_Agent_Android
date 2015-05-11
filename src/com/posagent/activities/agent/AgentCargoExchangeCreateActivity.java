@@ -78,6 +78,11 @@ public class AgentCargoExchangeCreateActivity extends BaseActivity {
         }
         if (v.getId() == R.id.ll_choose_terminal) {
             Intent i = new Intent(AgentCargoExchangeCreateActivity.this, TerminalChooseForm.class);
+
+            if (fromSonAgentId > 0) {
+                i.putExtra("agentId", fromSonAgentId);
+            }
+
             startActivity(i);
             return;
         }

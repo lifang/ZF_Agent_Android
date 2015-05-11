@@ -30,7 +30,7 @@
                 android:layout_weight="1"
                 android:background="@color/white"
                 android:maxLines="1"
-                android:text="储蓄"
+                android:text=""
                 android:hint="请输入银行名称"
                 />
             <ImageView

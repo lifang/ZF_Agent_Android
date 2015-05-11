@@ -346,7 +346,7 @@
                         android:layout_marginLeft="10dp"
                         android:singleLine="true"
                         android:text=""
-                        android:hint="终端管理/售后记录查看"
+                        android:hint="终端管理/售后记录"
                         android:textColor="@color/text292929"
                         android:background="@color/white"
                         android:gravity="center_vertical"
@@ -390,7 +390,7 @@
                         android:layout_marginLeft="10dp"
                         android:singleLine="true"
                         android:text=""
-                        android:hint="交易分润查询"
+                        android:hint="交易流水/POS分润"
                         android:textColor="@color/text292929"
                         android:background="@color/white"
                         android:gravity="center_vertical"
@@ -434,7 +434,7 @@
                         android:layout_marginLeft="10dp"
                         android:singleLine="true"
                         android:text=""
-                        android:hint="下级代理商管理"
+                        android:hint="管理下级代理商"
                         android:textColor="@color/text292929"
                         android:background="@color/white"
                         android:gravity="center_vertical"
@@ -478,7 +478,7 @@
                         android:layout_marginLeft="10dp"
                         android:singleLine="true"
                         android:text=""
-                        android:hint="用户管理"
+                        android:hint="管理用户"
                         android:textColor="@color/text292929"
                         android:background="@color/white"
                         android:gravity="center_vertical"
@@ -522,7 +522,7 @@
                         android:layout_marginLeft="10dp"
                         android:singleLine="true"
                         android:text=""
-                        android:hint="员工帐号管理"
+                        android:hint="员工帐号"
                         android:textColor="@color/text292929"
                         android:background="@color/white"
                         android:gravity="center_vertical"
@@ -566,7 +566,51 @@
                         android:layout_marginLeft="10dp"
                         android:singleLine="true"
                         android:text=""
-                        android:hint="代理商资料/收货地址管理"
+                        android:hint="代理商资料"
+                        android:textColor="@color/text292929"
+                        android:background="@color/white"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="17sp"
+                        />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/Viewc2" />
+            <LinearLayout
+
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_item" >
+
+                <LinearLayout android:layout_height="fill_parent"
+                    android:layout_width="0dp"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1">
+
+                    <CheckBox
+                        android:id="@+id/cb_role_stock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@drawable/checkbox_selector"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:singleLine="true"
+                        android:text=""
+                        android:hint="库存"
                         android:textColor="@color/text292929"
                         android:background="@color/white"
                         android:gravity="center_vertical"

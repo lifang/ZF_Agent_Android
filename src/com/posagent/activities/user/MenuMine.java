@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.zf_android.R;
-import com.example.zf_android.activity.AllProduct;
 import com.example.zf_android.activity.MerchantList;
 import com.example.zf_android.activity.MineSet;
 import com.example.zf_android.activity.MyInfo;
@@ -17,6 +16,7 @@ import com.example.zf_android.activity.SystemMessage;
 import com.example.zf_android.trade.ApplyOpenProgressActivity;
 import com.posagent.activities.BaseActivity;
 import com.posagent.activities.agent.AgentManageMainActivity;
+import com.posagent.activities.goods.GoodsList;
 import com.posagent.activities.home.Main;
 import com.posagent.utils.Constants;
 
@@ -86,7 +86,7 @@ public class MenuMine extends BaseActivity {
 
             case R.id.main_rl_gwc: //全部商品
 
-                startActivity(new Intent(MenuMine.this, AllProduct.class));
+                startActivity(new Intent(MenuMine.this, GoodsList.class));
                 break;
             case R.id.main_rl_pos1:
                 startActivity(new Intent(MenuMine.this, SystemMessage.class));

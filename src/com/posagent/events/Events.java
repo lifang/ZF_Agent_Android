@@ -936,6 +936,24 @@ public class Events {
         }
     }
 
+    public static class PrepareGoodsChannelListEvent extends CommonRequestEvent {}
+    public static class PrepareGoodsChannelListCompleteEvent extends CommonCompleteEvent {
+        private List<ChanelEntitiy> list = new ArrayList<ChanelEntitiy>();
+        public List<ChanelEntitiy> getList() {
+            if (list.size() < 1) {
+                String result = null;
+                result = getArrResult().toString();
+                list = (new Gson()).fromJson(result,
+                        new TypeToken<List<ChanelEntitiy>>() {}.getType());
+
+            }
+            return list;
+        }
+        public void setList(List<ChanelEntitiy> list) {
+            this.list = list;
+        }
+    }
+
     public static class BatchTerminalNumberPosEvent extends CommonRequestEvent {}
     public static class BatchTerminalNumberPosCompleteEvent extends CommonCompleteEvent {
         private List<TerminalItem> list = new ArrayList<TerminalItem>();

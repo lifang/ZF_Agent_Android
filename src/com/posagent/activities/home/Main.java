@@ -7,7 +7,6 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.example.zf_android.R;
-import com.example.zf_android.activity.AllProduct;
 import com.example.zf_android.entity.PicEntity;
 import com.example.zf_android.trade.CitySelectActivity;
 import com.example.zf_android.trade.entity.City;
@@ -15,6 +14,7 @@ import com.example.zf_android.trade.entity.Province;
 import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.activities.aftersale.AfterSaleGridActivity;
+import com.posagent.activities.goods.GoodsList;
 import com.posagent.activities.order.OrderList;
 import com.posagent.activities.stock.StockList;
 import com.posagent.activities.terminal.Terminal;
@@ -79,7 +79,7 @@ public class Main extends BaseActivity implements OnClickListener{
             @Override
             public void onClick(View v) {
                 if (!checkRole(Constants.Roles.AllProduct)) {return;}
-                Intent i2 =new Intent(Main.this, AllProduct.class);
+                Intent i2 =new Intent(Main.this, GoodsList.class);
                 startActivity(i2);
             }
         });

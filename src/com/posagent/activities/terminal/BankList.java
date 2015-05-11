@@ -72,7 +72,7 @@ public class BankList extends BaseListActivity {
         JsonParams params = new JsonParams();
         //Fixme
 //        params.put("terminalId", 6);
-        params.put("terminalId", terminalId);
+        params.put("terminalId", "" + terminalId);
 
         String keyword = ((EditText)findViewById(R.id.et_keyword)).getText().toString();
         params.put("keyword", keyword);

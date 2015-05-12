@@ -121,6 +121,17 @@ public class StaffForm extends BaseActivity
 
 
     private boolean check() {
+        if (!et_password.getText().toString().equals(et_password_confirm.getText().toString())) {
+            toast("两次密码不匹配");
+            return false;
+        }
+
+
+        int len = et_password.getText().toString().length();
+        if (len < 6 || len > 20) {
+            toast("密码长度6-20位");
+            return false;
+        }
         return true;
     }
 

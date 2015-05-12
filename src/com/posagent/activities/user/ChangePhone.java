@@ -1,5 +1,7 @@
 package com.posagent.activities.user;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +26,8 @@ import de.greenrobot.event.EventBus;
 public class ChangePhone extends BaseActivity
 {
 
+    ChangePhone _this = this;
+
     private EditText et_new_phone, et_verify_code;
     private TextView tv_old_phone;
     private Button btn_get_verify_code, btn_submit;
@@ -32,7 +36,21 @@ public class ChangePhone extends BaseActivity
     private boolean sendingVerifyCode = false;
 
     private String oldPhone;
+    static final int DOWN_COUNTER = 60;
 
+    private int counter = DOWN_COUNTER;
+
+    private Timer downCountTimer;
+
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public int counterDown() {
+        this.counter = --counter;
+        return this.counter;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,11 +101,34 @@ public class ChangePhone extends BaseActivity
         if (sendingVerifyCode) {
             return;
         }
+        counter = DOWN_COUNTER;
         sendingVerifyCode = true;
-        btn_get_verify_code.setText("正在发送...");
+        btn_get_verify_code.setText("等待(" + this.getCounter() + ")");
+        btn_get_verify_code.setEnabled(false);
+        btn_get_verify_code.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+
+        downCountTimer = new Timer();
+        downCountTimer.scheduleAtFixedRate(new TimerTask(){
+            @Override
+            public void run(){
+                _this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        int i = _this.counterDown();
+                        if (i < 1) {
+                            downCountTimer.cancel();
+                            btn_get_verify_code.getBackground().setColorFilter(null);
+                        }
+
+                        btn_get_verify_code.setText("等待(" + i + ")");
+                    }
+                });
+            }
+        },0,1000);
+
         Timer timer = new Timer();
         VerifyCodeReableTimerTask myTimerTask = new VerifyCodeReableTimerTask();
-        timer.schedule(myTimerTask, 60 * 1000);
+        timer.schedule(myTimerTask, DOWN_COUNTER * 1000);
 
         //do get verify code
         JsonParams params = new JsonParams();
@@ -102,6 +143,15 @@ public class ChangePhone extends BaseActivity
 
 
     private boolean check() {
+        if (et_new_phone.getText().toString().length() < 11) {
+            toast("请输入有效手机号码");
+            return false;
+        }
+        if (et_verify_code.getText().toString().length() < 3) {
+            toast("请输入有效验证码");
+            return false;
+        }
+
         return true;
     }
 
@@ -145,6 +195,7 @@ public class ChangePhone extends BaseActivity
                 public void run() {
                     sendingVerifyCode = false;
                     btn_get_verify_code.setText("获取验证码");
+                    btn_get_verify_code.setEnabled(true);
                 }
             });
         }

@@ -79,7 +79,6 @@ public class Terminal extends BaseActivity implements IXListViewListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_terminal);
         initView();
-        getData();
     }
 
     private void initView() {

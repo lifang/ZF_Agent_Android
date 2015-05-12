@@ -8,7 +8,6 @@ import android.os.Message;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.examlpe.zf_android.util.Tools;
@@ -194,7 +193,6 @@ public class UserDetail extends BaseActivity implements IXListViewListener {
                 if (deleteIds.size() > 0) {
                     sendDelete();
 
-                    Toast.makeText(UserDetail.this, "正在删除...", Toast.LENGTH_SHORT).show();
                 }
 
             }

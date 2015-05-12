@@ -10,7 +10,6 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.examlpe.zf_android.util.ScrollViewWithListView;
 import com.examlpe.zf_android.util.TitleMenuUtil;
@@ -106,7 +105,6 @@ public class AddressList extends BaseActivity  {
                 event.setParams(strParams);
                 EventBus.getDefault().post(event);
 
-                Toast.makeText(AddressList.this, "正在删除...", Toast.LENGTH_SHORT).show();
             }
         });
 

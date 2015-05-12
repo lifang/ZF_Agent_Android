@@ -24,6 +24,8 @@ public class AgentDefaultProfit extends BaseActivity
     private EditText et_profit;
     private Button btn_submit;
 
+    private String profit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,12 +33,17 @@ public class AgentDefaultProfit extends BaseActivity
 
         new TitleMenuUtil(AgentDefaultProfit.this, "默认分润比例").show();
 
+        profit = getIntent().getStringExtra("profit");
+
         initView();
     }
 
     private void initView() {
 
         et_profit = (EditText) findViewById(R.id.et_profit);
+        if (null != profit) {
+            et_profit.setText(profit);
+        }
 
         getData();
 

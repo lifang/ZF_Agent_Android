@@ -181,8 +181,7 @@ public class APIManager {
 
             JSONObject json = null;
             String code = null;
-            try {
-
+            try { 
                 json = new JSONObject(result);
                 int intCode = json.getInt("code");
 
@@ -218,9 +217,14 @@ public class APIManager {
                 EventBus.getDefault().post(completeEvent);
 
             } catch (Exception e) {
+
+                EventBus.getDefault().post(new Events.ServerError());
+
                 e.printStackTrace();
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
+            EventBus.getDefault().post(new Events.ServerError());
+
             e.printStackTrace();
         }
 
@@ -796,6 +800,15 @@ public class APIManager {
     public void onEventBackgroundThread(Events.BannerDataEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.BannerDataCompleteEvent();
         CommonRequest(event, completeEvent, UrlBannerData);
+    }
+
+
+
+
+    class ServerError extends Exception {
+        public ServerError(String msg) {
+            super(msg);
+        }
     }
 
 

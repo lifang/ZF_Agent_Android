@@ -319,7 +319,6 @@ public class MessageList extends BaseActivity implements IXListViewListener {
                 if (deleteIds.size() > 0) {
                     sendDelete();
 
-                    Toast.makeText(MessageList.this, "正在删除...", Toast.LENGTH_SHORT).show();
                 }
 
             }

@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
@@ -237,7 +236,6 @@ public class AgentProfitList extends BaseActivity implements IXListViewListener 
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 sendDelete(profit);
-                Toast.makeText(AgentProfitList.this, "正在删除...", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
@@ -113,7 +112,6 @@ public class MessageDetail extends BaseActivity {
                 deleteIds.add(entity.getId());
                 if (deleteIds.size() > 0) {
                     sendDelete();
-                    Toast.makeText(MessageDetail.this, "正在删除...", Toast.LENGTH_SHORT).show();
                 }
 
             }

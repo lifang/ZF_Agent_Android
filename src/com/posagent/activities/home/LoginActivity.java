@@ -54,6 +54,11 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
         initView();
         new TitleMenuUtil(LoginActivity.this, "登录").show();
+        findViewById(R.id.titleback_linear_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
 
         findViewById(R.id.titleback_image_back).setVisibility(View.GONE);
     }

@@ -289,6 +289,10 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         tv_encrypt_card_way.setText(goodinfo.getEncrypt_card_way());
         tv_goods_desc.setText(goodinfo.getDescription());
 
+        if (!goodinfo.isHas_lease()) {
+            hide("tv_daizulin");
+        }
+
         setText("tv_quantity", "" + goodinfo.getFloor_purchase_quantity() + "件");
 
 

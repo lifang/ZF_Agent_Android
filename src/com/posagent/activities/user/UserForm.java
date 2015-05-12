@@ -2,6 +2,8 @@ package com.posagent.activities.user;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +31,7 @@ import de.greenrobot.event.EventBus;
  */
 public class UserForm extends BaseActivity implements View.OnClickListener
 {
+    UserForm _this = this;
 
     private TextView tv_city_name;
     private EditText et_username, et_mobile, et_verify_code,
@@ -40,6 +43,22 @@ public class UserForm extends BaseActivity implements View.OnClickListener
     private String cityName;
 
     private boolean sendingVerifyCode = false;
+
+
+    static final int DOWN_COUNTER = 60;
+
+    private int counter = DOWN_COUNTER;
+
+    private Timer downCountTimer;
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public int counterDown() {
+        this.counter = --counter;
+        return this.counter;
+    }
 
 
     @Override
@@ -103,6 +122,32 @@ public class UserForm extends BaseActivity implements View.OnClickListener
         if (sendingVerifyCode) {
             return;
         }
+
+        counter = DOWN_COUNTER;
+        sendingVerifyCode = true;
+        btn_get_verify_code.setText("等待(" + this.getCounter() + ")");
+        btn_get_verify_code.setEnabled(false);
+        btn_get_verify_code.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+
+        downCountTimer = new Timer();
+        downCountTimer.scheduleAtFixedRate(new TimerTask(){
+            @Override
+            public void run(){
+                _this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        int i = _this.counterDown();
+                        if (i < 1) {
+                            downCountTimer.cancel();
+                            btn_get_verify_code.getBackground().setColorFilter(null);
+                        }
+
+                        btn_get_verify_code.setText("等待(" + i + ")");
+                    }
+                });
+            }
+        },0,1000);
+
         sendingVerifyCode = true;
         btn_get_verify_code.setText("正在发送...");
         Timer timer = new Timer();
@@ -123,6 +168,12 @@ public class UserForm extends BaseActivity implements View.OnClickListener
     private boolean check() {
         if (!et_password.getText().toString().equals(et_password_confirm.getText().toString())) {
             toast("两次密码不匹配");
+            return false;
+        }
+
+        int len = et_password.getText().toString().length();
+        if (len < 6 || len > 20) {
+            toast("密码长度6-20位");
             return false;
         }
         return true;
@@ -192,6 +243,8 @@ public class UserForm extends BaseActivity implements View.OnClickListener
                 public void run() {
                     sendingVerifyCode = false;
                     btn_get_verify_code.setText("获取验证码");
+                    btn_get_verify_code.setEnabled(true);
+
                 }
             });
         }

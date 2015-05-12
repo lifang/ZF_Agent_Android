@@ -33,7 +33,7 @@
                 android:layout_marginLeft="20dp"
                 android:gravity="center_vertical"
                 android:singleLine="true"
-                android:text="设置默认分润比率"
+                android:text="默认分润比率"
                 android:textColor="@color/text292929"
                 android:textSize="17sp" />
 

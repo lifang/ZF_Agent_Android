@@ -4,6 +4,8 @@ package com.posagent;
 import android.app.Activity;
 import android.app.Application;
 import android.support.v4.util.ArrayMap;
+import android.view.Gravity;
+import android.widget.Toast;
 
 import com.example.zf_android.entity.ApplyneedEntity;
 import com.example.zf_android.entity.ChannelEntity;
@@ -251,6 +253,14 @@ public class MyApplication extends Application {
     }
 
     // events
+    public void onEventMainThread(Events.ServerError event) {
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "服务器有点问题，请稍候再试",
+                Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
+
     public void onEventMainThread(Events.ChannelListCompleteEvent event) {
         setChannels(event.getList());
         for (ChannelEntity channel: event.getList()) {

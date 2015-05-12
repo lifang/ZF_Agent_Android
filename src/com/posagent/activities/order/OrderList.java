@@ -90,7 +90,6 @@ public class OrderList extends BaseActivity implements IXListViewListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_list);
         initView();
-        getData();
     }
 
     private void initView() {

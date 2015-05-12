@@ -155,6 +155,8 @@ public class Events {
     public static class RefreshToMuch {
         public RefreshToMuch() {}
     }
+    public static class ServerError {
+    }
 
     public static class DoLoginEvent extends CommonRequestEvent {
     }

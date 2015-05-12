@@ -86,7 +86,7 @@ public class AgentManageActivity extends BaseActivity implements XListView.IXLis
                 if (!checkRole(Constants.Roles.TradeFlowAndProfit)) {return;}
 
                 Intent i2 =new Intent(AgentManageActivity.this, AgentDefaultProfit.class);
-                startActivity(i2);
+                startActivityForResult(i2, Constants.REQUEST_CODE);
             }
         });
 
@@ -167,7 +167,7 @@ public class AgentManageActivity extends BaseActivity implements XListView.IXLis
         // 则直接 return，不再调用 super 处理
         if (v.getId() == R.id.ll_profit) {
             Intent i = new Intent(AgentManageActivity.this, AgentDefaultProfit.class);
-
+            i.putExtra("profit", getValue("tv_profit"));
             startActivityForResult(i, Constants.REQUEST_CODE);
 
             return;

@@ -9,7 +9,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.zf_android.R;
 import com.example.zf_android.entity.AdressEntity;
@@ -102,16 +101,12 @@ public class AddressAdapter extends BaseAdapter {
             public void onSwipeTop() {
                 holder.tv_delete.setVisibility(View.VISIBLE);
 
-                Toast.makeText(context, "top", Toast.LENGTH_SHORT).show();
             }
             public void onSwipeRight() {
-                Toast.makeText(context, "right", Toast.LENGTH_SHORT).show();
             }
             public void onSwipeLeft() {
-                Toast.makeText(context, "left", Toast.LENGTH_SHORT).show();
             }
             public void onSwipeBottom() {
-                Toast.makeText(context, "bottom", Toast.LENGTH_SHORT).show();
             }
         });
 

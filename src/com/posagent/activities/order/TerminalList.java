@@ -23,7 +23,7 @@ public class TerminalList extends BaseListActivity {
 
     private void getData() {
         String terminals = getIntent().getStringExtra("terminals");
-        for (String terminal: terminals.split(",")) {
+        for (String terminal: terminals.split(" ")) {
             Map<String, Object> item = new HashMap<String, Object>();
             item.put("name", terminal);
             items.add(item);

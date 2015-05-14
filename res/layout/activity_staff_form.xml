@@ -230,12 +230,14 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="0.5dp"
+                android:visibility="gone"
                 android:background="@color/Viewc2" />
             <LinearLayout
 
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:background="@drawable/bg_item" >
 
                 <LinearLayout android:layout_height="fill_parent"

@@ -76,6 +76,7 @@ public class MyInfo extends BaseActivity {
 
 
     private void initView() {
+        hide("btn_exit");
         btn_exit=(Button) findViewById(R.id.btn_exit);
         btn_exit.setOnClickListener(this);
 

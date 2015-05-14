@@ -146,8 +146,8 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
                     show("ll_fapiao_info_line");
                 }else{
                     is_need_invoice=0;
-                    hide("ll_fapiao_info");
-                    hide("ll_fapiao_info_line");
+//                    hide("ll_fapiao_info");
+//                    hide("ll_fapiao_info_line");
                 }
             }
         });
@@ -197,7 +197,7 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
         buyCountEdit.setText("1");
         if (buyType != Constants.Goods.OrderTypePigou) {
             hide("tv_origin_price");
-            ll_choose_users.setVisibility(View.VISIBLE);
+//            ll_choose_users.setVisibility(View.VISIBLE);
             if (buyType == Constants.Goods.OrderTypeDaigou) {
                 setText("titleback_text_title", "采购订单确认");
             } else if (buyType == Constants.Goods.OrderTypeDaizulin) {
@@ -262,7 +262,7 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
                     addressEntity = entity;
                 }
 
-                if (entity.getIsDefault() == "1") {
+                if (entity.getIsDefault().equals("1")) {
                     addressEntity = entity;
                     break;
                 }

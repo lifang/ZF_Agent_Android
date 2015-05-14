@@ -149,7 +149,7 @@
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:background="#f0f0f0"
-        android:stretchColumns="0,1,2,3,4,5,6"
+        android:stretchColumns="0,1,2,3,4"
         >
         <TableRow>
 
@@ -189,7 +189,7 @@
 
             <TextView
                 android:id="@+id/tv_agentCount"
-                android:text="代理商库存\n500件"
+                android:text="当前库存\n500件"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="10px"
@@ -200,11 +200,13 @@
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:visibility="gone"
                 >
                 <View style="@style/VDivider" />
             </LinearLayout>
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/tv_totalCount"
                 android:text="总库存\n500件"
                 android:layout_width="wrap_content"

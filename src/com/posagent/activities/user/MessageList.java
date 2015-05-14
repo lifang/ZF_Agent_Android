@@ -91,6 +91,9 @@ public class MessageList extends BaseActivity implements IXListViewListener {
 
     private void initView() {
         new TitleMenuUtil(MessageList.this, "我的消息").show();
+
+        setText("norecord_text_to", "没有收到消息");
+
         rl_button_toolbar = (RelativeLayout) findViewById(R.id.rl_button_toolbar);
         if (!isDeleting) {
             rl_button_toolbar.setVisibility(View.GONE);

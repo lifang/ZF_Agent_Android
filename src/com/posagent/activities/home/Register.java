@@ -36,7 +36,7 @@ public class Register extends FragmentActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        new TitleMenuUtil(Register.this, "申请成为代理商").show();
+        new TitleMenuUtil(Register.this, "申请成为合作伙伴").show();
         initView();
 
         try {

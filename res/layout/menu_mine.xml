@@ -119,6 +119,49 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
+            android:background="@color/Viewc" />
+        <LinearLayout
+            android:id="@+id/ll_change_password"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/bg_item" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/login_lock" />
+
+
+            <TextView
+                android:tag="@string/tag_destination_name"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="7dp"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="修改账户密码"
+                android:textColor="@color/text292929"
+                android:textSize="17sp" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/post_right" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
             android:background="@color/Viewc2" />
         <LinearLayout
             android:id="@+id/ll_dd"
@@ -261,6 +304,17 @@
             android:layout_width="fill_parent"
             android:layout_height="1dp"
             android:background="@color/Viewc2" />
+
+        <Button
+            android:id="@+id/btn_exit"
+            android:layout_height="42dp"
+            android:layout_width="184dp"
+            android:layout_marginTop="30dp"
+            android:text="退出登录"
+            android:background="@drawable/bg_red_dra"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/ffffff"
+            android:textSize="20sp"/>
     </LinearLayout>
 
     <!--列表结束-->

@@ -237,7 +237,7 @@ public class HMSlideFragment extends Fragment {
                     public void onClick(View v) {
                         Intent i = new Intent(context, Webview.class);
                         i.putExtra("url", entity.getWebsite_url());
-                        startActivity(i);
+//                        startActivity(i);
                     }
                 });
             }

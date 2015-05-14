@@ -95,6 +95,11 @@ public class AgentCargoCreateActivity extends BaseActivity {
     }
 
     private void doSubmit() {
+
+        if (!check()) {
+            return;
+        }
+
         JsonParams params = new JsonParams();
         params.put("agentId", MyApplication.user().getAgentId());
         params.put("customerId",  MyApplication.user().getId());
@@ -109,6 +114,20 @@ public class AgentCargoCreateActivity extends BaseActivity {
         Events.CommonRequestEvent event = new Events.PrepareAddEvent();
         event.setParams(strParams);
         EventBus.getDefault().post(event);
+    }
+
+    private boolean check() {
+        if (sonAgentId == 0) {
+            toast("请选择配送至");
+            return false;
+        }
+
+        if (selectedList.size() < 1) {
+            toast("请选择终端号");
+            return false;
+        }
+
+        return true;
     }
 
     //Events

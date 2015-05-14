@@ -68,7 +68,11 @@ public class AgentAdapter extends BaseAdapter{
         holder.tv_agent_name.setText("代理商名称：" + entity.getCompany_name());
         holder.tv_create_time.setText("加入时间：" + entity.getCreated_at());
         holder.tv_sold_count.setText("已售出：" + entity.getSoldNum());
-        holder.tv_left_count.setText("剩余库存：" + (entity.getOpenNum() - entity.getSoldNum()));
+        int left = (entity.getOpenNum() - entity.getSoldNum());
+        if (left < 0) {
+            left = 0;
+        }
+        holder.tv_left_count.setText("剩余库存：" + left);
         holder.tv_open_count.setText("终端开通量：" + entity.getOpenNum());
 
 

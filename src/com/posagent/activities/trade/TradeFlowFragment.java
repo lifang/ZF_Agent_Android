@@ -301,7 +301,7 @@ public class TradeFlowFragment extends Fragment implements View.OnClickListener 
 
     private boolean check() {
         if (TextUtils.isEmpty(tradeClientName)) {
-            CommonUtil.toastShort(getActivity(), "请选择终端号");
+            CommonUtil.toastShort(getActivity(), "请输入终端号");
             return false;
         }
         if (TextUtils.isEmpty(tradeStartDate)) {

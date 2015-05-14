@@ -52,6 +52,11 @@ public class ChangeAdress extends BaseActivity {
 
     private void initView() {
         hide("adresslist");
+
+        show("next_sure");
+        setText("next_sure", "管理地址");
+        findViewById(R.id.next_sure).setOnClickListener(this);
+
         lv = (ScrollViewWithListView) findViewById(R.id.lv);
         myAdapter = new ChooseAdressAdapter(ChangeAdress.this, myList);
         lv.setAdapter(myAdapter);
@@ -87,11 +92,26 @@ public class ChangeAdress extends BaseActivity {
 
     }
 
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.next_sure:
+                Intent i = new Intent(ChangeAdress.this, AddressList.class);
+                startActivity(i);
+                break;
+            default:
+
+        }
+
+        super.onClick(v);
+    }
 
     // events
     public void onEventMainThread(Events.AddressListCompleteEvent event) {
         if (event.getSuccess()) {
             moreList = event.getList();
+            myList.clear();
             myList.addAll(moreList);
 
             myAdapter.notifyDataSetChanged();

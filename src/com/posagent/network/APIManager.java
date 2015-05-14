@@ -34,8 +34,8 @@ public class APIManager {
 
     // Host and api
 //    public static final String BaseUrl = "http://114.215.149.242:28080/ZFAgent/api";
-//    public static final String BaseUrl = "http://121.40.84.2:28080/ZFAgent/api";
-    public static final String BaseUrl = "http://121.40.64.167:9090/api";
+    public static final String BaseUrl = "http://121.40.84.2:28080/ZFAgent/api";
+//    public static final String BaseUrl = "http://121.40.64.167:9090/api";
 
     public static final String UrlLogin = BaseUrl + "/agent/agentLogin";
     public static final String UrlRegister = BaseUrl + "/agent/userRegistration";
@@ -181,7 +181,7 @@ public class APIManager {
 
             JSONObject json = null;
             String code = null;
-            try { 
+            try {
                 json = new JSONObject(result);
                 int intCode = json.getInt("code");
 

@@ -27,11 +27,13 @@ import de.greenrobot.event.EventBus;
 public class AgentDetailActivity extends BaseActivity {
 
     TextView viewSetRate;
+    private CheckBox cb_is_profit;
 
     private int sonAgentsId;
     private SonAgentInfo entity;
 
-	@Override
+
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -118,7 +120,13 @@ public class AgentDetailActivity extends BaseActivity {
         setText("tv_open_count", "" + entity.getOpennum());
         setText("tv_left_count", "" + (entity.getOpennum() - entity.getSoldnum()));
 
-        CheckBox cb_is_profit = (CheckBox) findViewById(R.id.cb_is_profit);
+        cb_is_profit = (CheckBox) findViewById(R.id.cb_is_profit);
+        cb_is_profit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleSetProfit();
+            }
+        });
         boolean is_profit = entity.getIs_have_profit().equals("2");
         cb_is_profit.setChecked(is_profit);
         if (is_profit) {
@@ -156,6 +164,14 @@ public class AgentDetailActivity extends BaseActivity {
             }
         });
 
+    }
+
+    private void toggleSetProfit() {
+        if (cb_is_profit.isChecked()) {
+            viewSetRate.setVisibility(View.VISIBLE);
+        } else {
+            viewSetRate.setVisibility(View.GONE);
+        }
     }
 	 
 }

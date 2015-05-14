@@ -130,6 +130,11 @@ public class MyApplication extends Application {
 
         int intRoleId = Integer.parseInt(roleId);
 
+        if (intRoleId == Constants.Roles.Mine ||
+                intRoleId == Constants.Roles.Message) {
+            return true;
+        }
+
         if (null == roles) {
             return false;
         }

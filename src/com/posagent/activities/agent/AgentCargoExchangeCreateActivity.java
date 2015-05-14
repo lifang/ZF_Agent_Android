@@ -118,6 +118,13 @@ public class AgentCargoExchangeCreateActivity extends BaseActivity {
     }
 
     private void doSubmit() {
+
+
+        if (!check()) {
+            return;
+        }
+
+
         JsonParams params = new JsonParams();
         params.put("customerId", MyApplication.user().getId());
 
@@ -129,6 +136,26 @@ public class AgentCargoExchangeCreateActivity extends BaseActivity {
         Events.CommonRequestEvent event = new Events.ExchangeAddEvent();
         event.setParams(strParams);
         EventBus.getDefault().post(event);
+    }
+
+
+    private boolean check() {
+        if (toSonAgentId == 0) {
+            toast("请选择从");
+            return false;
+        }
+
+        if (fromSonAgentId == 0) {
+            toast("请选择到");
+            return false;
+        }
+
+        if (selectedList.size() < 1) {
+            toast("请选择终端号");
+            return false;
+        }
+
+        return true;
     }
 
     //Events

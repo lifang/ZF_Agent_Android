@@ -58,7 +58,7 @@ public class OrderList extends BaseActivity implements IXListViewListener,
     Spinner spinnerState, spinnerKinds;
 
     private String[] state= {"选择订单状态","全部","未付款","已付款","已发货","已取消","交易关闭"};
-    private String[] kinds = {"选择订单类型","全部","代采购","代租赁"};
+    private String[] kinds = {"选择订单类型","全部","采购","租赁"};
 
 
     //params data

@@ -10,8 +10,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.examlpe.zf_android.util.Tools;
@@ -95,6 +97,12 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
 
         setContentView(R.layout.activity_trade_flow);
         initViews();
+
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "手机端交易流水查询仅供单台终端查询，完整查询功能请登陆PC端合作伙伴平台",
+                Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 
     @Override

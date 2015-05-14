@@ -68,12 +68,14 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
+            android:visibility="gone"
             android:background="@color/Viewc2"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@color/white"
+            android:visibility="gone"
             android:paddingLeft="24dp">
 
 
@@ -248,6 +250,7 @@
                 android:text="@string/trade_statistic"
                 android:textColor="@color/white"
                 android:enabled="false"
+                android:visibility="gone"
                 android:background="@drawable/normal_button_selector"/>
 
         </LinearLayout>

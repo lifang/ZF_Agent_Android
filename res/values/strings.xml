@@ -55,7 +55,7 @@
         <item>现金</item>
     </string-array>
 
-	<string name="trade_client">请选择终端号</string>
+	<string name="trade_client">请输入终端号</string>
 	<string name="trade_start_date">请选择开始时间</string>
 	<string name="trade_end_date">请选择结束时间</string>
 
@@ -137,7 +137,7 @@
 	<string name="after_sale_lease">租赁退还记录</string>
 
 	<string-array name="after_sale_number">
-		<item>维修编号:</item>
+		<item>编号:</item>
 		<item>退货编号:</item>
 		<item>注销编号:</item>
 		<item>换货编号:</item>

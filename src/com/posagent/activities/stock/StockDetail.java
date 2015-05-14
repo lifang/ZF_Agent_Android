@@ -116,7 +116,7 @@ public class StockDetail extends BaseActivity implements IXListViewListener {
         tv_goods_name.setText(entity.getGoodname());
         tv_paychannel.setText(entity.getPaychannel());
         tv_totalCount.setText("总库存\n" + entity.getTotalCount() + "件");
-        tv_agentCount.setText("代理商库存\n" + entity.getAgentCount() + "件");
+        tv_agentCount.setText("当前库存\n" + entity.getAgentCount() + "件");
         tv_openCount.setText("已开通数量\n" + entity.getOpenCount() + "件");
         tv_historyCount.setText("历史进货数量\n" + entity.getHoitoryCount() + "件");
 
@@ -151,6 +151,9 @@ public class StockDetail extends BaseActivity implements IXListViewListener {
         Xlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (true) {
+                    return;
+                }
                 Intent i = new Intent(StockDetail.this, StockAgentDetail.class);
                 Gson gson = new Gson();
                 StockAgentEntity stockAgentEntity = myList.get(position - 1);

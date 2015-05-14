@@ -1,6 +1,5 @@
 package com.example.zf_zandroid.adapter;
 
-import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,16 +12,17 @@ import com.examlpe.zf_android.util.StringUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.trade.entity.TradeRecord;
 import com.posagent.activities.trade.TradeDetailActivity;
+import com.posagent.activities.trade.TradeFlowActivity;
 
 import java.util.List;
 
 
 public class TradeFlowAdapter extends BaseAdapter{
-    private Context context;
+    private TradeFlowActivity context;
     private List<TradeRecord> list;
     private LayoutInflater inflater;
     private ViewHolder holder = null;
-    public TradeFlowAdapter(Context context, List<TradeRecord> list) {
+    public TradeFlowAdapter(TradeFlowActivity context, List<TradeRecord> list) {
         this.context = context;
         this.list = list;
     }
@@ -80,12 +80,30 @@ public class TradeFlowAdapter extends BaseAdapter{
         holder.trade_status.setText(statusName);
         holder.trade_amount.setText("￥" + StringUtil.priceShow(entity.getAmount()));
 
+        if (this.tradeType() == 4) {
+            //话费充值
+            TextView tv;
+            tv = (TextView)convertView.findViewById(R.id.trade_account_key);
+            tv.setText("");
+
+            tv = (TextView)convertView.findViewById(R.id.trade_account);
+            tv.setText("");
+
+            holder.trade_receive_account.setText(entity.getPhone());
+            tv = (TextView)convertView.findViewById(R.id.trade_receive_account_key);
+            tv.setText("手机号码");
+
+        } else if (this.tradeType() == 5) {
+            //生活充值
+        }
+
         convertView.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
                 Intent i = new Intent(context, TradeDetailActivity.class);
                 i.putExtra("id", entity.getId());
+                i.putExtra("tradeType", context.tradeType());
                 context.startActivity(i);
             }
         });
@@ -96,5 +114,9 @@ public class TradeFlowAdapter extends BaseAdapter{
     public final class ViewHolder {
         public TextView trade_time, trade_account, trade_receive_account, trade_client_number,
                 trade_status, trade_amount;
+    }
+
+    private int tradeType() {
+        return context.tradeType();
     }
 }

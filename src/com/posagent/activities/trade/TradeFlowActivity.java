@@ -265,4 +265,8 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
         }
     }
 
+    public int tradeType() {
+        return tradeTypeId;
+    }
+
 }

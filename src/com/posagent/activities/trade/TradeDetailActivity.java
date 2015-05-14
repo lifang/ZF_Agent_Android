@@ -22,6 +22,7 @@ import de.greenrobot.event.EventBus;
 public class TradeDetailActivity extends BaseActivity {
 
     private int id;
+    private int tradeType;
 
     private TradeDetail entity;
 
@@ -32,6 +33,7 @@ public class TradeDetailActivity extends BaseActivity {
         new TitleMenuUtil(this, getString(R.string.title_trade_detail)).show();
 
         id = getIntent().getIntExtra("id", 0);
+        tradeType = getIntent().getIntExtra("tradeType", 1);
 
         initView();
     }
@@ -72,6 +74,8 @@ public class TradeDetailActivity extends BaseActivity {
 
     private void updateView() {
 
+        View k1 = null, k2 = null, v1 = null, v2 = null;
+
         Resources resources = getResources();
         String statusName = "未知";
 
@@ -85,7 +89,7 @@ public class TradeDetailActivity extends BaseActivity {
 
         setText("trade_detail_status", statusName);
         setText("trade_detail_amount", StringUtil.priceShow(entity.getAmount()));
-        setText("trade_detail_poundage",  StringUtil.priceShow(entity.getPoundage()));
+        setText("trade_detail_poundage",  "￥" + StringUtil.priceShow(entity.getPoundage()));
         setText("trade_detail_time", "" + entity.getTradedTimeStr());
 
         LinearLayout mCommercialValueContainer = (LinearLayout) findViewById(R.id.trade_commercial_value_container);
@@ -102,6 +106,7 @@ public class TradeDetailActivity extends BaseActivity {
             key.setPadding(0, 5, 0, 5);
             key.setTextColor(resources.getColor(R.color.text6c6c6c6));
             key.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
+            key.setTag(commercialKeys[i]);
             key.setText(commercialKeys[i]);
             mCommercialKeyContainer.addView(key);
         }
@@ -114,6 +119,11 @@ public class TradeDetailActivity extends BaseActivity {
             key.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
             key.setText(bankKeys[i]);
             mBankKeyContainer.addView(key);
+            if (i == 1) {
+                k1 = key;
+            } else if (i == 2) {
+                k2 = key;
+            }
         }
 
         for (int i = 0; i < commercialKeys.length; i++) {
@@ -135,19 +145,74 @@ public class TradeDetailActivity extends BaseActivity {
             value.setPadding(0, 5, 0, 5);
             value.setTextColor(resources.getColor(R.color.text6c6c6c6));
             value.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
-            value.setText(i == 0 ? entity.getTerminalNumber()
-                    : i == 1 ? entity.getPayFromAccount()
-                    : i == 2 ? entity.getPayIntoAccount()
-                    : i == 3 ? entity.getPaychannel()
-                    : i == 4 ? StringUtil.priceShow(entity.getProfitPrice()) + ""
-                    : i == 5 ? StringUtil.priceShow(entity.getAmount()) + ""
-                    : i == 6 ? entity.getTradedTimeStr()
-                    : i == 7 ? statusName
-                    : i == 8 ? entity.getBatchNumber()
-                    : i == 9 ? entity.getTradeNumber()
-                    : "");
+
+            if (i == 1) {
+                v1 = value;
+            } else if (i == 2) {
+                v2 = value;
+            }
+
+            String text = "";
+            switch (i) {
+                case 0:
+                    text = entity.getTerminalNumber();
+                    break;
+                case 1:
+                    text = entity.getPayFromAccount();
+                    break;
+                case 2:
+                    text = entity.getPayIntoAccount();
+
+                    break;
+                case 3:
+                    text = entity.getPaychannel();
+                    break;
+                case 4:
+                    text = StringUtil.priceShow(entity.getProfitPrice());
+                    break;
+                case 5:
+                    text = StringUtil.priceShow(entity.getAmount());
+                    break;
+                case 6:
+                    text = entity.getTradedTimeStr();
+                    break;
+                case 7:
+                    text = statusName;
+                    break;
+                case 8:
+                    text = entity.getBatchNumber();
+                    break;
+                case 9:
+                    text = entity.getTradeNumber();
+                    break;
+                default:
+
+            }
+
+            value.setText(text);
             mBankValueContainer.addView(value);
+
+
+
+            if (tradeType == 4) {
+                if (null != k1) {
+                    k1.setVisibility(View.GONE);
+                }
+                if (null != v1) {
+                    v1.setVisibility(View.GONE);
+                }
+
+                if (null != k2) {
+                    ((TextView)k2).setText("手机号码");
+                }
+                if (null != v2) {
+                    ((TextView)v2).setText(entity.getPhone());
+                }
+
+            }
         }
+
+
     }
 
 }

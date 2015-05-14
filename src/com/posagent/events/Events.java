@@ -1021,6 +1021,10 @@ public class Events {
     public static class ChangeEmailEvent extends CommonRequestEvent {}
     public static class ChangeEmailCompleteEvent extends CommonCompleteEvent{}
 
+    public static class UpdateEmailDentcodeEvent extends CommonRequestEvent {}
+    public static class UpdateEmailDentcodeCompleteEvent extends CommonCompleteEvent{}
+
+
     public static class ChangePasswordEvent extends CommonRequestEvent {}
     public static class ChangePasswordCompleteEvent extends CommonCompleteEvent{}
 

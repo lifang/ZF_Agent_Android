@@ -856,6 +856,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:visibility="gone"
                 android:orientation="horizontal">
 
                 <View style="@style/Divider"
@@ -879,6 +880,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/ll_relative_list_container"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

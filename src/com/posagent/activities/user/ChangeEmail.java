@@ -48,6 +48,8 @@ public class ChangeEmail extends BaseActivity
         btn_submit = (Button) findViewById(R.id.btn_submit);
         btn_submit.setOnClickListener(this);
 
+        findViewById(R.id.btn_send_verify_code).setOnClickListener(this);
+
     }
 
 
@@ -57,6 +59,9 @@ public class ChangeEmail extends BaseActivity
         switch (v.getId()) {
             case R.id.btn_submit:
                 doSubmit();
+                break;
+            case R.id.btn_send_verify_code:
+                doGetCode();
                 break;
             default:
                 break;
@@ -73,12 +78,28 @@ public class ChangeEmail extends BaseActivity
         return true;
     }
 
+    private void doGetCode() {
+        if(check()) {
+            JsonParams params = new JsonParams();
+
+            params.put("customerId",  MyApplication.user().getId());
+            params.put("email", et_new_email.getText().toString());
+
+            String strParams = params.toString();
+            Events.CommonRequestEvent event = new Events.UpdateEmailDentcodeEvent();
+            event.setParams(strParams);
+            EventBus.getDefault().post(event);
+        }
+    }
+
+
     private void doSubmit() {
         if(check()) {
             JsonParams params = new JsonParams();
 
             params.put("customerId",  MyApplication.user().getId());
             params.put("email", et_new_email.getText().toString());
+            params.put("dentcode", getValue("et_verify_code"));
 
             String strParams = params.toString();
             Events.ChangeEmailEvent event = new Events.ChangeEmailEvent();
@@ -94,6 +115,13 @@ public class ChangeEmail extends BaseActivity
             finish();
         }
         toast(event.getMessage());
+    }
+    public void onEventMainThread(Events.UpdateEmailDentcodeCompleteEvent event) {
+        if (event.success()) {
+            toast("验证码已发送");
+        } else {
+            toast(event.getMessage());
+        }
     }
 
 

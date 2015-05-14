@@ -22,7 +22,15 @@ public class TradeDetail {
     private String agentName;
     private String payFromAccount;
     private String paychannel;
+    private String phone;
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public String getTradedTimeStr() {
         return tradedTimeStr;

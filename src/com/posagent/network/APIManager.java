@@ -107,6 +107,7 @@ public class APIManager {
     public static final String UrlUserInfo = BaseUrl + "/agents/getOne";
     public static final String UrlUserVerifyCode = BaseUrl + "/agents/getUpdatePhoneDentcode";
     public static final String UrlUserChangePhone = BaseUrl + "/agents/updatePhone";
+    public static final String UrlUpdateEmailDentcode = BaseUrl + "/agents/getUpdateEmailDentcode";
     public static final String UrlUserChangeEmail = BaseUrl + "/agents/updateEmail";
     public static final String UrlUserChangePassword = BaseUrl + "/agents/updatePassword";
     public static final String UrlStaffList = BaseUrl + "/customerManage/getList";
@@ -632,6 +633,11 @@ public class APIManager {
     public void onEventBackgroundThread(Events.ChangeEmailEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.ChangeEmailCompleteEvent();
         CommonRequest(event, completeEvent, UrlUserChangeEmail);
+    }
+
+    public void onEventBackgroundThread(Events.UpdateEmailDentcodeEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.UpdateEmailDentcodeCompleteEvent();
+        CommonRequest(event, completeEvent, UrlUpdateEmailDentcode);
     }
 
     public void onEventBackgroundThread(Events.ChangePasswordEvent event) {

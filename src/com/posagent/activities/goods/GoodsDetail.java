@@ -200,8 +200,8 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         }
 
         if (v.getId() == R.id.tv_daigoumai) {
-            tv_daigoumai.setBackgroundResource(R.drawable.bg_shape);
-            tv_daigoumai.setTextColor(getResources().getColor(R.color.bgtitle));
+            tv_daigoumai.setBackgroundResource(R.drawable.bg_blue_shape);
+            tv_daigoumai.setTextColor(getResources().getColor(R.color.white));
             tv_daizulin.setBackgroundResource(R.drawable.bg_gray_shape);
             tv_daizulin.setTextColor(getResources().getColor(R.color.text535252));
             buyType = Constants.Goods.OrderTypeDaigou;
@@ -210,8 +210,8 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         }
 
         if (v.getId() == R.id.tv_daizulin) {
-            tv_daizulin.setBackgroundResource(R.drawable.bg_shape);
-            tv_daizulin.setTextColor(getResources().getColor(R.color.bgtitle));
+            tv_daizulin.setBackgroundResource(R.drawable.bg_blue_shape);
+            tv_daizulin.setTextColor(getResources().getColor(R.color.white));
             tv_daigoumai.setBackgroundResource(R.drawable.bg_gray_shape);
             tv_daigoumai.setTextColor(getResources().getColor(R.color.text535252));
             buyType = Constants.Goods.OrderTypeDaizulin;
@@ -332,49 +332,64 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
         if (payChannelList != null) {
             ll_pay_channel.removeAllViews();
 
-            int idx = 0;
+            int len = payChannelList.size();
 
-            for (final PayChannelEntity channel: payChannelList) {
+            LinearLayout.LayoutParams lineP = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT);
+            lineP.setMargins(10, 10, 10, 10);
 
-                idx++;
+            LinearLayout ll = new LinearLayout(this);
+            ll.setLayoutParams(lineP);
+            for (int i = 0; i < len; i++) {
 
-                if (idx > 3) {
-                    return;
-                }
 
-                final PayChannelEntity mychannel = channel;
+                final PayChannelEntity mychannel = payChannelList.get(i);
 
                 if (payChannelId < 1) {
-                    payChannelId = channel.getId();
+                    payChannelId = mychannel.getId();
                 }
 
                 TextView tv = new TextView(this);
-                tv.setText(channel.getName());
-                tv.setTag(channel);
+                tv.setText(mychannel.getName());
+                tv.setTag(mychannel);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.WRAP_CONTENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT);
                 lp.setMargins(0, 0, 10, 0);
                 tv.setLayoutParams(lp);
 
-                if (channel.getId() == payChannelId) {
-                    tv.setBackgroundResource(R.drawable.bg_shape_channel);
-                    tv.setTextColor(getResources().getColor(R.color.bgtitle));
+                if (mychannel.getId() == payChannelId) {
+                    tv.setBackgroundResource(R.drawable.bg_blue_shape);
+                    tv.setTextColor(getResources().getColor(R.color.white));
                 } else {
-                    tv.setBackgroundResource(R.drawable.bg_gray_shape_channel);
+                    tv.setBackgroundResource(R.drawable.bg_gray_shape);
+                    tv.setTextColor(getResources().getColor(R.color.tmc));
                 }
 
                 tv.setPadding(10, 8, 10, 8);
-                tv.setTextSize(10);
-                ll_pay_channel.addView(tv);
+                tv.setTextSize(15);
 
                 tv.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        changePayChannel(channel.getId());
+                        changePayChannel(mychannel.getId());
                     }
                 });
 
+
+                ll.addView(tv);
+
+
+                if ( i > 0 && (i + 1) % 2 == 0 ) {
+                    ll_pay_channel.addView(ll);
+                    ll = new LinearLayout(this);
+                    ll.setLayoutParams(lineP);
+                }
+
+            }
+
+            if ( len % 2 != 0 ) {
+                ll_pay_channel.addView(ll);
             }
         }
     }

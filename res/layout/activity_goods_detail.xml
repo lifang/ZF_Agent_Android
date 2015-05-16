@@ -190,7 +190,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
                     </LinearLayout>
                 </LinearLayout>
 
@@ -229,10 +229,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:textColor="@color/bgtitle"
-                        android:background="@drawable/bg_shape"
-                        android:textSize="10dp"
-                        android:padding="2dp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/bg_blue_shape"
+                        android:textSize="14dp"
+                        android:padding="5dp"
                         android:text="采购" />
 
                     <TextView
@@ -240,12 +240,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:textColor="@color/tmc"
+                        android:background="@drawable/bg_gray_shape"
+                        android:textSize="14dp"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:textColor="@color/text292929"
-                        android:background="@drawable/send_out_goods_shape"
-                        android:textSize="10dp"
-                        android:padding="2dp"
+                        android:padding="5dp"
                         android:text="租赁" />
                 </LinearLayout>
             </LinearLayout>
@@ -256,6 +255,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:visibility="gone"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
@@ -277,6 +277,7 @@
                 android:layout_height="0.5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
+                android:visibility="gone"
                 android:background="@color/bgtitle"
                 />
             <LinearLayout
@@ -285,6 +286,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="20dp"
+                android:visibility="gone"
                 android:orientation="horizontal">
                 <ImageView
                     android:id="@+id/iv_factory_logo"
@@ -309,6 +311,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="20dp"
+                android:visibility="gone"
                 android:orientation="horizontal">
                 <TextView
                     android:id="@+id/tv_factory_desc"
@@ -324,6 +327,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/Viewc2"
+                android:layout_marginTop="10dp"
                 />
             <LinearLayout
                 android:layout_width="fill_parent"

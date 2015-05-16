@@ -110,7 +110,7 @@ public class MenuMine extends BaseActivity {
                 break;
             case R.id.ll_400:
                 Intent intent = new Intent(
-                        Intent.ACTION_DIAL, Uri.parse("tel:4000908076"));
+                        Intent.ACTION_DIAL, Uri.parse("tel:4000090876"));
                 startActivity(intent);
                 break;
 

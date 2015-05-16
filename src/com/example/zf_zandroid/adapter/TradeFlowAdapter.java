@@ -91,10 +91,35 @@ public class TradeFlowAdapter extends BaseAdapter{
 
             holder.trade_receive_account.setText(entity.getPhone());
             tv = (TextView)convertView.findViewById(R.id.trade_receive_account_key);
-            tv.setText("手机号码");
+            tv.setText("手机号码:");
 
+        } else if (this.tradeType() == 1) {
+            //消费
+            TextView tv;
+            tv = (TextView)convertView.findViewById(R.id.trade_receive_account_key);
+            tv.setText("手续费:");
+
+            tv = (TextView)convertView.findViewById(R.id.trade_account_key);
+            tv.setText("结算时间:");
+
+            tv = (TextView)convertView.findViewById(R.id.trade_account);
+            tv.setText(entity.getPayedTimeStr());
+
+            tv = (TextView)convertView.findViewById(R.id.trade_receive_account);
+            tv.setText("￥" + StringUtil.priceShow(entity.getPoundage()));
+        } else if (this.tradeType() == 2) {
+            //转账
+        } else if (this.tradeType() == 3) {
+            //还款
         } else if (this.tradeType() == 5) {
             //生活充值
+        } else {
+            TextView tv;
+            tv = (TextView)convertView.findViewById(R.id.trade_receive_account_key);
+            tv.setText("付款帐号:");
+
+            tv = (TextView)convertView.findViewById(R.id.trade_account_key);
+            tv.setText("收款帐号:");
         }
 
         convertView.setOnClickListener(new OnClickListener() {

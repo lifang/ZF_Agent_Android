@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -89,6 +90,8 @@ public class Register extends BaseActivity {
 
         findViewById(R.id.ll_choose_city).setOnClickListener(this);
         findViewById(R.id.btn_submit).setOnClickListener(this);
+        findViewById(R.id.tv_400).setOnClickListener(this);
+        findViewById(R.id.tv_xieyi).setOnClickListener(this);
 
     }
 
@@ -97,6 +100,12 @@ public class Register extends BaseActivity {
         switch (v.getId()) {
             case R.id.btn_get_verify_code:
                 getVerifyCode();
+                break;
+            case R.id.tv_400:
+                startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:4000090876")));
+                break;
+            case R.id.tv_xieyi:
+                startActivity(new Intent(context, RegisterXieyi.class));
                 break;
             case R.id.cb_kind_company:
                 if (cb_kind_company.isChecked()) {

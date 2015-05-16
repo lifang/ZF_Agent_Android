@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.PicEntity;
 import com.example.zf_android.trade.CitySelectActivity;
+import com.example.zf_android.trade.common.CommonUtil;
 import com.example.zf_android.trade.entity.City;
 import com.example.zf_android.trade.entity.Province;
 import com.posagent.MyApplication;
@@ -204,6 +205,7 @@ public class Main extends BaseActivity implements OnClickListener{
 
     private void initSlider() {
         HMSlideFragment slideFragment = (HMSlideFragment) getFragmentManager().findFragmentById(R.id.headlines_fragment);
+        slideFragment.setSquareHeight(CommonUtil.dip2px(this, 160));
         slideFragment.feedData(banners);
     }
 

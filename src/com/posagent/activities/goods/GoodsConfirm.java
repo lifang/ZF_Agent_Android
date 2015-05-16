@@ -321,6 +321,9 @@ public class GoodsConfirm extends BaseActivity implements OnClickListener, Adapt
                 break;
             case R.id.ll_choose:
                 Intent i =new Intent(GoodsConfirm.this, ChangeAdress.class);
+                if (null != addressEntity) {
+                    i.putExtra("addressId", addressEntity.getId());
+                }
                 startActivityForResult(i, Constants.REQUEST_CODE);
                 break;
             case R.id.btn_pay:

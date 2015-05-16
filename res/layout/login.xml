@@ -207,7 +207,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
 
-                android:text="注册"
+                android:text="申请成为合作伙伴"
 
                 android:textSize="@dimen/s_13sp" />
         </LinearLayout>

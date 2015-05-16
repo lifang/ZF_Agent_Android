@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -29,6 +28,7 @@ import com.example.zf_android.entity.PicEntity;
 import com.example.zf_android.entity.RelativeShopEntity;
 import com.example.zf_android.entity.StandardRateEntity;
 import com.example.zf_android.entity.TDateEntity;
+import com.example.zf_android.trade.common.CommonUtil;
 import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.activities.Webview;
@@ -81,7 +81,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_good_detail);
+        setContentView(R.layout.activity_goods_detail);
         goodsId = getIntent().getIntExtra("id", 0);
         buyType = getIntent().getIntExtra("buyType", 0);
 
@@ -545,9 +545,8 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
             return;
         }
 
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
+        Point size = CommonUtil.screenSize(this);
+
         int width = size.x;
         int height = size.y;
 
@@ -611,6 +610,18 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
 
     private void initSlider(ArrayList<PicEntity> list) {
         HMSlideFragment slideFragment = (HMSlideFragment) getFragmentManager().findFragmentById(R.id.headlines_fragment);
+
+        //reset frame
+        Point size = CommonUtil.screenSize(this);
+        int height = size.x;
+        View v = findViewById(R.id.headlines_fragment);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height);
+        v.setLayoutParams(lp);
+
+
+        slideFragment.setSquareHeight(height);
+
+
         slideFragment.feedData(list);
     }
 

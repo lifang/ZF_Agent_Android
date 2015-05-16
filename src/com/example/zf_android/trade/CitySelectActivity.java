@@ -136,7 +136,7 @@ public class CitySelectActivity extends Activity {
         overlayThread = new Thread() {
             @Override
             public void run() {
-                overlay.setVisibility(View.GONE);
+//                overlay.setVisibility(View.GONE);
             }
         };
 
@@ -148,8 +148,8 @@ public class CitySelectActivity extends Activity {
                         if (mLetters.contains(s)) {
                             int position = mItems.indexOf(s);
                             mListView.setSelection(position);
-                            overlay.setText(s);
-                            overlay.setVisibility(View.VISIBLE);
+//                            overlay.setText(s);
+//                            overlay.setVisibility(View.VISIBLE);
                             handler.removeCallbacks(overlayThread);
                             handler.postDelayed(overlayThread, 1500);
                         }

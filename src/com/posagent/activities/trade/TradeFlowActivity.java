@@ -65,6 +65,8 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
     Map<String, Object> searchMap;
     private int tradeTypeId = 1;
 
+    private int[] tab_values;
+
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -121,6 +123,7 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
         mFragments = new ArrayList<TradeFlowFragment>();
 
         // add tabs to the TabWidget
+        tab_values = getResources().getIntArray(R.array.trade_flow_tabs_values);
         String[] tabs = getResources().getStringArray(R.array.trade_flow_tabs);
         for (int i = 0; i < tabs.length; i++) {
             mTabWidget.addTab(tabs[i]);
@@ -243,7 +246,7 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
     @Override
     public void onTabSelected(int position) {
         Log.d("TradeFlow", "postion: " + position);
-        tradeTypeId = position + 1;
+        tradeTypeId = tab_values[position];
         onRefresh();
 
     }

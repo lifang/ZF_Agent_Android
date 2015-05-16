@@ -36,6 +36,7 @@ public class ChangeAdress extends BaseActivity {
     private ScrollViewWithListView   lv;
     private String Url=Config.ChooseAdress;
     private int customerId;
+    private int addressId;
     private ChooseAdressAdapter myAdapter;
     List<AdressEntity>  myList = new ArrayList<AdressEntity>();
     List<AdressEntity>  moreList = new ArrayList<AdressEntity>();
@@ -45,7 +46,7 @@ public class ChangeAdress extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chance_adress);
         new TitleMenuUtil(ChangeAdress.this, "选择地址").show();
-
+        addressId = getIntent().getIntExtra("addressId", 0);
         initView();
         getData();
     }
@@ -116,5 +117,9 @@ public class ChangeAdress extends BaseActivity {
 
             myAdapter.notifyDataSetChanged();
         }
+    }
+
+    public int addressId() {
+        return addressId;
     }
 }

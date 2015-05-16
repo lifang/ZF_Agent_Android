@@ -19,8 +19,8 @@
 
             <fragment android:name="com.posagent.fragments.HMSlideFragment"
                 android:id="@+id/headlines_fragment"
-                android:layout_width="fill_parent"
-                android:layout_height="160dp"  />
+                android:layout_width="match_parent"
+                android:layout_height="400dp"  />
 
             <!-- 基本信息 -->
             <LinearLayout

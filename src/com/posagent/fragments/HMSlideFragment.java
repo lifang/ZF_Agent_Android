@@ -43,6 +43,8 @@ public class HMSlideFragment extends Fragment {
     private Context context;
     private String jsonData;
 
+    private HMSlideFragment _this;
+
     private List<String> mal = new ArrayList<String>();
     private List<PicEntity> myList = new ArrayList<PicEntity>();
     private ViewPager viewPager;
@@ -55,11 +57,15 @@ public class HMSlideFragment extends Fragment {
     private List<View> list = new ArrayList<View>();
     private int index_ima;
 
+    private int squareHeight = 200;
+
 
     Timer timer;
     int page = 0;
 
-
+    public void setSquareHeight(int squareHeight) {
+        this.squareHeight = squareHeight;
+    }
 
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
@@ -67,6 +73,11 @@ public class HMSlideFragment extends Fragment {
                 case 0:
                     for (int i = 0; i <myList.size(); i++) {
                         item = inflater.inflate(R.layout.item, null);
+                        ImageView iv = (ImageView)item.findViewById(R.id.image);
+                        int height = squareHeight;
+                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(height, height);
+                        iv.setLayoutParams(lp);
+
                         list.add(item);
                         ma.add(myList.get(i).getPicture_url());
                     }

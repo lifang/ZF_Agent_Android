@@ -1,6 +1,5 @@
 package com.example.zf_zandroid.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,16 +9,17 @@ import android.widget.TextView;
 
 import com.example.zf_android.R;
 import com.example.zf_android.entity.AdressEntity;
+import com.posagent.activities.user.ChangeAdress;
 
 import java.util.List;
 
 public class ChooseAdressAdapter extends BaseAdapter {
-    private Context context;
+    private ChangeAdress context;
     private List<AdressEntity> list;
     private LayoutInflater inflater;
     private ViewHolder holder = null;
 
-    public ChooseAdressAdapter(Context context, List<AdressEntity> list) {
+    public ChooseAdressAdapter(ChangeAdress context, List<AdressEntity> list) {
         this.context = context;
         this.list = list;
     }
@@ -41,6 +41,7 @@ public class ChooseAdressAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        AdressEntity entity = list.get(position);
         inflater = LayoutInflater.from(context);
         if (convertView == null) {
             holder = new ViewHolder();
@@ -55,9 +56,27 @@ public class ChooseAdressAdapter extends BaseAdapter {
         }
         holder.tv_tel.setText(list.get(position).getMoblephone());
         holder.tv_title.setText("收件人: " + list.get(position).getReceiver());
-        if(list.get(position).getIsDefault().equals("1")){
+
+        boolean isDefault = entity.getIsDefault().equals("1");
+        boolean isSelected = entity.getId() == context.addressId();
+
+
+        if(isDefault || isSelected){
             holder.ll_isshow.setVisibility(View.VISIBLE);
-        }else{
+
+            if (isSelected) {
+                convertView.findViewById(R.id.item_cb).setVisibility(View.VISIBLE);
+            } else {
+                convertView.findViewById(R.id.item_cb).setVisibility(View.GONE);
+            }
+
+            if (isDefault) {
+                convertView.findViewById(R.id.tv_default_tips).setVisibility(View.VISIBLE);
+            } else {
+                convertView.findViewById(R.id.tv_default_tips).setVisibility(View.GONE);
+            }
+
+        } else {
             holder.ll_isshow.setVisibility(View.INVISIBLE);
         }
         holder.tv_adress.setText("收件地址: " + list.get(position).getAddress());

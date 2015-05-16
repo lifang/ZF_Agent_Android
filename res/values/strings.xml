@@ -36,12 +36,19 @@
 	<string name="notation_day">天</string>
 
     <string-array name="trade_flow_tabs">
+        <item>消费</item>
         <item>转账</item>
         <item>还款</item>
-        <item>消费</item>
         <item>话费充值</item>
         <item>生活充值</item>
     </string-array>
+    <integer-array name="trade_flow_tabs_values">
+        <item>3</item>
+        <item>1</item>
+        <item>2</item>
+        <item>4</item>
+        <item>5</item>
+    </integer-array>
 
     <string-array name="order_kind_tabs">
         <item>批购订单</item>

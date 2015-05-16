@@ -177,17 +177,8 @@ public class Events {
     }
 
 
-    public static class RegisterEvent {
-        private String params;
-
-        public String getParams() {
-            return params;
-        }
-
-        public RegisterEvent(String _params) {
-            params = _params;
-        }
-    }
+    public static class RegisterEvent extends CommonRequestEvent {}
+    public static class RegisterCompleteEvent extends CommonCompleteEvent {}
 
     public static class GoodsListEvent {
         private String params;

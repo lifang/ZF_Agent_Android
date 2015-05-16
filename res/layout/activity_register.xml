@@ -6,27 +6,331 @@
 
     <include layout="@layout/title_back"/>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/F3F2F2">
+    <ScrollView  android:layout_height="wrap_content"
+        android:layout_width="fill_parent">
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:orientation="vertical">
 
-        <com.example.zf_android.trade.widget.MyTabWidget
-            android:id="@+id/tab_widget"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="24dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"/>
-    </FrameLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/Viewc"
+                android:layout_marginTop="10dp"
+                />
 
-    <com.example.zf_android.trade.widget.MyViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        />
+            <LinearLayout
+                android:id="@+id/mi_fzrxm"
+                android:tag="@string/tag_destination_get"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bg_item" >
+
+
+                <TextView
+                    android:tag="@string/tag_destination_name"
+                    android:layout_width="80dp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="7dp"
+                    android:gravity="right|center"
+                    android:singleLine="true"
+                    android:text="姓名"
+                    android:textColor="@color/text292929"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/tv_name"
+                    android:tag="@string/tag_destination"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:hint="填写您的姓名"
+                    android:text=""
+                    android:textColor="@color/text6c6c6c6"
+                    android:background="@color/white"
+                    android:textSize="13sp" />
+            </LinearLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/Viewc" />
+
+            <LinearLayout
+                android:tag="@string/tag_destination_get"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bg_item" >
+
+
+                <TextView
+                    android:tag="@string/tag_destination_name"
+                    android:layout_width="80dp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="7dp"
+                    android:gravity="right|center"
+                    android:singleLine="true"
+                    android:text="手机"
+                    android:textColor="@color/text292929"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/tv_phone"
+                    android:tag="@string/tag_destination"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:hint="填写您的手机"
+                    android:text=""
+                    android:textColor="@color/text6c6c6c6"
+                    android:background="@color/white"
+                    android:textSize="13sp" />
+                <Button
+                    android:id="@+id/btn_get_verify_code"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_blue_shapepre"
+                    android:textColor="@color/white"
+                    android:text="获取验证码" />
+            </LinearLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/Viewc" />
+
+            <LinearLayout
+                android:tag="@string/tag_destination_get"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bg_item" >
+
+
+                <TextView
+                    android:tag="@string/tag_destination_name"
+                    android:layout_width="80dp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="7dp"
+                    android:gravity="right|center"
+                    android:singleLine="true"
+                    android:text="验证码"
+                    android:textColor="@color/text292929"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/tv_verify_code"
+                    android:tag="@string/tag_destination"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:hint="填写手机验证码"
+                    android:text=""
+                    android:textColor="@color/text6c6c6c6"
+                    android:background="@color/white"
+                    android:textSize="13sp" />
+            </LinearLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/Viewc" />
+
+            <LinearLayout
+                android:tag="@string/tag_destination_get"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bg_item" >
+
+
+                <TextView
+                    android:tag="@string/tag_destination_name"
+                    android:layout_width="80dp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="7dp"
+                    android:gravity="right|center"
+                    android:singleLine="true"
+                    android:text="伙伴类型"
+                    android:textColor="@color/text292929"
+                    android:textSize="17sp" />
+
+
+                <CheckBox
+                    android:id="@+id/cb_kind_person"
+                    android:layout_width="25sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:button="@drawable/checkbox_selector"
+                    android:checked="true"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我是个人"
+                    />
+
+                <CheckBox
+                    android:id="@+id/cb_kind_company"
+                    android:layout_width="25sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:button="@drawable/checkbox_selector"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我是公司"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/Viewc" />
+
+            <LinearLayout
+                android:id="@+id/ll_choose_city"
+                android:tag="@string/tag_destination_get"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bg_item" >
+
+
+                <TextView
+                    android:tag="@string/tag_destination_name"
+                    android:layout_width="80dp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="7dp"
+
+                    android:gravity="center|right"
+                    android:singleLine="true"
+                    android:text="所在城市"
+                    android:textColor="@color/text292929"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/tv_city_name"
+                    android:tag="@string/tag_destination"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:maxLength="8"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/text6c6c6c6"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/post_right"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    />
+            </LinearLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/Viewc"
+                />
+
+
+            <LinearLayout
+                android:tag="@string/tag_destination_get"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                >
+
+
+                <CheckBox
+                    android:id="@+id/cb_agreement"
+                    android:layout_width="25sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:button="@drawable/checkbox_selector"
+                    android:checked="true"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="同意"
+                    android:textColor="@color/bgtitle"
+                    />
+                <TextView
+                    android:id="@+id/tv_xieyi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="《华尔街金融平台用户使用协议》"
+                    android:textColor="@color/bgtitle"
+
+                    />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:tag="@string/tag_destination_get"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="1dp"
+                >
+                <TextView
+                    android:id="@+id/tv_400"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/bg_red_border"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="若申请时遇到问题，请拨打电话400-009-0876"
+                    android:textColor="@color/rad"
+
+                    />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/login_linear_signin"
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="22dp"
+                android:layout_marginBottom="22dp"
+                android:background="@drawable/bg_btn_dra"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/btn_submit"
+
+                    android:tag="@string/tag_destination_get"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginRight="60dp"
+                    android:text="提交申请"
+                    android:textColor="@color/fffefe"
+                    android:textSize="@dimen/s_17sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>

@@ -518,6 +518,10 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.posagent.activities.home.RegisterSuccess"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".activity.RegistMail"
             android:screenOrientation="portrait" >
         </activity>

@@ -33,7 +33,9 @@
 
 	<string name="notation_yuan">￥</string>
 	<string name="notation_percent">%</string>
-	<string name="notation_day">天</string>
+    <string name="notation_day">天</string>
+
+
 
     <string-array name="trade_flow_tabs">
         <item>消费</item>

@@ -291,7 +291,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         String strParams = this.data();
 
         // submit
-        EventBus.getDefault().post(new Events.RegisterEvent(strParams));
+        EventBus.getDefault().post(new Events.RegisterEvent());
         Toast.makeText(getActivity().getApplicationContext(), "正在提交", Toast.LENGTH_SHORT).show();
 
     }

@@ -38,7 +38,7 @@ public class APIManager {
 //    public static final String BaseUrl = "http://121.40.64.167:9090/api";
 
     public static final String UrlLogin = BaseUrl + "/agent/agentLogin";
-    public static final String UrlRegister = BaseUrl + "/agent/userRegistration";
+    public static final String UrlRegister = BaseUrl + "/agent/getJoin";
     public static final String UrlSendEmailVerificationCode = BaseUrl + "/agent/sendEmailVerificationCode";
     public static final String UrlSendPhoneVerificationCode = BaseUrl + "/agent/sendPhoneVerificationCode";
     public static final String UrlUpdatePassword = BaseUrl + "/agent/updatePassword";
@@ -244,45 +244,8 @@ public class APIManager {
 
 
     public void onEventBackgroundThread(Events.RegisterEvent event){
-        String params = event.getParams();
-        RequestBody body = RequestBody.create(JSON, params);
-        Log.d(TAG, body.toString());
-
-        Request request = this.request()
-                .url(UrlRegister)
-                .post(body)
-                .build();
-
-        Response response = null;
-        try {
-            response = client.newCall(request).execute();
-            String result = response.body().string();
-            Log.d(TAG, result);
-
-
-            JSONObject json = null;
-            String code = null;
-            try {
-
-                json = new JSONObject(result);
-                int intCode = json.getInt("code");
-                Events.CompleteEvent completeEvent = new Events.CompleteEvent(intCode == Constants.SUCCESS_CODE);
-                completeEvent.setMessage(json.getString("message"));
-
-                //TODO 娉ㄥ唽鎴愬姛鍚庡仛涓�簺浜嬫儏
-                if(completeEvent.getSuccess()){
-                    String res =json.getString("result");
-                }
-
-                EventBus.getDefault().post(completeEvent);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Events.CommonCompleteEvent completeEvent = new Events.RegisterCompleteEvent();
+        CommonRequest(event, completeEvent, UrlRegister);
     }
 
 

@@ -336,7 +336,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
 
             LinearLayout.LayoutParams lineP = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.MATCH_PARENT);
-            lineP.setMargins(10, 10, 10, 10);
+            lineP.setMargins(0, 10, 10, 10);
 
             LinearLayout ll = new LinearLayout(this);
             ll.setLayoutParams(lineP);
@@ -416,8 +416,7 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(GoodsDetail.this, RequireMaterial.class);
-                i.putExtra("json_pra", gson.toJson(paychannelinfo.getRequireMaterial_pra()));
-                i.putExtra("json_pub", gson.toJson(paychannelinfo.getRequireMaterial_pub()));
+                i.putExtra("requirement", paychannelinfo.getOpening_datum());
                 startActivity(i);
             }
         });

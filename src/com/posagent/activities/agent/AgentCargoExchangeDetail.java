@@ -73,7 +73,7 @@ public class AgentCargoExchangeDetail extends BaseActivity {
         setText("tv_count", "总计" + entity.getQuantity() + "件");
         setText("tv_create_time", entity.getCreated_at());
         setText("tv_creator", entity.getCreator());
-        setText("tv_terminals", entity.getTerminal_list());
+        setText("tv_terminals", entity.getTerminals_list());
     }
 
 	 

@@ -902,12 +902,13 @@ public class ApplyDetailActivity extends FragmentActivity {
         setItemValue(mMerchantKeys[7], openInfo.getEmail());
         setItemValue(mMerchantKeys[8], ((MyApplication)getApplication()).cityNameForId(openInfo.getCity_id()));
 
-        setItemValue(mBankKeys[0], openInfo.getAccount_bank_code());
-        setItemValue(mBankKeys[1], openInfo.getAccount_bank_name());
+//        setItemValue(mBankKeys[0], openInfo.getAccount_bank_code());
+        setItemValue(mBankKeys[0], openInfo.getAccount_bank_name());
+        setItemValue(mBankKeys[1], "");
         setItemValue(mBankKeys[2], openInfo.getAccount_bank_num());
         setItemValue(mBankKeys[3], openInfo.getTax_registered_no());
         setItemValue(mBankKeys[4], openInfo.getOrganization_code_no());
-        setItemValue(mBankKeys[5], openInfo.getBillingname());
+        setItemValue(mBankKeys[5], openInfo.getChannelname() + " " + openInfo.getBillingname());
 
 
     }

@@ -13,7 +13,7 @@ public class ExchangeEntity extends BaseEntity {
 
     private String fromname;
     private String toname;
-    private String terminal_list;
+    private String terminals_list;
     private String created_at;
     private String creator;
 
@@ -49,14 +49,6 @@ public class ExchangeEntity extends BaseEntity {
         this.toname = toname;
     }
 
-    public String getTerminal_list() {
-        return terminal_list;
-    }
-
-    public void setTerminal_list(String terminal_list) {
-        this.terminal_list = terminal_list;
-    }
-
     public String getCreated_at() {
         return created_at;
     }
@@ -71,5 +63,13 @@ public class ExchangeEntity extends BaseEntity {
 
     public void setCreator(String creator) {
         this.creator = creator;
+    }
+
+    public String getTerminals_list() {
+        return terminals_list;
+    }
+
+    public void setTerminals_list(String terminals_list) {
+        this.terminals_list = terminals_list;
     }
 }

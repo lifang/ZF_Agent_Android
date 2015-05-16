@@ -27,7 +27,6 @@ import com.example.zf_android.trade.widget.MyTabWidget;
 import com.example.zf_zandroid.adapter.ProfitAdapter;
 import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
-import com.posagent.activities.CommonInputer;
 import com.posagent.events.Events;
 import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
@@ -255,7 +254,7 @@ public class AgentProfitList extends BaseActivity implements IXListViewListener 
         profitEntity = profit;
         profitTradeEntity = trade;
 
-        Intent i = new Intent(AgentProfitList.this, CommonInputer.class);
+        Intent i = new Intent(AgentProfitList.this, ProfitInputer.class);
         i.putExtra(Constants.CommonInputerConstant.TITLE_KEY, "设置百分比");
         i.putExtra(Constants.CommonInputerConstant.PLACEHOLDER_KEY, trade.getPercent());
 

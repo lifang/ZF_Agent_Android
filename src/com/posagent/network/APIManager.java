@@ -121,6 +121,7 @@ public class APIManager {
     public static final String UrlSonAgentInfo = BaseUrl + "/lowerAgent/info";
     public static final String UrlSonAgentCreate = BaseUrl + "/lowerAgent/createNew";
     public static final String UrlChangeProfit = BaseUrl + "/lowerAgent/changeProfit";
+    public static final String UrlSetIsProfit = BaseUrl + "/lowerAgent/setDefaultProfit";
     public static final String UrlGetDefaultProfit = BaseUrl + "/lowerAgent/getDefaultProfit";
     public static final String UrlChannelTradeList = BaseUrl + "/lowerAgent/getTradelist";
     public static final String UrlProfitList = BaseUrl + "/lowerAgent/getProfitlist";
@@ -654,6 +655,11 @@ public class APIManager {
     public void onEventBackgroundThread(Events.ChangeProfitEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.ChangeProfitCompleteEvent();
         CommonRequest(event, completeEvent, UrlChangeProfit);
+    }
+
+    public void onEventBackgroundThread(Events.SetIsProfitEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.SetIsProfitCompleteEvent();
+        CommonRequest(event, completeEvent, UrlSetIsProfit);
     }
 
     public void onEventBackgroundThread(Events.GetDefaultProfitEvent event) {

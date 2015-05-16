@@ -199,7 +199,9 @@ public class AgentManageActivity extends BaseActivity implements XListView.IXLis
 
         switch (requestCode) {
             case Constants.REQUEST_CODE:
-                setText("tv_profit", data.getStringExtra("value") + "%");
+                if (data != null && null != data.getStringExtra("value")) {
+                    setText("tv_profit", data.getStringExtra("value") + "%");
+                }
                 break;
         }
     }

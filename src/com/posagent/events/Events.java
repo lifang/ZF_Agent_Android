@@ -1118,6 +1118,10 @@ public class Events {
 
     public static class ChangeProfitEvent extends CommonRequestEvent {}
     public static class ChangeProfitCompleteEvent extends CommonCompleteEvent {}
+
+    public static class SetIsProfitEvent extends CommonRequestEvent {}
+    public static class SetIsProfitCompleteEvent extends CommonCompleteEvent {}
+
     public static class GetDefaultProfitEvent extends CommonRequestEvent {}
     public static class GetDefaultProfitCompleteEvent extends CommonCompleteEvent {
         private String defautProfit;

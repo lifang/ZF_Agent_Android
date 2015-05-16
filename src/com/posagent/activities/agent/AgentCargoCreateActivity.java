@@ -118,11 +118,11 @@ public class AgentCargoCreateActivity extends BaseActivity {
 
     private boolean check() {
         if (sonAgentId == 0) {
-            toast("请选择配送至");
+            toast("请选择调货代理商");
             return false;
         }
 
-        if (selectedList.size() < 1) {
+        if (null == selectedList || selectedList.size() < 1) {
             toast("请选择终端号");
             return false;
         }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.example.zf_android.entity.SonAgentInfo;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.activities.ImageViewer;
 import com.posagent.events.Events;
@@ -31,6 +32,8 @@ public class AgentDetailActivity extends BaseActivity {
 
     private int sonAgentsId;
     private SonAgentInfo entity;
+    private int profitStatus = 1;
+
 
 
     @Override
@@ -168,10 +171,24 @@ public class AgentDetailActivity extends BaseActivity {
 
     private void toggleSetProfit() {
         if (cb_is_profit.isChecked()) {
+            profitStatus = 2;
             viewSetRate.setVisibility(View.VISIBLE);
         } else {
+            profitStatus = 1;
             viewSetRate.setVisibility(View.GONE);
         }
+        saveProfitStatus();
+    }
+
+    private void saveProfitStatus() {
+        JsonParams params = new JsonParams();
+        params.put("agentId", MyApplication.user().getAgentId());
+        params.put("sonAgentsId", sonAgentsId);
+        params.put("isProfit", profitStatus);
+        String strParams = params.toString();
+        Events.CommonRequestEvent event = new Events.SetIsProfitEvent();
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
     }
 	 
 }

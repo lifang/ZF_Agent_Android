@@ -234,6 +234,10 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.posagent.activities.agent.ProfitInputer"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.posagent.activities.agent.ChannelList"
             android:screenOrientation="portrait" >
         </activity>

@@ -63,8 +63,8 @@ public class TradeFlowAdapter extends BaseAdapter{
 
         // fill data
         holder.trade_time.setText(entity.getTradedTimeStr());
-        holder.trade_account.setText(entity.getPayFromAccount());
-        holder.trade_receive_account.setText(entity.getPayIntoAccount());
+        holder.trade_account.setText(StringUtil.star(entity.getPayFromAccount(), 9, 12));
+        holder.trade_receive_account.setText(StringUtil.star(entity.getPayIntoAccount(), 9, 12));
         holder.trade_client_number.setText(entity.getTerminalNumber());
 
         String statusName = "未知";
@@ -89,7 +89,7 @@ public class TradeFlowAdapter extends BaseAdapter{
             tv = (TextView)convertView.findViewById(R.id.trade_account);
             tv.setText("");
 
-            holder.trade_receive_account.setText(entity.getPhone());
+            holder.trade_receive_account.setText(StringUtil.star(entity.getPhone(), 4, 8));
             tv = (TextView)convertView.findViewById(R.id.trade_receive_account_key);
             tv.setText("手机号码:");
 
@@ -100,19 +100,29 @@ public class TradeFlowAdapter extends BaseAdapter{
             tv.setText("手续费:");
 
             tv = (TextView)convertView.findViewById(R.id.trade_account_key);
-            tv.setText("结算时间:");
+            tv.setVisibility(View.GONE);
 
             tv = (TextView)convertView.findViewById(R.id.trade_account);
-            tv.setText(entity.getPayedTimeStr());
+            tv.setVisibility(View.GONE);
 
             tv = (TextView)convertView.findViewById(R.id.trade_receive_account);
             tv.setText("￥" + StringUtil.priceShow(entity.getPoundage()));
-        } else if (this.tradeType() == 2) {
-            //转账
-        } else if (this.tradeType() == 3) {
-            //还款
         } else if (this.tradeType() == 5) {
             //生活充值
+
+            TextView tv;
+            tv = (TextView)convertView.findViewById(R.id.trade_account_key);
+            tv.setText("账户名");
+
+            tv = (TextView)convertView.findViewById(R.id.trade_account);
+            tv.setText(StringUtil.star(entity.getAccountName(), 3, 4));
+
+            tv = (TextView)convertView.findViewById(R.id.trade_receive_account_key);
+            tv.setText("账户号码:");
+
+            tv = (TextView)convertView.findViewById(R.id.trade_receive_account);
+            tv.setText(StringUtil.star(entity.getAccountNumber(), 11, 15));
+
         } else {
             TextView tv;
             tv = (TextView)convertView.findViewById(R.id.trade_receive_account_key);

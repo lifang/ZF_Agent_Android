@@ -305,4 +305,24 @@ public class StringUtil {
         String tmpStr = str.replace("null", "");
         return tmpStr;
     }
+
+    public static String star(String str, int startAt, int endAt) {
+        str = String.valueOf(str);
+        String tmpStr = str.replace("null", "");
+        char[] charArray = tmpStr.toCharArray();
+
+        int len = charArray.length;
+        if (startAt > len) {
+            return tmpStr;
+        }
+        if (endAt > len) {
+            endAt = len;
+        }
+        for (int i = startAt; i < endAt; i++) {
+            charArray[i - 1] = '*';
+        }
+
+
+        return String.valueOf(charArray);
+    }
 }

@@ -23,6 +23,24 @@ public class TradeDetail {
     private String payFromAccount;
     private String paychannel;
     private String phone;
+    private String account_name;
+    private String account_number;
+
+    public String getAccount_number() {
+        return account_number;
+    }
+
+    public void setAccount_number(String account_number) {
+        this.account_number = account_number;
+    }
+
+    public String getAccount_name() {
+        return account_name;
+    }
+
+    public void setAccount_name(String account_name) {
+        this.account_name = account_name;
+    }
 
     public String getPhone() {
         return phone;

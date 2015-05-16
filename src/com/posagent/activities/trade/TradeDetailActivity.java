@@ -88,7 +88,7 @@ public class TradeDetailActivity extends BaseActivity {
         }
 
         setText("trade_detail_status", statusName);
-        setText("trade_detail_amount", StringUtil.priceShow(entity.getAmount()));
+        setText("trade_detail_amount", "￥" + StringUtil.priceShow(entity.getAmount()));
         setText("trade_detail_poundage",  "￥" + StringUtil.priceShow(entity.getPoundage()));
         setText("trade_detail_time", "" + entity.getTradedTimeStr());
 
@@ -133,7 +133,7 @@ public class TradeDetailActivity extends BaseActivity {
             value.setTextColor(getResources().getColor(R.color.text6c6c6c6));
             value.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
             value.setText(i == 0 ? entity.getMerchant_number()
-                    : i == 1 ? entity.getAgent_id() + ""
+                    : i == 1 ? entity.getAgentName() + ""
                     : i == 2 ? entity.getMerchant_name()
                     : "");
             mCommercialValueContainer.addView(value);
@@ -158,20 +158,20 @@ public class TradeDetailActivity extends BaseActivity {
                     text = entity.getTerminalNumber();
                     break;
                 case 1:
-                    text = entity.getPayFromAccount();
+                    text = StringUtil.star(entity.getPayFromAccount(), 9, 12);
                     break;
                 case 2:
-                    text = entity.getPayIntoAccount();
+                    text = StringUtil.star(entity.getPayIntoAccount(), 9, 12);
 
                     break;
                 case 3:
                     text = entity.getPaychannel();
                     break;
                 case 4:
-                    text = StringUtil.priceShow(entity.getProfitPrice());
+                    text = "￥" + StringUtil.priceShow(entity.getProfitPrice());
                     break;
                 case 5:
-                    text = StringUtil.priceShow(entity.getAmount());
+                    text = "￥" + StringUtil.priceShow(entity.getAmount());
                     break;
                 case 6:
                     text = entity.getTradedTimeStr();
@@ -206,15 +206,15 @@ public class TradeDetailActivity extends BaseActivity {
                     ((TextView)k2).setText("手机号码");
                 }
                 if (null != v2) {
-                    ((TextView)v2).setText(entity.getPhone());
+                    ((TextView)v2).setText(StringUtil.star(entity.getPhone(), 4, 8));
                 }
 
             } else if (tradeType == 1) {
                 if (null != k1) {
-                    ((TextView)k1).setText("结算时间");
+                    k1.setVisibility(View.GONE);
                 }
                 if (null != v1) {
-                    ((TextView)v1).setText(entity.getTradedTimeStr());
+                    v1.setVisibility(View.GONE);
                 }
 
                 if (null != k2) {
@@ -222,6 +222,21 @@ public class TradeDetailActivity extends BaseActivity {
                 }
                 if (null != v2) {
                     ((TextView)v2).setText("￥" + StringUtil.priceShow(entity.getPoundage()));
+                }
+
+            } else if (tradeType == 5) {
+                if (null != k1) {
+                    ((TextView)k1).setText("账户名");
+                }
+                if (null != v1) {
+                    ((TextView)v1).setText(StringUtil.star(entity.getAccount_name(), 3, 4));
+                }
+
+                if (null != k2) {
+                    ((TextView)k2).setText("账户帐号");
+                }
+                if (null != v2) {
+                    ((TextView)v2).setText(StringUtil.star(entity.getAccount_number(), 11, 15));
                 }
 
             }

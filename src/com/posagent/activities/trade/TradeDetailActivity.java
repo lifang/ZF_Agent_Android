@@ -209,6 +209,21 @@ public class TradeDetailActivity extends BaseActivity {
                     ((TextView)v2).setText(entity.getPhone());
                 }
 
+            } else if (tradeType == 1) {
+                if (null != k1) {
+                    ((TextView)k1).setText("结算时间");
+                }
+                if (null != v1) {
+                    ((TextView)v1).setText(entity.getTradedTimeStr());
+                }
+
+                if (null != k2) {
+                    ((TextView)k2).setText("手续费");
+                }
+                if (null != v2) {
+                    ((TextView)v2).setText("￥" + StringUtil.priceShow(entity.getPoundage()));
+                }
+
             }
         }
 

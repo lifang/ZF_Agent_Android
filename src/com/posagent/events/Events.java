@@ -722,6 +722,35 @@ public class Events {
     public static class MessageDeleteEvent extends CommonRequestEvent {}
     public static class MessageDeleteCompleteEvent extends CommonCompleteEvent {}
 
+    public static class MessageDetailEvent extends CommonRequestEvent {}
+    public static class MessageDetailCompleteEvent extends CommonCompleteEvent {
+        private MessageEntity entity;
+
+        public MessageEntity getEntity() {
+            String result = null;
+            result = getResult().toString();
+            entity = (new Gson()).fromJson(result, MessageEntity.class);
+            return entity;
+        }
+
+        public void setEntity(MessageEntity entity) {
+            this.entity = entity;
+        }
+    }
+
+    public static class GoToMessageDetailEvent extends CommonRequestEvent {
+        String msgId;
+
+        public String getMsgId() {
+            return msgId;
+        }
+
+        public void setMsgId(String msgId) {
+            this.msgId = msgId;
+        }
+    }
+
+
     public static class MessageMarkReadEvent extends CommonRequestEvent {}
     public static class MessageMarkReadCompleteEvent extends CommonCompleteEvent {}
 
@@ -1318,4 +1347,8 @@ public class Events {
             this.list = list;
         }
     }
+
+    public static class SendDeviceCodeEvent extends CommonRequestEvent {}
+    public static class SendDeviceCodeCompleteEvent extends CommonCompleteEvent{}
+
 }

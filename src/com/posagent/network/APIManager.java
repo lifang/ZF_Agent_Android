@@ -84,6 +84,7 @@ public class APIManager {
     public static final String UrlUserDelete = BaseUrl + "/user/delectAgentUser";
     public static final String UrlUserTerminal = BaseUrl + "/user/getTerminals";
     public static final String UrlMessageList = BaseUrl + "/message/receiver/getAll";
+    public static final String UrlMessageDetail = BaseUrl + "/message/receiver/getById";
     public static final String UrlMessageMarkRead = BaseUrl + "/message/receiver/batchRead";
     public static final String UrlMessageDelete = BaseUrl + "/message/receiver/batchDelete";
     public static final String UrlTradeClient = BaseUrl + "/trade/record/getTerminals";
@@ -141,6 +142,8 @@ public class APIManager {
 
     //banner
     public static final String UrlBannerData = BaseUrl + "/index/sysshufflingfigure";
+
+    public static final String UrlSendDeviceCode = BaseUrl + "/agents/sendDeviceCode";
 
 
     /** Convenience singleton for apps using a process-wide EventBus instance. */
@@ -481,6 +484,11 @@ public class APIManager {
         CommonRequest(event, completeEvent, UrlMessageList);
     }
 
+    public void onEventBackgroundThread(Events.MessageDetailEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.MessageDetailCompleteEvent();
+        CommonRequest(event, completeEvent, UrlMessageDetail);
+    }
+
     public void onEventBackgroundThread(Events.MessageDeleteEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.MessageDeleteCompleteEvent();
         CommonRequest(event, completeEvent, UrlMessageDelete);
@@ -776,6 +784,14 @@ public class APIManager {
         Events.CommonCompleteEvent completeEvent = new Events.BannerDataCompleteEvent();
         CommonRequest(event, completeEvent, UrlBannerData);
     }
+
+
+    public void onEventBackgroundThread(Events.SendDeviceCodeEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.SendDeviceCodeCompleteEvent();
+        CommonRequest(event, completeEvent, UrlSendDeviceCode);
+    }
+
+
 
 
 

@@ -175,6 +175,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
             //save user info
             MyApplication.setCurrentUser(userinfo);
             startActivity(new Intent(LoginActivity.this, Main.class));
+
+            MyApplication.sendDeviceCode();
+
         } else {
             toast(event.getMessage());
         }

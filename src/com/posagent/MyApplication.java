@@ -3,10 +3,15 @@ package com.posagent;
 
 import android.app.Activity;
 import android.app.Application;
+import android.app.Notification;
 import android.support.v4.util.ArrayMap;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import com.baidu.android.pushservice.CustomPushNotificationBuilder;
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
+import com.example.zf_android.R;
 import com.example.zf_android.entity.ApplyneedEntity;
 import com.example.zf_android.entity.ChannelEntity;
 import com.example.zf_android.entity.ChannelTradeEntity;
@@ -22,6 +27,7 @@ import com.posagent.events.Events;
 import com.posagent.network.APIManager;
 import com.posagent.utils.Constants;
 import com.posagent.utils.JsonParams;
+import com.posagent.utils.PushUtils;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -37,7 +43,17 @@ public class MyApplication extends Application {
 	//private ArrayList<Order> orderList = new ArrayList<Order>();
 
 	private static  String versionCode="";
-	private static int notifyId=0;
+	private static String deviceId="";
+
+    public static String getDeviceId() {
+        return deviceId;
+    }
+
+    public static void setDeviceId(String deviceId) {
+        MyApplication.deviceId = deviceId;
+    }
+
+    private static int notifyId=0;
 	private static Boolean isSelect=false;
 	
 	public static Boolean getIsSelect() {
@@ -227,6 +243,8 @@ public class MyApplication extends Application {
 
         initMapCity();
 
+        setupNotification();
+
     }
 
 	public static MyApplication getInstance() {
@@ -329,6 +347,46 @@ public class MyApplication extends Application {
             return "未知";
         }
         return mapCity.get(cityId);
+    }
+
+    public void setupNotification() {
+        // Push: 以apikey的方式登录，一般放在主Activity的onCreate中。
+        // 这里把apikey存放于manifest文件中，只是一种存放方式，
+        // 您可以用自定义常量等其它方式实现，来替换参数中的Utils.getMetaValue(PushDemoActivity.this,
+        // "api_key")
+        PushUtils.logStringCache = PushUtils.getLogText(getApplicationContext());
+
+        PushManager.startWork(getApplicationContext(),
+                PushConstants.LOGIN_TYPE_API_KEY,
+                PushUtils.getMetaValue(getApplicationContext(), "api_key"));
+        // Push: 如果想基于地理位置推送，可以打开支持地理位置的推送的开关
+        // PushManager.enableLbs(getApplicationContext());
+
+        // Push: 设置自定义的通知样式，具体API介绍见用户手册，如果想使用系统默认的可以不加这段代码
+        // 请在通知推送界面中，高级设置->通知栏样式->自定义样式，选中并且填写值：1，
+        // 与下方代码中 PushManager.setNotificationBuilder(this, 1, cBuilder)中的第二个参数对应
+        CustomPushNotificationBuilder cBuilder = new CustomPushNotificationBuilder(
+                getApplicationContext(), R.layout.notification_custom_builder,
+                R.id.notification_icon,
+                R.id.notification_title,
+                R.id.notification_text);
+        cBuilder.setNotificationFlags(Notification.FLAG_AUTO_CANCEL);
+        cBuilder.setNotificationDefaults(Notification.DEFAULT_SOUND
+                | Notification.DEFAULT_VIBRATE);
+        cBuilder.setStatusbarIcon(this.getApplicationInfo().icon);
+        cBuilder.setLayoutDrawable(R.drawable.logo_agent);
+        PushManager.setNotificationBuilder(this, 1, cBuilder);
+    }
+
+    public static void sendDeviceCode() {
+        // send bind code
+        JsonParams params = new JsonParams();
+        params.put("id", MyApplication.user().getId());
+        params.put("deviceCode", "2" + MyApplication.getDeviceId());
+        String strParams = params.toString();
+        Events.CommonRequestEvent event = new Events.SendDeviceCodeEvent();
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
     }
 
 

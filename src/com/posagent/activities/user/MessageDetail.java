@@ -31,13 +31,19 @@ public class MessageDetail extends BaseActivity {
     private List<String> deleteIds;
 
     private MessageEntity entity;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Gson gson = new Gson();
-        entity = gson.fromJson(getIntent().getStringExtra("json"), MessageEntity.class);
+        id = getIntent().getStringExtra("msgId");
+        if (null == id) {
+            Gson gson = new Gson();
+            entity = gson.fromJson(getIntent().getStringExtra("json"), MessageEntity.class);
+        } else {
+            getData();
+        }
 
         setContentView(R.layout.activity_message_detail);
         initView();
@@ -45,15 +51,6 @@ public class MessageDetail extends BaseActivity {
 
     private void initView() {
         new TitleMenuUtil(MessageDetail.this, "消息详情").show();
-
-        msg_content = (TextView) findViewById(R.id.msg_content);
-        msg_content.setText(entity.getContent());
-
-        msg_title = (TextView) findViewById(R.id.msg_title);
-        msg_title.setText(entity.getTitle());
-
-        msg_time = (TextView) findViewById(R.id.msg_time);
-        msg_time.setText(entity.getCreate_at());
 
         // delete icon show
         ImageView deleteIcon = (ImageView) findViewById(R.id.search);
@@ -65,6 +62,31 @@ public class MessageDetail extends BaseActivity {
             }
         });
 
+        if (null != entity) {
+            updateContent();
+        }
+
+    }
+
+    private void updateContent() {
+        msg_content = (TextView) findViewById(R.id.msg_content);
+        msg_content.setText(entity.getContent());
+
+        msg_title = (TextView) findViewById(R.id.msg_title);
+        msg_title.setText(entity.getTitle());
+
+        msg_time = (TextView) findViewById(R.id.msg_time);
+        msg_time.setText(entity.getCreate_at());
+    }
+
+    private void getData() {
+        JsonParams params = new JsonParams();
+        params.put("customerId",  MyApplication.user().getId());
+        params.put("id", id);
+        String strParams = params.toString();
+        Events.CommonRequestEvent event = new Events.MessageDetailEvent();
+        event.setParams(strParams);
+        EventBus.getDefault().post(event);
     }
 
     private void sendDelete() {
@@ -87,6 +109,15 @@ public class MessageDetail extends BaseActivity {
     }
 
     // events
+    public void onEventMainThread(Events.MessageDetailCompleteEvent event) {
+        if (event.success()) {
+            entity = event.getEntity();
+            if (null != entity) {
+                updateContent();
+            }
+        }
+    }
+
     public void onEventMainThread(Events.MessageDeleteCompleteEvent event) {
         toast(event.getMessage());
         if (event.success()) {

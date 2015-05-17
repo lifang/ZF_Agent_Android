@@ -1,7 +1,6 @@
 package com.posagent.activities.home;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -39,22 +38,22 @@ public class GuideActivity extends BaseActivity implements OnClickListener {
     private void initView() {
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
 
-        View item = getLayoutInflater().inflate(R.layout.item, null);
+        View item = getLayoutInflater().inflate(R.layout.item_for_guide, null);
         ImageView iv = (ImageView)item.findViewById(R.id.image);
         iv.setImageResource(R.drawable.guide1);
         lists.add(item);
 
-        item = getLayoutInflater().inflate(R.layout.item, null);
+        item = getLayoutInflater().inflate(R.layout.item_for_guide, null);
         iv = (ImageView)item.findViewById(R.id.image);
         iv.setImageResource(R.drawable.guide2);
         lists.add(item);
 
-        item = getLayoutInflater().inflate(R.layout.item, null);
+        item = getLayoutInflater().inflate(R.layout.item_for_guide, null);
         iv = (ImageView)item.findViewById(R.id.image);
         iv.setImageResource(R.drawable.guide3);
         lists.add(item);
 
-        item = getLayoutInflater().inflate(R.layout.item, null);
+        item = getLayoutInflater().inflate(R.layout.item_for_guide, null);
         iv = (ImageView)item.findViewById(R.id.image);
         iv.setImageResource(R.drawable.guide4);
         lists.add(item);

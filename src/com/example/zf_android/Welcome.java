@@ -42,6 +42,8 @@ public class Welcome extends BaseActivity {
             }
 
         }, SPLASHTIME);
+
+
 	}
  
 }

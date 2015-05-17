@@ -631,7 +631,6 @@
                     android:layout_width="fill_parent"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:visibility="gone"
                     >
 
                     <Spinner
@@ -653,8 +652,8 @@
 
             <View android:layout_height="1dp"
                 android:layout_width="fill_parent"
-
                 android:background="@color/Viewc2"/>
+
             <View android:layout_height="10dp"
                 android:layout_width="fill_parent"
 

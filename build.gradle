@@ -16,7 +16,7 @@ android {
     //noinspection all
     task copyNativeLibs(type: Copy) {
         // third party lib so
-        from(new File(projectDir, 'libs')) { include 'armeabi/*.so' }
+        from(new File(projectDir, 'libs')) { include 'armeabi/*.so'  }
         into new File(buildDir, 'native-libs')
     }
 
@@ -71,6 +71,7 @@ android {
 
 repositories {
         mavenCentral()
+
 }
 
 dependencies {

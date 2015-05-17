@@ -20,6 +20,7 @@ import com.posagent.MyApplication;
 import com.posagent.activities.goods.GoodsList;
 import com.posagent.activities.home.Main;
 import com.posagent.activities.user.MenuMine;
+import com.posagent.activities.user.MessageDetail;
 import com.posagent.activities.user.MessageList;
 import com.posagent.events.Events;
 import com.posagent.utils.Constants;
@@ -247,6 +248,17 @@ public class BaseActivity extends Activity implements View.OnClickListener {
     }
     public void onEventMainThread(Events.NetworkLoading event) {
 //        Toast.makeText(getApplicationContext(), "加载中...", Toast.LENGTH_SHORT).show();
+    }
+    public void onEventMainThread(Events.GoToMessageDetailEvent event) {
+
+        if (!isTaskRoot()) {
+            return;
+        }
+
+        String msgId = event.getMsgId();
+        Intent i = new Intent(context, MessageDetail.class);
+        i.putExtra("msgId", msgId);
+        context.startActivity(i);
     }
 
 

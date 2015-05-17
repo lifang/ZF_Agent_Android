@@ -71,6 +71,7 @@ public class HMSlideFragment extends Fragment {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
+                    list.clear();
                     for (int i = 0; i <myList.size(); i++) {
                         item = inflater.inflate(R.layout.item, null);
                         ImageView iv = (ImageView)item.findViewById(R.id.image);

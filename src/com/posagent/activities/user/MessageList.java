@@ -249,8 +249,13 @@ public class MessageList extends BaseActivity implements IXListViewListener {
         Intent i = new Intent(MessageList.this, MessageDetail.class);
         Gson gson = new Gson();
         String json = gson.toJson(entity);
-        i.putExtra("json", json);
-        startActivityForResult(i, Constants.REQUEST_CODE);
+//        i.putExtra("json", json);
+        i.putExtra("msgId", entity.getId());
+//        startActivityForResult(i, Constants.REQUEST_CODE);
+
+        Events.GoToMessageDetailEvent event = new Events.GoToMessageDetailEvent();
+        event.setMsgId(entity.getId());
+        EventBus.getDefault().post(event);
     }
 
     @Override

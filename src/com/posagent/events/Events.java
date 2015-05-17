@@ -36,6 +36,7 @@ import com.example.zf_android.entity.UserInfoEntity;
 import com.example.zf_android.entity.UserTerminal;
 import com.example.zf_android.trade.entity.AfterSaleRecord;
 import com.example.zf_android.trade.entity.ApplyDetail;
+import com.example.zf_android.trade.entity.PrepareAgent;
 import com.example.zf_android.trade.entity.TerminalDetail;
 import com.example.zf_android.trade.entity.TerminalItem;
 import com.example.zf_android.trade.entity.TradeAgent;
@@ -989,6 +990,24 @@ public class Events {
             return list;
         }
         public void setList(List<ChanelEntitiy> list) {
+            this.list = list;
+        }
+    }
+
+    public static class PrepareAgentListEvent extends CommonRequestEvent {}
+    public static class PrepareAgentListCompleteEvent extends CommonCompleteEvent {
+        private List<PrepareAgent> list = new ArrayList<PrepareAgent>();
+        public List<PrepareAgent> getList() {
+            if (list.size() < 1) {
+                String result = null;
+                result = getArrResult().toString();
+                list = (new Gson()).fromJson(result,
+                        new TypeToken<List<PrepareAgent>>() {}.getType());
+
+            }
+            return list;
+        }
+        public void setList(List<PrepareAgent> list) {
             this.list = list;
         }
     }

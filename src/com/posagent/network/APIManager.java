@@ -103,6 +103,7 @@ public class APIManager {
     public static final String UrlTerminalChoosePosList = BaseUrl + "/terminal/screeningPosName";
     public static final String UrlTerminalChooseChannelList = BaseUrl + "/terminal/getChannels";
     public static final String UrlPrepareGoodsChannelList = BaseUrl + "/preparegood/getpaychannellist";
+    public static final String UrlPrepareAgentlList = BaseUrl + "/preparegood/getsonagent";
     public static final String UrlCreateAfterSale = BaseUrl + "/terminal/submitAgent";
     public static final String UrlTerminalDetail = BaseUrl + "/terminal/getApplyDetails";
     public static final String UrlUserInfo = BaseUrl + "/agents/getOne";
@@ -568,6 +569,13 @@ public class APIManager {
         Events.CommonCompleteEvent completeEvent = new Events.PrepareGoodsChannelListCompleteEvent();
         CommonRequest(event, completeEvent, UrlPrepareGoodsChannelList);
     }
+
+    public void onEventBackgroundThread(Events.PrepareAgentListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.PrepareAgentListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlPrepareAgentlList);
+    }
+
+
 
     public void onEventBackgroundThread(Events.BatchTerminalNumberPosEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.BatchTerminalNumberPosCompleteEvent();

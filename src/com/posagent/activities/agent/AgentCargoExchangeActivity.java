@@ -212,7 +212,7 @@ public class AgentCargoExchangeActivity extends BaseActivity implements XListVie
         }
 
         if (v.getId() == R.id.ll_choose_agent) {
-            Intent iAgent = new Intent(AgentCargoExchangeActivity.this, TradeAgentActivity.class);
+            Intent iAgent = new Intent(AgentCargoExchangeActivity.this, AgentListActivity.class);
             iAgent.putExtra(AGENT_NAME, tradeAgentName);
             startActivityForResult(iAgent, REQUEST_TRADE_AGENT);
             return;

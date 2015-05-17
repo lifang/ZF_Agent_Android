@@ -183,12 +183,13 @@ public class AgentNewActivity extends BaseActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+//        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) return;
-        Bundle bundle = data.getExtras();
 
         switch (requestCode) {
             case Constants.CommonInputerConstant.REQUEST_CITY_CODE:
+                Bundle bundle = data.getExtras();
+
                 cityName = bundle.getString(com.example.zf_android.trade.Constants.CityIntent.CITY_NAME);
                 cityId = bundle.getInt(com.example.zf_android.trade.Constants.CityIntent.CITY_ID);
                 setText("tv_city_name", cityName);

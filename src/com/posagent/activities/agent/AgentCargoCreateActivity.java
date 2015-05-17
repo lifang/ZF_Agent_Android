@@ -60,7 +60,7 @@ public class AgentCargoCreateActivity extends BaseActivity {
         // 则直接 return，不再调用 super 处理
 
         if (v.getId() == R.id.ll_choose_agent) {
-            Intent iAgent = new Intent(AgentCargoCreateActivity.this, TradeAgentActivity.class);
+            Intent iAgent = new Intent(AgentCargoCreateActivity.this, AgentListActivity.class);
             iAgent.putExtra(AGENT_NAME, tradeAgentName);
             startActivityForResult(iAgent, REQUEST_TRADE_AGENT);
             return;

@@ -96,6 +96,7 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
                     if (p == Constants.Goods.BuyTypePigou) {
                         //show hide elements
                         hide("btn_view_terminals");
+                        hide("btn_view_wuliu");
                         hide("ll_header_daigou");
                         show("ll_header_pigou");
                         setText("tv_order_type", "订购类型 ：批购");
@@ -114,9 +115,11 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
                             case Constants.Order.StatusSent:
                             case Constants.Order.StatusComment:
                                 show("btn_view_terminals");
+                                show("btn_view_wuliu");
                                 break;
                             default:
                                 hide("btn_view_terminals");
+                                hide("btn_view_wuliu");
                         }
                         show("ll_header_daigou");
                         hide("ll_header_pigou");
@@ -162,6 +165,7 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
     private void initView() {
 
         findViewById(R.id.btn_view_terminals).setOnClickListener(this);
+        findViewById(R.id.btn_view_wuliu).setOnClickListener(this);
 
         tv_money=(TextView) findViewById(R.id.tv_money);
         tv_status_daigou=(TextView) findViewById(R.id.tv_status_daigou);
@@ -344,6 +348,16 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
                     startActivity(i);
                 } else {
                     toast("没有终端");
+                }
+                break;
+            case R.id.btn_view_wuliu:
+                if (status == Constants.Order.StatusSent) {
+                    Intent i = new Intent(context, OrderWuliu.class);
+                    i.putExtra("logistics_name", orderDetailEntity.getLogistics_name());
+                    i.putExtra("logistics_number", orderDetailEntity.getLogistics_number());
+                    startActivity(i);
+                } else {
+                    toast("没有物流信息");
                 }
                 break;
             default:

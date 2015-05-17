@@ -144,6 +144,7 @@ public class APIManager {
     public static final String UrlBannerData = BaseUrl + "/index/sysshufflingfigure";
 
     public static final String UrlSendDeviceCode = BaseUrl + "/agents/sendDeviceCode";
+    public static final String UrlGoodsPicture = BaseUrl + "/good/getGoodImgUrl";
 
 
     /** Convenience singleton for apps using a process-wide EventBus instance. */
@@ -192,9 +193,10 @@ public class APIManager {
 
                 completeEvent.setSuccess(intCode == Constants.SUCCESS_CODE);
                 completeEvent.setMessage(json.getString("message"));
+                completeEvent.setStrResult(json.getString("result"));
 
                 if(completeEvent.getSuccess()){
-                    if (!json.getString("result").equals("null") &&
+                    if (!String.valueOf(json.getString("result")).equals("null") &&
                             !json.getString("result").equals("") ) {
                         try {
                             completeEvent.setResult(json.getJSONObject("result"));
@@ -208,11 +210,6 @@ public class APIManager {
                                     completeEvent.setIntResult(json.getInt("result"));
                                 } catch (Exception e3) {
                                     Log.d("UnCatchException3", e3.getMessage());
-                                    try {
-                                        completeEvent.setStrResult(json.getString("result"));
-                                    } catch (Exception e4) {
-                                        Log.d("UnCatchException3", e4.getMessage());
-                                    }
                                 }
                             }
                         }
@@ -789,6 +786,11 @@ public class APIManager {
     public void onEventBackgroundThread(Events.SendDeviceCodeEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.SendDeviceCodeCompleteEvent();
         CommonRequest(event, completeEvent, UrlSendDeviceCode);
+    }
+
+    public void onEventBackgroundThread(Events.GoodsPictureListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.GoodsPictureListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlGoodsPicture);
     }
 
 

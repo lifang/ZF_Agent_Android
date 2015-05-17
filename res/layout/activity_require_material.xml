@@ -7,40 +7,45 @@
 
     <include layout="@layout/title_back" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:textSize="15dp"
-            android:text="开通所需材料"
-            />
-        <View
-            android:layout_marginTop="3dp"
-            android:layout_width="fill_parent"
-            android:layout_height="1px"
-            android:background="@color/Viewc2"
-            />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <LinearLayout
-            android:id="@+id/ll_pra"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/tv_requirement"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textSize="15dp"
+                android:text="开通所需材料"
                 />
+            <View
+                android:layout_marginTop="3dp"
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="@color/Viewc2"
+                />
+            <LinearLayout
+                android:id="@+id/ll_pra"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_requirement"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    />
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
-
-    </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>

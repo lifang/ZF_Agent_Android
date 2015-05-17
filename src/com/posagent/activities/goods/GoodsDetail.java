@@ -421,6 +421,15 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
             }
         });
 
+        findViewById(R.id.tv_picture_detail).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(GoodsDetail.this, PictureDetail.class);
+                i.putExtra("goodsId", "" + goodinfo.getId());
+                startActivity(i);
+            }
+        });
+
         //area
         List<String> areas = paychannelinfo.getSupportAreas();
         if (areas != null) {

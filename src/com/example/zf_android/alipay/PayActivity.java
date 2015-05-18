@@ -142,7 +142,7 @@ public abstract class PayActivity extends BaseActivity {
 	 * 
 	 */
 	private String getOrderInfo(String outTradeNo, String subject, String body, String price) {
-        Log.d(TAG, APIManager.BaseUrl + Config.NOTIFT_URL);
+        Log.d(TAG, APIManager.URL + Config.NOTIFT_URL);
 
 		// 签约合作者身份ID
 		String orderInfo = "partner=" + "\"" + Config.PARTNER + "\"";
@@ -163,7 +163,7 @@ public abstract class PayActivity extends BaseActivity {
 		orderInfo += "&total_fee=" + "\"" + price + "\"";
 
 		// 服务器异步通知页面路径
-		orderInfo += "&notify_url=" + "\"" + APIManager.BaseUrl + Config.NOTIFT_URL + "\"";
+		orderInfo += "&notify_url=" + "\"" + APIManager.URL + Config.NOTIFT_URL + "\"";
 
 		// 服务接口名称， 固定值
 		orderInfo += "&service=\"mobile.securitypay.pay\"";
@@ -185,7 +185,7 @@ public abstract class PayActivity extends BaseActivity {
 		// orderInfo += "&extern_token=" + "\"" + extern_token + "\"";
 
 		// 支付宝处理完请求后，当前页面跳转到商户指定页面的路径，可空
-		orderInfo += "&return_url=\"" + APIManager.BaseUrl + Config.RETURN_URL + "\"";
+		orderInfo += "&return_url=\"" + APIManager.URL + Config.RETURN_URL + "\"";
 
 		// 调用银行卡支付，需配置此参数，参与签名， 固定值 （需要签约《无线银行卡快捷支付》才能使用）
 		// orderInfo += "&paymethod=\"expressGateway\"";

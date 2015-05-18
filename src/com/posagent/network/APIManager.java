@@ -34,7 +34,8 @@ public class APIManager {
 
     // Host and api
 //    public static final String BaseUrl = "http://114.215.149.242:28080/ZFAgent/api";
-    public static final String BaseUrl = "http://121.40.84.2:28080/ZFAgent/api";
+    public static final String URL = "http://121.40.84.2:28080/ZFAgent";
+    public static final String BaseUrl = URL+"/api";
 //    public static final String BaseUrl = "http://121.40.64.167:9090/api";
 
     public static final String UrlLogin = BaseUrl + "/agent/agentLogin";

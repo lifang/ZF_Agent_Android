@@ -96,14 +96,15 @@
 		<item>商户名称</item>
 	</string-array>
 
-	<string name="trade_item_bank_info">银行信息</string>
+	<string name="trade_item_bank_info">交易信息</string>
 
 	<string-array name="trade_item_bank">
 		<item>终 端 号</item>
 		<item>付款账号</item>
 		<item>收款账号</item>
 		<item>支付通道</item>
-		<item>分润金额</item>
+        <item>产出分润</item>
+        <item>支付分润</item>
 		<item>交易金额</item>
 		<item>交易时间</item>
 		<item>交易状态</item>

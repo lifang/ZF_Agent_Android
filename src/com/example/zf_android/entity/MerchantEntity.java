@@ -13,6 +13,7 @@ public class MerchantEntity {
 
 	private String bank_open_account;
 	private String body_photo_path;
+	private String bank_name;
 	private String account_bank_name;
 	private String org_code_no_pic_path;
 	private String account_pic_path;
@@ -53,6 +54,14 @@ public class MerchantEntity {
 	public void setLegal_person_name(String legal_person_name) {
 		this.legal_person_name = legal_person_name;
 	}
+
+    public String getBank_name() {
+        return bank_name;
+    }
+
+    public void setBank_name(String bank_name) {
+        this.bank_name = bank_name;
+    }
 
     public int getCity_id() {
         return city_id;

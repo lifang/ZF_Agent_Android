@@ -21,7 +21,7 @@ public class SonAgent extends BaseEntity {
     private String created_at;
     private String allQtyStr;
 
-    private boolean is_have_profit;
+    private int is_have_profit;
 
     public int getTypes() {
         return types;
@@ -111,11 +111,11 @@ public class SonAgent extends BaseEntity {
         this.allQtyStr = allQtyStr;
     }
 
-    public boolean isIs_have_profit() {
+    public int getIs_have_profit() {
         return is_have_profit;
     }
 
-    public void setIs_have_profit(boolean is_have_profit) {
+    public void setIs_have_profit(int is_have_profit) {
         this.is_have_profit = is_have_profit;
     }
 }

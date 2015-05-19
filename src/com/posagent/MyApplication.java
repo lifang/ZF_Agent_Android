@@ -350,6 +350,9 @@ public class MyApplication extends Application {
     }
 
     public void setupNotification() {
+        if (true) {
+            return;
+        }
         // Push: 以apikey的方式登录，一般放在主Activity的onCreate中。
         // 这里把apikey存放于manifest文件中，只是一种存放方式，
         // 您可以用自定义常量等其它方式实现，来替换参数中的Utils.getMetaValue(PushDemoActivity.this,

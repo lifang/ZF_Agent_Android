@@ -121,7 +121,7 @@ public class AgentDetailActivity extends BaseActivity {
         setText("tv_create_time", "" + entity.getCreated_at());
         setText("tv_sold_count", "" + entity.getSoldnum());
         setText("tv_open_count", "" + entity.getOpennum());
-        setText("tv_left_count", "" + (entity.getOpennum() - entity.getSoldnum()));
+        setText("tv_left_count", "" + (entity.getAllQty() - entity.getSoldnum()));
 
         cb_is_profit = (CheckBox) findViewById(R.id.cb_is_profit);
         cb_is_profit.setOnClickListener(new View.OnClickListener() {

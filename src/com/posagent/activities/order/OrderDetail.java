@@ -93,6 +93,11 @@ public class OrderDetail extends BaseActivity implements OnClickListener{
                     tv_fplx.setText(entity.getOrder_invoce_type().equals("1") ? "发票类型 ：个人" : "发票类型 ：公司");
                     fptt.setText("发票抬头 ：" + entity.getOrder_invoce_info());
 
+                    if (0 == entity.getNeed_invoice()) {
+                        hide("fptt");
+                        hide("tv_fplx");
+                    }
+
                     if (p == Constants.Goods.BuyTypePigou) {
                         //show hide elements
                         hide("btn_view_terminals");

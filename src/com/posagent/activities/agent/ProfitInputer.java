@@ -49,14 +49,14 @@ public class ProfitInputer extends BaseActivity implements OnClickListener {
             case R.id.click_common_inputer_confirm:
                 TextView tv = (TextView) findViewById(R.id.content);
                 String value = tv.getText().toString();
-                String pattern = "^[0-9]+$";
+                String pattern = "^([0-9]|\\.)+$";
                 boolean matches = Pattern.matches(pattern, value);
                 if (!matches) {
-                    toast("请输入0-100之间的分润比例");
+                    toast("请输入正确的分润比例");
                     return;
                 } else {
-                   int intValue = Integer.parseInt(value);
-                   if (intValue > 100 || intValue < 0) {
+                   float floatValue = Float.parseFloat(value);
+                   if (floatValue > 100 || floatValue < 0.1) {
                        toast("请输入0-100之间的分润比例");
                        return;
                    }

@@ -11,6 +11,50 @@ public class OrderDetailEntity {
     private String logistics_name;
     private String logistics_number;
 
+    private String shipped_quantity;
+    private String total_quantity;
+    private int need_invoice;
+
+
+    //    "order_totalprice": "120",//实付金额
+    private String order_totalPrice;
+    private CommentG comments;
+    private List <Goodlist> order_goodsList;
+
+
+
+
+    //    "order_number": "020150206104427420",
+    private String order_number;
+    //    "order_receiver_phone": "18352445051",\
+    private String order_receiver_phone;
+    //    "order_payment_type": "",
+    private String order_payment_type;//支付方式
+    //    "order_comment": "nihao",
+    private String order_comment;//留言
+    //    "order_address": "江苏省苏州市工业园区独墅湖高教区",
+    private String order_address;//收件人地址
+    //    "order_invoce_type": "个人",
+    private String order_invoce_type;//发票类型
+    //    "order_oldprice": "100",
+    private String order_oldprice;
+    //    "order_id": 1,
+//    "order_totalNum": "5",
+    private int order_id;
+    private String order_totalNum;//订单总件数
+    //    "order_status": 1,
+    private int order_status;//订单状态
+    //    "order_receiver": "李长福",
+    private String order_receiver;//收件人
+    //    "order_createTime": "2015-02-05 19:53:31",
+    private String order_createTime;//订单日期
+    //    "order_psf": "0",
+    private String order_psf;//配送费
+    //    "good_merchant": "",
+    private String good_merchant;
+    //    "order_invoce_info": "sad",
+    private String order_invoce_info;
+
     public String getLogistics_name() {
         return logistics_name;
     }
@@ -67,41 +111,6 @@ public class OrderDetailEntity {
         this.total_quantity = total_quantity;
     }
 
-    private String shipped_quantity;
-    private String total_quantity;
-
-
-
-    //    "order_number": "020150206104427420",
-    private String order_number;
-    //    "order_receiver_phone": "18352445051",\
-    private String order_receiver_phone;
-    //    "order_payment_type": "",
-    private String order_payment_type;//支付方式
-    //    "order_comment": "nihao",
-    private String order_comment;//留言
-    //    "order_address": "江苏省苏州市工业园区独墅湖高教区",
-    private String order_address;//收件人地址
-    //    "order_invoce_type": "个人",
-    private String order_invoce_type;//发票类型
-    //    "order_oldprice": "100",
-    private String order_oldprice;
-    //    "order_id": 1,
-//    "order_totalNum": "5",
-    private int order_id;
-    private String order_totalNum;//订单总件数
-    //    "order_status": 1,
-    private int order_status;//订单状态
-    //    "order_receiver": "李长福",
-    private String order_receiver;//收件人
-    //    "order_createTime": "2015-02-05 19:53:31",
-    private String order_createTime;//订单日期
-    //    "order_psf": "0",
-    private String order_psf;//配送费
-    //    "good_merchant": "",
-    private String good_merchant;
-    //    "order_invoce_info": "sad",
-    private String order_invoce_info;
 
     public String getOrder_totalPrice() {
         return order_totalPrice;
@@ -110,11 +119,6 @@ public class OrderDetailEntity {
     public void setOrder_totalPrice(String order_totalPrice) {
         this.order_totalPrice = order_totalPrice;
     }
-
-    //    "order_totalprice": "120",//实付金额
-    private String order_totalPrice;
-    private CommentG comments;
-    private List <Goodlist> order_goodsList;
 
 
 
@@ -385,5 +389,13 @@ public class OrderDetailEntity {
 
     public void setGuishu_user(String guishu_user) {
         this.guishu_user = guishu_user;
+    }
+
+    public int getNeed_invoice() {
+        return need_invoice;
+    }
+
+    public void setNeed_invoice(int need_invoice) {
+        this.need_invoice = need_invoice;
     }
 }

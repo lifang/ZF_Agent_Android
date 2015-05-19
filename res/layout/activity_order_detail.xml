@@ -370,7 +370,7 @@
                         android:layout_marginTop="6dp"
                         android:background="@drawable/bg_shape"
                         android:textColor="@color/bgtitle"
-                        android:text="查看终端号" />
+                        android:text="查看物流" />
 
                 </LinearLayout>
 

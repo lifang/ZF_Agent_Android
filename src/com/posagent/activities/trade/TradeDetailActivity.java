@@ -171,18 +171,21 @@ public class TradeDetailActivity extends BaseActivity {
                     text = "￥" + StringUtil.priceShow(entity.getProfitPrice());
                     break;
                 case 5:
-                    text = "￥" + StringUtil.priceShow(entity.getAmount());
+                    text = "￥" + StringUtil.priceShow(entity.getProfitPrice());
                     break;
                 case 6:
-                    text = entity.getTradedTimeStr();
+                    text = "￥" + StringUtil.priceShow(entity.getAmount());
                     break;
                 case 7:
-                    text = statusName;
+                    text = entity.getTradedTimeStr();
                     break;
                 case 8:
-                    text = entity.getBatchNumber();
+                    text = statusName;
                     break;
                 case 9:
+                    text = entity.getBatchNumber();
+                    break;
+                case 10:
                     text = entity.getTradeNumber();
                     break;
                 default:

@@ -11,7 +11,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -110,6 +112,9 @@ public class ApplyDetailActivity extends FragmentActivity {
 	private TextView mSerialNum;
 	private TextView mPayChannel;
 	private TextView tv_support_type_name;
+
+    private EditText etMerchantName;
+    private EditText etBankMerchantName;
 
 	private String[] mMerchantKeys;
 	private String[] mBankKeys;
@@ -502,7 +507,29 @@ public class ApplyDetailActivity extends FragmentActivity {
 
 		mMerchantContainer.addView(getDetailItem(ITEM_CHOOSE, mMerchantKeys[0], null));
 		mMerchantContainer.addView(getDetailItem(ITEM_EDIT, mMerchantKeys[1], null));
-		mMerchantContainer.addView(getDetailItem(ITEM_EDIT, mMerchantKeys[2], null));
+
+        LinearLayout ll = getDetailItem(ITEM_EDIT, mMerchantKeys[2], null);
+        etMerchantName = (EditText)ll.findViewById(R.id.apply_detail_value);
+        etMerchantName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                etBankMerchantName.setText(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                etBankMerchantName.setText(s.toString());
+            }
+        });
+        mMerchantContainer.addView(ll);
+
+
+
 
 		View merchantGender = getDetailItem(ITEM_CHOOSE, mMerchantKeys[3], null);
 		merchantGender.setOnClickListener(new View.OnClickListener() {
@@ -555,8 +582,8 @@ public class ApplyDetailActivity extends FragmentActivity {
 		mBankKeys = getResources().getStringArray(R.array.apply_detail_bank_keys);
 
 		mCustomerContainer.addView(getDetailItem(ITEM_CHOOSE, mBankKeys[0], null));
-        LinearLayout ll = (LinearLayout) mContainer.findViewWithTag(mBankKeys[0]);
-        ll.setOnClickListener(new View.OnClickListener() {
+        LinearLayout tmpll = (LinearLayout) mContainer.findViewWithTag(mBankKeys[0]);
+        tmpll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 customTag = mBankKeys[0];
@@ -567,12 +594,18 @@ public class ApplyDetailActivity extends FragmentActivity {
             }
         });
 
-		mCustomerContainer.addView(getDetailItem(ITEM_EDIT, mBankKeys[1], null));
+        View bankAccountName = getDetailItem(ITEM_EDIT, mBankKeys[1] , null);
+        etBankMerchantName = (EditText) bankAccountName.findViewById(R.id.apply_detail_value);
+        etBankMerchantName.setEnabled(false);
+
+		mCustomerContainer.addView(bankAccountName);
 		mCustomerContainer.addView(getDetailItem(ITEM_EDIT, mBankKeys[2], null));
 		mCustomerContainer.addView(getDetailItem(ITEM_EDIT, mBankKeys[3], null));
 		mCustomerContainer.addView(getDetailItem(ITEM_EDIT, mBankKeys[4], null));
 
-		View chooseChannel = getDetailItem(ITEM_CHOOSE, getString(R.string.apply_detail_channel), null);
+
+
+        View chooseChannel = getDetailItem(ITEM_CHOOSE, getString(R.string.apply_detail_channel), null);
 		chooseChannel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -601,7 +634,7 @@ public class ApplyDetailActivity extends FragmentActivity {
 
 		setItemValue(mMerchantKeys[8], mCityName);
 
-        setItemValue(mBankKeys[0], merchant.getAccount_bank_name());
+        setItemValue(mBankKeys[0], merchant.getBank_name());
         setItemValue(mBankKeys[1], merchant.getAccount_bank_num());
         setItemValue(mBankKeys[2], merchant.getBank_open_account());
         setItemValue(mBankKeys[3], merchant.getTax_registered_no());
@@ -838,7 +871,8 @@ public class ApplyDetailActivity extends FragmentActivity {
         params.put("billingId", mBillingId);
 
         params.put("bankNum", getItemValue(mBankKeys[2]));
-        params.put("bankName", getItemValue(mBankKeys[0]));
+        params.put("bankName", getItemValue(mBankKeys[1]));
+        params.put("bank_name", getItemValue(mBankKeys[0]));
 
 //        params.put("bankCode", getItemValue(mBankKeys[1]));
         //FIXME 只有一个银行条目吗？
@@ -903,8 +937,8 @@ public class ApplyDetailActivity extends FragmentActivity {
         setItemValue(mMerchantKeys[8], ((MyApplication)getApplication()).cityNameForId(openInfo.getCity_id()));
 
 //        setItemValue(mBankKeys[0], openInfo.getAccount_bank_code());
-        setItemValue(mBankKeys[0], openInfo.getAccount_bank_name());
-        setItemValue(mBankKeys[1], "");
+        setItemValue(mBankKeys[0], openInfo.getBank_name());
+        setItemValue(mBankKeys[1], openInfo.getAccount_bank_name());
         setItemValue(mBankKeys[2], openInfo.getAccount_bank_num());
         setItemValue(mBankKeys[3], openInfo.getTax_registered_no());
         setItemValue(mBankKeys[4], openInfo.getOrganization_code_no());

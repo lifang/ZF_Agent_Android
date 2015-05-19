@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
+import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.activities.user.UserList;
 import com.posagent.events.Events;
@@ -80,6 +81,7 @@ public class TerminalUserBind extends BaseActivity implements View.OnClickListen
         JsonParams params = new JsonParams();
 
         params.put("userId", userId);
+        params.put("agentId", MyApplication.user().getAgentId());
         params.put("terminalsNum", et_terminals.getText().toString());
         String strParams = params.toString();
         Events.TerminalBindEvent event = new Events.TerminalBindEvent();

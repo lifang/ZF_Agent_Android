@@ -20,6 +20,7 @@ public class TerminalOpenInfo {
     private String phone;
     private String channelname;
     private String account_bank_num;
+    private String bank_name;
     private String merchant_name;
     private String billingname;
     private String card_id;
@@ -223,5 +224,13 @@ public class TerminalOpenInfo {
 
     public void setAccount_bank_name(String account_bank_name) {
         this.account_bank_name = account_bank_name;
+    }
+
+    public String getBank_name() {
+        return bank_name;
+    }
+
+    public void setBank_name(String bank_name) {
+        this.bank_name = bank_name;
     }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
@@ -12,6 +13,8 @@ import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
+
+import java.util.regex.Pattern;
 
 import de.greenrobot.event.EventBus;
 
@@ -78,6 +81,22 @@ public class AgentDefaultProfit extends BaseActivity
 
 
     private boolean check() {
+
+        TextView tv = et_profit;
+        String value = tv.getText().toString();
+        String pattern = "^([0-9]|\\.)+$";
+        boolean matches = Pattern.matches(pattern, value);
+        if (!matches) {
+            toast("请输入正确的分润比例");
+            return false;
+        } else {
+            float floatValue = Float.parseFloat(value);
+            if (floatValue > 100 || floatValue < 0.1) {
+                toast("请输入0-100之间的分润比例");
+                return false;
+            }
+        }
+
         return true;
     }
 

@@ -22,7 +22,7 @@ public class UserInfoEntity extends BaseEntity {
     private String username;
     private String updatedAt;
 
-    private boolean is_have_profit;
+    private int is_have_profit;
 
     private List<UserRole> machtigingen;
 
@@ -122,19 +122,19 @@ public class UserInfoEntity extends BaseEntity {
         this.updatedAt = updatedAt;
     }
 
-    public boolean isIs_have_profit() {
-        return is_have_profit;
-    }
-
-    public void setIs_have_profit(boolean is_have_profit) {
-        this.is_have_profit = is_have_profit;
-    }
-
     public List<UserRole> getMachtigingen() {
         return machtigingen;
     }
 
     public void setMachtigingen(List<UserRole> machtigingen) {
         this.machtigingen = machtigingen;
+    }
+
+    public int getIs_have_profit() {
+        return is_have_profit;
+    }
+
+    public void setIs_have_profit(int is_have_profit) {
+        this.is_have_profit = is_have_profit;
     }
 }

@@ -257,6 +257,18 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.posagent.activities.agent.TerminalChoose"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.posagent.activities.agent.TerminalChoosePos"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.posagent.activities.agent.TerminalChooseAdd"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.posagent.activities.agent.AgentCargoExchangeDetail"
             android:screenOrientation="portrait" >
         </activity>

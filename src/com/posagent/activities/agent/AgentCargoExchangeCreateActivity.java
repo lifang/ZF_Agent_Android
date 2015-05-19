@@ -11,7 +11,6 @@ import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
-import com.posagent.activities.terminal.TerminalChooseForm;
 import com.posagent.activities.trade.TradeAgentActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
@@ -77,12 +76,13 @@ public class AgentCargoExchangeCreateActivity extends BaseActivity {
             return;
         }
         if (v.getId() == R.id.ll_choose_terminal) {
-            Intent i = new Intent(AgentCargoExchangeCreateActivity.this, TerminalChooseForm.class);
-
-            if (fromSonAgentId > 0) {
-                i.putExtra("agentId", fromSonAgentId);
+            if (fromSonAgentId < 1) {
+                toast("请选择被调货代理商");
+                return ;
             }
 
+            Intent i = new Intent(AgentCargoExchangeCreateActivity.this, TerminalChoose.class);
+            i.putExtra("agentId", fromSonAgentId);
             startActivity(i);
             return;
         }

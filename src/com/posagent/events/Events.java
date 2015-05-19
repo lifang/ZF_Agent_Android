@@ -928,6 +928,28 @@ public class Events {
         }
     }
 
+    public static class SearchAgentTerminalListEvent extends CommonRequestEvent {}
+    public static class SearchAgentTerminalListCompleteEvent extends CommonCompleteEvent {
+        private List<TerminalItem> list = new ArrayList<TerminalItem>();
+        public List<TerminalItem> getList() {
+            if (list.size() < 1) {
+                String result = null;
+
+                try {
+                    result = getResult().getString("list");
+                    list = (new Gson()).fromJson(result,
+                            new TypeToken<List<TerminalItem>>() {}.getType());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            return list;
+        }
+        public void setList(List<TerminalItem> list) {
+            this.list = list;
+        }
+    }
+
     public static class TerminalChooseFinishEvent {
         private List<String> list;
 
@@ -942,6 +964,24 @@ public class Events {
 
     public static class TerminalChoosePosListEvent extends CommonRequestEvent {}
     public static class TerminalChoosePosListCompleteEvent extends CommonCompleteEvent {
+        private List<TerminalChoosePosItem> list = new ArrayList<TerminalChoosePosItem>();
+        public List<TerminalChoosePosItem> getList() {
+            if (list.size() < 1) {
+                String result = null;
+                result = getArrResult().toString();
+                list = (new Gson()).fromJson(result,
+                        new TypeToken<List<TerminalChoosePosItem>>() {}.getType());
+
+            }
+            return list;
+        }
+        public void setList(List<TerminalChoosePosItem> list) {
+            this.list = list;
+        }
+    }
+
+    public static class TerminalChoosePosAgentListEvent extends CommonRequestEvent {}
+    public static class TerminalChoosePosAgentListCompleteEvent extends CommonCompleteEvent {
         private List<TerminalChoosePosItem> list = new ArrayList<TerminalChoosePosItem>();
         public List<TerminalChoosePosItem> getList() {
             if (list.size() < 1) {

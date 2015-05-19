@@ -4,6 +4,15 @@ public class TerminalChoosePosItem {
 
 	private int id;
     private String title;
+    private String goodname;
+
+    public String getGoodname() {
+        return goodname;
+    }
+
+    public void setGoodname(String goodname) {
+        this.goodname = goodname;
+    }
 
     public int getId() {
         return id;

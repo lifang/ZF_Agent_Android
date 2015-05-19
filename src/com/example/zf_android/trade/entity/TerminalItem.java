@@ -13,6 +13,15 @@ public class TerminalItem extends BaseEntity {
 	private String terminalNumber;
 	private int status;
     private int retail_price;
+    private int money;
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
 
     public int getRetail_price() {
         return retail_price;

@@ -102,8 +102,10 @@ public class APIManager {
     public static final String UrlBatchTerminalNumber = BaseUrl + "/terminal/batchTerminalNum";
     public static final String UrlBatchTerminalNumberPos = BaseUrl + "/terminal/screeningTerminalNum";
     public static final String UrlTerminalChoosePosList = BaseUrl + "/terminal/screeningPosName";
+    public static final String UrlTerminalChoosePosAgentList = BaseUrl + "/preparegood/getgoodlist";
     public static final String UrlTerminalChooseChannelList = BaseUrl + "/terminal/getChannels";
     public static final String UrlPrepareGoodsChannelList = BaseUrl + "/preparegood/getpaychannellist";
+    public static final String UrlPrepareGoodTerminalList = BaseUrl + "/preparegood/getterminalslist";
     public static final String UrlPrepareAgentlList = BaseUrl + "/preparegood/getsonagent";
     public static final String UrlCreateAfterSale = BaseUrl + "/terminal/submitAgent";
     public static final String UrlTerminalDetail = BaseUrl + "/terminal/getApplyDetails";
@@ -561,6 +563,11 @@ public class APIManager {
         CommonRequest(event, completeEvent, UrlTerminalChoosePosList);
     }
 
+    public void onEventBackgroundThread(Events.TerminalChoosePosAgentListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.TerminalChoosePosAgentListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlTerminalChoosePosAgentList);
+    }
+
     public void onEventBackgroundThread(Events.TerminalChooseChannelListEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.TerminalChooseChannelListCompleteEvent();
         CommonRequest(event, completeEvent, UrlTerminalChooseChannelList);
@@ -763,6 +770,11 @@ public class APIManager {
     public void onEventBackgroundThread(Events.MerchantListEvent event) {
         Events.CommonCompleteEvent completeEvent = new Events.MerchantListCompleteEvent();
         CommonRequest(event, completeEvent, UrlMerchantList);
+    }
+
+    public void onEventBackgroundThread(Events.SearchAgentTerminalListEvent event) {
+        Events.CommonCompleteEvent completeEvent = new Events.SearchAgentTerminalListCompleteEvent();
+        CommonRequest(event, completeEvent, UrlPrepareGoodTerminalList);
     }
 
     public void onEventBackgroundThread(Events.BankListEvent event) {

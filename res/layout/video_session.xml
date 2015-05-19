@@ -5,7 +5,7 @@
     android:layout_height="match_parent" >
 
     <SurfaceView
-        android:id="@+id/surface_remote"
+        android:id="@+id/surface_local"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/videoremote_bg"
@@ -21,11 +21,12 @@
         android:padding="3dip" >
 
         <SurfaceView
-            android:id="@+id/surface_local"
+            android:id="@+id/surface_remote"
             android:layout_width="match_parent"
             android:layout_height="0dip"
             android:layout_gravity="center"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:visibility="gone"/>
     </LinearLayout>
 
 </FrameLayout>

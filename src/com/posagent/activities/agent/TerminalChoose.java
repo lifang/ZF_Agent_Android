@@ -117,7 +117,7 @@ public class TerminalChoose extends BaseActivity {
         params.put("paychannelId", channelId);
         if (null != serialNums) {
             params.put("serialNums", serialNums.split(","));
-        } 
+        }
         String strParams = params.toString();
         Events.CommonRequestEvent event = new Events.SearchAgentTerminalListEvent();
         event.setParams(strParams);

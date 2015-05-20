@@ -97,9 +97,11 @@
 
                 <TextView
                     style="@style/TextTrace.Comment"
+                    android:visibility="gone"
                     android:text="@string/after_sale_trace_record"/>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/after_sale_comment_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

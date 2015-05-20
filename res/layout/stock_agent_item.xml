@@ -94,6 +94,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginRight="10dp"
             android:src="@drawable/post_right"
+            android:visibility="gone"
             />
     </LinearLayout>
 

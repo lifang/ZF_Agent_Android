@@ -56,6 +56,7 @@ public class AddressAdapter extends BaseAdapter {
             holder.tv_address = (TextView) convertView.findViewById(R.id.tv_address);
             holder.tv_moblephone = (TextView) convertView.findViewById(R.id.tv_moblephone);
             holder.tv_delete = (TextView) convertView.findViewById(R.id.tv_delete);
+            holder.tv_is_default = (TextView) convertView.findViewById(R.id.tv_is_default);
             holder.item_cb = (CheckBox) convertView.findViewById(R.id.item_cb);
             convertView.setTag(holder);
         } else {
@@ -75,6 +76,12 @@ public class AddressAdapter extends BaseAdapter {
             holder.tv_delete.setVisibility(View.VISIBLE);
         } else {
             holder.tv_delete.setVisibility(View.GONE);
+        }
+
+        if (entity.getIsDefault().equals("1")) {
+            holder.tv_is_default.setVisibility(View.VISIBLE);
+        } else {
+            holder.tv_is_default.setVisibility(View.GONE);
         }
 
         holder.tv_delete.setOnClickListener(new View.OnClickListener() {
@@ -116,7 +123,7 @@ public class AddressAdapter extends BaseAdapter {
 
     public final class ViewHolder {
         public TextView tv_title, tv_time, tv_moblephone, tv_address,
-                tv_delete;
+                tv_delete, tv_is_default;
         public CheckBox item_cb;
 
     }

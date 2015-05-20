@@ -1,5 +1,7 @@
 package com.posagent.activities.aftersale;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -211,23 +213,43 @@ public class AfterSaleListActivity extends BaseActivity implements XListView.IXL
 
     }
 
-    private void doCancel(AfterSaleRecord record) {
-        JsonParams params = new JsonParams();
-        params.put("id", record.getId());
-        String strParams = params.toString();
-        Events.CommonRequestEvent event = new Events.AfterSaleMaintainCancelEvent();
-        switch (mRecordType) {
-            case CANCEL:
-                event = new Events.AfterSaleCancelCancelEvent();
+    private void doCancel(final AfterSaleRecord record) {
 
-                break;
-            case UPDATE:
-                event = new Events.AfterSaleUpdateCancelEvent();
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("确定取消吗？");
+        builder.setTitle("请确认");
 
-                break;
-        }
-        event.setParams(strParams);
-        EventBus.getDefault().post(event);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                JsonParams params = new JsonParams();
+                params.put("id", record.getId());
+                String strParams = params.toString();
+                Events.CommonRequestEvent event = new Events.AfterSaleMaintainCancelEvent();
+                switch (mRecordType) {
+                    case CANCEL:
+                        event = new Events.AfterSaleCancelCancelEvent();
+
+                        break;
+                    case UPDATE:
+                        event = new Events.AfterSaleUpdateCancelEvent();
+
+                        break;
+                }
+                event.setParams(strParams);
+                EventBus.getDefault().post(event);
+
+            }
+        });
+
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.create().show();
+
+
 
     }
 

@@ -667,48 +667,6 @@
                 android:layout_height="1dp"
                 android:background="@color/Viewc" />
             <LinearLayout
-                android:id="@+id/ll_change_password"
-                android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/bg_item" >
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/margin_left2"
-                    android:src="@drawable/login_lock" />
-
-
-                <TextView
-                    android:tag="@string/tag_destination_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:layout_marginLeft="7dp"
-                    android:gravity="center_vertical"
-                    android:singleLine="true"
-                    android:text="修改账户密码"
-                    android:textColor="@color/text292929"
-                    android:textSize="17sp" />
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    />
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="5dp"
-                    android:src="@drawable/post_right" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@color/Viewc" />
-            <LinearLayout
                 android:id="@+id/ll_address_manage"
                 android:tag="@string/tag_destination_get"
                 android:layout_width="fill_parent"

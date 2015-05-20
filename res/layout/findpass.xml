@@ -33,7 +33,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
                 android:background="@color/white"
-                android:hint="@string/hintname"
+                android:hint="输入手机/邮箱"
                 android:maxWidth="20dp"
                 android:singleLine="true"
                 android:textSize="17sp" />

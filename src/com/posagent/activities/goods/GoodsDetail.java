@@ -662,6 +662,15 @@ public class GoodsDetail extends BaseActivity implements OnClickListener {
     }
 
     private void updatePrice() {
+
+        if (buyType == Constants.Goods.OrderTypeDaigou) {
+            btn_confirm_order.setText("立即采购");
+
+        } else if (buyType == Constants.Goods.OrderTypeDaizulin) {
+            btn_confirm_order.setText("立即租赁");
+        }
+
+
         int price = 0;
         originPrice = goodinfo.getPrice() + paychannelinfo.getOpening_cost();
         if (buyType == Constants.Goods.OrderTypePigou) {

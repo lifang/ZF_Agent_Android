@@ -1232,7 +1232,7 @@ public class Events {
         private String defautProfit;
 
         public String getDefautProfit() {
-            String result = "" + getIntResult();
+            String result = "" + getStrResult();
             return result;
         }
 

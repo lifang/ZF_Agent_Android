@@ -1,6 +1,7 @@
 package com.posagent.activities.user;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -121,6 +122,11 @@ public class StaffForm extends BaseActivity
 
 
     private boolean check() {
+
+        if (null != entity && TextUtils.isEmpty(et_password.getText().toString())) {
+            return true;
+        }
+
         if (!et_password.getText().toString().equals(et_password_confirm.getText().toString())) {
             toast("两次密码不匹配");
             return false;

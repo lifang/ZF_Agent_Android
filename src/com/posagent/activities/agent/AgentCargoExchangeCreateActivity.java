@@ -150,7 +150,7 @@ public class AgentCargoExchangeCreateActivity extends BaseActivity {
             toast("请选择调货代理商");
             return false;
         }
-        
+
         if (null == selectedList || selectedList.size() < 1) {
             toast("请选择终端号");
             return false;

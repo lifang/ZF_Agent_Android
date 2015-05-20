@@ -80,11 +80,9 @@ public class MyInfo extends BaseActivity {
         btn_exit=(Button) findViewById(R.id.btn_exit);
         btn_exit.setOnClickListener(this);
 
-        ll_change_password = (LinearLayout)findViewById(R.id.ll_change_password);
         ll_address_manage = (LinearLayout)findViewById(R.id.ll_address_manage);
         ll_email = (LinearLayout)findViewById(R.id.ll_email);
         ll_phone = (LinearLayout)findViewById(R.id.ll_phone);
-        ll_change_password.setOnClickListener(this);
         ll_address_manage.setOnClickListener(this);
         ll_email.setOnClickListener(this);
         ll_phone.setOnClickListener(this);

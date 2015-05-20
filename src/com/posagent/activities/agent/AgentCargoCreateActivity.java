@@ -11,8 +11,6 @@ import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.R;
 import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
-import com.posagent.activities.terminal.TerminalChooseForm;
-import com.posagent.activities.trade.TradeAgentActivity;
 import com.posagent.events.Events;
 import com.posagent.utils.JsonParams;
 
@@ -66,7 +64,8 @@ public class AgentCargoCreateActivity extends BaseActivity {
             return;
         }
         if (v.getId() == R.id.ll_choose_terminal) {
-            Intent i = new Intent(AgentCargoCreateActivity.this, TerminalChooseForm.class);
+            Intent i = new Intent(context, TerminalChoose.class);
+            i.putExtra("agentId", MyApplication.user().getAgentId());
             startActivity(i);
             return;
         }

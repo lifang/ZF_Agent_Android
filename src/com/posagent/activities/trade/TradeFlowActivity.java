@@ -1,9 +1,11 @@
 package com.posagent.activities.trade;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -100,11 +102,21 @@ public class TradeFlowActivity extends FragmentActivity implements ViewPager.OnP
         setContentView(R.layout.activity_trade_flow);
         initViews();
 
-        Toast toast = Toast.makeText(getApplicationContext(),
-                "手机端交易流水查询仅供单台终端查询，完整查询功能请登陆PC端合作伙伴平台",
-                Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show();
+        String key = "tradeflowToasted";
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        Boolean tradeflowToasted = sp.getBoolean(key, false);
+        if (!tradeflowToasted) {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "手机端交易流水查询仅供单台终端查询，完整查询功能请登陆PC端合作伙伴平台",
+                    Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putBoolean(key, true);
+            editor.commit();
+        }
+
+
     }
 
     @Override

@@ -112,7 +112,7 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/login_img_pass1"
             android:textSize="17sp"
-            android:text="1234567"
+            android:text="123456"
             android:inputType="textPassword"
             />
         <LinearLayout

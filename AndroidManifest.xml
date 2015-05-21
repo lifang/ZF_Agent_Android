@@ -702,7 +702,7 @@
         </meta-data>
         <meta-data
                 android:name="UMENG_CHANNEL"
-                android:value="user_phone" >
+                android:value="agent_phone" >
         </meta-data>
     </application>
 

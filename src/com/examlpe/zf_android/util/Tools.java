@@ -5,16 +5,11 @@ import android.app.ActivityManager;
 import android.app.ActivityManager.RunningTaskInfo;
 import android.content.ComponentName;
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.graphics.*;
 import android.graphics.Bitmap.Config;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
@@ -26,6 +21,7 @@ import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
+import javax.net.ssl.*;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
@@ -39,13 +35,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 
 public class Tools {
 	static int index = 0;
@@ -420,38 +409,37 @@ public class Tools {
 		return statusBarHeight;
 	}
 
-//	public static ArrayList getExpressDictList(Context context) {
-//		Gson gson = new Gson();
-//		SharedPreferences preferences = context.getSharedPreferences(
-//				cn.com.besttone.merchant.config.Config.SHARED,
-//				Context.MODE_PRIVATE);
-//		ArrayList<ExpressDict> items = new ArrayList<ExpressDict>();
-//		items = gson.fromJson(preferences.getString("ExpressDictList", ""),
-//				new TypeToken<List<ExpressDict>>() {
-//				}.getType());
-//		return items;
-//	}
-	
-//	public static MyDialog showLoading( Activity act,
-//			String str) {
-//		View view = act.getLayoutInflater().inflate(R.layout.loading_main, null);
-//		ImageView iv = (ImageView) view.findViewById(R.id.loading_iv);
-//		final AnimationDrawable loadingDw = ((AnimationDrawable) iv
-//				.getBackground());
-//		// loadingDw.start();
-//		iv.getViewTreeObserver().addOnPreDrawListener(new OnPreDrawListener() {
-//			@Override
-//			public boolean onPreDraw() {
-//				loadingDw.start();
-//				return true; // ����Ҫ�����true����
-//			}
-//		});
-//		TextView tv = (TextView) view.findViewById(R.id.loading_tv);
-//		tv.setText(str);
-//		MyDialog builder = new MyDialog(act, 3, view, R.style.mydialog);
-//		builder.setCanceledOnTouchOutside(false);
-//		builder.show();
-//		return builder;
-//	}
+	/**
+	 * 获得应用版本号
+	 * @param context
+	 * @return
+	 */
+	public static int getVerCode(Context context) {
+		int verCode = -1;
+		try {
+			PackageManager packageManager = context.getPackageManager();
+			PackageInfo packInfo = packageManager.getPackageInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+			verCode = packInfo.versionCode;
+		} catch (PackageManager.NameNotFoundException e) {
+			e.printStackTrace();
+		}
+		return verCode;
+	}
+	/**
+	 * 获得应用版本号
+	 * @param context
+	 * @return
+	 */
+	public static String getVerName(Context context) {
+		String versionName = "";
+		try {
+			PackageManager packageManager = context.getPackageManager();
+			PackageInfo packInfo = packageManager.getPackageInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+			versionName = packInfo.versionName;
+		} catch (PackageManager.NameNotFoundException e) {
+			e.printStackTrace();
+		}
+		return versionName;
+	}
 
 }

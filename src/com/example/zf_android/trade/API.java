@@ -101,6 +101,8 @@ public class API {
 	// Apply Opening Progress Query
 	public static final String APPLY_PROGRESS = SCHEMA + HOST + "/ZFMerchant/api/terminal/openStatus";
 
+	public final static String URL_CHECK_VERSION = APIManager.BaseUrl+"/index/getVersion";
+
 	public static void getTerminalList(
 			Context context,
 			int customerId,
@@ -398,6 +400,11 @@ public class API {
 		new HttpRequest(context, callback).post(APPLY_PROGRESS, params);
 	}
 
+	public static void checkVersion(Context context, HttpCallback callback) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("types", 4);
+		new HttpRequest(context, callback).post(URL_CHECK_VERSION, params);
+	}
 
 	public static void noticeVideo(
 			Context context,

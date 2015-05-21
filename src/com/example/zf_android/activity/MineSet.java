@@ -89,11 +89,11 @@ public class MineSet extends BaseActivity implements OnClickListener{
 				API.checkVersion(this, new HttpCallback<Map<String, Object>> (MineSet.this) {
 					@Override
 					public void onSuccess(Map<String, Object> data) {
-						String version = (String)data.get("versions");
+						Double version = (Double)data.get("versions");
 						String url = (String)data.get("down_url");
 						Integer nowVersion = Tools.getVerCode(MineSet.this);
 						Message msg = null;
-						if(Double.parseDouble(version) > nowVersion){
+						if(version > nowVersion){
 							msg = handler.obtainMessage(VersionHandler.HAS_NEW_VERSION);
 							Bundle bundle = new Bundle();
 							bundle.putString("url", url);

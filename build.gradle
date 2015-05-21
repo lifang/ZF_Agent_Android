@@ -47,13 +47,13 @@ android {
         }
     }
 
-    defaultConfig {
-        applicationId 'com.posagent'
-        minSdkVersion 14
-        targetSdkVersion 19
-        versionCode 1
-        versionName '1.0'
-    }
+//    defaultConfig {
+//        applicationId 'com.posagent'
+//        minSdkVersion 14
+//        targetSdkVersion 19
+//        versionCode 1001
+//        versionName '1.0.1'
+//    }
     buildTypes {
         release {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

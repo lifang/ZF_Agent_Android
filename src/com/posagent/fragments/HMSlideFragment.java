@@ -75,9 +75,9 @@ public class HMSlideFragment extends Fragment {
                     for (int i = 0; i <myList.size(); i++) {
                         item = inflater.inflate(R.layout.item, null);
                         ImageView iv = (ImageView)item.findViewById(R.id.image);
-                        int height = squareHeight;
-                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(height, height);
-                        iv.setLayoutParams(lp);
+//                        int height = squareHeight;
+//                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(height, height);
+//                        iv.setLayoutParams(lp);
 
                         list.add(item);
                         ma.add(myList.get(i).getPicture_url());

@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.umeng.analytics.MobclickAgent;
 import de.greenrobot.event.EventBus;
 
 public class BaseActivity extends Activity implements View.OnClickListener {
@@ -95,6 +96,12 @@ public class BaseActivity extends Activity implements View.OnClickListener {
         } catch (RuntimeException ex) {
             Log.d("UNCatchException", ex.getMessage());
         }
+
+        MobclickAgent.setDebugMode(true);
+        // SDK在统计Fragment时，需要关闭Activity自带的页面统计，
+        // 然后在每个页面中重新集成页面统计的代码(包括调用了 onResume 和 onPause 的Activity)。
+        MobclickAgent.openActivityDurationTrack(false);
+        MobclickAgent.updateOnlineConfig(this);
     }
 
     @Override
@@ -106,14 +113,16 @@ public class BaseActivity extends Activity implements View.OnClickListener {
 	
 	@Override
 	protected void onPause() {
-		super.onPause();
-	//	StatService.onPause(this);
+        super.onPause();
+        MobclickAgent.onPageEnd(this.toString());
+        MobclickAgent.onPause(this);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-	//	StatService.onResume(this);
+        MobclickAgent.onPageStart(this.toString());
+        MobclickAgent.onResume(this);
 	}
 
     @Override

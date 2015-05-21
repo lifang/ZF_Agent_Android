@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.umeng.analytics.MobclickAgent;
 import de.greenrobot.event.EventBus;
 
 public class BaseListActivity extends ListActivity {
@@ -55,6 +56,20 @@ public class BaseListActivity extends ListActivity {
         //getRequests().cancelAll(this);
         EventBus.getDefault().unregister(this);
         super.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(this.toString());
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd(this.toString());
+        MobclickAgent.onPause(this);
     }
 
     @Override

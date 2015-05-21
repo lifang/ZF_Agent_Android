@@ -12,12 +12,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.examlpe.zf_android.util.DownloadUtils;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.examlpe.zf_android.util.Tools;
@@ -48,6 +50,12 @@ public class MineSet extends BaseActivity implements OnClickListener{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
 		setContentView(R.layout.mine_set);
 		new TitleMenuUtil(MineSet.this, "设置").show();
 		mySharedPreferences = getSharedPreferences(Config.SHARED, MODE_PRIVATE);
@@ -179,6 +187,15 @@ public class MineSet extends BaseActivity implements OnClickListener{
 						DownloadUtils.download(url,
 								file, false, listener);
 					} catch (Exception e) {
+//                        final StringWriter sw = new StringWriter();
+//                        PrintWriter pw = new PrintWriter(sw);
+//                        e.printStackTrace(pw);
+//                        runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                toast(sw.toString());
+//                            }
+//                        });
 						Log.e(LOG_TAG, "", e);
 					}
 				}
@@ -218,6 +235,19 @@ public class MineSet extends BaseActivity implements OnClickListener{
 
 		@Override
 		public void exception(Exception e) {
+//            final StringWriter sw = new StringWriter();
+//            PrintWriter pw = new PrintWriter(sw);
+//            e.printStackTrace(pw);
+//
+//            sa.runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    sa.toast(sw.toString());
+//
+//                }
+//            });
+            Log.d("Uncatched Exception", e.toString());
+
 		}
 	}
 

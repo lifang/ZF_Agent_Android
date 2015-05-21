@@ -65,6 +65,8 @@ public class OrderList extends BaseActivity implements IXListViewListener,
     private int p = 0; //批购 5 采购 0
     private int q = 0;
 
+    private boolean isInited = false;
+
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -160,7 +162,12 @@ public class OrderList extends BaseActivity implements IXListViewListener,
             }
         }
 
-        onRefresh();
+        if (isInited) {
+            onRefresh();
+        } else {
+            isInited = true;
+        }
+
 
     }
 

@@ -694,6 +694,16 @@
         <!-- 在百度开发者中心查询应用的API Key -->
         <!--<meta-data android:name="api_key" android:value="ZQGgmYt1j5FXBN9tNhnaroGx" />-->
         <meta-data android:name="api_key" android:value="P2aGQ7gtsCNGoctwgnGPvLGt" />
+
+        <!-- 友盟 -->
+        <meta-data
+                android:name="UMENG_APPKEY"
+                android:value="553df0ca67e58ed8ef000266" >
+        </meta-data>
+        <meta-data
+                android:name="UMENG_CHANNEL"
+                android:value="user_phone" >
+        </meta-data>
     </application>
 
 </manifest>

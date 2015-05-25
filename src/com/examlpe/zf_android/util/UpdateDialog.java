@@ -1,7 +1,7 @@
 package com.examlpe.zf_android.util;
 
 
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 
 import android.app.Dialog;
 import android.content.Context;

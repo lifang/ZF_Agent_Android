@@ -10,7 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.entity.TerminalApplyEntity;
 import com.example.zf_android.trade.ApplyDetailActivity;
 import com.posagent.activities.terminal.TerminalDetailActivity;

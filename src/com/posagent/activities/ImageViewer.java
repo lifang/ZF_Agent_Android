@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 import com.examlpe.zf_android.util.ImageCacheUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.trade.common.CommonUtil;
 import com.posagent.utils.PhotoManager;
 

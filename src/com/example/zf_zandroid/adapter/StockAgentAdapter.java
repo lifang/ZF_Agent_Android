@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.examlpe.zf_android.util.StringUtil;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.entity.StockAgentEntity;
 
 import java.util.List;

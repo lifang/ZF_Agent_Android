@@ -17,7 +17,7 @@ import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.examlpe.zf_android.util.Tools;
 import com.examlpe.zf_android.util.XListView;
 import com.example.zf_android.Config;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.entity.ExchangeEntity;
 import com.example.zf_zandroid.adapter.ExchangeAdapter;
 import com.posagent.MyApplication;

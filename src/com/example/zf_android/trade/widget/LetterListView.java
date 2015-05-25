@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 
 /**
  * Created by Leo on 2015/2/7.

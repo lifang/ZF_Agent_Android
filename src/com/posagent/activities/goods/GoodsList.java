@@ -16,7 +16,7 @@ import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.Tools;
 import com.examlpe.zf_android.util.XListView;
 import com.example.zf_android.Config;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.activity.SearchFormActivity;
 import com.example.zf_android.entity.PosEntity;
 import com.example.zf_zandroid.adapter.PosAdapter;

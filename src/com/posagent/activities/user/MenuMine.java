@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.activity.ChangePassword;
 import com.example.zf_android.activity.MerchantList;
 import com.example.zf_android.activity.MineSet;

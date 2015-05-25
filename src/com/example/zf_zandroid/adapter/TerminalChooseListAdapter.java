@@ -10,7 +10,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.examlpe.zf_android.util.StringUtil;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.trade.entity.TerminalItem;
 import com.posagent.activities.terminal.TerminalChooseList;
 

@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 
 import java.util.ArrayList;
 import java.util.List;

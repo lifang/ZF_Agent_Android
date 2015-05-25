@@ -15,7 +15,7 @@ import com.examlpe.zf_android.util.Tools;
 import com.examlpe.zf_android.util.XListView;
 import com.examlpe.zf_android.util.XListView.IXListViewListener;
 import com.example.zf_android.Config;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.entity.MessageEntity;
 import com.example.zf_zandroid.adapter.MessageAdapter;
 import com.google.gson.Gson;

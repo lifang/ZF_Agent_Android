@@ -22,7 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.examlpe.zf_android.util.ImageCacheUtil;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.entity.PicEntity;
 import com.posagent.activities.Webview;
 

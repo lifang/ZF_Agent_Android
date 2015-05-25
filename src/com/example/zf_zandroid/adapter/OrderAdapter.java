@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.examlpe.zf_android.util.ImageCacheUtil;
 import com.examlpe.zf_android.util.StringUtil;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.activity.PayFromCar;
 import com.example.zf_android.entity.Goodlist;
 import com.example.zf_android.entity.OrderEntity;

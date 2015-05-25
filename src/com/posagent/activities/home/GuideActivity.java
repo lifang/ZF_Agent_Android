@@ -9,7 +9,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.posagent.activities.BaseActivity;
 import com.posagent.utils.ViewHelper;
 

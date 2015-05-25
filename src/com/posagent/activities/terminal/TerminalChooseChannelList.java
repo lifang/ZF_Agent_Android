@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.entity.ChanelEntitiy;
 import com.posagent.MyApplication;
 import com.posagent.activities.BaseListActivity;

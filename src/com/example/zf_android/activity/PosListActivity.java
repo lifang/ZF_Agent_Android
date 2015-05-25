@@ -21,7 +21,7 @@ import com.examlpe.zf_android.util.XListView.IXListViewListener;
 import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
 import com.posagent.MyApplication;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.entity.PosEntity;
 import com.example.zf_zandroid.adapter.PosAdapter;
 import com.google.gson.Gson;

@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.entity.PicEntity;
 import com.example.zf_android.trade.CitySelectActivity;
 import com.example.zf_android.trade.common.CommonUtil;

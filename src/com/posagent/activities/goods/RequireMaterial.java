@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View.OnClickListener;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.posagent.activities.BaseActivity;
 
 public class RequireMaterial extends BaseActivity implements OnClickListener {

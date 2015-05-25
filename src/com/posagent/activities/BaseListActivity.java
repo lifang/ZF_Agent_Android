@@ -9,7 +9,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.example.zf_android.Config;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.posagent.utils.Constants;
 
 import java.util.ArrayList;

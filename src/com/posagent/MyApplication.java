@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.baidu.android.pushservice.CustomPushNotificationBuilder;
 import com.baidu.android.pushservice.PushConstants;
 import com.baidu.android.pushservice.PushManager;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.entity.ApplyneedEntity;
 import com.example.zf_android.entity.ChannelEntity;
 import com.example.zf_android.entity.ChannelTradeEntity;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.zf_android"
+    package="com.epalmpay.agentPhone"
     android:versionCode="1000"
     android:versionName="1.0.0" >
 
@@ -47,7 +47,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".Welcome"
+            android:name="com.example.zf_android.Welcome"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -99,15 +99,15 @@
 
 
         <activity
-            android:name=".activity.About"
+            android:name="com.example.zf_android.activity.About"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.PosListActivity"
+            android:name="com.example.zf_android.activity.PosListActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.PosSelect"
+            android:name="com.example.zf_android.activity.PosSelect"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -119,19 +119,19 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.FindLogin"
+            android:name="com.example.zf_android.activity.FindLogin"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.FindPass"
+            android:name="com.example.zf_android.activity.FindPass"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.FindPassword"
+            android:name="com.example.zf_android.activity.FindPassword"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.FindPasswordDone"
+            android:name="com.example.zf_android.activity.FindPasswordDone"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -208,7 +208,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.TradeOrderDetail"
+            android:name="com.example.zf_android.activity.TradeOrderDetail"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -307,11 +307,11 @@
         </activity>
 
         <activity
-            android:name=".activity.MineSet"
+            android:name="com.example.zf_android.activity.MineSet"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.MyMessage"
+            android:name="com.example.zf_android.activity.MyMessage"
            
             android:screenOrientation="portrait" >
         </activity>
@@ -352,11 +352,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".trade.CitySelectActivity"
+            android:name="com.example.zf_android.trade.CitySelectActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".trade.CityProvinceActivity"
+            android:name="com.example.zf_android.trade.CityProvinceActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -391,39 +391,39 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".trade.TerminalManageActivity"
+            android:name="com.example.zf_android.trade.TerminalManageActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".trade.TerminalChannelActivity"
+            android:name="com.example.zf_android.trade.TerminalChannelActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".trade.TerminalAddActivity"
+            android:name="com.example.zf_android.trade.TerminalAddActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".trade.TerminalDetailActivity"
+            android:name="com.example.zf_android.trade.TerminalDetailActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".trade.ShowWebImageActivity"
+            android:name="com.example.zf_android.trade.ShowWebImageActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".trade.ApplyListActivity"
+            android:name="com.example.zf_android.trade.ApplyListActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".trade.ApplyDetailActivity"
+            android:name="com.example.zf_android.trade.ApplyDetailActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".trade.ApplyChooseActivity"
+            android:name="com.example.zf_android.trade.ApplyChooseActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".trade.ApplyOpenProgressActivity"
+            android:name="com.example.zf_android.trade.ApplyOpenProgressActivity"
             android:screenOrientation="portrait" >
         </activity>
         <!-- ====================================================== -->
@@ -431,36 +431,36 @@
         <!-- ====================================================== -->
 
         <activity
-            android:name=".activity.SystemDetail"
+            android:name="com.example.zf_android.activity.SystemDetail"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.MymsgDetail"
+            android:name="com.example.zf_android.activity.MymsgDetail"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.SystemMessage"
+            android:name="com.example.zf_android.activity.SystemMessage"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.ApplyDetail"
+            android:name="com.example.zf_android.activity.ApplyDetail"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.ContentUs"
+            android:name="com.example.zf_android.activity.ContentUs"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.WantBuy"
+            android:name="com.example.zf_android.activity.WantBuy"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.ShopCar"
+            android:name="com.example.zf_android.activity.ShopCar"
            
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.AllProduct"
+            android:name="com.example.zf_android.activity.AllProduct"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -491,25 +491,25 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.SearchFormActivity"
+            android:name="com.example.zf_android.activity.SearchFormActivity"
            
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.SearchFormCommon"
+            android:name="com.example.zf_android.activity.SearchFormCommon"
             android:screenOrientation="portrait" >
         </activity>
 
         <activity
-            android:name=".activity.ConfirmOrder"
+            android:name="com.example.zf_android.activity.ConfirmOrder"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.PayFromCar"
+            android:name="com.example.zf_android.activity.PayFromCar"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.MyInfo"
+            android:name="com.example.zf_android.activity.MyInfo"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -530,7 +530,7 @@
         </activity>
 
         <activity
-            android:name=".activity.ChangeText"
+            android:name="com.example.zf_android.activity.ChangeText"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -538,11 +538,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.ChangePassword"
+            android:name="com.example.zf_android.activity.ChangePassword"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.MerchantList"
+            android:name="com.example.zf_android.activity.MerchantList"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -558,19 +558,19 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.RegistMail"
+            android:name="com.example.zf_android.activity.RegistMail"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.Register4phone"
+            android:name="com.example.zf_android.activity.Register4phone"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.PosSelecList"
+            android:name="com.example.zf_android.activity.PosSelecList"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.PosSearch"
+            android:name="com.example.zf_android.activity.PosSearch"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" >
         </activity>
@@ -607,24 +607,24 @@
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name=".activity.GoodComment"
+            android:name="com.example.zf_android.activity.GoodComment"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.ApplyNeed"
+            android:name="com.example.zf_android.activity.ApplyNeed"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.LeaseInstruction"
+            android:name="com.example.zf_android.activity.LeaseInstruction"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.MerchantEdit"
+            android:name="com.example.zf_android.activity.MerchantEdit"
             android:screenOrientation="portrait" >
         </activity>
         <!-- video -->
         <activity
-            android:name=".video.VideoActivity"
+            android:name="com.example.zf_android.video.VideoActivity"
             android:screenOrientation="portrait" >
         </activity>
 

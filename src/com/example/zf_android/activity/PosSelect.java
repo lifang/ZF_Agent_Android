@@ -23,7 +23,7 @@ import android.widget.Toast;
 import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
 import com.posagent.MyApplication;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.entity.PosItem;
 import com.example.zf_android.entity.PosSelectEntity;
 import com.google.gson.Gson;

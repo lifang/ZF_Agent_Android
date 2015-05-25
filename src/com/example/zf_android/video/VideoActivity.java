@@ -24,7 +24,7 @@ import com.bairuitech.anychat.AnyChatBaseEvent;
 import com.bairuitech.anychat.AnyChatCoreSDK;
 import com.bairuitech.anychat.AnyChatDefine;
 import com.example.zf_android.Config;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.trade.API;
 import com.example.zf_android.trade.Constants.TerminalIntent;
 import com.example.zf_android.video.config.ConfigEntity;

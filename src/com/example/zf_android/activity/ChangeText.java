@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.posagent.activities.BaseActivity;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 /***
  * 
 *    

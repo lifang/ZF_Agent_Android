@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.trade.widget.gestureimage.GestureImageView;
 import com.example.zf_android.trade.widget.gestureimage.MyViewPager;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;

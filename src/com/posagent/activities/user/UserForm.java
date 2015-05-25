@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.trade.CitySelectActivity;
 import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;

@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.entity.BankEntity;
 import com.example.zf_android.trade.common.CommonUtil;
 import com.posagent.activities.BaseListActivity;

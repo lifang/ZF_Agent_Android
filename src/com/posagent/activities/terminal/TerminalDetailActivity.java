@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.trade.ApplyDetailActivity;
 import com.example.zf_android.trade.entity.TerminalApply;
 import com.example.zf_android.trade.entity.TerminalComment;

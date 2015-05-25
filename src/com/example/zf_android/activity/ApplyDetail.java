@@ -19,7 +19,7 @@ import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
 import com.posagent.MyApplication;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;

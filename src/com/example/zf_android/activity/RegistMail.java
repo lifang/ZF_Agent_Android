@@ -18,7 +18,7 @@ import com.examlpe.zf_android.util.StringUtil;
 import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
 import com.posagent.MyApplication;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;

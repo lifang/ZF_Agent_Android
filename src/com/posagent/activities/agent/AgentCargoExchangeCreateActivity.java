@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.posagent.MyApplication;
 import com.posagent.activities.BaseActivity;
 import com.posagent.activities.trade.TradeAgentActivity;

@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.posagent.activities.BaseActivity;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_zandroid.adapter.RateAdapter;
 /**
  * 

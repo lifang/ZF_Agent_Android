@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.examlpe.zf_android.util.ImageCacheUtil;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.entity.StockEntity;
 import com.posagent.activities.goods.GoodsDetail;
 import com.posagent.activities.stock.StockList;

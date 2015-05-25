@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.example.zf_android.Config;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.activity.FindPass;
 import com.example.zf_android.entity.UserInfoEntity;
 import com.posagent.MyApplication;

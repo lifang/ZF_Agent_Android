@@ -24,7 +24,7 @@ import com.examlpe.zf_android.util.DownloadUtils;
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.examlpe.zf_android.util.Tools;
 import com.example.zf_android.Config;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.trade.API;
 import com.example.zf_android.trade.common.HttpCallback;
 import com.example.zf_android.trade.common.NetworkUtil;

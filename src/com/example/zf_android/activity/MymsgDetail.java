@@ -21,7 +21,7 @@ import com.examlpe.zf_android.util.TitleMenuUtil;
  
 import com.posagent.activities.BaseActivity;
 import com.example.zf_android.Config;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.entity.MessageEntity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

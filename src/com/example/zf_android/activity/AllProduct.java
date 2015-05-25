@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.posagent.activities.BaseActivity;
 import com.posagent.activities.goods.GoodsList;
 import com.posagent.utils.Constants;

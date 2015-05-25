@@ -6,7 +6,7 @@ import org.apache.http.Header;
 
 import com.example.zf_android.Config;
 import com.posagent.MyApplication;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.entity.MyShopCar.Good;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;

@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.entity.AfterSaleCancel;
 import com.example.zf_android.entity.AfterSaleMaintain;
 import com.example.zf_android.entity.AfterSaleUpdate;

@@ -3,7 +3,7 @@ package com.posagent.activities.home;
 import android.os.Bundle;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.posagent.activities.BaseActivity;
 
 public class RegisterXieyi extends BaseActivity {

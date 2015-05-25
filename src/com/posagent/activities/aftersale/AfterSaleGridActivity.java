@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 
 import static com.example.zf_android.trade.Constants.AfterSaleIntent.RECORD_TYPE;
 import static com.example.zf_android.trade.Constants.AfterSaleType.CANCEL;

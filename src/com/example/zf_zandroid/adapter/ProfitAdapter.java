@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.entity.ChannelEntity;
 import com.example.zf_android.entity.ChannelTradeEntity;
 import com.example.zf_android.entity.ProfitEntity;

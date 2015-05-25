@@ -18,7 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.entity.ApplyOpenProgress;
 import com.example.zf_android.trade.common.HttpCallback;
 import com.example.zf_android.trade.common.TextWatcherAdapter;

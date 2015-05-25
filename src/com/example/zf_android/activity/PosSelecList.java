@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.posagent.activities.BaseActivity;
 import com.posagent.MyApplication;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.entity.PosItem;
 import com.example.zf_zandroid.adapter.PositmeAdapter;
 

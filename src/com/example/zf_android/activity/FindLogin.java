@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.posagent.activities.BaseActivity;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.posagent.activities.home.LoginActivity;
 
 public class FindLogin extends BaseActivity {

@@ -3,7 +3,7 @@ package com.example.zf_android.activity;
 import android.os.Bundle;
 
 import com.posagent.activities.BaseActivity;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 
 public class WantBuy extends BaseActivity{
 			@Override

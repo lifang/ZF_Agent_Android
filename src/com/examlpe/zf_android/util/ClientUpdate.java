@@ -20,7 +20,7 @@ import org.json.JSONObject;
  
 import com.example.zf_android.CancleUpdate;
 import com.example.zf_android.Config;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpClient;

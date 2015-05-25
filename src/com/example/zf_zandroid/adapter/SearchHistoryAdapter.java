@@ -1,6 +1,6 @@
 package com.example.zf_zandroid.adapter;
 
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 
 import android.content.Context;
 import android.view.LayoutInflater;

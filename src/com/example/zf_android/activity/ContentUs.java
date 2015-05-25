@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
 import com.posagent.activities.BaseActivity;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 
 public class ContentUs extends BaseActivity implements OnClickListener{
 	private LinearLayout ll_pay_type;

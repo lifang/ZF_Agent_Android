@@ -8,7 +8,7 @@ import android.widget.TableRow;
 
 import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.entity.TDateEntity;
 import com.google.gson.reflect.TypeToken;
 import com.posagent.activities.BaseActivity;

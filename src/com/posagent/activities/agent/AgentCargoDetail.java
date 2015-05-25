@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.entity.PrepareEntity;
 import com.posagent.activities.BaseActivity;
 import com.posagent.events.Events;

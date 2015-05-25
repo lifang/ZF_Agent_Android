@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 
 import java.io.File;
 

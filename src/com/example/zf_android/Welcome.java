@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.epalmpay.agentPhone.R;
 import com.posagent.activities.BaseActivity;
 import com.posagent.activities.home.GuideActivity;
 import com.posagent.activities.home.LoginActivity;

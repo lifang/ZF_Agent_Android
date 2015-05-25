@@ -15,7 +15,7 @@ import com.examlpe.zf_android.util.DialogUtil;
 import com.examlpe.zf_android.util.DialogUtil.CallBackChange;
 import com.examlpe.zf_android.util.StringUtil;
 import com.examlpe.zf_android.util.TitleMenuUtil;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.alipay.PayActivity;
 import com.example.zf_android.entity.PayOrderInfo;
 import com.example.zf_android.entity.ShopPayOrderInfo;

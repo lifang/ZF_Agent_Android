@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.entity.StaffEntity;
 import com.posagent.activities.user.StaffList;
 import com.posagent.utils.OnSwipeTouchListener;

@@ -2,7 +2,7 @@ package com.example.zf_zandroid.adapter;
 
 import java.util.List;
 
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.entity.ApplyneedEntity;
 
 import android.content.Context;

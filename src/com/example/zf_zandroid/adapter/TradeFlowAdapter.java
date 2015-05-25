@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.examlpe.zf_android.util.StringUtil;
-import com.example.zf_android.R;
+import com.epalmpay.agentPhone.R;
 import com.example.zf_android.trade.entity.TradeRecord;
 import com.posagent.activities.trade.TradeDetailActivity;
 import com.posagent.activities.trade.TradeFlowActivity;
